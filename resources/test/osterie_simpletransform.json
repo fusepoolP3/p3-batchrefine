@@ -1,0 +1,15 @@
+[
+  {
+    "op": "core/text-transform",
+    "description": "Text transform on cells in column Tipo using expression value.toUppercase()",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Tipo",
+    "expression": "value.toUppercase()",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10
+  }
+]
