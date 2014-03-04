@@ -1,6 +1,5 @@
 package eu.spaziodati.batchrefine.core;
 
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -9,6 +8,7 @@ import java.io.IOException;
 import org.junit.Assert;
 import org.junit.Test;
 
+import eu.spaziodati.batchrefine.core.impl.TransformEngineImpl;
 import eu.spaziodati.batchrefine.core.test.utils.TestUtilities;
 
 public class TestCoreAPI {
@@ -21,17 +21,17 @@ public class TestCoreAPI {
 		File reference = TestUtilities
 				.find("osterie_simpletransform_output.csv");
 
-		FileInputStream iStream = null;
-		try {
-			iStream = new FileInputStream(TestUtilities.find("osterie.csv"));
-			ByteArrayOutputStream oStream = new ByteArrayOutputStream();
+		ByteArrayOutputStream oStream = new ByteArrayOutputStream();
+		engine.transform(TestUtilities.find("osterie.csv"), transform, oStream);
+		assertContentEquals(reference, oStream);
+	}
 
-			engine.transform(iStream, transform, oStream);
+	private ITransformEngine getEngine() {
+		return new TransformEngineImpl().init();
+	}
 
-			assertContentEquals(reference, oStream);
-		} finally {
-			TestUtilities.safeClose(iStream, false);
-		}
+	private ITransform createTransform(String resource) {
+		return null;
 	}
 
 	private void assertContentEquals(File expected, ByteArrayOutputStream actual)
@@ -48,7 +48,7 @@ public class TestCoreAPI {
 		} finally {
 			TestUtilities.safeClose(iStream, false);
 		}
-		
+
 		String expectedStr = new String(buffer.toByteArray());
 		String actualStr = new String(actual.toByteArray());
 

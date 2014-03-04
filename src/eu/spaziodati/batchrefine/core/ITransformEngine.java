@@ -1,7 +1,7 @@
 package eu.spaziodati.batchrefine.core;
 
+import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.OutputStream;
 
 /**
@@ -13,11 +13,12 @@ import java.io.OutputStream;
 public interface ITransformEngine {
 
 	/**
-	 * Applies a transform to an input and writes the output.
+	 * Applies a transform to an input file and writes to an
+	 * {@link OutputStream}.
 	 * 
 	 * @param original
-	 *            an {@link InputStream} from where the original data is to be
-	 *            read from.
+	 *            a {@link File} from where the original data is to be read
+	 *            from.
 	 * 
 	 * @param transform
 	 *            the {@link ITransform} to be applied to the data.
@@ -30,7 +31,7 @@ public interface ITransformEngine {
 	 *             if either the original or the transformed streams throw
 	 *             {@link IOException}s.
 	 */
-	public void transform(InputStream original, ITransform transform,
+	public void transform(File original, ITransform transform,
 			OutputStream transformed) throws IOException;
 
 }
