@@ -2,11 +2,15 @@ package eu.spaziodati.batchrefine.core;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 
+import org.apache.commons.io.FileUtils;
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.junit.Assert;
 import org.junit.Test;
+
+import com.google.refine.util.ParsingUtilities;
 
 import eu.spaziodati.batchrefine.core.impl.TransformEngineImpl;
 import eu.spaziodati.batchrefine.core.test.utils.TestUtilities;
@@ -16,7 +20,7 @@ public class TestCoreAPI {
 	@Test
 	public void testSimpleCSVTransform() throws Exception {
 		ITransformEngine engine = getEngine();
-		ITransform transform = createTransform("osterie_simpletransform.json");
+		JSONArray transform = getTransform("osterie_simpletransform.json");
 
 		File reference = TestUtilities
 				.find("osterie_simpletransform_output.csv");
@@ -30,26 +34,16 @@ public class TestCoreAPI {
 		return new TransformEngineImpl().init();
 	}
 
-	private ITransform createTransform(String resource) {
-		return null;
+	JSONArray getTransform(String transformFile) throws IOException,
+			JSONException {
+		String transform = FileUtils.readFileToString(TestUtilities
+				.find(transformFile));
+		return ParsingUtilities.evaluateJsonStringToArray(transform);
 	}
 
 	private void assertContentEquals(File expected, ByteArrayOutputStream actual)
 			throws IOException {
-
-		FileInputStream iStream = null;
-		ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-		try {
-			iStream = new FileInputStream(expected);
-			int c;
-			while ((c = iStream.read()) != -1) {
-				buffer.write(c);
-			}
-		} finally {
-			TestUtilities.safeClose(iStream, false);
-		}
-
-		String expectedStr = new String(buffer.toByteArray());
+		String expectedStr = FileUtils.readFileToString(expected);
 		String actualStr = new String(actual.toByteArray());
 
 		Assert.assertEquals(expectedStr, actualStr);

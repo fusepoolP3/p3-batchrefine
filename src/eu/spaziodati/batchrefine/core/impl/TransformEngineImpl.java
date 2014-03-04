@@ -5,8 +5,10 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 import org.apache.commons.io.FileUtils;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -16,9 +18,11 @@ import com.google.refine.importers.ImporterUtilities.MultiFileReadingProgress;
 import com.google.refine.importers.SeparatorBasedImporter;
 import com.google.refine.importing.ImportingJob;
 import com.google.refine.importing.ImportingManager;
+import com.google.refine.model.AbstractOperation;
 import com.google.refine.model.Project;
+import com.google.refine.operations.OperationRegistry;
+import com.google.refine.process.Process;
 
-import eu.spaziodati.batchrefine.core.ITransform;
 import eu.spaziodati.batchrefine.core.ITransformEngine;
 
 public class TransformEngineImpl implements ITransformEngine {
@@ -34,19 +38,18 @@ public class TransformEngineImpl implements ITransformEngine {
 	}
 
 	@Override
-	public void transform(File original, ITransform transform,
-			OutputStream transformed) throws IOException {
+	public void transform(File original, JSONArray transform,
+			OutputStream transformed) throws IOException, JSONException {
 
 		ensureInitialized();
-		
-		loadData(original);
-		
-		applyTransform(transform);
-		
-		outputData(transformed);
+
+		Project project = loadData(original);
+
+		applyTransform(project, transform);
+
 	}
 
-	private void loadData(File original) throws IOException {
+	private Project loadData(File original) throws IOException {
 		ImportingJob job = ImportingManager.createJob();
 		job.getOrCreateDefaultConfig();
 
@@ -68,6 +71,26 @@ public class TransformEngineImpl implements ITransformEngine {
 
 		importer.parseOneFile(project, metadata, job, fileRecord, -1, options,
 				exceptions, NULL_PROGRESS);
+
+		return project;
+	}
+
+	private void applyTransform(Project project, JSONArray transform)
+			throws JSONException {
+		for (int i = 0; i < transform.length(); i++) {
+			AbstractOperation operation = OperationRegistry.reconstruct(
+					project, transform.getJSONObject(i));
+			if (operation != null) {
+				try {
+					Process process = operation.createProcess(project,
+							new Properties());
+
+					project.processManager.queueProcess(process);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}
 	}
 
 	private void ensureFileInLocation(File original, File rawDataDir)

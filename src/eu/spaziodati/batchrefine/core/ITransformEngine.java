@@ -4,6 +4,9 @@ import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
 /**
  * {@link ITransformEngine} takes some input and transforms it into an output
  * according to the rules defined by an {@link ITransform}.
@@ -21,7 +24,7 @@ public interface ITransformEngine {
 	 *            from.
 	 * 
 	 * @param transform
-	 *            the {@link ITransform} to be applied to the data.
+	 *            a {@link JSONArray} containing the transforms to be applied.
 	 * 
 	 * @param transformed
 	 *            an {@link OutputStream} to which transformed data will be
@@ -31,7 +34,7 @@ public interface ITransformEngine {
 	 *             if either the original or the transformed streams throw
 	 *             {@link IOException}s.
 	 */
-	public void transform(File original, ITransform transform,
-			OutputStream transformed) throws IOException;
+	public void transform(File original, JSONArray transform,
+			OutputStream transformed) throws IOException, JSONException;
 
 }
