@@ -14,7 +14,7 @@ import eu.spaziodati.batchrefine.core.test.utils.TestUtilities;
 public class TestCoreAPI {
 
 	@Test
-	public void testSimpleTransform() throws Exception {
+	public void testSimpleCSVTransform() throws Exception {
 		ITransformEngine engine = getEngine();
 		ITransform transform = createTransform("osterie_simpletransform.json");
 
