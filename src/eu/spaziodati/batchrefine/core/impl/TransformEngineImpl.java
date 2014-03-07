@@ -3,6 +3,8 @@ package eu.spaziodati.batchrefine.core.impl;
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -12,28 +14,31 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.google.refine.ProjectManager;
 import com.google.refine.ProjectMetadata;
 import com.google.refine.RefineServlet;
 import com.google.refine.importers.ImporterUtilities.MultiFileReadingProgress;
 import com.google.refine.importers.SeparatorBasedImporter;
 import com.google.refine.importing.ImportingJob;
 import com.google.refine.importing.ImportingManager;
+import com.google.refine.io.FileProjectManager;
 import com.google.refine.model.AbstractOperation;
 import com.google.refine.model.Project;
-import com.google.refine.operations.OperationRegistry;
+import com.google.refine.operations.cell.TextTransformOperation;
 import com.google.refine.process.Process;
 
 import eu.spaziodati.batchrefine.core.ITransformEngine;
 
 public class TransformEngineImpl implements ITransformEngine {
-
 	private RefineServlet fServletStub;
 
 	public TransformEngineImpl init() {
 		RefineServlet servlet = new RefineServletStub();
 		fServletStub = servlet;
+		File s_dataDir = new File(
+				"/Users/maddy/Library/Application Support/OpenRefine");
+		FileProjectManager.initialize(s_dataDir);
 		ImportingManager.initialize(servlet);
-
 		return this;
 	}
 
@@ -46,6 +51,9 @@ public class TransformEngineImpl implements ITransformEngine {
 		Project project = loadData(original);
 
 		applyTransform(project, transform);
+		Export2Csv exp = new Export2Csv();
+		OutputStreamWriter writer = new OutputStreamWriter(transformed);
+		exp.export(project, writer);
 
 	}
 
@@ -71,26 +79,35 @@ public class TransformEngineImpl implements ITransformEngine {
 
 		importer.parseOneFile(project, metadata, job, fileRecord, -1, options,
 				exceptions, NULL_PROGRESS);
-
+		ProjectManager.singleton.registerProject(project, metadata);
 		return project;
 	}
 
-	private void applyTransform(Project project, JSONArray transform)
+	private Project applyTransform(Project project, JSONArray transform)
 			throws JSONException {
-		for (int i = 0; i < transform.length(); i++) {
-			AbstractOperation operation = OperationRegistry.reconstruct(
-					project, transform.getJSONObject(i));
-			if (operation != null) {
-				try {
-					Process process = operation.createProcess(project,
-							new Properties());
+		int count = transform.length();
+		AbstractOperation operation = null;
+		JSONObject obj;
+		for (int i = 0; i < count; i++) {
+			obj = transform.getJSONObject(i);
+			try {
+				operation = TextTransformOperation.reconstruct(project, obj);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 
-					project.processManager.queueProcess(process);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+		}
+		if (operation != null) {
+			try {
+				Process process = operation.createProcess(project,
+						new Properties());
+
+				project.processManager.queueProcess(process);
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
 		}
+		return project;
 	}
 
 	private void ensureFileInLocation(File original, File rawDataDir)
