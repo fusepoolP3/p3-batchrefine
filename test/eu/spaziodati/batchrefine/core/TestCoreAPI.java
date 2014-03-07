@@ -19,18 +19,29 @@ public class TestCoreAPI {
 
 	@Test
 	public void testSimpleCSVTransform() throws Exception {
-		ITransformEngine engine = getEngine();
-		JSONArray transform = getTransform("osterie_simpletransform.json");
+		runTransformTest("osterie", "simpletransform");
+	}
 
-		File reference = TestUtilities
-				.find("osterie_simpletransform_output.csv");
+	@Test
+	public void testCompositeTransformWithGREL() throws Exception {
+		runTransformTest("osterie", "compositetransform_with_GREL");
+	}
+
+	private void runTransformTest(String inputName, String transformName)
+			throws Exception {
+		ITransformEngine engine = getEngine();
+		JSONArray transform = getTransform(inputName + "_" + transformName
+				+ ".json");
+
+		File reference = TestUtilities.find(inputName + "_" + transformName
+				+ "_output" + ".csv");
 
 		ByteArrayOutputStream oStream = new ByteArrayOutputStream();
-		engine.transform(TestUtilities.find("osterie.csv"), transform, oStream);
+		engine.transform(TestUtilities.find(inputName + ".csv"), transform, oStream);
 		assertContentEquals(reference, oStream);
 	}
 
-	private ITransformEngine getEngine() {
+	private ITransformEngine getEngine() throws Exception {
 		return new TransformEngineImpl().init();
 	}
 
