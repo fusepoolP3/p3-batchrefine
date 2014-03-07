@@ -25,9 +25,5 @@ public class Export2Csv {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
-
-
 	}
-
 }

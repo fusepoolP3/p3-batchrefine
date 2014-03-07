@@ -1,10 +1,10 @@
 package eu.spaziodati.batchrefine.core.impl;
 
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
-import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -13,7 +13,17 @@ import org.apache.commons.io.FileUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.mozilla.javascript.Context;
+import org.mozilla.javascript.ContextFactory;
+import org.mozilla.javascript.EcmaError;
+import org.mozilla.javascript.Function;
+import org.mozilla.javascript.ImporterTopLevel;
+import org.mozilla.javascript.Script;
+import org.mozilla.javascript.ScriptableObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import com.google.refine.Configurations;
 import com.google.refine.ProjectManager;
 import com.google.refine.ProjectMetadata;
 import com.google.refine.RefineServlet;
@@ -21,40 +31,43 @@ import com.google.refine.importers.ImporterUtilities.MultiFileReadingProgress;
 import com.google.refine.importers.SeparatorBasedImporter;
 import com.google.refine.importing.ImportingJob;
 import com.google.refine.importing.ImportingManager;
-import com.google.refine.io.FileProjectManager;
 import com.google.refine.model.AbstractOperation;
 import com.google.refine.model.Project;
-import com.google.refine.operations.cell.TextTransformOperation;
+import com.google.refine.operations.OperationRegistry;
 import com.google.refine.process.Process;
 
+import edu.mit.simile.butterfly.ButterflyModule;
 import eu.spaziodati.batchrefine.core.ITransformEngine;
 
 public class TransformEngineImpl implements ITransformEngine {
+
+	private static final Logger fLogger = LoggerFactory
+			.getLogger(TransformEngineImpl.class);
+
 	private RefineServlet fServletStub;
 
-	public TransformEngineImpl init() {
+	public TransformEngineImpl init() throws IOException {
 		RefineServlet servlet = new RefineServletStub();
 		fServletStub = servlet;
-		File s_dataDir = new File(
-				"/Users/maddy/Library/Application Support/OpenRefine");
-		FileProjectManager.initialize(s_dataDir);
+
+		ProjectManagerStub.initialize();
 		ImportingManager.initialize(servlet);
+
+		registerOperations();
+
 		return this;
 	}
 
 	@Override
 	public void transform(File original, JSONArray transform,
 			OutputStream transformed) throws IOException, JSONException {
-
 		ensureInitialized();
 
 		Project project = loadData(original);
 
 		applyTransform(project, transform);
-		Export2Csv exp = new Export2Csv();
-		OutputStreamWriter writer = new OutputStreamWriter(transformed);
-		exp.export(project, writer);
 
+		outputResults(project, transformed);
 	}
 
 	private Project loadData(File original) throws IOException {
@@ -72,6 +85,9 @@ public class TransformEngineImpl implements ITransformEngine {
 		Project project = new Project();
 		ProjectMetadata metadata = new ProjectMetadata();
 
+		// Engine will try to access this later.
+		ProjectManager.singleton.registerProject(project, metadata);
+
 		List<Exception> exceptions = new ArrayList<Exception>();
 
 		JSONObject options = importer.createParserUIInitializationData(job,
@@ -79,35 +95,37 @@ public class TransformEngineImpl implements ITransformEngine {
 
 		importer.parseOneFile(project, metadata, job, fileRecord, -1, options,
 				exceptions, NULL_PROGRESS);
-		ProjectManager.singleton.registerProject(project, metadata);
+		
+		project.update();
+
 		return project;
 	}
 
-	private Project applyTransform(Project project, JSONArray transform)
+	private void applyTransform(Project project, JSONArray transform)
 			throws JSONException {
-		int count = transform.length();
-		AbstractOperation operation = null;
-		JSONObject obj;
-		for (int i = 0; i < count; i++) {
-			obj = transform.getJSONObject(i);
-			try {
-				operation = TextTransformOperation.reconstruct(project, obj);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
 
-		}
-		if (operation != null) {
-			try {
-				Process process = operation.createProcess(project,
-						new Properties());
+		for (int i = 0; i < transform.length(); i++) {
+			AbstractOperation operation = OperationRegistry.reconstruct(
+					project, transform.getJSONObject(i));
+						
+			if (operation != null) {
+				try {
+					Process process = operation.createProcess(project,
+							new Properties());
 
-				project.processManager.queueProcess(process);
-			} catch (Exception e) {
-				e.printStackTrace();
+					project.processManager.queueProcess(process);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
 		}
-		return project;
+		
+	}
+
+	private void outputResults(Project project, OutputStream transformed) {
+		Export2Csv exp = new Export2Csv();
+		OutputStreamWriter writer = new OutputStreamWriter(transformed);
+		exp.export(project, writer);
 	}
 
 	private void ensureFileInLocation(File original, File rawDataDir)
@@ -119,6 +137,43 @@ public class TransformEngineImpl implements ITransformEngine {
 
 		// No, have to put it there.
 		FileUtils.copyFile(original, new File(rawDataDir, original.getName()));
+	}
+
+	private void registerOperations() throws IOException {
+		ButterflyModule core = new ButterflyModuleStub("core");
+
+		File coreController = new File(Configurations.get("refine.root",
+				"../OpenRefine"),
+				"main/webapp/modules/core/MOD-INF/controller.js");
+
+		if (!coreController.exists()) {
+			fLogger.warn("Can't find core module controller. Things may not work as expected.");
+			return;
+		}
+
+        // Compiles and "executes" the controller script. The script basically contains
+		// function declarations.
+        Context context = ContextFactory.getGlobal().enterContext();
+        Script controller = context.compileReader(new FileReader(coreController), "init.js", 1, null);
+        
+        // Initializes the scope.
+        ScriptableObject scope = new ImporterTopLevel(context);
+        scope.put("module", scope, core);
+        controller.exec(context, scope);
+                
+        // Runs the function that initializes the OperationRegistry. 
+        try {
+            Object fun = context.compileString("registerOperations", null, 1, null).exec(context, scope);
+            if (fun != null && fun instanceof Function) {
+                try {
+                    ((Function) fun).call(context, scope, scope, new Object[] {});
+                } catch (EcmaError ee) {
+                    fLogger.error("Error running core moduler controller.", ee);
+                }
+            }
+        } catch (EcmaError ex) {
+            // ignore -- taken from refine code. 
+        }
 	}
 
 	private JSONObject createFileRecord(File original, String format) {
