@@ -16,13 +16,13 @@
   },
   {
     "op": "core/text-transform",
-    "description": "Text transform on cells in column Insegna using expression grel:value.split(\" \")[0] + \" First Word Is All That Matters: \" + row.index + if(mod(row.index, 2) == 0, \" even\", \" odd\")",
+    "description": "Text transform on cells in column Insegna using expression grel:value.split(\" \")[0] + \" First Word Is All That Matters: \" + mod(row.index, 48) + if(mod(row.index, 2) == 0, \" even\", \" odd\")",
     "engineConfig": {
       "facets": [],
       "mode": "row-based"
     },
     "columnName": "Insegna",
-    "expression": "grel:value.split(\" \")[0] + \" First Word Is All That Matters: \" + row.index + if(mod(row.index, 2) == 0, \" even\", \" odd\")",
+    "expression": "grel:value.split(\" \")[0] + \" First Word Is All That Matters: \" + mod(row.index, 48) + if(mod(row.index, 2) == 0, \" even\", \" odd\")",
     "onError": "keep-original",
     "repeat": false,
     "repeatCount": 10

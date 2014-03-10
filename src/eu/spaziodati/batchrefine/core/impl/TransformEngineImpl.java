@@ -100,6 +100,11 @@ public class TransformEngineImpl implements ITransformEngine {
 
 		project.update();
 
+		if (fLogger.isDebugEnabled()) {
+			fLogger.debug("Loaded file " + original.getName() + " with "
+					+ project.rows.size() + " rows.");
+		}
+
 		return project;
 	}
 

@@ -1,8 +1,12 @@
 package eu.spaziodati.batchrefine.core;
 
-import java.io.ByteArrayOutputStream;
+import java.io.BufferedOutputStream;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
+import java.io.OutputStream;
 
 import org.apache.commons.io.FileUtils;
 import org.json.JSONArray;
@@ -29,12 +33,17 @@ public class TestCoreAPI {
 
 	/**
 	 * Same as {@link #testCompositeTransformWithGREL()}, but using a file with
-	 * at least 100000 rows.
+	 * at least 1000000 rows.
+	 * 
+	 * XXX we should define test groups and differ between correctness tests (fast)
+	 *     and scalability tests (not necessarily fast).
 	 */
 	@Test
 	public void testCompositeTransformWithGRELLarge() throws Exception {
-		runTransformTest("osterie_large", "simpletransform");
+		runTransformTest("osterie_large", "compositetransform_with_GREL");
 	}
+
+	// ------------------------------------------------------------------------
 
 	private void runTransformTest(String inputName, String transformName)
 			throws Exception {
@@ -44,10 +53,21 @@ public class TestCoreAPI {
 		File reference = TestUtilities.find(inputName + "_" + transformName
 				+ "_output" + ".csv");
 
-		ByteArrayOutputStream oStream = new ByteArrayOutputStream();
-		engine.transform(TestUtilities.find(inputName + ".csv"), transform,
-				oStream);
-		assertContentEquals(reference, oStream);
+		File output = File.createTempFile("batch-refine-test", null);
+		output.deleteOnExit();
+
+		OutputStream oStream = null;
+		try {
+			oStream = new BufferedOutputStream(new FileOutputStream(output));
+			engine.transform(TestUtilities.find(inputName + ".csv"), transform,
+					oStream);
+		} finally {
+			TestUtilities.safeClose(oStream, false);
+		}
+
+		System.err.println("Transformed!");
+
+		assertContentEquals(reference, output);
 	}
 
 	private ITransformEngine getEngine() throws Exception {
@@ -61,12 +81,43 @@ public class TestCoreAPI {
 		return ParsingUtilities.evaluateJsonStringToArray(transform);
 	}
 
-	private void assertContentEquals(File expected, ByteArrayOutputStream actual)
+	private void assertContentEquals(File expectedFile, File outputFile)
 			throws IOException {
-		String expectedStr = FileUtils.readFileToString(expected);
-		String actualStr = new String(actual.toByteArray());
 
-		Assert.assertEquals(expectedStr, actualStr);
+		BufferedReader expected = null;
+		BufferedReader output = null;
+
+		try {
+			expected = new BufferedReader(new FileReader(expectedFile));
+			output = new BufferedReader(new FileReader(outputFile));
+
+			int line = 0;
+			String current = null;
+
+			do {
+				current = expected.readLine();
+				String actual = output.readLine();
+
+				if (current == null) {
+					if (actual != null) {
+						Assert.fail("Actual output too short (line " + line
+								+ ").");
+					}
+					break;
+				}
+
+				if (!current.equals(actual)) {
+					Assert.fail("Expected: " + current + "\n Got: " + actual
+							+ "\n at line " + line);
+				}
+
+				line++;
+			} while (current != null);
+
+		} finally {
+			TestUtilities.safeClose(expected, false);
+			TestUtilities.safeClose(output, false);
+		}
 	}
 
 }
