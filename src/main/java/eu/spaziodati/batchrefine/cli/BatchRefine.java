@@ -37,9 +37,12 @@ public class BatchRefine {
 		if (inputFile == null || transformFile == null) {
 			return;
 		}
-		
+
 		JSONArray transform = deserialize(transformFile);
 		ITransformEngine engine = batchEngine();
+		if (engine == null) {
+			return;
+		}
 
 		try {
 			engine.transform(inputFile, transform, output(args));
@@ -47,6 +50,10 @@ public class BatchRefine {
 			fLogger.error("Error running transform.", ex);
 			return;
 		}
+
+		// Have to be brutal as refine keeps non-daemon threads
+		// running everywhere and there's no API to shut them down.
+		System.exit(0);
 	}
 
 	private static JSONArray deserialize(File transform) {
@@ -70,7 +77,12 @@ public class BatchRefine {
 	}
 
 	private static ITransformEngine batchEngine() {
-		return new TransformEngineImpl();
+		try {
+			return new TransformEngineImpl().init();
+		} catch (IOException ex) {
+			fLogger.error("Error initializing engine.", ex);
+			return null;
+		}
 	}
 
 	private static OutputStream output(String[] args) throws IOException {

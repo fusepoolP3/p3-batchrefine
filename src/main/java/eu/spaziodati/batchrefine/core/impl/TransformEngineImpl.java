@@ -138,12 +138,24 @@ public class TransformEngineImpl implements ITransformEngine {
 	private void ensureFileInLocation(File original, File rawDataDir)
 			throws IOException {
 		// Is this where the refine engine expects to find it?
-		if (original.getParentFile().equals(rawDataDir)) {
+		if (isParent(original, rawDataDir)) {
 			return;
 		}
 
 		// No, have to put it there.
 		FileUtils.copyFile(original, new File(rawDataDir, original.getName()));
+	}
+
+	private boolean isParent(File original, File rawDataDir) throws IOException {
+		File parentFolder = original.getAbsoluteFile().getParentFile();
+		if (parentFolder == null) {
+			// Well, this should not happen, so I reserve the right to
+			// produce a crappy error message.
+			throw new IOException("Can't obtain a parent path for "
+					+ original.getAbsolutePath() + ".");
+		}
+		
+		return rawDataDir.getAbsoluteFile().equals(original);
 	}
 
 	private void registerOperations() throws IOException {
