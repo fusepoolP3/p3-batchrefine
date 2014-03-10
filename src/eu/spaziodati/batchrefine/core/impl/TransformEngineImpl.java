@@ -27,6 +27,8 @@ import com.google.refine.Configurations;
 import com.google.refine.ProjectManager;
 import com.google.refine.ProjectMetadata;
 import com.google.refine.RefineServlet;
+import com.google.refine.browsing.Engine;
+import com.google.refine.exporters.CsvExporter;
 import com.google.refine.importers.ImporterUtilities.MultiFileReadingProgress;
 import com.google.refine.importers.SeparatorBasedImporter;
 import com.google.refine.importing.ImportingJob;
@@ -95,7 +97,7 @@ public class TransformEngineImpl implements ITransformEngine {
 
 		importer.parseOneFile(project, metadata, job, fileRecord, -1, options,
 				exceptions, NULL_PROGRESS);
-		
+
 		project.update();
 
 		return project;
@@ -107,25 +109,25 @@ public class TransformEngineImpl implements ITransformEngine {
 		for (int i = 0; i < transform.length(); i++) {
 			AbstractOperation operation = OperationRegistry.reconstruct(
 					project, transform.getJSONObject(i));
-						
+
 			if (operation != null) {
 				try {
 					Process process = operation.createProcess(project,
 							new Properties());
 
 					project.processManager.queueProcess(process);
-				} catch (Exception e) {
-					e.printStackTrace();
+				} catch (Exception ex) {
+					fLogger.error("Error applying operation.", ex);
 				}
 			}
 		}
-		
 	}
 
-	private void outputResults(Project project, OutputStream transformed) {
-		Export2Csv exp = new Export2Csv();
-		OutputStreamWriter writer = new OutputStreamWriter(transformed);
-		exp.export(project, writer);
+	private void outputResults(Project project, OutputStream transformed)
+			throws IOException {
+		CsvExporter exp = new CsvExporter();
+		exp.export(project, null, new Engine(project), new OutputStreamWriter(
+				transformed));
 	}
 
 	private void ensureFileInLocation(File original, File rawDataDir)
@@ -147,33 +149,36 @@ public class TransformEngineImpl implements ITransformEngine {
 				"main/webapp/modules/core/MOD-INF/controller.js");
 
 		if (!coreController.exists()) {
-			fLogger.warn("Can't find core module controller. Things may not work as expected.");
+			fLogger.warn("Can't find core module controller - core operations can't be initialized.");
 			return;
 		}
 
-        // Compiles and "executes" the controller script. The script basically contains
-		// function declarations.
-        Context context = ContextFactory.getGlobal().enterContext();
-        Script controller = context.compileReader(new FileReader(coreController), "init.js", 1, null);
-        
-        // Initializes the scope.
-        ScriptableObject scope = new ImporterTopLevel(context);
-        scope.put("module", scope, core);
-        controller.exec(context, scope);
-                
-        // Runs the function that initializes the OperationRegistry. 
-        try {
-            Object fun = context.compileString("registerOperations", null, 1, null).exec(context, scope);
-            if (fun != null && fun instanceof Function) {
-                try {
-                    ((Function) fun).call(context, scope, scope, new Object[] {});
-                } catch (EcmaError ee) {
-                    fLogger.error("Error running core moduler controller.", ee);
-                }
-            }
-        } catch (EcmaError ex) {
-            // ignore -- taken from refine code. 
-        }
+		// Compiles and "executes" the controller script. The script basically
+		// contains function declarations.
+		Context context = ContextFactory.getGlobal().enterContext();
+		Script controller = context.compileReader(
+				new FileReader(coreController), "init.js", 1, null);
+
+		// Initializes the scope.
+		ScriptableObject scope = new ImporterTopLevel(context);
+		scope.put("module", scope, core);
+		controller.exec(context, scope);
+
+		// Runs the function that initializes the OperationRegistry.
+		try {
+			Object fun = context.compileString("registerOperations", null, 1,
+					null).exec(context, scope);
+			if (fun != null && fun instanceof Function) {
+				try {
+					((Function) fun).call(context, scope, scope,
+							new Object[] {});
+				} catch (EcmaError ee) {
+					fLogger.error("Error running core moduler controller.", ee);
+				}
+			}
+		} catch (EcmaError ex) {
+			// ignore.
+		}
 	}
 
 	private JSONObject createFileRecord(File original, String format) {

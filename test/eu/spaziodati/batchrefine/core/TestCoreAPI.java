@@ -27,17 +27,26 @@ public class TestCoreAPI {
 		runTransformTest("osterie", "compositetransform_with_GREL");
 	}
 
+	/**
+	 * Same as {@link #testCompositeTransformWithGREL()}, but using a file with
+	 * at least 100000 rows.
+	 */
+	@Test
+	public void testCompositeTransformWithGRELLarge() throws Exception {
+		runTransformTest("osterie_large", "simpletransform");
+	}
+
 	private void runTransformTest(String inputName, String transformName)
 			throws Exception {
 		ITransformEngine engine = getEngine();
-		JSONArray transform = getTransform(inputName + "_" + transformName
-				+ ".json");
+		JSONArray transform = getTransform(transformName + ".json");
 
 		File reference = TestUtilities.find(inputName + "_" + transformName
 				+ "_output" + ".csv");
 
 		ByteArrayOutputStream oStream = new ByteArrayOutputStream();
-		engine.transform(TestUtilities.find(inputName + ".csv"), transform, oStream);
+		engine.transform(TestUtilities.find(inputName + ".csv"), transform,
+				oStream);
 		assertContentEquals(reference, oStream);
 	}
 
