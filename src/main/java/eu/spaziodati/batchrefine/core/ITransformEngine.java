@@ -33,6 +33,9 @@ public interface ITransformEngine {
 	 * @throws IOException
 	 *             if either the original or the transformed streams throw
 	 *             {@link IOException}s.
+	 * 
+	 * @throws JSONException
+	 *             if the underlying {@link JSONArray} throws them on access.
 	 */
 	public void transform(File original, JSONArray transform,
 			OutputStream transformed) throws IOException, JSONException;

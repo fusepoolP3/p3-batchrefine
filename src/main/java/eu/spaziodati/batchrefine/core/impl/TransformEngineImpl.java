@@ -73,6 +73,19 @@ public class TransformEngineImpl implements ITransformEngine {
 	}
 
 	private Project loadData(File original) throws IOException {
+		// Creates project. Project contain the RecordModel
+		// and ColumnModel instances, which contain the actual data.
+		Project project = new Project();
+		ProjectMetadata metadata = new ProjectMetadata();
+
+		// Engine will try to access project by calling this singleton
+		// later, so we have to register it.
+		ProjectManager.singleton.registerProject(project, metadata);
+
+		// Imports, i.e. loads a CSV into the engine. This is a 
+		// bureaucratic process.
+
+		// 1. The importer requires a "job". 
 		ImportingJob job = ImportingManager.createJob();
 		job.getOrCreateDefaultConfig();
 
@@ -80,24 +93,18 @@ public class TransformEngineImpl implements ITransformEngine {
 
 		JSONObject fileRecord = createFileRecord(original,
 				"text/line-based/*sv");
-
+		
 		SeparatorBasedImporter importer = new SeparatorBasedImporter();
-
-		// Creates project and job.
-		Project project = new Project();
-		ProjectMetadata metadata = new ProjectMetadata();
-
-		// Engine will try to access this later.
-		ProjectManager.singleton.registerProject(project, metadata);
-
-		List<Exception> exceptions = new ArrayList<Exception>();
 
 		JSONObject options = importer.createParserUIInitializationData(job,
 				asList(fileRecord), "text/line-based/*sv");
 
+		List<Exception> exceptions = new ArrayList<Exception>();
+
 		importer.parseOneFile(project, metadata, job, fileRecord, -1, options,
 				exceptions, NULL_PROGRESS);
 
+		// After import we have to call update or the.
 		project.update();
 
 		if (fLogger.isDebugEnabled()) {
@@ -154,7 +161,7 @@ public class TransformEngineImpl implements ITransformEngine {
 			throw new IOException("Can't obtain a parent path for "
 					+ original.getAbsolutePath() + ".");
 		}
-		
+
 		return rawDataDir.getAbsoluteFile().equals(original);
 	}
 

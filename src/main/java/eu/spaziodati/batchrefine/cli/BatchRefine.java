@@ -39,6 +39,10 @@ public class BatchRefine {
 		}
 
 		JSONArray transform = deserialize(transformFile);
+		if (transform == null) {
+			return;
+		}
+		
 		ITransformEngine engine = batchEngine();
 		if (engine == null) {
 			return;
@@ -94,7 +98,8 @@ public class BatchRefine {
 	}
 
 	private static void printUsage() {
-		fLogger.info("Usage: BatchRefine INPUT TRANSFORM [OUTPUT]\n"
+		System.err.println("batchrefine: missing parameter(s).\n"
+				+ "Usage: batchrefine INPUT TRANSFORM [OUTPUT]\n"
 				+ "Applies an OpenRefine TRANSFORM to an INPUT file, and writes it to an OUTPUT file.\n"
 				+ "If no OUTPUT is specified, writes to standard output.");
 	}
