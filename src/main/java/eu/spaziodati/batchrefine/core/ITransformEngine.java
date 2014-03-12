@@ -9,7 +9,7 @@ import org.json.JSONException;
 
 /**
  * {@link ITransformEngine} takes some input and transforms it into an output
- * according to the rules defined by an {@link ITransform}.
+ * according to rules (operations) specified in an OpenRefine undo/redo history.
  * 
  * @author giuliano
  */
@@ -24,7 +24,8 @@ public interface ITransformEngine {
 	 *            from.
 	 * 
 	 * @param transform
-	 *            a {@link JSONArray} containing the transforms to be applied.
+	 *            a {@link JSONArray} containing the OpenRefine undo/redo
+	 *            history.
 	 * 
 	 * @param transformed
 	 *            an {@link OutputStream} to which transformed data will be
@@ -35,7 +36,8 @@ public interface ITransformEngine {
 	 *             {@link IOException}s.
 	 * 
 	 * @throws JSONException
-	 *             if the underlying {@link JSONArray} throws them on access.
+	 *             if the underlying {@link JSONArray} throws them during access
+	 *             (e.g. the if it contains the wrong data types).
 	 */
 	public void transform(File original, JSONArray transform,
 			OutputStream transformed) throws IOException, JSONException;
