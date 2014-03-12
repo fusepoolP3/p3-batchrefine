@@ -82,29 +82,37 @@ public class TransformEngineImpl implements ITransformEngine {
 		// later, so we have to register it.
 		ProjectManager.singleton.registerProject(project, metadata);
 
-		// Imports, i.e. loads a CSV into the engine. This is a 
+		// Imports, i.e. loads a CSV into the engine. This is a
 		// bureaucratic process.
 
-		// 1. The importer requires a "job". 
+		// 1. The importer requires a "job".
 		ImportingJob job = ImportingManager.createJob();
 		job.getOrCreateDefaultConfig();
 
 		ensureFileInLocation(original, job.getRawDataDir());
 
+		// 2. and a "file record" with things like the file format.
+		// The engine would normally get that from the browser.
 		JSONObject fileRecord = createFileRecord(original,
 				"text/line-based/*sv");
-		
+
+		// Creates the CSV importer.
 		SeparatorBasedImporter importer = new SeparatorBasedImporter();
 
+		// 3. we have to call this method to initialize the "options" object,
+		// which contains some more configuration options to the importer.
 		JSONObject options = importer.createParserUIInitializationData(job,
 				asList(fileRecord), "text/line-based/*sv");
 
 		List<Exception> exceptions = new ArrayList<Exception>();
 
+		// 4. finally we can import.
 		importer.parseOneFile(project, metadata, job, fileRecord, -1, options,
 				exceptions, NULL_PROGRESS);
 
-		// After import we have to call update or the.
+		// After import we have to call update (which is a post-load
+		// initialization procedure, really) or the row model will be
+		// inconsistent.
 		project.update();
 
 		if (fLogger.isDebugEnabled()) {
@@ -165,6 +173,11 @@ public class TransformEngineImpl implements ITransformEngine {
 		return rawDataDir.getAbsoluteFile().equals(original);
 	}
 
+	/**
+	 * This method runs part of the core module controller.js script so that we
+	 * can register all operations without having to duplicate configuration
+	 * here.
+	 */
 	private void registerOperations() throws IOException {
 		ButterflyModule core = new ButterflyModuleStub("core");
 
