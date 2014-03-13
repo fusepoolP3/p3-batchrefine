@@ -1,0 +1,7 @@
+[
+  {
+    "op": "core/column-removal",
+    "description": "Remove column Tipo",
+    "columnName": "Tipo"
+  }
+]

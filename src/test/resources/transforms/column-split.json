@@ -1,0 +1,19 @@
+[
+  {
+    "op": "core/column-split",
+    "description": "Split column Insegna by field lengths",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Insegna",
+    "guessCellType": true,
+    "removeOriginalColumn": true,
+    "mode": "lengths",
+    "fieldLengths": [
+      1,
+      2,
+      3
+    ]
+  }
+]

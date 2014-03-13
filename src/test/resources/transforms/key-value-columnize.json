@@ -1,0 +1,9 @@
+[
+  {
+    "op": "core/key-value-columnize",
+    "description": "Columnize by key column Notes and value column Annual pay rate - including taxable benefits and allowances with note column ",
+    "keyColumnName": "Notes",
+    "valueColumnName": "Annual pay rate - including taxable benefits and allowances",
+    "noteColumnName": ""
+  }
+]

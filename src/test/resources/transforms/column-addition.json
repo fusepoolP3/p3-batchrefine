@@ -1,0 +1,15 @@
+[
+  {
+    "op": "core/column-addition",
+    "description": "Create column new at index 4 based on column Tipo using expression grel:value",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "newColumnName": "new",
+    "columnInsertIndex": 4,
+    "baseColumnName": "Tipo",
+    "expression": "grel:value",
+    "onError": "set-to-blank"
+  }
+]

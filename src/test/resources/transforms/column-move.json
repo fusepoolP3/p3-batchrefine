@@ -1,0 +1,8 @@
+[
+  {
+    "op": "core/column-move",
+    "description": "Move column Tipo to position 6",
+    "columnName": "Tipo",
+    "index": 6
+  }
+]

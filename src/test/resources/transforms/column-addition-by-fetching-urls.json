@@ -1,0 +1,16 @@
+[
+  {
+    "op": "core/column-addition-by-fetching-urls",
+    "description": "Create column url at index 4 by fetching URLs based on column Tipo using expression grel:\"http://thesaurus.altervista.org/thesaurus/v1?key=7V4Y1NecRAB1R1t3Pqnd&word=performance&language=it_IT\"",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "newColumnName": "url",
+    "columnInsertIndex": 4,
+    "baseColumnName": "Tipo",
+    "urlExpression": "grel:\"http://thesaurus.altervista.org/thesaurus/v1?key=7V4Y1NecRAB1R1t3Pqnd&word=performance&language=it_IT\"",
+    "onError": "set-to-blank",
+    "delay": 300
+  }
+]
