@@ -3,6 +3,7 @@ package eu.spaziodati.batchrefine.core;
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.Properties;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -31,6 +32,14 @@ public interface ITransformEngine {
 	 *            an {@link OutputStream} to which transformed data will be
 	 *            written to.
 	 * 
+	 * @param exporter
+	 *            the string identifier of an OpenRefine exporter (e.g. "csv"
+	 *            for the CSV exporter, or "rdf" for RDF).
+	 * 
+	 * @param exporterOptions
+	 *            a set or {@link Properties} that will be passed as-is to the
+	 *            selected exporter.
+	 * 
 	 * @throws IOException
 	 *             if either the original or the transformed streams throw
 	 *             {@link IOException}s.
@@ -40,6 +49,7 @@ public interface ITransformEngine {
 	 *             (e.g. the if it contains the wrong data types).
 	 */
 	public void transform(File original, JSONArray transform,
-			OutputStream transformed) throws IOException, JSONException;
+			OutputStream transformed, String exporter,
+			Properties exporterOptions) throws IOException, JSONException;
 
 }

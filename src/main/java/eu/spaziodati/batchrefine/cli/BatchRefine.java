@@ -49,7 +49,7 @@ public class BatchRefine {
 		}
 
 		try {
-			engine.transform(inputFile, transform, output(args));
+			engine.transform(inputFile, transform, output(args), "csv", null);
 		} catch (Exception ex) {
 			fLogger.error("Error running transform.", ex);
 			return;

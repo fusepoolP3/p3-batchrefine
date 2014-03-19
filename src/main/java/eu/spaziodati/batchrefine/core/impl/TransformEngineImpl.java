@@ -28,7 +28,9 @@ import com.google.refine.ProjectManager;
 import com.google.refine.ProjectMetadata;
 import com.google.refine.RefineServlet;
 import com.google.refine.browsing.Engine;
-import com.google.refine.exporters.CsvExporter;
+import com.google.refine.exporters.Exporter;
+import com.google.refine.exporters.ExporterRegistry;
+import com.google.refine.exporters.WriterExporter;
 import com.google.refine.importers.ImporterUtilities.MultiFileReadingProgress;
 import com.google.refine.importers.SeparatorBasedImporter;
 import com.google.refine.importing.ImportingJob;
@@ -55,21 +57,27 @@ public class TransformEngineImpl implements ITransformEngine {
 		ProjectManagerStub.initialize();
 		ImportingManager.initialize(servlet);
 
-		registerOperations();
-
+		try {
+			loadModules();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return this;
 	}
 
 	@Override
 	public void transform(File original, JSONArray transform,
-			OutputStream transformed) throws IOException, JSONException {
+			OutputStream transformed, String exporterId,
+			Properties exporterProperties) throws IOException, JSONException {
+
 		ensureInitialized();
 
 		Project project = loadData(original);
 
 		applyTransform(project, transform);
 
-		outputResults(project, transformed);
+		outputResults(project, transformed, exporterId, exporterProperties);
 	}
 
 	private Project loadData(File original) throws IOException {
@@ -143,11 +151,20 @@ public class TransformEngineImpl implements ITransformEngine {
 		}
 	}
 
-	private void outputResults(Project project, OutputStream transformed)
+	private void outputResults(Project project, OutputStream transformed,
+			String exporterId, Properties exporterProperties)
 			throws IOException {
-		CsvExporter exp = new CsvExporter();
-		exp.export(project, null, new Engine(project), new OutputStreamWriter(
+		
+		Exporter e = ExporterRegistry.getExporter(exporterId);
+		if (!(e instanceof WriterExporter)) {
+			throw new RuntimeException(e.getClass().getName()
+					+ " is not a WriterExporter.");
+		}
+		
+		WriterExporter we = (WriterExporter)e;
+		we.export(project, exporterProperties, new Engine(project), new OutputStreamWriter(
 				transformed));
+		
 	}
 
 	private void ensureFileInLocation(File original, File rawDataDir)
@@ -173,17 +190,25 @@ public class TransformEngineImpl implements ITransformEngine {
 		return rawDataDir.getAbsoluteFile().equals(original);
 	}
 
+	private void loadModules() throws Exception {
+		loadModule("core", "/main/webapp/modules/core/MOD-INF/controller.js",
+				"registerOperations");
+		loadModule("rdf-extension",
+				"/extensions/rdf-extension/module/MOD-INF/controller.js",
+				"registerExporters", "registerOperations");
+	}
+
 	/**
 	 * This method runs part of the core module controller.js script so that we
 	 * can register all operations without having to duplicate configuration
 	 * here.
 	 */
-	private void registerOperations() throws IOException {
-		ButterflyModule core = new ButterflyModuleStub("core");
 
+	public void loadModule(String name, String path, String... initFunctions)
+			throws IOException {
+		ButterflyModule core = new ButterflyModuleStub(name);
 		File coreController = new File(Configurations.get("refine.root",
-				"../OpenRefine"),
-				"main/webapp/modules/core/MOD-INF/controller.js");
+				"../OpenRefine"), path);
 
 		if (!coreController.exists()) {
 			fLogger.warn("Can't find core module controller - core operations can't be initialized.");
@@ -198,23 +223,27 @@ public class TransformEngineImpl implements ITransformEngine {
 
 		// Initializes the scope.
 		ScriptableObject scope = new ImporterTopLevel(context);
+
 		scope.put("module", scope, core);
 		controller.exec(context, scope);
 
-		// Runs the function that initializes the OperationRegistry.
-		try {
-			Object fun = context.compileString("registerOperations", null, 1,
-					null).exec(context, scope);
-			if (fun != null && fun instanceof Function) {
-				try {
-					((Function) fun).call(context, scope, scope,
-							new Object[] {});
-				} catch (EcmaError ee) {
-					fLogger.error("Error running core moduler controller.", ee);
+		for (String function : initFunctions) {
+			// Runs the function that initializes the OperationRegistry.
+			try {
+				Object fun = context.compileString(function, null, 1, null)
+						.exec(context, scope);
+				if (fun != null && fun instanceof Function) {
+					try {
+						((Function) fun).call(context, scope, scope,
+								new Object[] {});
+					} catch (EcmaError ee) {
+						fLogger.error("Error running core moduler controller.",
+								ee);
+					}
 				}
+			} catch (EcmaError ex) {
+				// ignore.
 			}
-		} catch (EcmaError ex) {
-			// ignore.
 		}
 	}
 

@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF
+	xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+	xmlns:foaf="http://xmlns.com/foaf/0.1/"
+	xmlns:owl="http://www.w3.org/2002/07/owl#"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+
+<rdf:Description rdf:about="http://127.0.0.1:3333/0">
+	<rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
+	<foaf:name>AL FAGGIO </foaf:name>
+	<foaf:theme>Ristorante</foaf:theme>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://127.0.0.1:3333/1">
+	<rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
+	<foaf:name>OSTERIA IL RITRATTO</foaf:name>
+	<foaf:theme>Ristorante-Bar</foaf:theme>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://127.0.0.1:3333/2">
+	<rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
+	<foaf:name>AI DUE CAMI</foaf:name>
+	<foaf:theme>Albergo-Ristorante-Bar</foaf:theme>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://127.0.0.1:3333/3">
+	<rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
+	<foaf:name>AL POSTA HOTEL - RISTORANTE CA' DEI BOCI </foaf:name>
+	<foaf:theme>Albergo-Ristorante-Bar</foaf:theme>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://127.0.0.1:3333/4">
+	<rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
+	<foaf:name>LA RUPE DI BESE</foaf:name>
+	<foaf:theme>Ristorante-Bar</foaf:theme>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://127.0.0.1:3333/5">
+	<rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
+	<foaf:name>HOSTERIA TOBLISELLIPOINT</foaf:name>
+	<foaf:theme>Ristorante-Bar</foaf:theme>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://127.0.0.1:3333/6">
+	<rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
+	<foaf:name>LA STALLA DEL NON</foaf:name>
+	<foaf:theme>Ristorante-Bar</foaf:theme>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://127.0.0.1:3333/7">
+	<rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
+	<foaf:name>EL PAEL </foaf:name>
+	<foaf:theme>Ristorante-Pizzeria</foaf:theme>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://127.0.0.1:3333/8">
+	<rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
+	<foaf:name>COSTA SALICI </foaf:name>
+	<foaf:theme>Ristorante</foaf:theme>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://127.0.0.1:3333/9">
+	<rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
+	<foaf:name>RISTORANTE AL CONVENTO</foaf:name>
+	<foaf:theme>Ristorante-Bar</foaf:theme>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://127.0.0.1:3333/10">
+	<rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
+	<foaf:name>AURORA</foaf:name>
+	<foaf:theme>Albergo-Ristorante-Bar</foaf:theme>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://127.0.0.1:3333/11">
+	<rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
+	<foaf:name>GIARDINO</foaf:name>
+	<foaf:theme>Ristorante-Pizzeria-Bar</foaf:theme>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://127.0.0.1:3333/12">
+	<rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
+	<foaf:name>BURBA </foaf:name>
+	<foaf:theme>Ristorante</foaf:theme>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://127.0.0.1:3333/13">
+	<rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
+	<foaf:name>HOTEL PINETA</foaf:name>
+	<foaf:theme>Albergo-Ristorante-Bar</foaf:theme>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://127.0.0.1:3333/14">
+	<rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
+	<foaf:name>ALP &amp; WELLNESS SPORT HOTEL PANORAMA</foaf:name>
+	<foaf:theme>Albergo-Ristorante-Bar</foaf:theme>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://127.0.0.1:3333/15">
+	<rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
+	<foaf:name>OSTARIA DEL CARADOR </foaf:name>
+	<foaf:theme>Ristorante-Bar</foaf:theme>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://127.0.0.1:3333/16">
+	<rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
+	<foaf:name>ALBERGO RISTORANTE BAR AL SOLE</foaf:name>
+	<foaf:theme>Albergo-Ristorante-Bar</foaf:theme>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://127.0.0.1:3333/17">
+	<rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
+	<foaf:name>LOCANDA DELLE TRE CHIAVI  -</foaf:name>
+	<foaf:theme>Ristorante</foaf:theme>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://127.0.0.1:3333/18">
+	<rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
+	<foaf:name>ALBERGO CERVO RISTORANTE STUBE DEL CERVO</foaf:name>
+	<foaf:theme>Albergo-Ristorante-Pizzeria-Bar</foaf:theme>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://127.0.0.1:3333/19">
+	<rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
+	<foaf:name>CANTINOTA</foaf:name>
+	<foaf:theme>Ristorante-Pizzeria</foaf:theme>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://127.0.0.1:3333/20">
+	<rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
+	<foaf:name>ALBERGO LUSERNARHOF BAR RISTORANTE</foaf:name>
+	<foaf:theme>Albergo-Ristorante-Bar</foaf:theme>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://127.0.0.1:3333/21">
+	<rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
+	<foaf:name>PER BACCO </foaf:name>
+	<foaf:theme>Ristorante-Bar</foaf:theme>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://127.0.0.1:3333/22">
+	<rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
+	<foaf:name>MALGA PAN</foaf:name>
+	<foaf:theme>Ristorante</foaf:theme>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://127.0.0.1:3333/23">
+	<rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
+	<foaf:name>POST HOTEL RESTAURATYROL</foaf:name>
+	<foaf:theme>Ristorante</foaf:theme>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://127.0.0.1:3333/24">
+	<rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
+	<foaf:name>ALEXANDER HOTEL</foaf:name>
+	<foaf:theme>Albergo-Ristorante-Bar</foaf:theme>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://127.0.0.1:3333/25">
+	<rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
+	<foaf:name>RISTORANTE AN</foaf:name>
+	<foaf:theme>Ristorante-Bar</foaf:theme>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://127.0.0.1:3333/26">
+	<rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
+	<foaf:name>AL FORTE ALTO </foaf:name>
+	<foaf:theme>Ristorante-Bar</foaf:theme>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://127.0.0.1:3333/27">
+	<rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
+	<foaf:name>CEVEDALE LIVIROMANCE HOTEL </foaf:name>
+	<foaf:theme>Albergo-Ristorante-Bar</foaf:theme>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://127.0.0.1:3333/28">
+	<rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
+	<foaf:name>RISTORANTE RODODENDRO</foaf:name>
+	<foaf:theme>Ristorante</foaf:theme>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://127.0.0.1:3333/29">
+	<rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
+	<foaf:name>EL FILO'</foaf:name>
+	<foaf:theme>Ristorante-Bar</foaf:theme>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://127.0.0.1:3333/30">
+	<rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
+	<foaf:name>LE GIARE </foaf:name>
+	<foaf:theme>Ristorante-Pizzeria-Bar</foaf:theme>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://127.0.0.1:3333/31">
+	<rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
+	<foaf:name>ALBERGO MARTINELLI </foaf:name>
+	<foaf:theme>Albergo-Ristorante-Bar</foaf:theme>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://127.0.0.1:3333/32">
+	<rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
+	<foaf:name>RISTORANTE ANTICA GARDUMO </foaf:name>
+	<foaf:theme>Ristorante</foaf:theme>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://127.0.0.1:3333/33">
+	<rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
+	<foaf:name>SAN COLOMBANO</foaf:name>
+	<foaf:theme>Ristorante</foaf:theme>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://127.0.0.1:3333/34">
+	<rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
+	<foaf:name>RISTORANTE DA PINO</foaf:name>
+	<foaf:theme>Ristorante-Bar</foaf:theme>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://127.0.0.1:3333/35">
+	<rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
+	<foaf:name>OSTARIA DEL FILO' </foaf:name>
+	<foaf:theme>Ristorante-Bar</foaf:theme>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://127.0.0.1:3333/36">
+	<rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
+	<foaf:name>OSTERIA CA' DEI GIOSI </foaf:name>
+	<foaf:theme>Ristorante-Bar</foaf:theme>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://127.0.0.1:3333/37">
+	<rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
+	<foaf:name>ALLA CORTE DEI TOLDI</foaf:name>
+	<foaf:theme>Ristorante-Bar</foaf:theme>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://127.0.0.1:3333/38">
+	<rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
+	<foaf:name>AL VO'</foaf:name>
+	<foaf:theme>Ristorante-Bar</foaf:theme>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://127.0.0.1:3333/39">
+	<rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
+	<foaf:name>ANTICA TRATTORIA AL VOLT</foaf:name>
+	<foaf:theme>Trattoria-Bar</foaf:theme>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://127.0.0.1:3333/40">
+	<rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
+	<foaf:name>ANTICA TRATTORIA DUE MORI </foaf:name>
+	<foaf:theme>Ristorante-Bar</foaf:theme>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://127.0.0.1:3333/41">
+	<rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
+	<foaf:name>HOTEL VILLA MADRUZZO </foaf:name>
+	<foaf:theme>Albergo-Ristorante-Bar</foaf:theme>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://127.0.0.1:3333/42">
+	<rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
+	<foaf:name>LA CANTINOTA  </foaf:name>
+	<foaf:theme>Ristorante-Bar</foaf:theme>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://127.0.0.1:3333/43">
+	<rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
+	<foaf:name>OLD BAR &amp; FOOD </foaf:name>
+	<foaf:theme>Ristorante-Bar</foaf:theme>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://127.0.0.1:3333/44">
+	<rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
+	<foaf:name>OSTERIA A LE DUE SPADE</foaf:name>
+	<foaf:theme>Ristorante-Bar</foaf:theme>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://127.0.0.1:3333/45">
+	<rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
+	<foaf:name>SCRIGDEL DUOMO </foaf:name>
+	<foaf:theme>Ristorante-Bar</foaf:theme>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://127.0.0.1:3333/46">
+	<rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
+	<foaf:name>TRATTORIA AL TINO</foaf:name>
+	<foaf:theme>Ristorante-Bar</foaf:theme>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://127.0.0.1:3333/47">
+	<rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
+	<foaf:name>ALPINO</foaf:name>
+	<foaf:theme>Albergo-Ristorante-Bar</foaf:theme>
+</rdf:Description>
+
+</rdf:RDF>
