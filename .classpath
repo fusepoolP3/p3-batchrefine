@@ -1,12 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/OpenRefine"/>
-	<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
-		<attributes>
-			<attribute name="maven.pomderived" value="true"/>
-		</attributes>
-	</classpathentry>
 	<classpathentry kind="src" output="target/classes" path="src/main/java">
 		<attributes>
 			<attribute name="optional" value="true"/>
@@ -24,8 +18,12 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="/grefine-rdf-extension/module/MOD-INF/lib/sesame-rio-api-2.7.5.jar" sourcepath="/home/maddy/.m2/repository/org/openrdf/sesame/sesame-rio-api/2.7.5/sesame-rio-api-2.7.5-sources.jar"/>
+	<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="lib" path="/grefine-rdf-extension/module/MOD-INF/lib/sesame-rio-datatypes-2.7.5.jar"/>
 	<classpathentry kind="lib" path="/grefine-rdf-extension/module/MOD-INF/lib/sesame-rio-languages-2.7.5.jar"/>
 	<classpathentry kind="lib" path="/grefine-rdf-extension/module/MOD-INF/lib/sesame-rio-n3-2.7.5.jar"/>
@@ -33,15 +31,7 @@
 	<classpathentry kind="lib" path="/grefine-rdf-extension/module/MOD-INF/lib/sesame-rio-rdfxml-2.7.5.jar"/>
 	<classpathentry kind="lib" path="/grefine-rdf-extension/module/MOD-INF/lib/sesame-rio-trix-2.7.5.jar"/>
 	<classpathentry kind="lib" path="/grefine-rdf-extension/module/MOD-INF/lib/sesame-rio-turtle-2.7.5.jar"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/grefine-rdf-extension"/>
-	<classpathentry kind="lib" path="/grefine-rdf-extension/module/MOD-INF/lib/apache-any23-api-0.8.0.jar"/>
-	<classpathentry kind="lib" path="/grefine-rdf-extension/module/MOD-INF/lib/apache-any23-core-0.8.0.jar"/>
-	<classpathentry kind="lib" path="/grefine-rdf-extension/module/MOD-INF/lib/apache-any23-encoding-0.8.0.jar"/>
-	<classpathentry kind="lib" path="/grefine-rdf-extension/module/MOD-INF/lib/apache-any23-mime-0.8.0.jar"/>
-	<classpathentry kind="lib" path="/grefine-rdf-extension/module/MOD-INF/lib/apache-mime4j-core-0.7.2.jar"/>
-	<classpathentry kind="lib" path="/grefine-rdf-extension/module/MOD-INF/lib/apache-mime4j-dom-0.7.2.jar"/>
 	<classpathentry kind="lib" path="/grefine-rdf-extension/module/MOD-INF/lib/commons-codec-1.6.jar"/>
-	<classpathentry kind="lib" path="/grefine-rdf-extension/module/MOD-INF/lib/commons-httpclient-3.0.1.jar"/>
 	<classpathentry kind="lib" path="/grefine-rdf-extension/module/MOD-INF/lib/commons-io-2.4.jar"/>
 	<classpathentry kind="lib" path="/grefine-rdf-extension/module/MOD-INF/lib/commons-logging-1.1.1.jar"/>
 	<classpathentry kind="lib" path="/grefine-rdf-extension/module/MOD-INF/lib/guava-r07.jar"/>
@@ -84,5 +74,8 @@
 	<classpathentry kind="lib" path="/grefine-rdf-extension/module/MOD-INF/lib/solr-solrj-4.3.1.jar"/>
 	<classpathentry kind="lib" path="/grefine-rdf-extension/module/MOD-INF/lib/tika-core-1.4.jar"/>
 	<classpathentry kind="lib" path="/grefine-rdf-extension/module/MOD-INF/lib/tika-parsers-1.4.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/grefine-rdf-extension"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/OpenRefine"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

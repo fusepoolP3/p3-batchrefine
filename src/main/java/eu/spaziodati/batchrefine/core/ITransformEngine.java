@@ -1,5 +1,6 @@
 package eu.spaziodati.batchrefine.core;
 
+import java.io.Closeable;
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -14,7 +15,7 @@ import org.json.JSONException;
  * 
  * @author giuliano
  */
-public interface ITransformEngine {
+public interface ITransformEngine extends Closeable {
 
 	/**
 	 * Applies a transform to an input file and writes to an
@@ -49,7 +50,7 @@ public interface ITransformEngine {
 	 *             (e.g. the if it contains the wrong data types).
 	 */
 	public void transform(File original, JSONArray transform,
-			OutputStream transformed, String exporter,
-			Properties exporterOptions) throws IOException, JSONException;
+			OutputStream transformed, Properties exporterOptions)
+			throws IOException, JSONException;
 
 }

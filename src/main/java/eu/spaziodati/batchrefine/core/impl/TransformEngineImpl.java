@@ -66,11 +66,13 @@ public class TransformEngineImpl implements ITransformEngine {
 		return this;
 	}
 
+	
 	@Override
 	public void transform(File original, JSONArray transform,
-			OutputStream transformed, String exporterId,
+			OutputStream transformed, 
 			Properties exporterProperties) throws IOException, JSONException {
-
+		String exporterId = exporterProperties.getProperty("format");
+		
 		ensureInitialized();
 
 		Project project = loadData(original);
@@ -78,6 +80,8 @@ public class TransformEngineImpl implements ITransformEngine {
 		applyTransform(project, transform);
 
 		outputResults(project, transformed, exporterId, exporterProperties);
+		
+		
 	}
 
 	private Project loadData(File original) throws IOException {
@@ -291,4 +295,6 @@ public class TransformEngineImpl implements ITransformEngine {
 		}
 	};
 
+	@Override
+	public void close() throws IOException { }
 }

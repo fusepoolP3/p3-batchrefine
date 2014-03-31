@@ -4,7 +4,18 @@
   <groupId>eu.spaziodati.batchrefine</groupId>
   <artifactId>BatchRefine</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  
+  <dependencies>
+<dependency>
+  <groupId>org.apache.httpcomponents</groupId>
+  <artifactId>httpclient</artifactId>
+  <version>4.3.3</version>
+</dependency>
+<dependency>
+	<groupId>org.apache.httpcomponents</groupId>
+	<artifactId>httpmime</artifactId>
+	<version>4.3.3</version>
+</dependency>
+</dependencies>
   <build>
     <plugins>
       <plugin>

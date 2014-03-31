@@ -1,7 +1,6 @@
 package eu.spaziodati.batchrefine.core.test.utils;
 
 import java.io.BufferedReader;
-import java.io.Closeable;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -16,8 +15,11 @@ import org.junit.Assert;
 
 import com.google.refine.util.ParsingUtilities;
 
+import eu.spaziodati.batchrefine.core.EngineType;
 import eu.spaziodati.batchrefine.core.ITransformEngine;
 import eu.spaziodati.batchrefine.core.impl.TransformEngineImpl;
+import eu.spaziodati.batchrefine.core.impl.Utils;
+import eu.spaziodati.batchrefine.http.RefineHTTPClient;
 
 public class TestUtilities {
 
@@ -47,43 +49,21 @@ public class TestUtilities {
 	}
 
 	/**
-	 * Closes a given {@link Closeable} if it's not <code>null</code>.
-	 * 
-	 * @param closeable
-	 *            the {@link Closeable} to be closed.
-	 * @param rethrow
-	 *            if set to <code>true</code>, rethrows any exceptions
-	 *            encountered during {@link Closeable#close()}.
-	 * 
-	 * @throws IOException
-	 *             if an exception is thrown, and <code>rethrow</code> is set to
-	 *             true.
-	 */
-	public static void safeClose(Closeable closeable, boolean rethrow)
-			throws IOException {
-
-		if (closeable != null) {
-			try {
-				closeable.close();
-			} catch (IOException ex) {
-				if (rethrow) {
-					throw ex;
-				} else {
-					ex.printStackTrace();
-				}
-			}
-		}
-	}
-
-	/**
 	 * Called to initialize the minimal engine
 	 * 
 	 * @return {@link ITransformEngine}
 	 * 
 	 * @throws Exception
 	 */
-	public static ITransformEngine getEngine() throws Exception {
-		return new TransformEngineImpl().init();
+	public static ITransformEngine getEngine(EngineType type) throws Exception {
+		switch (type) {
+		case http:
+			return new RefineHTTPClient();
+		case java:
+			return new TransformEngineImpl().init();
+		default:
+			throw new RuntimeException("Invalid type " + type);
+		}
 	}
 
 	/**
@@ -96,7 +76,7 @@ public class TestUtilities {
 	 * @throws IOException
 	 * @throws JSONException
 	 */
-	
+
 	public static JSONArray getTransform(String transformFile)
 			throws IOException, JSONException {
 		String transform = FileUtils.readFileToString(TestUtilities
@@ -105,20 +85,19 @@ public class TestUtilities {
 	}
 
 	/**
-	 * For test purpose, takes two files as an input and asserts them
-	 * for equality on per line basis. It is necessary to specify from
-	 * which line actually to start the comparison.
+	 * For test purpose, takes two files as an input and asserts them for
+	 * equality on per line basis. It is necessary to specify from which line
+	 * actually to start the comparison.
 	 * 
-	 * @param startFromLine
+	 * @param skipLines
 	 * @param expectedFile
 	 * @param outputFile
 	 * 
 	 * @throws IOException
 	 */
-	
-		
-	public static void assertContentEquals(File expectedFile, File outputFile, int startFromLine)
-			throws IOException {
+
+	public static void assertContentEquals(File expectedFile, File outputFile,
+			int skipLines) throws IOException {
 
 		BufferedReader expected = null;
 		BufferedReader output = null;
@@ -129,7 +108,7 @@ public class TestUtilities {
 
 			int line = 0;
 			String current = null;
-			
+
 			do {
 				current = expected.readLine();
 				String actual = output.readLine();
@@ -142,7 +121,7 @@ public class TestUtilities {
 					break;
 				}
 
-				if (line > startFromLine && !current.equals(actual)) {
+				if (line > skipLines && !current.equals(actual)) {
 					Assert.fail("Expected: " + current + "\n Got: " + actual
 							+ "\n at line " + line);
 				}
@@ -151,8 +130,8 @@ public class TestUtilities {
 			} while (current != null);
 
 		} finally {
-			TestUtilities.safeClose(expected, false);
-			TestUtilities.safeClose(output, false);
+			Utils.safeClose(expected, false);
+			Utils.safeClose(output, false);
 		}
 	}
 

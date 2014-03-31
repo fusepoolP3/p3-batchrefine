@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.Properties;
 
 import org.apache.commons.io.FileUtils;
 import org.json.JSONArray;
@@ -49,7 +50,9 @@ public class BatchRefine {
 		}
 
 		try {
-			engine.transform(inputFile, transform, output(args), "csv", null);
+			Properties exporterProperties = new Properties();
+			exporterProperties.setProperty("format", "csv");
+			engine.transform(inputFile, transform, output(args), exporterProperties);
 		} catch (Exception ex) {
 			fLogger.error("Error running transform.", ex);
 			return;
