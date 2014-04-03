@@ -6,8 +6,10 @@
 # disaster.
 #
 
+# -- CHANGE THOSE IN YOUR MACHINE --
 REFINE_ROOT=/home/giuliano/Work/SpazioDati/Code/workspace/OpenRefine
 BATCH_REFINE_ROOT=/home/giuliano/Work/SpazioDati/Code/workspace/BatchRefine
+# ----------------------------------
 
 function add_module {
   mroot="${REFINE_ROOT}/extensions/${1}/module/MOD-INF"
@@ -15,17 +17,18 @@ function add_module {
   CP="${CP}:"`ls ${mroot}/lib/*.jar | tr '\n' ':'`
 }
 
+# Batch refine classes and libs.
 CP="${BATCH_REFINE_ROOT}/target/classes"
 CP="${CP}:"`ls ${BATCH_REFINE_ROOT}/lib/*.jar | tr '\n' ':'`
 
+# OpenRefine classes and libs.
 refinewebinf=${REFINE_ROOT}/main/webapp/WEB-INF
 
 CP="${CP}:${refinewebinf}/classes":`ls ${refinewebinf}/lib/*.jar | tr '\n' ':'`
 
-CP="$CP:${REFINE_ROOT}/server/classes:"`ls ${REFINE_ROOT}/server/lib/*.jar | tr '\n' ':'`
+CP="${CP}:${REFINE_ROOT}/server/classes:"`ls ${REFINE_ROOT}/server/lib/*.jar | tr '\n' ':'`
 
-#echo $CP
-
+# Modules.
 add_module "rdf-extension"
 
 javax -cp ${CP} -Drefine.root=${REFINE_ROOT} eu.spaziodati.batchrefine.cli.BatchRefine "$@"
