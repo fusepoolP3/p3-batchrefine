@@ -15,17 +15,17 @@ function add_module {
   CP="${CP}:"`ls ${mroot}/lib/*.jar | tr '\n' ':'`
 }
 
+CP="${BATCH_REFINE_ROOT}/target/classes"
+CP="${CP}:"`ls ${BATCH_REFINE_ROOT}/lib/*.jar | tr '\n' ':'`
+
 refinewebinf=${REFINE_ROOT}/main/webapp/WEB-INF
 
-CP="${refinewebinf}/classes":`ls ${refinewebinf}/lib/*.jar | tr '\n' ':'`
+CP="${CP}:${refinewebinf}/classes":`ls ${refinewebinf}/lib/*.jar | tr '\n' ':'`
 
 CP="$CP:${REFINE_ROOT}/server/classes:"`ls ${REFINE_ROOT}/server/lib/*.jar | tr '\n' ':'`
 
-CP="${CP}:${BATCH_REFINE_ROOT}/target/classes"
-CP="${CP}:"`ls ${BATCH_REFINE_ROOT}/lib/*.jar | tr '\n' ':'`
-
 #echo $CP
 
-add_module "grefine-rdf-extension"
+add_module "rdf-extension"
 
-java -cp ${CP} eu.spaziodati.batchrefine.cli.BatchRefine -Drefine.root=${REFINE_ROOT} "$@"
+javax -cp ${CP} -Drefine.root=${REFINE_ROOT} eu.spaziodati.batchrefine.cli.BatchRefine "$@"
