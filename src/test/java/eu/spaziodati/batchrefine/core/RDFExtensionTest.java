@@ -23,7 +23,7 @@ public class RDFExtensionTest extends BatchRefineTest {
 				{ "rdf", EngineType.java},
 				{ "turtle", EngineType.http},
 				{ "turtle", EngineType.java}
-				});
+			});
 	}
 	
 	public RDFExtensionTest(String format, EngineType engineType) {
@@ -31,9 +31,8 @@ public class RDFExtensionTest extends BatchRefineTest {
 		fEngineType = engineType;
 	}
 	
-
 	@Test
 	public void RDFtest() throws Exception {
-		runTransformTest("osterie", "rdf_skeleton", startFromLine,fFormat, fEngineType);
+		runTransformTest("osterie", "rdf_skeleton", startFromLine, fFormat, fEngineType);
 	}
 }

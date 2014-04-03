@@ -1,0 +1,55 @@
+<!--
+    Plain ANT script for BatchRefine.
+-->
+
+<project name="batchrefine" default="run" basedir=".">
+
+	<property file="build.properties" />
+	<property name="main.class" value="eu.spaziodati.batchrefine.cli.BatchRefine" />
+
+	<path id="class.path">
+		<!-- Our libs -->
+		<fileset dir="${lib.dir}">
+			<include name="**/*.jar" />
+		</fileset>
+
+		<!-- OpenRefine libs and classes -->
+		<fileset dir="${refine.lib.dir}">
+			<include name="**/*.jar" />
+		</fileset>
+		<fileset dir="${server.lib.dir}">
+			<include name="**/*.jar" />
+		</fileset>
+		<fileset dir="${server.lib.dir}">
+			<include name="**/*.jar" />
+		</fileset>
+
+		<pathelement path="${refine.classes.dir}" />
+
+		<!-- RDF extension libs and classes -->
+		<fileset dir="${rdfext.lib.dir}">
+			<include name="**/*.jar" />
+		</fileset>
+
+		<pathelement path="${rdfext.classes.dir}" />
+
+	</path>
+
+	<target name="compile">
+		<mkdir dir="${build.dir}" />
+		<javac destdir="${build.dir}" debug="true">
+			<src path="${src.dir}" />
+			<classpath refid="class.path" />
+		</javac>
+	</target>
+	
+	<target name="run" depends="compile">
+		<java fork="true" classname="${main.class}">
+			<classpath>
+				<path refid="class.path" />
+				<pathelement path="${build.dir}" />
+			</classpath>
+		</java>
+	</target>
+
+</project>

@@ -66,13 +66,12 @@ public class TransformEngineImpl implements ITransformEngine {
 		return this;
 	}
 
-	
 	@Override
 	public void transform(File original, JSONArray transform,
-			OutputStream transformed, 
-			Properties exporterProperties) throws IOException, JSONException {
+			OutputStream transformed, Properties exporterProperties)
+			throws IOException, JSONException {
 		String exporterId = exporterProperties.getProperty("format");
-		
+
 		ensureInitialized();
 
 		Project project = loadData(original);
@@ -80,8 +79,7 @@ public class TransformEngineImpl implements ITransformEngine {
 		applyTransform(project, transform);
 
 		outputResults(project, transformed, exporterId, exporterProperties);
-		
-		
+
 	}
 
 	private Project loadData(File original) throws IOException {
@@ -151,6 +149,8 @@ public class TransformEngineImpl implements ITransformEngine {
 				} catch (Exception ex) {
 					fLogger.error("Error applying operation.", ex);
 				}
+			} else {
+				fLogger.warn("Skipping unknown operation " + operation);
 			}
 		}
 	}
@@ -158,17 +158,17 @@ public class TransformEngineImpl implements ITransformEngine {
 	private void outputResults(Project project, OutputStream transformed,
 			String exporterId, Properties exporterProperties)
 			throws IOException {
-		
+
 		Exporter e = ExporterRegistry.getExporter(exporterId);
 		if (!(e instanceof WriterExporter)) {
 			throw new RuntimeException(e.getClass().getName()
 					+ " is not a WriterExporter.");
 		}
-		
-		WriterExporter we = (WriterExporter)e;
-		we.export(project, exporterProperties, new Engine(project), new OutputStreamWriter(
-				transformed));
-		
+
+		WriterExporter we = (WriterExporter) e;
+		we.export(project, exporterProperties, new Engine(project),
+				new OutputStreamWriter(transformed));
+
 	}
 
 	private void ensureFileInLocation(File original, File rawDataDir)
@@ -199,7 +199,7 @@ public class TransformEngineImpl implements ITransformEngine {
 				"registerOperations");
 		loadModule("rdf-extension",
 				"/extensions/rdf-extension/module/MOD-INF/controller.js",
-				"registerExporters", "registerOperations");
+				"registerOperations", "registerExporters");
 	}
 
 	/**
@@ -296,5 +296,6 @@ public class TransformEngineImpl implements ITransformEngine {
 	};
 
 	@Override
-	public void close() throws IOException { }
+	public void close() throws IOException {
+	}
 }

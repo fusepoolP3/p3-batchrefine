@@ -58,7 +58,7 @@ public class TestUtilities {
 	public static ITransformEngine getEngine(EngineType type) throws Exception {
 		switch (type) {
 		case http:
-			return new RefineHTTPClient();
+			return new RefineHTTPClient("localhost", 3333);
 		case java:
 			return new TransformEngineImpl().init();
 		default:

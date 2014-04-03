@@ -1,0 +1,31 @@
+#!/bin/bash
+#
+# Interim script to run BatchRefine until we have a proper
+# packaging mechanism in place. It's messy as it simply 
+# throws everything into the classpath, and may lead to 
+# disaster.
+#
+
+REFINE_ROOT=/home/giuliano/Work/SpazioDati/Code/workspace/OpenRefine
+BATCH_REFINE_ROOT=/home/giuliano/Work/SpazioDati/Code/workspace/BatchRefine
+
+function add_module {
+  mroot="${REFINE_ROOT}/extensions/${1}/module/MOD-INF"
+  CP="${CP}:${mroot}/classes"
+  CP="${CP}:"`ls ${mroot}/lib/*.jar | tr '\n' ':'`
+}
+
+refinewebinf=${REFINE_ROOT}/main/webapp/WEB-INF
+
+CP="${refinewebinf}/classes":`ls ${refinewebinf}/lib/*.jar | tr '\n' ':'`
+
+CP="$CP:${REFINE_ROOT}/server/classes:"`ls ${REFINE_ROOT}/server/lib/*.jar | tr '\n' ':'`
+
+CP="${CP}:${BATCH_REFINE_ROOT}/target/classes"
+CP="${CP}:"`ls ${BATCH_REFINE_ROOT}/lib/*.jar | tr '\n' ':'`
+
+#echo $CP
+
+add_module "grefine-rdf-extension"
+
+java -cp ${CP} eu.spaziodati.batchrefine.cli.BatchRefine -Drefine.root=${REFINE_ROOT} "$@"

@@ -26,10 +26,7 @@ public class TestCoreAPI extends BatchRefineTest {
 		fFormat = format;
 		fEngineType = engineType;
 	}
-	
-	
-	
-	
+		
 	@Test
 	public void testSimpleCSVTransform() throws Exception {
 		

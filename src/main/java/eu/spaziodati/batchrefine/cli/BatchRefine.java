@@ -4,10 +4,18 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.net.ConnectException;
+import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 import org.apache.commons.io.FileUtils;
 import org.json.JSONArray;
+import org.kohsuke.args4j.Argument;
+import org.kohsuke.args4j.CmdLineException;
+import org.kohsuke.args4j.CmdLineParser;
+import org.kohsuke.args4j.Option;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -15,6 +23,7 @@ import com.google.refine.util.ParsingUtilities;
 
 import eu.spaziodati.batchrefine.core.ITransformEngine;
 import eu.spaziodati.batchrefine.core.impl.TransformEngineImpl;
+import eu.spaziodati.batchrefine.http.RefineHTTPClient;
 
 /**
  * Command line utility for BatchRefine.
@@ -26,15 +35,51 @@ public class BatchRefine {
 	private static final Logger fLogger = LoggerFactory
 			.getLogger(BatchRefine.class);
 
-	public static void main(String[] args) {
+	private static enum Engine {
+		embedded, remote
+	}
 
-		if (args.length < 2) {
-			printUsage();
-			return;
+	private static enum Format {
+		csv, rdf, turtle
+	}
+
+	@Option(name = "-e", aliases = { "--engine" }, usage = "uses either an embedded or remote engine (defaults to remote)", required = false)
+	private Engine fType = Engine.remote;
+
+	@Option(name = "-h", aliases = { "--host" }, usage = "OpenRefine host (remote engine only, defaults to localhost)", required = false)
+	private String fHost = "localhost";
+
+	@Option(name = "-p", aliases = { "--port" }, usage = "OpenRefine port  (remote engine only, defaults to 3333)", required = false)
+	private int fPort = 3333;
+
+	@Option(name = "-f", aliases = { "--format" }, usage = "The format in which to output the transformed data (defaults to csv)", required = false)
+	private Format fFormat = Format.csv;
+
+	@Option(name = "-v", aliases = { "--verbose" }, usage = "Prints debug information", required = false)
+	private boolean fVerbose;
+
+	@Argument
+	private List<String> fArguments = new ArrayList<String>();
+
+	private void _main(String[] args) {
+
+		CmdLineParser parser = new CmdLineParser(this);
+
+		try {
+			parser.parseArgument(args);
+
+			if (fArguments.size() < 2) {
+				printUsage(parser);
+				System.exit(-1);
+			}
+
+		} catch (CmdLineException ex) {
+			printUsage(parser);
+			System.exit(-1);
 		}
 
-		File inputFile = checkExists(args[0]);
-		File transformFile = checkExists(args[1]);
+		File inputFile = checkExists(fArguments.get(0));
+		File transformFile = checkExists(fArguments.get(1));
 		if (inputFile == null || transformFile == null) {
 			return;
 		}
@@ -43,7 +88,7 @@ public class BatchRefine {
 		if (transform == null) {
 			return;
 		}
-		
+
 		ITransformEngine engine = batchEngine();
 		if (engine == null) {
 			return;
@@ -51,8 +96,10 @@ public class BatchRefine {
 
 		try {
 			Properties exporterProperties = new Properties();
-			exporterProperties.setProperty("format", "csv");
-			engine.transform(inputFile, transform, output(args), exporterProperties);
+			exporterProperties.setProperty("format", fFormat.toString());
+			engine.transform(inputFile, transform, output(), exporterProperties);
+		} catch (ConnectException ex) {
+			fLogger.error("Could not connect to host (is it running)? Error was:\n " + ex.getMessage());
 		} catch (Exception ex) {
 			fLogger.error("Error running transform.", ex);
 			return;
@@ -63,7 +110,8 @@ public class BatchRefine {
 		System.exit(0);
 	}
 
-	private static JSONArray deserialize(File transform) {
+
+	private JSONArray deserialize(File transform) {
 		String transformStr;
 		try {
 			transformStr = FileUtils.readFileToString(transform);
@@ -74,7 +122,7 @@ public class BatchRefine {
 		}
 	}
 
-	private static File checkExists(String name) {
+	private File checkExists(String name) {
 		File file = new File(name);
 		if (!file.exists()) {
 			fLogger.error("File " + name + " could not be found.");
@@ -83,28 +131,48 @@ public class BatchRefine {
 		return file;
 	}
 
-	private static ITransformEngine batchEngine() {
+	private ITransformEngine batchEngine() {
 		try {
-			return new TransformEngineImpl().init();
+			switch (fType) {
+			case embedded:
+				return new TransformEngineImpl().init();
+			case remote:
+				return new RefineHTTPClient(fHost, fPort);
+			default:
+				return null;
+			}
+
 		} catch (IOException ex) {
 			fLogger.error("Error initializing engine.", ex);
+			return null;
+		} catch (URISyntaxException ex) {
+			fLogger.error(
+					"Can't build a meaningful host URI. Is your hostname correct?",
+					ex);
 			return null;
 		}
 	}
 
-	private static OutputStream output(String[] args) throws IOException {
-		if (args.length >= 3) {
-			return new FileOutputStream(new File(args[2]));
+	private OutputStream output() throws IOException {
+		if (fArguments.size() >= 3) {
+			return new FileOutputStream(new File(fArguments.get(2)));
 		}
 
 		return System.out;
 	}
 
-	private static void printUsage() {
-		System.err.println("batchrefine: missing parameter(s).\n"
-				+ "Usage: batchrefine INPUT TRANSFORM [OUTPUT]\n"
-				+ "Applies an OpenRefine TRANSFORM to an INPUT file, and writes it to an OUTPUT file.\n"
-				+ "If no OUTPUT is specified, writes to standard output.");
+	private void printUsage(CmdLineParser parser) {
+		System.err
+				.println("batchrefine: missing parameter(s).\n"
+						+ "Usage: batchrefine [OPTION...] INPUT TRANSFORM [OUTPUT]\n"
+						+ "Applies an OpenRefine TRANSFORM to an INPUT file, and writes it to an OUTPUT\nfile.\n");
+		parser.printUsage(System.err);
+		System.err
+				.println("\n If no OUTPUT is specified, writes to standard output.");
+	}
+
+	public static void main(String[] args) {
+		new BatchRefine()._main(args);
 	}
 
 }

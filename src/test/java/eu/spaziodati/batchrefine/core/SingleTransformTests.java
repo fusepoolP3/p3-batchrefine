@@ -7,8 +7,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
-import eu.spaziodati.batchrefine.core.impl.Utils;
-
 @RunWith(Parameterized.class)
 public class SingleTransformTests extends BatchRefineTest {
 
@@ -24,6 +22,7 @@ public class SingleTransformTests extends BatchRefineTest {
 	private final EngineType fEngineType;
 
 	int startFromLine = 0;
+	
 	@Parameterized.Parameters
 	public static Collection<?> parameters() {
 		return Arrays.asList(new Object[][] { 
@@ -37,6 +36,7 @@ public class SingleTransformTests extends BatchRefineTest {
 	}
 
 	// -------tests with "osterie.csv" data:
+	
 	@Test
 	public void textTransformTest() throws Exception {
 		runTransformTest("osterie", "text-transform", startFromLine, fFormat,
