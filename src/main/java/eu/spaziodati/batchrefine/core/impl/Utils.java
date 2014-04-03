@@ -35,25 +35,4 @@ public class Utils {
 			}
 		}
 	}
-// not yet implemented, starting external process of OpenRefine
-	
-//	public static void startRefineInstance() {
-//		Process refineProcess = null;
-//		String line;
-//		try {
-//			refineProcess = new ProcessBuilder("../OpenRefine/refine").start();
-//			BufferedReader refineStdOut = new BufferedReader(
-//					new InputStreamReader(refineProcess.getInputStream()));
-//			while ((line = refineStdOut.readLine()) != null) {
-//				System.out.println("Refine: " + line);
-//				if (line.contains("Starting OpenRefine " + "/d./d " + "[//w]"))
-//					break;
-//				if (line.contains("OpenRefine is already Running."))
-//					throw new Exception("Refine is already Running");
-//			}
-//		} catch (Exception e) {
-//			throw new RuntimeException("Refine failed to Start: " + e);
-//		}
-//	}
-
 }
