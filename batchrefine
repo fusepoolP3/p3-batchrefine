@@ -18,7 +18,7 @@ function add_module {
 }
 
 # Batch refine classes and libs.
-CP="${BATCH_REFINE_ROOT}/target/classes"
+CP=`echo ${BATCH_REFINE_ROOT}/target/{classes,resources}: | tr -d ' '`
 CP="${CP}:"`ls ${BATCH_REFINE_ROOT}/lib/*.jar | tr '\n' ':'`
 
 # OpenRefine classes and libs.

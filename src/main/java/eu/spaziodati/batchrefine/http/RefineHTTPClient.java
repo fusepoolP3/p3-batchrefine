@@ -14,7 +14,6 @@ import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.RandomStringUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpRequest;
-import org.apache.http.HttpStatus;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
@@ -59,7 +58,7 @@ public class RefineHTTPClient implements ITransformEngine {
 	/**
 	 * Maximum poll interval length for asynchronous operations.
 	 */
-	private static final int MAX_POLL_INTERVAL = 10000;
+	private static final int MAX_POLL_INTERVAL = 3000;
 
 	/**
 	 * Length of the random identifier used for temporary refine projects.
@@ -92,7 +91,7 @@ public class RefineHTTPClient implements ITransformEngine {
 			OutputStream transformed, Properties exporterOptions)
 			throws IOException, JSONException {
 		String handle = null;
-		
+
 		try {
 			handle = createProjectAndUpload(original);
 
@@ -110,6 +109,10 @@ public class RefineHTTPClient implements ITransformEngine {
 		CloseableHttpResponse response = null;
 
 		try {
+			/*
+			 * Refine requires projects to be named, but these are not important
+			 * for us, so we just use a random string.
+			 */
 			String name = RandomStringUtils
 					.randomAlphanumeric(IDENTIFIER_LENGTH);
 
@@ -139,7 +142,7 @@ public class RefineHTTPClient implements ITransformEngine {
 	private boolean applyOperations(String handle, JSONArray transform)
 			throws IOException {
 		CloseableHttpResponse response = null;
-		
+
 		try {
 			List<NameValuePair> pairs = new ArrayList<NameValuePair>();
 			pairs.add(new BasicNameValuePair("project", handle));
@@ -148,7 +151,12 @@ public class RefineHTTPClient implements ITransformEngine {
 			response = doPost("/command/core/apply-operations",
 					new UrlEncodedFormEntity(pairs));
 
-			return response.getStatusLine().getStatusCode() == HttpStatus.SC_ACCEPTED;
+			JSONObject content = decode(response);
+			if (content == null) {
+				return false;
+			}
+
+			return "pending".equals(content.get("code"));
 
 		} catch (Exception e) {
 			throw launderedException(e);
@@ -167,7 +175,7 @@ public class RefineHTTPClient implements ITransformEngine {
 				Thread.sleep(backoff);
 				backoff = Math.min(backoff * 2, MAX_POLL_INTERVAL);
 			}
-			
+
 		} catch (Exception e) {
 			throw launderedException(e);
 		} finally {
@@ -201,7 +209,7 @@ public class RefineHTTPClient implements ITransformEngine {
 
 	private String checkedGet(Properties p, String key) {
 		String value = p.getProperty(key);
-		
+
 		if (value == null) {
 			throw new IllegalArgumentException("Missing required parameter "
 					+ key + ".");
@@ -216,7 +224,7 @@ public class RefineHTTPClient implements ITransformEngine {
 		}
 
 		CloseableHttpResponse response = null;
-		
+
 		try {
 			List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
 			urlParameters.add(new BasicNameValuePair("project", handle));
@@ -224,7 +232,7 @@ public class RefineHTTPClient implements ITransformEngine {
 					new UrlEncodedFormEntity(urlParameters));
 
 			// Not much of a point in checking the response as
-			// it will contain "OK" not matter what happens.
+			// it will contain "OK" no matter what happens.
 		} catch (Exception e) {
 			throw launderedException(e);
 		} finally {
@@ -244,22 +252,42 @@ public class RefineHTTPClient implements ITransformEngine {
 			logRequest(poll);
 
 			response = logResponse(fHttpClient.execute(poll));
-			JSONArray pending = new JSONObject(IOUtils.toString(response
-					.getEntity().getContent())).getJSONArray("processes");
+			JSONArray pending = decode(response).getJSONArray("processes");
 
-			return pending.length() == 0;
+			fLogger.info(formatProgress(pending));
+
+			return pending.length() != 0;
 		} finally {
 			Utils.safeClose(response, true);
 		}
+	}
+
+	private String formatProgress(JSONArray pending) {
+		StringBuffer formatString = new StringBuffer("[Progress: ");
+		Object[] progress = new Object[pending.length()];
+
+		for (int i = 0; i < pending.length(); i++) {
+			formatString.append("%1$3s%% ");
+			try {
+				progress[i] = ((JSONObject) pending.get(i))
+						.getString("progress");
+			} catch (JSONException ex) {
+				progress[i] = "error";
+			}
+		}
+
+		formatString.setCharAt(formatString.length() - 1, ']');
+
+		return String.format(formatString.toString(), progress);
 	}
 
 	private CloseableHttpResponse doPost(String path, HttpEntity entity)
 			throws ClientProtocolException, IOException, URISyntaxException {
 		URI requestURI = new URIBuilder(fRefineURI).setPath(path).build();
 		HttpPost post = new HttpPost(requestURI);
-		
+
 		post.setEntity(entity);
-		
+
 		logRequest(post);
 		return logResponse(fHttpClient.execute(post));
 	}
@@ -269,8 +297,19 @@ public class RefineHTTPClient implements ITransformEngine {
 		if (ex instanceof ConnectException) {
 			throw (ConnectException) ex;
 		}
-		
+
 		return new RuntimeException(ex);
+	}
+
+	private JSONObject decode(CloseableHttpResponse response)
+			throws IOException {
+		try {
+			return new JSONObject(IOUtils.toString(response.getEntity()
+					.getContent()));
+		} catch (JSONException ex) {
+			fLogger.error("Error decoding server response: ", ex);
+			return null;
+		}
 	}
 
 	private void logRequest(HttpRequest request) {

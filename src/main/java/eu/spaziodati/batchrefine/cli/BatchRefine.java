@@ -11,13 +11,13 @@ import java.util.List;
 import java.util.Properties;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
 import org.json.JSONArray;
 import org.kohsuke.args4j.Argument;
 import org.kohsuke.args4j.CmdLineException;
 import org.kohsuke.args4j.CmdLineParser;
 import org.kohsuke.args4j.Option;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.google.refine.util.ParsingUtilities;
 
@@ -31,9 +31,6 @@ import eu.spaziodati.batchrefine.http.RefineHTTPClient;
  * @author giuliano
  */
 public class BatchRefine {
-
-	private static final Logger fLogger = LoggerFactory
-			.getLogger(BatchRefine.class);
 
 	private static enum Engine {
 		embedded, remote
@@ -61,6 +58,8 @@ public class BatchRefine {
 	@Argument
 	private List<String> fArguments = new ArrayList<String>();
 
+	private Logger fLogger;
+
 	private void _main(String[] args) {
 
 		CmdLineParser parser = new CmdLineParser(this);
@@ -77,6 +76,8 @@ public class BatchRefine {
 			printUsage(parser);
 			System.exit(-1);
 		}
+
+		configureLogging();
 
 		File inputFile = checkExists(fArguments.get(0));
 		File transformFile = checkExists(fArguments.get(1));
@@ -99,7 +100,8 @@ public class BatchRefine {
 			exporterProperties.setProperty("format", fFormat.toString());
 			engine.transform(inputFile, transform, output(), exporterProperties);
 		} catch (ConnectException ex) {
-			fLogger.error("Could not connect to host (is it running)? Error was:\n " + ex.getMessage());
+			fLogger.error("Could not connect to host (is it running)? Error was:\n "
+					+ ex.getMessage());
 		} catch (Exception ex) {
 			fLogger.error("Error running transform.", ex);
 			return;
@@ -110,6 +112,10 @@ public class BatchRefine {
 		System.exit(0);
 	}
 
+	private void configureLogging() {
+		Logger.getRootLogger().setLevel(fVerbose ? Level.DEBUG : Level.INFO);
+		fLogger = Logger.getLogger(BatchRefine.class);
+	}
 
 	private JSONArray deserialize(File transform) {
 		String transformStr;
@@ -168,7 +174,7 @@ public class BatchRefine {
 						+ "Applies an OpenRefine TRANSFORM to an INPUT file, and writes it to an OUTPUT\nfile.\n");
 		parser.printUsage(System.err);
 		System.err
-				.println("\n If no OUTPUT is specified, writes to standard output.");
+				.println("\nIf no OUTPUT is specified, writes to standard output.");
 	}
 
 	public static void main(String[] args) {
