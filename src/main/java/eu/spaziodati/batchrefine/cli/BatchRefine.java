@@ -22,8 +22,9 @@ import org.kohsuke.args4j.Option;
 import com.google.refine.util.ParsingUtilities;
 
 import eu.spaziodati.batchrefine.core.ITransformEngine;
-import eu.spaziodati.batchrefine.core.impl.TransformEngineImpl;
-import eu.spaziodati.batchrefine.http.RefineHTTPClient;
+import eu.spaziodati.batchrefine.core.Utils;
+import eu.spaziodati.batchrefine.core.embedded.TransformEngineImpl;
+import eu.spaziodati.batchrefine.core.http.RefineHTTPClient;
 
 /**
  * Command line utility for BatchRefine.
@@ -90,12 +91,14 @@ public class BatchRefine {
 			return;
 		}
 
-		ITransformEngine engine = batchEngine();
-		if (engine == null) {
-			return;
-		}
+		ITransformEngine engine = null;
 
 		try {
+			engine = batchEngine();
+			if (engine == null) {
+				return;
+			}
+			
 			Properties exporterProperties = new Properties();
 			exporterProperties.setProperty("format", fFormat.toString());
 			engine.transform(inputFile, transform, output(), exporterProperties);
@@ -105,6 +108,8 @@ public class BatchRefine {
 		} catch (Exception ex) {
 			fLogger.error("Error running transform.", ex);
 			return;
+		} finally {
+			Utils.safeClose(engine);
 		}
 
 		// Have to be brutal as refine keeps non-daemon threads

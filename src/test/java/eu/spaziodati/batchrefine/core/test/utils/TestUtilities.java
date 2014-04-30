@@ -17,9 +17,9 @@ import com.google.refine.util.ParsingUtilities;
 
 import eu.spaziodati.batchrefine.core.EngineType;
 import eu.spaziodati.batchrefine.core.ITransformEngine;
-import eu.spaziodati.batchrefine.core.impl.TransformEngineImpl;
-import eu.spaziodati.batchrefine.core.impl.Utils;
-import eu.spaziodati.batchrefine.http.RefineHTTPClient;
+import eu.spaziodati.batchrefine.core.Utils;
+import eu.spaziodati.batchrefine.core.embedded.TransformEngineImpl;
+import eu.spaziodati.batchrefine.core.http.RefineHTTPClient;
 
 public class TestUtilities {
 
