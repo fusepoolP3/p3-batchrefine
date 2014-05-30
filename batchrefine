@@ -7,8 +7,8 @@
 #
 
 # -- CHANGE THOSE IN YOUR MACHINE --
-REFINE_ROOT=/home/giuliano/Work/SpazioDati/Code/workspace/OpenRefine
-BATCH_REFINE_ROOT=/home/giuliano/Work/SpazioDati/Code/workspace/BatchRefine
+REFINE_ROOT=${PWD}/../OpenRefine
+BATCH_REFINE_ROOT=${PWD}
 # ----------------------------------
 
 function add_module {
