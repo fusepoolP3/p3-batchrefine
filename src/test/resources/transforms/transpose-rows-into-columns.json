@@ -1,8 +1,0 @@
-[
-  {
-    "op": "core/transpose-rows-into-columns",
-    "description": "Transpose every 4 cells in column Job Title into separate columns",
-    "columnName": "Job Title",
-    "rowCount": 4
-  }
-]

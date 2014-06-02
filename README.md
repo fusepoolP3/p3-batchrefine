@@ -10,17 +10,7 @@ This is a work in progress, and so is this documentation.
 
 1. How to build
 ---------------
-Unfortunately, there is no simple way to build this as OpenRefine does not use Maven (and [won't be switching to it](https://code.google.com/p/google-refine/issues/detail?id=71)). 
-
-To build:
-1. create a base folder and clone both OpenRefine and batchrefine in it;
-2. switch the OpenRefine repo to 2.6.1, which is the only one we tested against;
-3. switch to batchrefine's folder and run:
-
-   ant compile
-   
-3. to run, use the ./batchrefine script.
-
+Soon.
 
 2. Caveats with Embedded Engine
 -------------------------------
