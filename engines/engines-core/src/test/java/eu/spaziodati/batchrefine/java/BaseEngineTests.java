@@ -1,7 +1,7 @@
 package eu.spaziodati.batchrefine.java;
 
 import static eu.spaziodati.batchrefine.java.EngineTestUtils.assertContentEquals;
-import static eu.spaziodati.batchrefine.java.EngineTestUtils.findFile;
+import static eu.spaziodati.batchrefine.java.EngineTestUtils.findAndCopy;
 import static eu.spaziodati.batchrefine.java.EngineTestUtils.getTransform;
 
 import java.io.BufferedOutputStream;
@@ -66,8 +66,9 @@ public abstract class BaseEngineTests {
 	public void transformTest() throws Exception {
 		JSONArray transform = getTransform(fTransform + ".json");
 
-		File reference = findFile("outputs/" + fInput + "_" + fTransform + "."
-				+ fFormat);
+		// FIXME This doesn't have to be copied.
+		File reference = findAndCopy("outputs/" + fInput + "_" + fTransform
+				+ "." + fFormat);
 
 		File output = File.createTempFile("batch-refine-test", null);
 		output.deleteOnExit();
@@ -81,8 +82,8 @@ public abstract class BaseEngineTests {
 			Properties properties = new Properties();
 			properties.setProperty("format", fFormat);
 
-			engine.transform(findFile("inputs/" + fInput + ".csv"), transform,
-					oStream, properties);
+			engine.transform(findAndCopy("inputs/" + fInput + ".csv"),
+					transform, oStream, properties);
 		} finally {
 			IOUtils.closeQuietly(oStream);
 			IOUtils.closeQuietly(engine);

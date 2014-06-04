@@ -1,12 +1,14 @@
 package eu.spaziodati.batchrefine.extractor;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.net.URI;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 
@@ -14,9 +16,6 @@ import javax.activation.MimeType;
 import javax.activation.MimeTypeParseException;
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.clerezza.rdf.core.TripleCollection;
-import org.apache.clerezza.rdf.core.serializedform.Parser;
-import org.apache.clerezza.rdf.core.serializedform.ParsingProvider;
 import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -28,12 +27,12 @@ import org.apache.log4j.Logger;
 import org.json.JSONArray;
 
 import com.google.refine.util.ParsingUtilities;
-import com.hp.hpl.jena.shared.impl.JenaParameters;
 
 import eu.fusepool.extractor.Entity;
 import eu.fusepool.extractor.Extractor;
 import eu.fusepool.extractor.HttpRequestEntity;
-import eu.fusepool.extractor.RdfGeneratingExtractor;
+import eu.fusepool.extractor.SyncExtractor;
+import eu.fusepool.extractor.util.WritingEntity;
 import eu.spaziodati.batchrefine.core.ITransformEngine;
 import eu.spaziodati.batchrefine.core.http.RefineHTTPClient;
 
@@ -43,32 +42,55 @@ import eu.spaziodati.batchrefine.core.http.RefineHTTPClient;
  * 
  * @author giuliano
  */
-public class BatchRefineExtractor extends RdfGeneratingExtractor {
+@SuppressWarnings("serial")
+public class BatchRefineExtractor implements SyncExtractor {
 
 	private static final Logger fLogger = Logger
 			.getLogger(BatchRefineExtractor.class);
 
-	private static final Set<MimeType> SUPPORTED_TYPES;
+	private static final Set<MimeType> SUPPORTED_INPUTS;
 
-	private static final Properties EXPORTER_OPTIONS;
+	private static final Set<MimeType> SUPPORTED_OUTPUTS;
+
+	private static final Map<String, MimeType> FORMAT_MAP;
 
 	private static final String TRANSFORM_PARAMETER = "refinejson";
 
+	private static final String FORMAT_PARAMETER = "format";
+
 	static {
 		try {
-			SUPPORTED_TYPES = Collections.unmodifiableSet(Collections
+			SUPPORTED_INPUTS = Collections.unmodifiableSet(Collections
 					.singleton(new MimeType("text/csv")));
+
+			// XXX one issue is that these outputs are not *always* supported,
+			// they depend on the transform JSON that we get with the request.
+			SUPPORTED_OUTPUTS = Collections
+					.unmodifiableSet(new HashSet<MimeType>() {
+						{
+							add(new MimeType("text/csv"));
+							add(new MimeType("application/rdf+xml"));
+							add(new MimeType("text/turtle"));
+						}
+					});
+
+			FORMAT_MAP = Collections
+					.unmodifiableMap(new HashMap<String, MimeType>() {
+						{
+							put("csv", new MimeType("text/csv"));
+							put("rdf", new MimeType("application/rdf+xml"));
+							put("turtle", new MimeType("text/turtle"));
+						}
+					});
+
 		} catch (MimeTypeParseException ex) {
 			// if this happens, it's a bug, no way to recover.
 			throw new RuntimeException("Internal error", ex);
 		}
-
-		EXPORTER_OPTIONS = new Properties();
-		EXPORTER_OPTIONS.put("format", "rdf");
 	}
-	
+
 	private ITransformEngine fRefineEngine;
-	
+
 	public BatchRefineExtractor(URI refineURI) {
 		fRefineEngine = new RefineHTTPClient(refineURI);
 	}
@@ -82,31 +104,44 @@ public class BatchRefineExtractor extends RdfGeneratingExtractor {
 
 	@Override
 	public Set<MimeType> getSupportedInputFormats() {
-		return SUPPORTED_TYPES;
+		return SUPPORTED_INPUTS;
 	}
 
 	@Override
-	protected TripleCollection generateRdf(Entity entity) throws IOException {
-		ITransformEngine engine = null;
-		File input = null;
+	public Set<MimeType> getSupportedOutputFormats() {
+		return SUPPORTED_OUTPUTS;
+	}
 
-		try {
-			HttpRequestEntity request = cast(entity);
-			input = downloadInput(entity);
-			engine = getEngine();
+	@Override
+	public Entity extract(HttpRequestEntity entity) throws IOException {
+		final HttpRequestEntity request = cast(entity);
 
-			// XXX data could probably be piped directly into the Clerezza
-			// parser to reduce footprint, but since we're loading the whole
-			// graph in memory anyway...
-			ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-			engine.transform(input, transform(request), buffer,
-					EXPORTER_OPTIONS);
+		String format = getSingleParameter(FORMAT_PARAMETER, "csv",
+				request.getRequest());
 
-			return asTripleCollection(buffer);
-		} finally {
-			delete(input);
-			IOUtils.closeQuietly(engine);
-		}
+		final MimeType mimeType = mapType(format);
+		final File input = downloadInput(entity);
+		final ITransformEngine engine = getEngine();
+
+		final Properties exporterOptions = new Properties();
+		exporterOptions.put(FORMAT_PARAMETER, format);
+
+		return new WritingEntity() {
+			@Override
+			public void writeData(OutputStream out) throws IOException {
+				try {
+					engine.transform(input, transform(request), out,
+							exporterOptions);
+				} finally {
+					input.delete();
+				}
+			}
+
+			@Override
+			public MimeType getType() {
+				return mimeType;
+			}
+		};
 	}
 
 	private HttpRequestEntity cast(Entity entity) throws IOException {
@@ -120,12 +155,6 @@ public class BatchRefineExtractor extends RdfGeneratingExtractor {
 		}
 
 		return (HttpRequestEntity) entity;
-	}
-
-	private TripleCollection asTripleCollection(ByteArrayOutputStream buffer) {
-		return Parser.getInstance().parse(
-				new ByteArrayInputStream(buffer.toByteArray()),
-				"application/rdf+xml");
 	}
 
 	private File downloadInput(Entity entity) throws IOException {
@@ -173,17 +202,25 @@ public class BatchRefineExtractor extends RdfGeneratingExtractor {
 		}
 	}
 
-	private String getSingleParameter(String transformParameter,
+	private String getSingleParameter(String parameter,
 			HttpServletRequest request) throws IOException {
-		String[] values = request.getParameterValues(TRANSFORM_PARAMETER);
+		return getSingleParameter(parameter, null, request);
+	}
+
+	private String getSingleParameter(String parameter, String defaultValue,
+			HttpServletRequest request) throws IOException {
+		String[] values = request.getParameterValues(parameter);
 		if (values == null) {
+			if(defaultValue != null) {
+				return defaultValue;
+			}
 			// TODO appropriate error reporting/handling
-			throw new IOException("BatchRefine requires a "
-					+ TRANSFORM_PARAMETER + " request parameter.");
+			throw new IOException("BatchRefine requires a " + parameter
+					+ " request parameter.");
 		}
 
 		if (values.length > 1) {
-			fLogger.warn("More than one " + TRANSFORM_PARAMETER
+			fLogger.warn("More than one " + parameter
 					+ " specified in request URL, using the first one ("
 					+ values[0] + ")");
 		}
@@ -210,10 +247,13 @@ public class BatchRefineExtractor extends RdfGeneratingExtractor {
 		return fRefineEngine;
 	}
 
-	private void delete(File input) {
-		if (input != null) {
-			input.delete();
+	private MimeType mapType(String format) {
+		MimeType type = FORMAT_MAP.get(format);
+		if (type == null) {
+			//TODO agree on exceptions for invalid configs
+			throw new RuntimeException("Unsupported format - " + format + ".");
 		}
+		return type;
 	}
-
+	
 }

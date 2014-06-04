@@ -3,7 +3,6 @@ package eu.spaziodati.batchrefine.core.http;
 import java.net.URI;
 
 import eu.spaziodati.batchrefine.core.ITransformEngine;
-import eu.spaziodati.batchrefine.core.http.RefineHTTPClient;
 import eu.spaziodati.batchrefine.java.BaseEngineTests;
 
 public class BaseHttpEngineTest extends BaseEngineTests {

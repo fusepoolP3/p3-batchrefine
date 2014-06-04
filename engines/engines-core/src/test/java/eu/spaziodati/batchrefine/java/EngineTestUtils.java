@@ -1,67 +1,80 @@
 package eu.spaziodati.batchrefine.java;
 
-import static eu.spaziodati.batchrefine.java.EngineTestUtils.findFile;
-
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URISyntaxException;
-import java.net.URL;
 
 import junit.framework.AssertionFailedError;
 
 import org.apache.clerezza.rdf.core.serializedform.Parser;
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONTokener;
 import org.junit.Assert;
 
+import eu.spaziodati.batchrefine.core.ITransformEngine;
+
 public class EngineTestUtils {
 
 	/**
 	 * Given a file name, attempts to find it using
-	 * {@link ClassLoader#getResource(String)}. If the file is on the classpath,
-	 * it's likely to be found.
+	 * {@link ClassLoader#getResourceAsStrean(String)}. If it cannot be found,
+	 * throws an exception.
 	 * 
 	 * @param name
 	 *            the name of the file to be found.
 	 * 
-	 * @return a {@link File} object pointing to the file, if it exists.
+	 * @return an {@link InputStream} pointing to the resource, if it exists.
 	 * 
-	 * @throws {@link FileNotFoundException} if the file cannot be found.
+	 * @throws {@link FileNotFoundException} if the resource cannot be found.
 	 */
-	public static File findFile(String name) throws FileNotFoundException {
-		URL url = find(name);
-		try {
-			return new File(url.toURI());
-		} catch (URISyntaxException e) {
-			throw new RuntimeException("Unexpected error.", e);
+	public static InputStream find(String name) throws FileNotFoundException {
+		InputStream iStream = BaseEngineTests.class.getClassLoader()
+				.getResourceAsStream(name);
+		if (iStream == null) {
+			throw new FileNotFoundException("Could not access " + name + ".");
 		}
+		return iStream;
 	}
 
 	/**
-	 * Same as {@link #findFile(String)}, except that it returns an {@link URL}
-	 * instead.
+	 * Finds a resource (possibly inside a Jar file) and copies it to an
+	 * external temporary file, returning a {@link File} handle to it. This is
+	 * required for APIs that require {@link File} objects and can't operate in
+	 * {@link InputStream}s like {@link ITransformEngine}.
 	 * 
 	 * @param name
-	 *            the name of the file to be found.
+	 *            the resource name to be resolved.
 	 * 
-	 * @return a {@link URL} object pointing to the file, if it exists.
+	 * @return a {@link File} pointing to a temporary file that is a copy of the
+	 *         resource.
 	 * 
-	 * @throws {@link FileNotFoundException} if the file cannot be found.
+	 * @throws IOException
+	 *             if the resource can't be found, or there are issues copying
+	 *             it.
 	 */
-	public static URL find(String name) throws FileNotFoundException {
-		URL url = BaseEngineTests.class.getClassLoader().getResource(name);
-		if (url == null) {
-			throw new FileNotFoundException("Could not access " + name + ".");
+	public static File findAndCopy(String name) throws IOException {
+		InputStream iStream = null;
+		FileOutputStream oStream = null;
+		try {
+			iStream = find(name);
+			File copy = File.createTempFile("resource-", null);
+			copy.deleteOnExit();
+			oStream = new FileOutputStream(copy);
+			IOUtils.copy(iStream, oStream);
+			
+			return copy;
+		} finally {
+			IOUtils.closeQuietly(iStream);
+			IOUtils.closeQuietly(oStream);
 		}
-		return url;
 	}
 
 	/**
@@ -77,8 +90,8 @@ public class EngineTestUtils {
 
 	public static JSONArray getTransform(String transformFile)
 			throws IOException, JSONException {
-		String transform = FileUtils.readFileToString(findFile("transforms/"
-				+ transformFile));
+		String transform = IOUtils
+				.toString(find("transforms/" + transformFile));
 		return asJSONArray(transform);
 	}
 
@@ -142,10 +155,9 @@ public class EngineTestUtils {
 
 	public static byte[] contentsAsBytes(String prefix, String id, String suffix)
 			throws IOException, URISyntaxException {
-		FileInputStream iStream = null;
+		InputStream iStream = null;
 		try {
-			iStream = new FileInputStream(findFile(prefix + "/" + id + "."
-					+ suffix));
+			iStream = find(prefix + "/" + id + "." + suffix);
 			return IOUtils.toByteArray(iStream);
 		} finally {
 			IOUtils.closeQuietly(iStream);
@@ -154,10 +166,9 @@ public class EngineTestUtils {
 
 	public static String contentsAsString(String prefix, String id,
 			String suffix) throws IOException, URISyntaxException {
-		FileInputStream iStream = null;
+		InputStream iStream = null;
 		try {
-			iStream = new FileInputStream(findFile(prefix + "/" + id + "."
-					+ suffix));
+			iStream = find(prefix + "/" + id + "." + suffix);
 			return IOUtils.toString(iStream);
 		} finally {
 			IOUtils.closeQuietly(iStream);
