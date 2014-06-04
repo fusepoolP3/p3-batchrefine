@@ -1,0 +1,20 @@
+[
+  {
+    "op": "core/fill-down",
+    "description": "Fill down cells in column Grade",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Grade"
+  },
+  {
+    "op": "core/fill-down",
+    "description": "Fill down cells in column Notes",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Notes"
+  }
+]

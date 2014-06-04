@@ -1,0 +1,22 @@
+[
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column Comune",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Comune",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "TRENTO"
+        ],
+        "to": "TRIENT"
+      }
+    ]
+  }
+]

@@ -19,12 +19,35 @@
     without going through HTTP or Butterfly.
   </description>
 
+  <build>
+    <plugins>
+      <!-- Unfortunately tests won't work, as the controller.js scripts
+	   are not bundled with the jar files and initialization will fail. 
+	   Need to define a more solid packaging strategy (see #4) -->
+      <plugin>
+	<groupId>org.apache.maven.plugins</groupId>
+	<artifactId>maven-surefire-plugin</artifactId>
+	<configuration>
+	  <skipTests>true</skipTests>
+	</configuration>
+      </plugin>
+    </plugins>
+  </build>
+  
   <dependencies>
 
     <dependency>
       <groupId>eu.spaziodati.batchrefine</groupId>
       <artifactId>engines-core</artifactId>
       <version>${project.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>eu.spaziodati.batchrefine</groupId>
+      <artifactId>engines-core</artifactId>
+      <version>${project.version}</version>
+      <type>test-jar</type>
+      <scope>test</scope>
     </dependency>
 
     <dependency>
@@ -65,6 +88,31 @@
     </dependency>
     
     <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <scope>test</scope>      
+    </dependency>
+
+    <!-- Dependencies required by OpenRefine -->
+    <dependency>
+      <groupId>org.apache.httpcomponents</groupId>
+      <artifactId>httpclient</artifactId>
+      <version>4.2.5</version>
+    </dependency>
+    
+    <dependency>
+      <groupId>com.metaweb</groupId>
+      <artifactId>lessen</artifactId>
+      <version>1.0</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-log4j12</artifactId>
+      <version>1.5.6</version>
+    </dependency>
+
+    <dependency>
       <groupId>ant-tools</groupId>
       <artifactId>ant-tools</artifactId>
       <version>1.8.0</version>
@@ -77,17 +125,35 @@
     </dependency>
     
     <dependency>
-	  <groupId>javax.servlet</groupId>
-	  <artifactId>servlet-api</artifactId>
-	  <version>2.5</version>
+      <groupId>javax.servlet</groupId>
+      <artifactId>servlet-api</artifactId>
+      <version>2.5</version>
     </dependency>
     
     <dependency>
-	  <groupId>org.apache.velocity</groupId>
-	  <artifactId>velocity</artifactId>
-	  <version>1.5</version>
-	</dependency>
-        
+      <groupId>org.apache.velocity</groupId>
+      <artifactId>velocity</artifactId>
+      <version>1.5</version>
+    </dependency>
+
+    <dependency>
+      <groupId>commons-fileupload</groupId>
+      <artifactId>commons-fileupload</artifactId>
+      <version>1.2.1</version>
+    </dependency>
+
+    <dependency>
+      <groupId>net.sf.opencsv</groupId>
+      <artifactId>opencsv</artifactId>
+      <version>2.4-SNAPSHOT</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.poi</groupId>
+      <artifactId>poi</artifactId>
+      <version>3.8</version>
+    </dependency>
+    
   </dependencies>
 
 </project>

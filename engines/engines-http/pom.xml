@@ -22,6 +22,14 @@
   <dependencies>
 
     <dependency>
+      <groupId>eu.spaziodati.batchrefine</groupId>
+      <artifactId>engines-core</artifactId>
+      <version>${project.version}</version>
+      <type>test-jar</type>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
       <groupId>org.apache.httpcomponents</groupId>
       <artifactId>httpclient</artifactId>
       <version>4.3.3</version>
@@ -55,6 +63,12 @@
       <artifactId>commons-io</artifactId>
     </dependency>
   
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <scope>test</scope>      
+    </dependency>
+
     <dependency>
       <groupId>commons-lang</groupId>
       <artifactId>commons-lang</artifactId>

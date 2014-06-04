@@ -1,0 +1,15 @@
+[
+  {
+    "op": "core/column-reorder",
+    "description": "Reorder columns",
+    "columnNames": [
+      "Nr",
+      "Insegna",
+      "Comune",
+      "Tipo",
+      "Frazione",
+      "Civico",
+      "Indirizzo"
+    ]
+  }
+]

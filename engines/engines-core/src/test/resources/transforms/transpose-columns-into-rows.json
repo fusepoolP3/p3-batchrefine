@@ -1,0 +1,12 @@
+[
+  {
+    "op": "core/transpose-columns-into-rows",
+    "description": "Transpose cells in columns starting with Organisation into rows in two new columns named Transpose and +",
+    "startColumnName": "Organisation",
+    "columnCount": -1,
+    "ignoreBlankCells": true,
+    "fillDown": false,
+    "keyColumnName": "Transpose",
+    "valueColumnName": "+"
+  }
+]

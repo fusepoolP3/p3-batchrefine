@@ -81,7 +81,11 @@ public class RefineHTTPClient implements ITransformEngine {
 	 *             if the host name contains illegal syntax.
 	 */
 	public RefineHTTPClient(String host, int port) throws URISyntaxException {
-		fRefineURI = new URI("http", null, host, port, null, null, null);
+		this(new URI("http", null, host, port, null, null, null));
+	}
+	
+	public RefineHTTPClient(URI refineURI) {
+		fRefineURI = refineURI;
 		fHttpClient = HttpClients.createDefault();
 	}
 

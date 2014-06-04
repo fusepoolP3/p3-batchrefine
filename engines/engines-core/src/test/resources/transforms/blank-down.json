@@ -1,0 +1,11 @@
+[
+  {
+    "op": "core/blank-down",
+    "description": "Blank down cells in column Grade",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Grade"
+  }
+]

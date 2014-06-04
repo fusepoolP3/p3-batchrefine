@@ -1,0 +1,15 @@
+[
+  {
+    "op": "core/text-transform",
+    "description": "Text transform on cells in column Insegna using expression grel:value.toLowercase()",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Insegna",
+    "expression": "grel:value.toLowercase()",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10
+  }
+]
