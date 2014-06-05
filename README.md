@@ -29,6 +29,7 @@ The build procedure is still, unfortunately, somewhat complicated, but should wo
 5. Clone the BatchRefine repository in a sibling folder to OpenRefine, and run:
    
    ./import-refine.sh
+
    mvn install
 
 2. Caveats with Embedded Engine
