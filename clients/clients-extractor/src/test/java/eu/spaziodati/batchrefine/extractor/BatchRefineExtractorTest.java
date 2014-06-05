@@ -17,6 +17,7 @@ import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.handler.DefaultHandler;
 import org.eclipse.jetty.server.handler.HandlerList;
 import org.eclipse.jetty.server.handler.ResourceHandler;
+import org.eclipse.jetty.util.resource.JarResource;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -48,10 +49,6 @@ public class BatchRefineExtractorTest {
 	}
 
 	private int startTransformServer() throws Exception {
-		// FIXME this will fail if the resources end up inside of a Jar
-		// file. Gotta either fix the packaging to leave these out or
-		// copy the contents to the local file system in the same spirit
-		// of EngineTestUtils#findAndCopy.
 		URL transforms = BaseEngineTests.class.getClassLoader().getResource(
 				"transforms");
 		if (transforms == null) {
@@ -64,7 +61,7 @@ public class BatchRefineExtractorTest {
 
 		ResourceHandler handler = new ResourceHandler();
 		handler.setDirectoriesListed(true);
-		handler.setResourceBase(transforms.getPath());
+		handler.setBaseResource(JarResource.newResource(transforms));
 
 		HandlerList handlers = new HandlerList();
 		handlers.addHandler(handler);

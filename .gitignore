@@ -4,3 +4,4 @@ target/
 src/test/resources/osterie_large.csv
 src/test/resources/outputs/osterie_large_compositetransform_with_GREL_output.csv
 
+/local-repository

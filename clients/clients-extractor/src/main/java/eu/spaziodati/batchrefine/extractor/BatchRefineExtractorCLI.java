@@ -9,6 +9,11 @@ import org.kohsuke.args4j.Option;
 
 import eu.fusepool.extractor.server.ExtractorServer;
 
+/**
+ * Command Line Interface for launching {@link BatchRefineExtractor}.
+ * 
+ * @author giuliano
+ */
 public class BatchRefineExtractorCLI {
 
 	@Option(name = "-p", aliases = { "--port" }, usage = "Port for the extractor service (defaults to 7100)", required = false)

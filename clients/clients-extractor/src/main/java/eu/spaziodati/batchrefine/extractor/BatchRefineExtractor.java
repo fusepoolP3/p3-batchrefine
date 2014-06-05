@@ -28,6 +28,7 @@ import org.json.JSONArray;
 
 import com.google.refine.util.ParsingUtilities;
 
+import eu.fusepool.extractor.AsyncExtractor;
 import eu.fusepool.extractor.Entity;
 import eu.fusepool.extractor.Extractor;
 import eu.fusepool.extractor.HttpRequestEntity;
@@ -39,6 +40,8 @@ import eu.spaziodati.batchrefine.core.http.RefineHTTPClient;
 /**
  * {@link BatchRefineExtractor} is the Fusepool P3 {@link Extractor} for
  * BatchRefine.
+ * 
+ * TODO make it an {@link AsyncExtractor}.
  * 
  * @author giuliano
  */
