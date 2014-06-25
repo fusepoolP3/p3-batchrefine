@@ -3,8 +3,6 @@ package eu.spaziodati.batchrefine.extractor;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
-import java.net.URI;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -17,6 +15,7 @@ import javax.activation.MimeTypeParseException;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -28,38 +27,32 @@ import org.json.JSONArray;
 
 import com.google.refine.util.ParsingUtilities;
 
-import eu.fusepool.extractor.AsyncExtractor;
 import eu.fusepool.extractor.Entity;
 import eu.fusepool.extractor.Extractor;
 import eu.fusepool.extractor.HttpRequestEntity;
-import eu.fusepool.extractor.SyncExtractor;
-import eu.fusepool.extractor.util.WritingEntity;
-import eu.spaziodati.batchrefine.core.ITransformEngine;
-import eu.spaziodati.batchrefine.core.http.RefineHTTPClient;
 
 /**
- * {@link BatchRefineExtractor} is the Fusepool P3 {@link Extractor} for
- * BatchRefine.
- * 
- * TODO make it an {@link AsyncExtractor}.
+ * {@link BatchRefineTransformer} is the base trait for implementing the
+ * Fusepool P3 transformers for batch refine. The trait itself is stateless
+ * (apart from immutable maps), and therefore thread-safe.
  * 
  * @author giuliano
  */
 @SuppressWarnings("serial")
-public class BatchRefineExtractor implements SyncExtractor {
+public class BatchRefineTransformer implements Extractor {
 
 	private static final Logger fLogger = Logger
-			.getLogger(BatchRefineExtractor.class);
-
-	private static final Set<MimeType> SUPPORTED_INPUTS;
-
-	private static final Set<MimeType> SUPPORTED_OUTPUTS;
-
-	private static final Map<String, MimeType> FORMAT_MAP;
+			.getLogger(BatchRefineTransformer.class);
 
 	private static final String TRANSFORM_PARAMETER = "refinejson";
 
 	private static final String FORMAT_PARAMETER = "format";
+
+	private static final RefineMime DEFAULT_EXPORT_MIME;
+
+	private static final Set<MimeType> SUPPORTED_INPUTS;
+
+	static final Map<String, RefineMime> SUPPORTED_OUTPUTS;
 
 	static {
 		try {
@@ -68,21 +61,15 @@ public class BatchRefineExtractor implements SyncExtractor {
 
 			// XXX one issue is that these outputs are not *always* supported,
 			// they depend on the transform JSON that we get with the request.
+			DEFAULT_EXPORT_MIME = new RefineMime("text/csv", "csv");
 			SUPPORTED_OUTPUTS = Collections
-					.unmodifiableSet(new HashSet<MimeType>() {
+					.unmodifiableMap(new HashMap<String, RefineMime>() {
 						{
-							add(new MimeType("text/csv"));
-							add(new MimeType("application/rdf+xml"));
-							add(new MimeType("text/turtle"));
-						}
-					});
-
-			FORMAT_MAP = Collections
-					.unmodifiableMap(new HashMap<String, MimeType>() {
-						{
-							put("csv", new MimeType("text/csv"));
-							put("rdf", new MimeType("application/rdf+xml"));
-							put("turtle", new MimeType("text/turtle"));
+							put("text/csv", DEFAULT_EXPORT_MIME);
+							put("application/rdf+xml", new RefineMime(
+									"application/rdf+xml", "rdf"));
+							put("text/turtle", new RefineMime("text/turtle",
+									"turtle"));
 						}
 					});
 
@@ -92,19 +79,6 @@ public class BatchRefineExtractor implements SyncExtractor {
 		}
 	}
 
-	private ITransformEngine fRefineEngine;
-
-	public BatchRefineExtractor(URI refineURI) {
-		fRefineEngine = new RefineHTTPClient(refineURI);
-	}
-
-	@Override
-	public boolean isLongRunning() {
-		// XXX one issue is that the refine extractor is not *always*
-		// long running.
-		return false;
-	}
-
 	@Override
 	public Set<MimeType> getSupportedInputFormats() {
 		return SUPPORTED_INPUTS;
@@ -112,68 +86,12 @@ public class BatchRefineExtractor implements SyncExtractor {
 
 	@Override
 	public Set<MimeType> getSupportedOutputFormats() {
-		return SUPPORTED_OUTPUTS;
+		Set<MimeType> supported = new HashSet<MimeType>();
+		supported.addAll(SUPPORTED_OUTPUTS.values());
+		return supported;
 	}
 
-	@Override
-	public Entity extract(HttpRequestEntity entity) throws IOException {
-		final HttpRequestEntity request = cast(entity);
-
-		String format = getSingleParameter(FORMAT_PARAMETER, "csv",
-				request.getRequest());
-
-		final MimeType mimeType = mapType(format);
-		final File input = downloadInput(entity);
-		final ITransformEngine engine = getEngine();
-
-		final Properties exporterOptions = new Properties();
-		exporterOptions.put(FORMAT_PARAMETER, format);
-
-		return new WritingEntity() {
-			@Override
-			public void writeData(OutputStream out) throws IOException {
-				try {
-					engine.transform(input, transform(request), out,
-							exporterOptions);
-				} finally {
-					input.delete();
-				}
-			}
-
-			@Override
-			public MimeType getType() {
-				return mimeType;
-			}
-		};
-	}
-
-	private HttpRequestEntity cast(Entity entity) throws IOException {
-		// TODO have to discuss with Reto how to properly:
-		// 1 - handle/report error conditions (for now I just throw
-		// IOException);
-		// 2 - properly get the parameters from the enclosing HTTP request.
-		if (!(entity instanceof HttpRequestEntity)) {
-			throw new IOException("BatchRefineExtractor requires a "
-					+ HttpRequestEntity.class.getName());
-		}
-
-		return (HttpRequestEntity) entity;
-	}
-
-	private File downloadInput(Entity entity) throws IOException {
-		FileOutputStream oStream = null;
-		try {
-			File input = File.createTempFile("batchrefine-extractor", null);
-			oStream = new FileOutputStream(input);
-			IOUtils.copy(entity.getData(), oStream);
-
-			return input;
-		} finally {
-			IOUtils.closeQuietly(oStream);
-		}
-	}
-
-	private JSONArray transform(HttpRequestEntity request) throws IOException {
+	protected JSONArray transform(HttpRequestEntity request) throws IOException {
 		String transformURI = getSingleParameter(TRANSFORM_PARAMETER,
 				request.getRequest());
 
@@ -205,6 +123,33 @@ public class BatchRefineExtractor implements SyncExtractor {
 		}
 	}
 
+	protected ImmutablePair<MimeType, Properties> exporterOptions(
+			HttpServletRequest request) {
+		String format = request.getHeader("Accept");
+		RefineMime mime = format == null ? DEFAULT_EXPORT_MIME
+				: SUPPORTED_OUTPUTS.get(format);
+		if (mime == null) {
+			// TODO agree on exceptions for invalid configs
+			throw new RuntimeException("Unsupported format - " + format + ".");
+		}
+		Properties exporterOptions = new Properties();
+		exporterOptions.put(FORMAT_PARAMETER, mime.exporter());
+		return new ImmutablePair<MimeType, Properties>(mime, exporterOptions);
+	}
+
+	protected File downloadInput(Entity entity) throws IOException {
+		FileOutputStream oStream = null;
+		try {
+			File input = File.createTempFile("batchrefine-extractor", null);
+			oStream = new FileOutputStream(input);
+			IOUtils.copy(entity.getData(), oStream);
+
+			return input;
+		} finally {
+			IOUtils.closeQuietly(oStream);
+		}
+	}
+
 	private String getSingleParameter(String parameter,
 			HttpServletRequest request) throws IOException {
 		return getSingleParameter(parameter, null, request);
@@ -214,7 +159,7 @@ public class BatchRefineExtractor implements SyncExtractor {
 			HttpServletRequest request) throws IOException {
 		String[] values = request.getParameterValues(parameter);
 		if (values == null) {
-			if(defaultValue != null) {
+			if (defaultValue != null) {
 				return defaultValue;
 			}
 			// TODO appropriate error reporting/handling
@@ -246,17 +191,19 @@ public class BatchRefineExtractor implements SyncExtractor {
 		return response;
 	}
 
-	private ITransformEngine getEngine() {
-		return fRefineEngine;
+	protected static class RefineMime extends MimeType {
+
+		private final String fRefineExporter;
+
+		public RefineMime(String type, String refineExporter)
+				throws MimeTypeParseException {
+			super(type);
+			fRefineExporter = refineExporter;
+		}
+
+		public String exporter() {
+			return fRefineExporter;
+		}
 	}
 
-	private MimeType mapType(String format) {
-		MimeType type = FORMAT_MAP.get(format);
-		if (type == null) {
-			//TODO agree on exceptions for invalid configs
-			throw new RuntimeException("Unsupported format - " + format + ".");
-		}
-		return type;
-	}
-	
 }

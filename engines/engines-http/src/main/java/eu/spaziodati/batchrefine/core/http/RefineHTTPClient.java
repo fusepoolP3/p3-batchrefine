@@ -1,9 +1,11 @@
 package eu.spaziodati.batchrefine.core.http;
 
+import java.io.Closeable;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
-import java.net.ConnectException;
+import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
@@ -34,6 +36,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import eu.spaziodati.batchrefine.core.CloseableWrappingStream;
 import eu.spaziodati.batchrefine.core.ITransformEngine;
 import eu.spaziodati.batchrefine.core.Utils;
 
@@ -83,7 +86,7 @@ public class RefineHTTPClient implements ITransformEngine {
 	public RefineHTTPClient(String host, int port) throws URISyntaxException {
 		this(new URI("http", null, host, port, null, null, null));
 	}
-	
+
 	public RefineHTTPClient(URI refineURI) {
 		fRefineURI = refineURI;
 		fHttpClient = HttpClients.createDefault();
@@ -93,7 +96,19 @@ public class RefineHTTPClient implements ITransformEngine {
 	public void transform(File original, JSONArray transform,
 			OutputStream transformed, Properties exporterOptions)
 			throws IOException, JSONException {
-		
+
+		InputStream iStream = null;
+		try {
+			iStream = transform(original, transform, exporterOptions);
+			IOUtils.copy(iStream, transformed);
+		} finally {
+			Utils.safeClose(iStream);
+		}
+	}
+
+	public CloseableWrappingStream transform(File original,
+			JSONArray transform, Properties exporterOptions)
+			throws IOException, JSONException {
 		String handle = null;
 		try {
 			handle = createProjectAndUpload(original);
@@ -102,10 +117,16 @@ public class RefineHTTPClient implements ITransformEngine {
 				join(handle);
 			}
 
-			outputResults(handle, transformed, exporterOptions);
-		} finally {
-			deleteProject(handle);
+			// XXX Will throw NPE if request is missing entity.
+			return wrap(results(handle, exporterOptions).getEntity()
+					.getContent(), handle);
+		} catch (Exception ex) {
+			throw launderedException(ex);
 		}
+	}
+
+	public URI uri() {
+		return fRefineURI;
 	}
 
 	private String createProjectAndUpload(File original) throws IOException {
@@ -186,28 +207,20 @@ public class RefineHTTPClient implements ITransformEngine {
 		}
 	}
 
-	private void outputResults(String handle, OutputStream transformed,
-			Properties exporterOptions) throws IOException {
-		CloseableHttpResponse response = null;
+	private CloseableHttpResponse results(String handle,
+			Properties exporterOptions) throws ClientProtocolException,
+			IOException, URISyntaxException, UnsupportedEncodingException {
+		CloseableHttpResponse response;
+		String format = checkedGet(exporterOptions, "format");
 
-		try {
-			String format = checkedGet(exporterOptions, "format");
+		List<NameValuePair> pairs = new ArrayList<NameValuePair>();
 
-			List<NameValuePair> pairs = new ArrayList<NameValuePair>();
+		pairs.add(new BasicNameValuePair("project", handle));
+		pairs.add(new BasicNameValuePair("format", format));
 
-			pairs.add(new BasicNameValuePair("project", handle));
-			pairs.add(new BasicNameValuePair("format", format));
-
-			response = doPost("/command/core/export-rows/" + handle + "."
-					+ format, new UrlEncodedFormEntity(pairs));
-
-			response.getEntity().writeTo(transformed);
-
-		} catch (Exception e) {
-			throw launderedException(e);
-		} finally {
-			Utils.safeClose(response, false);
-		}
+		response = doPost("/command/core/export-rows/" + handle + "." + format,
+				new UrlEncodedFormEntity(pairs));
+		return response;
 	}
 
 	private String checkedGet(Properties p, String key) {
@@ -273,7 +286,7 @@ public class RefineHTTPClient implements ITransformEngine {
 			formatString.append("%1$3s%% ");
 			try {
 				progress[i] = ((JSONObject) pending.get(i))
-						.getString("progress");
+						.getInt("progress");
 			} catch (JSONException ex) {
 				progress[i] = "error";
 			}
@@ -296,9 +309,11 @@ public class RefineHTTPClient implements ITransformEngine {
 	}
 
 	private RuntimeException launderedException(Exception ex)
-			throws IOException {
-		if (ex instanceof ConnectException) {
-			throw (ConnectException) ex;
+			throws IOException, JSONException {
+		if (ex instanceof IOException) {
+			throw (IOException) ex;
+		} else if (ex instanceof JSONException) {
+			throw (JSONException) ex;
 		}
 
 		return new RuntimeException(ex);
@@ -326,6 +341,15 @@ public class RefineHTTPClient implements ITransformEngine {
 			fLogger.debug(response.toString());
 		}
 		return response;
+	}
+
+	private CloseableWrappingStream wrap(InputStream content, final String handle) {
+		return new CloseableWrappingStream(content, new Closeable() {
+			@Override
+			public void close() throws IOException {
+				deleteProject(handle);
+			}
+		});
 	}
 
 	@Override

@@ -3,12 +3,13 @@ package eu.spaziodati.batchrefine.core.http;
 import java.net.URI;
 
 import eu.spaziodati.batchrefine.core.ITransformEngine;
-import eu.spaziodati.batchrefine.java.BaseEngineTests;
+import eu.spaziodati.batchrefine.java.EngineTest;
 
-public class BaseHttpEngineTest extends BaseEngineTests {
+public class BaseHttpEngineTest extends EngineTest {
 
-	public BaseHttpEngineTest(String input, String transform, String format) {
-		super(input, transform, format);
+	public BaseHttpEngineTest(String input, String transform, String format,
+			CallType type) {
+		super(input, transform, format, type);
 	}
 
 	@Override

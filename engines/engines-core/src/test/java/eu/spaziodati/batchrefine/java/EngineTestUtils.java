@@ -3,6 +3,7 @@ package eu.spaziodati.batchrefine.java;
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
@@ -36,7 +37,7 @@ public class EngineTestUtils {
 	 * @throws {@link FileNotFoundException} if the resource cannot be found.
 	 */
 	public static InputStream find(String name) throws FileNotFoundException {
-		InputStream iStream = BaseEngineTests.class.getClassLoader()
+		InputStream iStream = EngineTest.class.getClassLoader()
 				.getResourceAsStream(name);
 		if (iStream == null) {
 			throw new FileNotFoundException("Could not access " + name + ".");
@@ -65,11 +66,10 @@ public class EngineTestUtils {
 		FileOutputStream oStream = null;
 		try {
 			iStream = find(name);
-			File copy = File.createTempFile("resource-", null);
-			copy.deleteOnExit();
+			File copy = outputFile();
 			oStream = new FileOutputStream(copy);
 			IOUtils.copy(iStream, oStream);
-			
+
 			return copy;
 		} finally {
 			IOUtils.closeQuietly(iStream);
@@ -95,62 +95,18 @@ public class EngineTestUtils {
 		return asJSONArray(transform);
 	}
 
-	/**
-	 * Matches two files line by line without loading any of them into memory.
-	 * 
-	 * @throws AssertionFailedError
-	 *             if the files do not match.
-	 */
-	public static void assertContentEquals(File expectedFile, File outputFile)
-			throws IOException {
-
-		BufferedReader expected = null;
-		BufferedReader output = null;
-
-		try {
-			expected = new BufferedReader(new FileReader(expectedFile));
-			output = new BufferedReader(new FileReader(outputFile));
-
-			int line = 0;
-			String current = null;
-
-			do {
-				current = expected.readLine();
-				String actual = output.readLine();
-
-				if (current == null) {
-					if (actual != null) {
-						Assert.fail("Actual output too short (line " + line
-								+ ").");
-					}
-					break;
-				}
-
-				if (!current.equals(actual)) {
-					Assert.fail("Expected: " + current + "\n Got: " + actual
-							+ "\n at line " + line);
-				}
-
-			} while (current != null);
-
-		} finally {
-			IOUtils.closeQuietly(expected);
-			IOUtils.closeQuietly(output);
+	public static File toFile(InputStream iStream) throws IOException {
+		File outputFile = outputFile();
+		try (FileOutputStream oStream = new FileOutputStream(outputFile)) {
+			IOUtils.copy(iStream, oStream);
 		}
+		return outputFile;
 	}
 
-	public static void assertRDFEquals(String actual, String reference,
-			String actualFormat, String referenceFormat) {
-		Parser parser = Parser.getInstance();
-
-		boolean equals = parser
-				.parse(new ByteArrayInputStream(reference.getBytes()),
-						referenceFormat).equals(
-						parser.parse(
-								new ByteArrayInputStream(actual.getBytes()),
-								actualFormat));
-
-		Assert.assertTrue(equals);
+	public static File outputFile() throws IOException {
+		File output = File.createTempFile("batch-refine-test", null);
+		output.deleteOnExit();
+		return output;
 	}
 
 	public static byte[] contentsAsBytes(String prefix, String id, String suffix)
@@ -175,6 +131,12 @@ public class EngineTestUtils {
 		}
 	}
 
+	public static String contentsAsString(File file) throws IOException {
+		try (InputStream iStream = new FileInputStream(file)) {
+			return IOUtils.toString(iStream);
+		}
+	}
+
 	public static JSONArray asJSONArray(String s) throws JSONException {
 		JSONTokener t = new JSONTokener(s);
 		Object o = t.nextValue();
@@ -183,5 +145,63 @@ public class EngineTestUtils {
 		} else {
 			throw new JSONException(s + " couldn't be parsed as JSON array");
 		}
+	}
+	
+	/**
+	 * Matches two files line by line without loading any of them into memory.
+	 * 
+	 * @throws AssertionFailedError
+	 *             if the files do not match.
+	 */
+	public static void assertContentEquals(File expectedFile, File outputFile)
+			throws IOException {
+	
+		BufferedReader expected = null;
+		BufferedReader output = null;
+	
+		try {
+			expected = new BufferedReader(new FileReader(expectedFile));
+			output = new BufferedReader(new FileReader(outputFile));
+	
+			int line = 0;
+			String current = null;
+	
+			do {
+				current = expected.readLine();
+				String actual = output.readLine();
+	
+				if (current == null) {
+					if (actual != null) {
+						Assert.fail("Actual output too short (line " + line
+								+ ").");
+					}
+					break;
+				}
+	
+				if (!current.equals(actual)) {
+					Assert.fail("Expected: " + current + "\n Got: " + actual
+							+ "\n at line " + line);
+				}
+	
+			} while (current != null);
+	
+		} finally {
+			IOUtils.closeQuietly(expected);
+			IOUtils.closeQuietly(output);
+		}
+	}
+
+	public static void assertRDFEquals(String actual, String reference,
+			String actualFormat, String referenceFormat) {
+		Parser parser = Parser.getInstance();
+
+		boolean equals = parser
+				.parse(new ByteArrayInputStream(reference.getBytes()),
+						referenceFormat).equals(
+						parser.parse(
+								new ByteArrayInputStream(actual.getBytes()),
+								actualFormat));
+
+		Assert.assertTrue(equals);
 	}
 }
