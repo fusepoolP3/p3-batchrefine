@@ -314,7 +314,9 @@ public class RefineHTTPClient implements ITransformEngine {
 			throw (IOException) ex;
 		} else if (ex instanceof JSONException) {
 			throw (JSONException) ex;
-		}
+		} else if (ex instanceof RuntimeException) {
+            throw (RuntimeException) ex;
+        }
 
 		return new RuntimeException(ex);
 	}

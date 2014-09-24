@@ -1,26 +1,25 @@
-package eu.spaziodati.batchrefine.extractor;
+package eu.spaziodati.batchrefine.transformer;
 
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import eu.fusepool.p3.transformer.server.TransformerServer;
 import org.kohsuke.args4j.CmdLineException;
 import org.kohsuke.args4j.CmdLineParser;
 import org.kohsuke.args4j.Option;
-
-import eu.fusepool.extractor.server.ExtractorServer;
 
 /**
  * Command Line Interface for launching {@link SynchronousTransformer}.
  * 
  * @author giuliano
  */
-public class BatchRefineExtractorCLI {
+public class BatchRefineTransformerCLI {
 	
 	private static enum Transformer {
 		sync, async
 	}
 
-	@Option(name = "-p", aliases = { "--port" }, usage = "Port for the extractor service (defaults to 7100)", required = false)
+	@Option(name = "-p", aliases = { "--port" }, usage = "Port for the transformer service (defaults to 7100)", required = false)
 	private int fPort = 7100;
 
 	@Option(name = "-l", aliases = { "--uri-list" }, usage = "Comma-separated list of host URIs pointing to OpenRefine instances (defaults to localhost)", required = false)
@@ -43,7 +42,7 @@ public class BatchRefineExtractorCLI {
 	}
 
 	private void start() throws Exception {
-		ExtractorServer server = new ExtractorServer(fPort);
+		TransformerServer server = new TransformerServer(fPort);
 		switch(fTransformer) {
 		
 		case sync:
@@ -70,12 +69,12 @@ public class BatchRefineExtractorCLI {
 	}
 
 	private void printUsage(CmdLineParser parser) {
-		System.err.println("Usage: batchrefine-extractor [OPTION...]\n"
-				+ "Starts the BatchRefine Fusepool P3 Extractor.\n");
+		System.err.println("Usage: batchrefine-transformer [OPTION...]\n"
+				+ "Starts the BatchRefine Fusepool P3 Transformer.\n");
 		parser.printUsage(System.err);
 	}
 
 	public static void main(String[] args) throws Exception {
-		new BatchRefineExtractorCLI()._main(args);
+		new BatchRefineTransformerCLI()._main(args);
 	}
 }

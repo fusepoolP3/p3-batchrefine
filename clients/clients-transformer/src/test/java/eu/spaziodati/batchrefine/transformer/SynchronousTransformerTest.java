@@ -1,4 +1,4 @@
-package eu.spaziodati.batchrefine.extractor;
+package eu.spaziodati.batchrefine.transformer;
 
 import static eu.spaziodati.batchrefine.java.EngineTestUtils.assertContentEquals;
 import static eu.spaziodati.batchrefine.java.EngineTestUtils.contentsAsBytes;
@@ -11,13 +11,13 @@ import java.net.URISyntaxException;
 
 import javax.activation.MimeType;
 
+import eu.fusepool.p3.transformer.Transformer;
 import org.apache.commons.io.IOUtils;
 import org.junit.Test;
 
 import com.jayway.restassured.RestAssured;
 import com.jayway.restassured.response.Response;
 
-import eu.fusepool.extractor.Extractor;
 import eu.spaziodati.batchrefine.java.EngineTestUtils;
 
 public class SynchronousTransformerTest extends TransformerTest {
@@ -55,7 +55,7 @@ public class SynchronousTransformerTest extends TransformerTest {
 	}
 
 	@Override
-	protected Extractor transformer() throws URISyntaxException {
+	protected Transformer transformer() throws URISyntaxException {
 		return new SynchronousTransformer(new URI("http://localhost:" + REFINE_PORT));
 	}
 }

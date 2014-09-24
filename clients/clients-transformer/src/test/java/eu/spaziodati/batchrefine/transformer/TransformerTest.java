@@ -1,4 +1,4 @@
-package eu.spaziodati.batchrefine.extractor;
+package eu.spaziodati.batchrefine.transformer;
 
 import static eu.spaziodati.batchrefine.java.EngineTestUtils.assertContentEquals;
 import static eu.spaziodati.batchrefine.java.EngineTestUtils.assertRDFEquals;
@@ -24,9 +24,9 @@ import org.junit.Before;
 
 import com.jayway.restassured.RestAssured;
 
-import eu.fusepool.extractor.Extractor;
-import eu.fusepool.extractor.server.ExtractorServer;
-import eu.spaziodati.batchrefine.extractor.BatchRefineTransformer.RefineMime;
+import eu.fusepool.p3.transformer.Transformer;
+import eu.fusepool.p3.transformer.server.TransformerServer;
+import eu.spaziodati.batchrefine.transformer.BatchRefineTransformer.RefineMime;
 import eu.spaziodati.batchrefine.java.BatchRefineBase;
 import eu.spaziodati.batchrefine.java.EngineTest;
 
@@ -48,11 +48,11 @@ public abstract class TransformerTest extends BatchRefineBase {
 	private void startTransformerServer() throws Exception {
 		final int port = findFreePort();
 		RestAssured.baseURI = "http://localhost:" + port + "/";
-		ExtractorServer server = new ExtractorServer(port);
+		TransformerServer server = new TransformerServer(port);
 		server.start(transformer());
 	}
 
-	protected abstract Extractor transformer() throws URISyntaxException;
+	protected abstract Transformer transformer() throws URISyntaxException;
 	
 	private int startTransformServer() throws Exception {
 		URL transforms = EngineTest.class.getClassLoader().getResource(

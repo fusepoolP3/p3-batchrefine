@@ -1,4 +1,4 @@
-package eu.spaziodati.batchrefine.extractor;
+package eu.spaziodati.batchrefine.transformer;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -14,6 +14,9 @@ import javax.activation.MimeType;
 import javax.activation.MimeTypeParseException;
 import javax.servlet.http.HttpServletRequest;
 
+import eu.fusepool.p3.transformer.HttpRequestEntity;
+import eu.fusepool.p3.transformer.Transformer;
+import eu.fusepool.p3.transformer.commons.Entity;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.http.HttpEntity;
@@ -27,10 +30,6 @@ import org.json.JSONArray;
 
 import com.google.refine.util.ParsingUtilities;
 
-import eu.fusepool.extractor.Entity;
-import eu.fusepool.extractor.Extractor;
-import eu.fusepool.extractor.HttpRequestEntity;
-
 /**
  * {@link BatchRefineTransformer} is the base trait for implementing the
  * Fusepool P3 transformers for batch refine. The trait itself is stateless
@@ -39,7 +38,7 @@ import eu.fusepool.extractor.HttpRequestEntity;
  * @author giuliano
  */
 @SuppressWarnings("serial")
-public class BatchRefineTransformer implements Extractor {
+public class BatchRefineTransformer implements Transformer {
 
 	private static final Logger fLogger = Logger
 			.getLogger(BatchRefineTransformer.class);
@@ -91,7 +90,7 @@ public class BatchRefineTransformer implements Extractor {
 		return supported;
 	}
 
-	protected JSONArray transform(HttpRequestEntity request) throws IOException {
+	protected JSONArray fetchTransform(HttpRequestEntity request) throws IOException {
 		String transformURI = getSingleParameter(TRANSFORM_PARAMETER,
 				request.getRequest());
 
@@ -140,7 +139,7 @@ public class BatchRefineTransformer implements Extractor {
 	protected File downloadInput(Entity entity) throws IOException {
 		FileOutputStream oStream = null;
 		try {
-			File input = File.createTempFile("batchrefine-extractor", null);
+			File input = File.createTempFile("batchrefine-transformer", null);
 			oStream = new FileOutputStream(input);
 			IOUtils.copy(entity.getData(), oStream);
 

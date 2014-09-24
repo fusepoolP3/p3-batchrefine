@@ -10,21 +10,28 @@
     <relativePath>../../parent</relativePath>
   </parent>
 
-  <artifactId>clients-extractor</artifactId>
+  <artifactId>clients-transformer</artifactId>
   <packaging>jar</packaging>
 
-  <name>BatchRefine Clients: Fusepool P3 Extractor</name>
+  <name>BatchRefine Clients: Fusepool P3 Transformer</name>
   <description>
-    Fusepool P3 Extractor for BatchRefine
+    Fusepool P3 Transformer for BatchRefine
   </description>
 
   <dependencies>
 
     <dependency>
       <groupId>eu.fusepool.p3</groupId>
-      <artifactId>extractor-implementation-library</artifactId>
-      <version>1.0-SNAPSHOT</version>
+      <artifactId>transformer-implementation-library</artifactId>
+      <version>1.0.0</version>
     </dependency>
+
+    <dependency>
+        <groupId>eu.fusepool.p3</groupId>
+        <artifactId>transformer-commons</artifactId>
+        <version>1.0.0</version>
+    </dependency>
+
 
     <dependency>
       <groupId>args4j</groupId>

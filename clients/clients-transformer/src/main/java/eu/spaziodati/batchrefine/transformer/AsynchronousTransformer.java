@@ -1,4 +1,4 @@
-package eu.spaziodati.batchrefine.extractor;
+package eu.spaziodati.batchrefine.transformer;
 
 import java.io.File;
 import java.io.IOException;
@@ -22,27 +22,29 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.log4j.Logger;
 import org.json.JSONArray;
 
-import eu.fusepool.extractor.AsyncExtractor;
-import eu.fusepool.extractor.Entity;
-import eu.fusepool.extractor.Extractor;
-import eu.fusepool.extractor.HttpRequestEntity;
+import eu.fusepool.p3.transformer.AsyncTransformer;
+import eu.fusepool.p3.transformer.HttpRequestEntity;
+import eu.fusepool.p3.transformer.commons.Entity;
 import eu.spaziodati.batchrefine.core.http.RefineHTTPClient;
 
 /**
- * Asynchronous Fusepool P3 {@link Extractor} for BatchRefine. Supports multiple
- * the use of multiple refine engines.
+ * Asynchronous Fusepool P3 {@link Transformer} for BatchRefine. Supports the use
+ * of multiple refine engines.
  * 
  * @author giuliano
  */
 public class AsynchronousTransformer extends BatchRefineTransformer implements
-		AsyncExtractor {
+		AsyncTransformer {
 
 	private static final Logger fLogger = Logger
 			.getLogger(AsynchronousTransformer.class);
 
 	/**
 	 * Maximum number of allowed queued requests before
-	 * {@link #extract(HttpRequestEntity, String)} blocks.
+	 * {@link #extract(HttpRequestEntity, String)} blocks. 
+	 * 
+	 * FIXME dropping requests with an exception is probably a better 
+	 * idea in this case as clients expect it to be asynchronous.
 	 */
 	private static final int MAX_PENDING_REQUESTS = 100;
 
@@ -75,7 +77,7 @@ public class AsynchronousTransformer extends BatchRefineTransformer implements
 	}
 
 	@Override
-	public void extract(HttpRequestEntity entity, String requestId)
+	public void transform(HttpRequestEntity entity, String requestId)
 			throws IOException {
 		if (!fActive.add(requestId)) {
 			throw new IllegalStateException("A request with id " + requestId
@@ -94,6 +96,12 @@ public class AsynchronousTransformer extends BatchRefineTransformer implements
 			final MimeType contentType) throws IOException {
 
 		fHandler.responseAvailable(id, new Entity() {
+			@Override
+			public URI getContentLocation() {
+				// TODO Auto-generated method stub
+				return null;
+			}
+
 			@Override
 			public void writeData(OutputStream out) throws IOException {
 				IOUtils.copy(response, out);
@@ -165,7 +173,7 @@ public class AsynchronousTransformer extends BatchRefineTransformer implements
 				throws IOException {
 			fOptions = exporterOptions(request.getRequest());
 			fInput = downloadInput(request);
-			fTransform = transform(request);
+			fTransform = fetchTransform(request);
 			fJobId = id;
 		}
 
