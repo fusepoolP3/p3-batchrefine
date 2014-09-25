@@ -1,16 +1,42 @@
 BatchRefine
 ===========
 
-BatchRefine is an effort to run  [OpenRefine](http://openrefine.org) effectively in batch workloads and ETL pipelines. Goals include:
+BatchRefine is an effort to run [OpenRefine](http://openrefine.org)
+effectively in batch workloads and ETL pipelines. Goals include:
 
-1. providing APIs for embedding and/or otherwise driving the engine programmatically;
-2. scaling the engine to run over huge data sets. 
+1. providing APIs for embedding and/or otherwise driving the engine
+   programmatically;
+2. scaling the engine to run over huge data sets.
 
-This is a work in progress, and so is this documentation.
+This is a work in progress, and so is this documentation. BatchRefine
+can be currently deployed and built in two ways.
 
-1. How to build
+1. With Docker
+--------------
+
+Building and deploying BatchRefine with
+[Docker](https://www.docker.com/) is easy. Assuming you have Docker
+[already installed](https://docs.docker.com/installation/#installation),
+there are two main options, depending on your mileage:
+
+1. use the
+   [dockerfile](https://github.com/fusepoolP3/batchrefine/blob/master/docker/Dockerfile)
+   we provide;
+
+2. use our wrapper script. At the BatchRefine source root, run:
+
+```sh
+cd docker
+./batchrefine-docker.sh bootstrap
+./batchrefine-docker.sh run
+```
+
+2. From Sources
 ---------------
-The build procedure is still, unfortunately, somewhat complicated, but should work reliably now.
+
+Building BatchRefine from sources requires Maven 3. The procedure,
+which is somewhat complex because OpenRefine is not meant to be used
+as a library, is as follows:
 
 1. Download OpenRefine 2.6-beta.1 from:
 
