@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 #
 # Simple script for importing OpenRefine jar files 
 # into a local Maven repository.
