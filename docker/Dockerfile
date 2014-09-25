@@ -32,8 +32,9 @@ RUN cd ./OpenRefine/extensions; \
 RUN cd ./OpenRefine; ant clean jar_server jar_webapp
 
 # Downloads and builds batchrefine.
-ADD https://github.com/fusepoolP3/batchrefine/archive/master.tar.gz
-RUN mv batchrefine-master batchrefine; \
+ADD https://github.com/fusepoolP3/batchrefine/archive/master.tar.gz /
+RUN tar xzvf master.tar.gz; \
+    mv batchrefine-master batchrefine; \
     cd batchrefine; \
     ./refine-import.sh
 
