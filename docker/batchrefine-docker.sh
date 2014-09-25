@@ -5,8 +5,9 @@ function print_usage {
 Usage: batchrefine-docker.sh {bootstrap|run|clean}
 
    bootstrap        boostraps a docker image for BatchRefine
-   run [-p PORT]    starts a container with the BatchRefine P3 
-                      transformer and binds it to PORT
+   run [PORT]       starts a container with the BatchRefine P3 
+                      transformer and binds it to PORT (defaults 
+                      to 7100)
    clean            destroys and wipes all BatchRefine containers
     
 EOF
@@ -37,7 +38,3 @@ case "$1" in
 	exit -1
 	;;
 esac
-
-PORT=${1}
-
-docker run -p 0.0.0.0:${1}:${1} -t spaziodati/batchrefine
