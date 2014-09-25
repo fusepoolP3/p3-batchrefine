@@ -22,14 +22,17 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get -y --force-yes -q install ant maven3;
 RUN wget -O - --no-check-certificate https://github.com/OpenRefine/OpenRefine/archive/2.6-beta.1.tar.gz -O ./2.6-beta.1.tar.gz; \  
     tar xzvf 2.6-beta.1.tar.gz
 
-RUN mv OpenRefine-2.6-beta.1 OpenRefine 
+RUN mv OpenRefine-2.6-beta.1 OpenRefine; \
+    echo 'JAVA_OPTIONS=-Drefine.headless=true' >> ./OpenRefine/refine.ini
+
+RUN cd ./OpenRefine; ant clean build jar_server jar_webapp
 
 RUN cd ./OpenRefine/extensions; \
     wget https://github.com/fadmaa/grefine-rdf-extension/archive/v0.9.0.tar.gz -O v0.9.0.tar.gz; \
     tar xzvf v0.9.0.tar.gz && rm v0.9.0.tar.gz; \
-    mv grefine-rdf-extension-0.9.0 rdf-extension
-
-RUN cd ./OpenRefine; ant clean jar_server jar_webapp
+    mv grefine-rdf-extension-0.9.0 rdf-extension; \
+    cd rdf-extension; \
+    JAVA_TOOL_OPTIONS='-Dfile.encoding=UTF-8' ant build
 
 # Downloads and builds batchrefine.
 ADD https://github.com/fusepoolP3/batchrefine/archive/master.tar.gz /
@@ -41,4 +44,4 @@ RUN tar xzvf master.tar.gz; \
 RUN cd batchrefine; \
     mvn package -DskipTests
 
-ENTRYPOINT ["/batchrefine/docker/p3-transformer-start.sh"]
+ENTRYPOINT ["/batchrefine/docker/internal/p3-transformer-start.sh"]
