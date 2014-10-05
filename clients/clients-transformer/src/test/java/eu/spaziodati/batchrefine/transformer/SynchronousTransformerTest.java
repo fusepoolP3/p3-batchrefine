@@ -30,7 +30,7 @@ public class SynchronousTransformerTest extends TransformerTest {
 	}
 
 	@Test
-	public void transformTest() throws Exception {
+	public void testTransform() throws Exception {
 		File reference = findAndCopy("outputs/" + fInput + "_" + fTransform
 				+ "." + fFormat);
 		Response response = doRequest(fInput, fTransform, fFormat,
@@ -49,7 +49,7 @@ public class SynchronousTransformerTest extends TransformerTest {
 
 		return RestAssured.given().queryParam("refinejson", transformURI)
 				.queryParam("format", format).and()
-				.header("Accept", contentType.toString()).contentType("text/csv")
+				.header("Accept", contentType.toString()).contentType("text/csv;q=1.0")
 				.content(contentsAsBytes("inputs", input, "csv")).when().post()
 				.andReturn();
 	}

@@ -60,7 +60,7 @@ as a library, is as follows:
 	mvn install
 ```
 
-2. Caveats with Embedded Engine
+3. Caveats with Embedded Engine
 -------------------------------
 The embedded engine is currently a hack. It won't initialize Butterfly (the OpenRefine server) and, at the same time, does not provide a mechanism for isolating modules (extensions), relying on the system classloader for everything. 
 

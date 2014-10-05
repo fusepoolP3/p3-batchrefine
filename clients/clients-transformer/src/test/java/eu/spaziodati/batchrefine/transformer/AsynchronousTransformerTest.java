@@ -48,7 +48,7 @@ public class AsynchronousTransformerTest extends TransformerTest {
 
 		Response response = RestAssured.given()
 				.queryParam("refinejson", transformURI)
-				.header("Accept", contentType.toString())
+				.header("Accept", contentType.toString() + ";q=1.0")
 				.contentType("text/csv")
 				.content(contentsAsBytes("inputs", input, "csv"))
 				.when().post();
