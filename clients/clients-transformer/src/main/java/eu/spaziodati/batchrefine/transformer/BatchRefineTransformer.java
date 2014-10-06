@@ -125,6 +125,7 @@ public class BatchRefineTransformer implements Transformer {
     protected ImmutablePair<MimeType, Properties> exporterOptions(
             HttpServletRequest request) {
         String format = request.getHeader("Accept");
+        System.err.println("ACCEPT HEADER: " + format);
         RefineMime mime = format == null ? DEFAULT_EXPORT_MIME
                 : findMatchingMIME(format);
         Properties exporterOptions = new Properties();

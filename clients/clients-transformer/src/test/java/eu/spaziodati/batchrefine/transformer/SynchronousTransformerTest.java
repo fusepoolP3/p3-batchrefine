@@ -49,7 +49,7 @@ public class SynchronousTransformerTest extends TransformerTest {
 
 		return RestAssured.given().queryParam("refinejson", transformURI)
 				.queryParam("format", format).and()
-				.header("Accept", contentType.toString()).contentType("text/csv;q=1.0")
+				.header("Accept", contentType.toString() + ";q=1.0").contentType("text/csv")
 				.content(contentsAsBytes("inputs", input, "csv")).when().post()
 				.andReturn();
 	}
