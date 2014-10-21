@@ -98,7 +98,6 @@ public class AsynchronousTransformer extends BatchRefineTransformer implements
 		fHandler.responseAvailable(id, new Entity() {
 			@Override
 			public URI getContentLocation() {
-				// TODO Auto-generated method stub
 				return null;
 			}
 
@@ -117,6 +116,7 @@ public class AsynchronousTransformer extends BatchRefineTransformer implements
 				return response;
 			}
 		});
+
 		inactive(id);
 	}
 
@@ -171,7 +171,7 @@ public class AsynchronousTransformer extends BatchRefineTransformer implements
 
 		public RefineRequest(HttpRequestEntity request, String id)
 				throws IOException {
-			fOptions = exporterOptions(request.getRequest());
+			fOptions = exporterOptions(request);
 			fInput = downloadInput(request);
 			fTransform = fetchTransform(request);
 			fJobId = id;

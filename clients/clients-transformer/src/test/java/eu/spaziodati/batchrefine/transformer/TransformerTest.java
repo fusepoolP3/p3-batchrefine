@@ -32,8 +32,8 @@ import eu.spaziodati.batchrefine.java.EngineTest;
 
 public abstract class TransformerTest extends BatchRefineBase {
 
-	protected int fTransformPort;
-	
+    protected TestSupport fServers;
+
 	public TransformerTest(String input, String transform, String format,
 			CallType type) {
 		super(input, transform, format, type);
@@ -41,44 +41,12 @@ public abstract class TransformerTest extends BatchRefineBase {
 
 	@Before
 	public void setUp() throws Exception {
-		startTransformerServer();
-		fTransformPort = startTransformServer();
-	}
-
-	private void startTransformerServer() throws Exception {
-		final int port = findFreePort();
-		RestAssured.baseURI = "http://localhost:" + port + "/";
-		TransformerServer server = new TransformerServer(port);
-		server.start(transformer());
+        fServers = new TestSupport();
+        fServers.start(transformer());
 	}
 
 	protected abstract Transformer transformer() throws URISyntaxException;
-	
-	private int startTransformServer() throws Exception {
-		URL transforms = EngineTest.class.getClassLoader().getResource(
-				"transforms");
-		if (transforms == null) {
-			Assert.fail();
-		}
 
-		int port = findFreePort();
-
-		Server fileServer = new Server(port);
-
-		ResourceHandler handler = new ResourceHandler();
-		handler.setDirectoriesListed(true);
-		handler.setBaseResource(JarResource.newResource(transforms));
-
-		HandlerList handlers = new HandlerList();
-		handlers.addHandler(handler);
-		handlers.addHandler(new DefaultHandler());
-
-		fileServer.setHandler(handlers);
-		fileServer.start();
-
-		return port;
-	}
-	
 	protected RefineMime mapContentType(String format) {
 		for (RefineMime mime : BatchRefineTransformer.SUPPORTED_OUTPUTS
 				.values()) {
@@ -101,17 +69,7 @@ public abstract class TransformerTest extends BatchRefineBase {
 				|| content.match("application/rdf+xml")) {
 			assertRDFEquals(contentsAsString(reference),
 					contentsAsString(output), content.toString(),
-					"application/xml+rdf");
+					"application/rdf+xml");
 		}
-	}
-	
-	public static int findFreePort() {
-		int port = 0;
-		try (ServerSocket server = new ServerSocket(0);) {
-			port = server.getLocalPort();
-		} catch (Exception e) {
-			throw new RuntimeException("unable to find a free port");
-		}
-		return port;
 	}
 }

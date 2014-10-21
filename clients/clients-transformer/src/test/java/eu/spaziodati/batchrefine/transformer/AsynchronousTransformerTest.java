@@ -21,66 +21,65 @@ import eu.spaziodati.batchrefine.java.EngineTestUtils;
 
 public class AsynchronousTransformerTest extends TransformerTest {
 
-	private static final int REFINE_PORT = 3333;
+    private static final int REFINE_PORT = 3333;
 
-	private static final long ASYNC_TIMEOUT = 60000;
+    private static final long ASYNC_TIMEOUT = 60000;
 
-	public AsynchronousTransformerTest(String input, String transform,
-			String format, CallType type) {
-		super(input, transform, format, type);
-	}
+    public AsynchronousTransformerTest(String input, String transform,
+                                       String format, CallType type) {
+        super(input, transform, format, type);
+    }
 
-	@Test
-	public void testTransform() throws Exception {
-		File reference = findAndCopy("outputs/" + fInput + "_" + fTransform
-				+ "." + fFormat);
-		MimeType mime = mapContentType(fFormat);
-		Response response = doRequest(fInput, fTransform, fFormat, mime);
-		File output = EngineTestUtils
-				.toFile(response.getBody().asInputStream());
-		assertEquals(reference, output, mime);
-	}
+    @Test
+    public void testTransform() throws Exception {
+        File reference = findAndCopy("outputs/" + fInput + "_" + fTransform
+                + "." + fFormat);
+        MimeType mime = mapContentType(fFormat);
+        Response response = doRequest(fInput, fTransform, fFormat, mime);
+        File output = EngineTestUtils
+                .toFile(response.getBody().asInputStream());
+        assertEquals(reference, output, mime);
+    }
 
-	private Response doRequest(String input, String transform, String format,
-			MimeType contentType) throws Exception {
-		String transformURI = "http://localhost:" + fTransformPort + "/"
-				+ input + "-" + transform + ".json";
+    private Response doRequest(String input, String transform, String format,
+                               MimeType contentType) throws Exception {
+        String transformURI = fServers.transformURI(input + "-" + transform + ".json").toString();
 
-		Response response = RestAssured.given()
-				.queryParam("refinejson", transformURI)
-				.header("Accept", contentType.toString() + ";q=1.0")
-				.contentType("text/csv")
-				.content(contentsAsBytes("inputs", input, "csv"))
-				.when().post();
+        Response response = RestAssured.given()
+                .queryParam("refinejson", transformURI)
+                .header("Accept", contentType.toString() + ";q=1.0")
+                .contentType("text/csv")
+                .content(contentsAsBytes("inputs", input, "csv"))
+                .when().post();
 
-		Assert.assertEquals(HttpStatus.SC_ACCEPTED, response.getStatusCode());
+        Assert.assertEquals(HttpStatus.SC_ACCEPTED, response.getStatusCode());
 
-		String location = response.getHeader("location");
-		Assert.assertTrue(location != null);
+        String location = response.getHeader("location");
+        Assert.assertTrue(location != null);
 
 		/* Polls until ready. */
-		long start = System.currentTimeMillis();
-		do {
-			response = RestAssured.given()
-					.header("Accept", "text/turtle")
-					.header("Content-Type", "text/turtle")
-					.when().get(location);
+        long start = System.currentTimeMillis();
+        do {
+            response = RestAssured.given()
+                    .header("Accept", "text/turtle")
+                    .header("Content-Type", "text/turtle")
+                    .when().get(location);
 
-			if (System.currentTimeMillis() - start >= ASYNC_TIMEOUT) {
-				Assert.fail("Asynchronous call timed out.");
-			}
+            if (System.currentTimeMillis() - start >= ASYNC_TIMEOUT) {
+                Assert.fail("Asynchronous call timed out.");
+            }
 
-			Thread.sleep(100);
+            Thread.sleep(100);
 
-		} while (response.statusCode() == HttpStatus.SC_ACCEPTED);
+        } while (response.statusCode() == HttpStatus.SC_ACCEPTED);
 
-		return response;
-	}
+        return response;
+    }
 
-	@Override
-	protected Transformer transformer() throws URISyntaxException {
-		return new AsynchronousTransformer(new URI("http://localhost:"
-				+ REFINE_PORT));
-	}
+    @Override
+    protected Transformer transformer() throws URISyntaxException {
+        return new AsynchronousTransformer(new URI("http://localhost:"
+                + REFINE_PORT));
+    }
 
 }

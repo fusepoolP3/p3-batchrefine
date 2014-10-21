@@ -44,12 +44,12 @@ public class SynchronousTransformerTest extends TransformerTest {
 
 	private Response doRequest(String input, String transform, String format,
 			MimeType contentType) throws Exception {
-		String transformURI = "http://localhost:" + fTransformPort + "/"
-				+ input + "-" + transform + ".json";
+		String transformURI = fServers.transformURI(input + "-" + transform + ".json").toString();
 
 		return RestAssured.given().queryParam("refinejson", transformURI)
 				.queryParam("format", format).and()
-				.header("Accept", contentType.toString() + ";q=1.0").contentType("text/csv")
+				.header("Accept", contentType.toString() + ";q=1.0")
+                .contentType("text/csv")
 				.content(contentsAsBytes("inputs", input, "csv")).when().post()
 				.andReturn();
 	}

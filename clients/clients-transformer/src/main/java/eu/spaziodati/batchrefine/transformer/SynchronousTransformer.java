@@ -43,8 +43,7 @@ public class SynchronousTransformer extends BatchRefineTransformer implements
 	public Entity transform(HttpRequestEntity entity) throws IOException {
 		final HttpRequestEntity request = cast(entity);
 
-		final ImmutablePair<MimeType, Properties> options = exporterOptions(request
-				.getRequest());
+		final ImmutablePair<MimeType, Properties> options = exporterOptions(request);
 		final File input = downloadInput(entity);
 		final ITransformEngine engine = getEngine();
 

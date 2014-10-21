@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import eu.fusepool.p3.transformer.HttpRequestEntity;
 import eu.fusepool.p3.transformer.Transformer;
 import eu.fusepool.p3.transformer.commons.Entity;
+import eu.fusepool.p3.transformer.util.AcceptHeader;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.http.HttpEntity;
@@ -53,10 +54,12 @@ public class BatchRefineTransformer implements Transformer {
 
     static final Map<String, RefineMime> SUPPORTED_OUTPUTS;
 
+    private static final String MIME_TYPE_TEXT_CSV = "text/csv";
+
     static {
         try {
             SUPPORTED_INPUTS = Collections.unmodifiableSet(Collections
-                    .singleton(new MimeType("text/csv")));
+                    .singleton(new MimeType(MIME_TYPE_TEXT_CSV)));
 
             // XXX one issue is that these outputs are not *always* supported,
             // they depend on the transform JSON that we get with the request.
@@ -123,29 +126,27 @@ public class BatchRefineTransformer implements Transformer {
     }
 
     protected ImmutablePair<MimeType, Properties> exporterOptions(
-            HttpServletRequest request) {
-        String format = request.getHeader("Accept");
-        System.err.println("ACCEPT HEADER: " + format);
-        RefineMime mime = format == null ? DEFAULT_EXPORT_MIME
-                : findMatchingMIME(format);
+            HttpRequestEntity request) {
+        RefineMime mime = findMatchingMIME(request.getAcceptHeader());
         Properties exporterOptions = new Properties();
         exporterOptions.put(FORMAT_PARAMETER, mime.exporter());
         return new ImmutablePair<MimeType, Properties>(mime, exporterOptions);
     }
 
-    private RefineMime findMatchingMIME(String header) {
-        // FIXME proper parsing for Accept headers!
-        int index = header.indexOf(';');
-        String format = index != -1 ? header.substring(0, index) : header;
-        RefineMime mime = SUPPORTED_OUTPUTS.get(format);
+    private RefineMime findMatchingMIME(AcceptHeader header) {
+        RefineMime mime = (RefineMime) header.getPreferredAccept(getSupportedOutputFormats());
         if (mime == null) {
-            // TODO agree on exceptions for invalid configs
-            throw new RuntimeException("Unsupported format - " + format + ".");
+            throw new RuntimeException("Can't satisfy request: no supported MIME types found in accept header.");
         }
+
         return mime;
     }
 
     protected File downloadInput(Entity entity) throws IOException {
+        if(!entity.getType().getBaseType().equals(MIME_TYPE_TEXT_CSV)) {
+            throw new RuntimeException("Unsupported input format - " + entity.getType());
+        }
+
         FileOutputStream oStream = null;
         try {
             File input = File.createTempFile("batchrefine-transformer", null);
