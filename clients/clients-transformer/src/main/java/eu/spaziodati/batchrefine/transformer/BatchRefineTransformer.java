@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import eu.fusepool.p3.transformer.HttpRequestEntity;
 import eu.fusepool.p3.transformer.Transformer;
 import eu.fusepool.p3.transformer.commons.Entity;
-import eu.fusepool.p3.transformer.util.AcceptHeader;
+import eu.fusepool.p3.transformer.util.AcceptPreference;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.http.HttpEntity;
@@ -127,14 +127,14 @@ public class BatchRefineTransformer implements Transformer {
 
     protected ImmutablePair<MimeType, Properties> exporterOptions(
             HttpRequestEntity request) {
-        RefineMime mime = findMatchingMIME(request.getMergedAcceptHeader());
+        RefineMime mime = findMatchingMIME(request.getAcceptPreference());
         Properties exporterOptions = new Properties();
         exporterOptions.put(FORMAT_PARAMETER, mime.exporter());
         return new ImmutablePair<MimeType, Properties>(mime, exporterOptions);
     }
 
-    private RefineMime findMatchingMIME(AcceptHeader header) {
-        RefineMime mime = (RefineMime) header.getPreferredAccept(getSupportedOutputFormats());
+    private RefineMime findMatchingMIME(AcceptPreference preference) {
+        RefineMime mime = (RefineMime) preference.getPreferredAccept(getSupportedOutputFormats());
         if (mime == null) {
             throw new RuntimeException("Can't satisfy request: no supported MIME types found in accept header.");
         }

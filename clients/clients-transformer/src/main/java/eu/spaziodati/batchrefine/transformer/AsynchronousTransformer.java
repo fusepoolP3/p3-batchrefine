@@ -41,7 +41,7 @@ public class AsynchronousTransformer extends BatchRefineTransformer implements
 
 	/**
 	 * Maximum number of allowed queued requests before
-	 * {@link #extract(HttpRequestEntity, String)} blocks. 
+	 * {@link #transform(HttpRequestEntity, String)} blocks.
 	 * 
 	 * FIXME dropping requests with an exception is probably a better 
 	 * idea in this case as clients expect it to be asynchronous.

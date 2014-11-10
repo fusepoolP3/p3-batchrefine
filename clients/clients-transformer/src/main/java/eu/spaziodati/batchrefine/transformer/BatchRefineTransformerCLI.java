@@ -42,7 +42,7 @@ public class BatchRefineTransformerCLI {
 	}
 
 	private void start() throws Exception {
-		TransformerServer server = new TransformerServer(fPort);
+		TransformerServer server = new TransformerServer(fPort, false);
 		switch(fTransformer) {
 		
 		case sync:

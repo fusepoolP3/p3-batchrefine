@@ -4,154 +4,154 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
                              http://maven.apache.org/maven-v4_0_0.xsd">
 
-  <modelVersion>4.0.0</modelVersion>
-  
-  <groupId>eu.spaziodati.batchrefine</groupId>
-  <artifactId>batchrefine-parent</artifactId>
-  <packaging>pom</packaging>
-  <version>1.0.0-SNAPSHOT</version>
-  
-  <name>BatchRefine Parent</name>
-  <description>Parent POM for BatchRefine</description>
+    <modelVersion>4.0.0</modelVersion>
 
-  <scm>
-    <url>https://github.com/fusepoolP3/batchrefine</url>
-    <connection>scm:git:https://github.com/fusepoolp3/batchrefine</connection>
-    <developerConnection>scm:git:git@github.com:fusepoolp3/batchrefine.git</developerConnection>
-  </scm>
+    <groupId>eu.spaziodati.batchrefine</groupId>
+    <artifactId>batchrefine-parent</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0.0-SNAPSHOT</version>
 
-  <prerequisites>
-    <maven>3.0.3</maven>
-  </prerequisites>
+    <name>BatchRefine Parent</name>
+    <description>Parent POM for BatchRefine</description>
 
-  <build>
-    <pluginManagement>
-      <plugins>
+    <scm>
+        <url>https://github.com/fusepoolP3/batchrefine</url>
+        <connection>scm:git:https://github.com/fusepoolp3/batchrefine</connection>
+        <developerConnection>scm:git:git@github.com:fusepoolp3/batchrefine.git</developerConnection>
+    </scm>
 
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-compiler-plugin</artifactId>
-          <version>3.1</version>
-          <configuration>
-            <source>1.7</source>
-            <target>1.7</target>
-            <encoding>UTF-8</encoding>
-          </configuration>
-        </plugin>
+    <prerequisites>
+        <maven>3.0.3</maven>
+    </prerequisites>
 
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-javadoc-plugin</artifactId>
-          <version>2.9</version>
-        </plugin>
+    <build>
+        <pluginManagement>
+            <plugins>
 
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-resources-plugin</artifactId>
-          <version>2.6</version>
-          <configuration>
-            <encoding>UTF-8</encoding>
-          </configuration>
-        </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.1</version>
+                    <configuration>
+                        <source>1.7</source>
+                        <target>1.7</target>
+                        <encoding>UTF-8</encoding>
+                    </configuration>
+                </plugin>
 
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-reactor-plugin</artifactId>
-          <version>1.0</version>
-        </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <version>2.9</version>
+                </plugin>
 
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-surefire-plugin</artifactId>
-          <version>2.16</version>
-          <configuration>
-            <useSystemClassLoader>false</useSystemClassLoader>
-            <forkCount>1</forkCount>
-            <reuseForks>false</reuseForks>
-          </configuration>
-        </plugin>
-	
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-failsafe-plugin</artifactId>
-          <version>2.16</version>
-          <configuration>
-            <useSystemClassLoader>false</useSystemClassLoader>
-            <forkCount>1</forkCount>
-            <reuseForks>false</reuseForks>
-          </configuration>
-        </plugin>
-      </plugins>
-    </pluginManagement>
-  </build>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>2.6</version>
+                    <configuration>
+                        <encoding>UTF-8</encoding>
+                    </configuration>
+                </plugin>
 
-  <dependencyManagement>
-    <dependencies>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-reactor-plugin</artifactId>
+                    <version>1.0</version>
+                </plugin>
 
-      <dependency>
-	<groupId>log4j</groupId>
-	<artifactId>log4j</artifactId>
-	<version>1.2.17</version>
-      </dependency>
-      
-      <dependency>
-	<groupId>org.openrefine</groupId>
-	<artifactId>openrefine-core</artifactId>
-	<version>2.6.1</version>
-      </dependency>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>2.16</version>
+                    <configuration>
+                        <useSystemClassLoader>false</useSystemClassLoader>
+                        <forkCount>1</forkCount>
+                        <reuseForks>false</reuseForks>
+                    </configuration>
+                </plugin>
 
-      <dependency>
-	<groupId>org.openrefine</groupId>
-	<artifactId>openrefine-server</artifactId>
-	<version>2.6.1</version>
-      </dependency>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-failsafe-plugin</artifactId>
+                    <version>2.16</version>
+                    <configuration>
+                        <useSystemClassLoader>false</useSystemClassLoader>
+                        <forkCount>1</forkCount>
+                        <reuseForks>false</reuseForks>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
 
-      <dependency>
-	<groupId>commons-io</groupId>
-	<artifactId>commons-io</artifactId>
-	<version>2.4</version>
-      </dependency>
+    <dependencyManagement>
+        <dependencies>
 
-      <dependency>
-	<groupId>commons-lang</groupId>
-	<artifactId>commons-lang</artifactId>
-	<version>2.6</version>
-      </dependency>
+            <dependency>
+                <groupId>log4j</groupId>
+                <artifactId>log4j</artifactId>
+                <version>1.2.17</version>
+            </dependency>
 
-      <dependency>
-	<groupId>org.json</groupId>
-	<artifactId>json</artifactId>
-	<version>20140107</version>
-      </dependency>
+            <dependency>
+                <groupId>org.openrefine</groupId>
+                <artifactId>openrefine-core</artifactId>
+                <version>2.6.1</version>
+            </dependency>
 
-      <dependency>
-	<groupId>junit</groupId>
-	<artifactId>junit</artifactId>
-	<version>4.11</version>
-	<scope>test</scope>      
-      </dependency>
+            <dependency>
+                <groupId>org.openrefine</groupId>
+                <artifactId>openrefine-server</artifactId>
+                <version>2.6.1</version>
+            </dependency>
 
-      <dependency>
-	<groupId>args4j</groupId>
-	<artifactId>args4j</artifactId>
-	<version>2.0.28</version>
-      </dependency>
+            <dependency>
+                <groupId>commons-io</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>2.4</version>
+            </dependency>
 
-      <dependency>
-	<groupId>org.apache.commons</groupId>
-	<artifactId>commons-lang3</artifactId>
-	<version>3.1</version>
-      </dependency>
-      
-    </dependencies>
+            <dependency>
+                <groupId>commons-lang</groupId>
+                <artifactId>commons-lang</artifactId>
+                <version>2.6</version>
+            </dependency>
 
-  </dependencyManagement>
+            <dependency>
+                <groupId>org.json</groupId>
+                <artifactId>json</artifactId>
+                <version>20140107</version>
+            </dependency>
 
-  <repositories>
-    <repository>
-      <id>local-repository</id>
-      <url>file://${user.dir}/local-repository</url>
-    </repository>
-  </repositories>
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>4.11</version>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>args4j</groupId>
+                <artifactId>args4j</artifactId>
+                <version>2.0.28</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>3.1</version>
+            </dependency>
+
+        </dependencies>
+
+    </dependencyManagement>
+
+    <repositories>
+        <repository>
+            <id>local-repository</id>
+            <url>file://${user.dir}/local-repository</url>
+        </repository>
+    </repositories>
 
 </project>	
