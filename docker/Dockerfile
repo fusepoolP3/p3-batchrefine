@@ -35,7 +35,7 @@ RUN cd ./OpenRefine/extensions; \
     JAVA_TOOL_OPTIONS='-Dfile.encoding=UTF-8' ant build
 
 # Downloads and builds batchrefine.
-ADD https://github.com/fusepoolP3/p3-batchrefine/archive/master.tar.gz /
+ADD https://github.com/fusepoolP3/batchrefine/archive/master.tar.gz /
 RUN tar xzvf master.tar.gz; \
     mv p3-batchrefine-master batchrefine; \
     cd batchrefine; \
