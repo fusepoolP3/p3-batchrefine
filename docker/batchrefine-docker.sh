@@ -4,7 +4,8 @@ function print_usage {
     cat <<EOF
 Usage: batchrefine-docker.sh {bootstrap|run|clean}
 
-   bootstrap        boostraps a docker image for BatchRefine
+   bootstrap        boostraps a docker image for BatchRefine. Has specialized 
+                      parameters and help (batch-refinedocker.sh --help).
    run [PORT]       starts a container with the BatchRefine P3 
                       transformer and binds it to PORT (defaults 
                       to 7100)
@@ -22,11 +23,23 @@ fi
 
 case "$1" in
     bootstrap)
-	docker build -t spaziodati/batchrefine .
+	#TODO support more than one mode simultaneously
+        if ./internal/bootstrap.py "$@"
+	then 
+	    docker build ${DOCKER_OPTIONS} -t spaziodati/batchrefine .
+	else
+	    exit -1
+	fi
 	;;
     run)
+	if [ ! -f ./Dockerfile ] 
+	then
+	    echo "No Dockerfile found, you have to bootstrap first."
+	    echo "Try 'batchrefine-docker.sh' without arguments to see usage information."
+	    exit -1
+	fi
 	port=${2:-7100}
-	exec docker run -p 0.0.0.0:${port}:7100 -t spaziodati/batchrefine
+	exec docker run ${DOCKER_OPTIONS} -p 0.0.0.0:${port}:7100 -t spaziodati/batchrefine
 	;;
     clean)
 	to_kill=`docker ps -a | grep 'batchrefine' | cut -d' ' -f1 | xargs`
