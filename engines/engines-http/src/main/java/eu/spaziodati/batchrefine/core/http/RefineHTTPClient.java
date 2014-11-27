@@ -1,17 +1,7 @@
 package eu.spaziodati.batchrefine.core.http;
 
-import java.io.Closeable;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.UnsupportedEncodingException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Properties;
-
+import eu.spaziodati.batchrefine.core.ITransformEngine;
+import eu.spaziodati.batchrefine.core.Utils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.RandomStringUtils;
 import org.apache.http.HttpEntity;
@@ -27,6 +17,7 @@ import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.entity.mime.content.FileBody;
+import org.apache.http.entity.mime.content.InputStreamBody;
 import org.apache.http.entity.mime.content.StringBody;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
@@ -36,327 +27,357 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import eu.spaziodati.batchrefine.core.CloseableWrappingStream;
-import eu.spaziodati.batchrefine.core.ITransformEngine;
-import eu.spaziodati.batchrefine.core.Utils;
+import java.io.*;
+import java.net.*;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Properties;
 
 /**
  * {@link RefineHTTPClient} is a wrapper to the OpenRefine HTTP API that
  * implements {@link ITransformEngine}.
- * 
  */
 public class RefineHTTPClient implements ITransformEngine {
 
-	private static final Logger fLogger = Logger
-			.getLogger(RefineHTTPClient.class);
+    private static final Logger fLogger = Logger
+            .getLogger(RefineHTTPClient.class);
 
-	/**
-	 * Poll intervals for asynchronous operations should start at
-	 * {@link #MIN_POLL_INTERVAL}, and grow exponentially at every iteration
-	 * until they reach {@link #MAX_POLL_INTERVAL}.
-	 */
-	private static final int MIN_POLL_INTERVAL = 500;
+    private static final String BOGUS_FILENAME = "bogus";
 
-	/**
-	 * Maximum poll interval length for asynchronous operations.
-	 */
-	private static final int MAX_POLL_INTERVAL = 3000;
+    /**
+     * Poll intervals for asynchronous operations should start at
+     * {@link #MIN_POLL_INTERVAL}, and grow exponentially at every iteration
+     * until they reach {@link #MAX_POLL_INTERVAL}.
+     */
+    private static final int MIN_POLL_INTERVAL = 500;
 
-	/**
-	 * Length of the random identifier used for temporary refine projects.
-	 */
-	private static final int IDENTIFIER_LENGTH = 10;
+    /**
+     * Maximum poll interval length for asynchronous operations.
+     */
+    private static final int MAX_POLL_INTERVAL = 3000;
 
-	private final CloseableHttpClient fHttpClient;
+    /**
+     * Length of the random identifier used for temporary refine projects.
+     */
+    private static final int IDENTIFIER_LENGTH = 10;
 
-	private final URI fRefineURI;
+    private final CloseableHttpClient fHttpClient;
 
-	/**
-	 * Creates a new {@link RefineHTTPClient}.
-	 * 
-	 * @param host
-	 *            host where the remote engine is running.
-	 * 
-	 * @param port
-	 *            port at which the remote engine is running.
-	 * 
-	 * @throws URISyntaxException
-	 *             if the host name contains illegal syntax.
-	 */
-	public RefineHTTPClient(String host, int port) throws URISyntaxException {
-		this(new URI("http", null, host, port, null, null, null));
-	}
+    private final URI fRefineURI;
 
-	public RefineHTTPClient(URI refineURI) {
-		fRefineURI = refineURI;
-		fHttpClient = HttpClients.createDefault();
-	}
+    /**
+     * Creates a new {@link RefineHTTPClient}.
+     *
+     * @param host host where the remote engine is running.
+     * @param port port at which the remote engine is running.
+     * @throws URISyntaxException if the host name contains illegal syntax.
+     */
+    public RefineHTTPClient(String host, int port) throws URISyntaxException {
+        this(new URI("http", null, host, port, null, null, null));
+    }
 
-	@Override
-	public void transform(File original, JSONArray transform,
-			OutputStream transformed, Properties exporterOptions)
-			throws IOException, JSONException {
+    public RefineHTTPClient(URI refineURI) {
+        fRefineURI = refineURI;
+        fHttpClient = HttpClients.createDefault();
+    }
 
-		InputStream iStream = null;
-		try {
-			iStream = transform(original, transform, exporterOptions);
-			IOUtils.copy(iStream, transformed);
-		} finally {
-			Utils.safeClose(iStream);
-		}
-	}
+    @Override
+    public void transform(URI original, JSONArray transform,
+                          URI transformed, Properties exporterOptions)
+            throws IOException, JSONException {
 
-	public CloseableWrappingStream transform(File original,
-			JSONArray transform, Properties exporterOptions)
-			throws IOException, JSONException {
-		String handle = null;
-		try {
-			handle = createProjectAndUpload(original);
+        String handle = null;
 
-			if (applyOperations(handle, transform)) {
-				join(handle);
-			}
+        URL input = asURL(original);
+        URL output = asURL(transformed);
 
-			// XXX Will throw NPE if request is missing entity.
-			return wrap(results(handle, exporterOptions).getEntity()
-					.getContent(), handle);
-		} catch (Exception ex) {
-			throw launderedException(ex);
-		}
-	}
+        try {
+            handle = createProjectAndUpload(input);
 
-	public URI uri() {
-		return fRefineURI;
-	}
+            if (applyOperations(handle, transform)) {
+                join(handle);
+            }
 
-	private String createProjectAndUpload(File original) throws IOException {
-		CloseableHttpResponse response = null;
+            write(results(handle, exporterOptions), output);
 
-		try {
-			/*
-			 * Refine requires projects to be named, but these are not important
+        } catch (Exception ex) {
+            throw launderedException(ex);
+        } finally {
+            deleteProject(handle);
+        }
+    }
+
+    public URL asURL(URI uri) throws IOException {
+        try {
+            return uri.toURL();
+        } catch (MalformedURLException ex) {
+            throw new IOException("Unsupported URI " + uri + ". Don't know how to " +
+                    "fetch its contents.");
+        }
+    }
+
+    public URI uri() {
+        return fRefineURI;
+    }
+
+    private void write(CloseableHttpResponse response, URL output) throws IOException {
+        HttpEntity entity = response.getEntity();
+        if (entity == null) {
+            fLogger.warn("Response contained no entity. Nothing to write.");
+            return;
+        }
+
+        try (OutputStream oStream = outputStream(output)) {
+            IOUtils.copy(entity.getContent(), oStream);
+        }
+    }
+
+    private OutputStream outputStream(URL url) throws IOException {
+        // Need separate resolution due to
+        // http://bugs.java.com/bugdatabase/view_bug.do?bug_id=4191800
+        if (url.getProtocol().equals("file")) {
+            return new BufferedOutputStream(new FileOutputStream(url.getFile()));
+        }
+
+        return url.openConnection().getOutputStream();
+    }
+
+    private String createProjectAndUpload(URL original) throws IOException {
+        CloseableHttpResponse response = null;
+
+        URLConnection connection = original.openConnection();
+
+        try (InputStream iStream = connection.getInputStream()) {
+
+            /*
+             * Refine requires projects to be named, but these are not important
 			 * for us, so we just use a random string.
 			 */
-			String name = RandomStringUtils
-					.randomAlphanumeric(IDENTIFIER_LENGTH);
+            String name = RandomStringUtils
+                    .randomAlphanumeric(IDENTIFIER_LENGTH);
 
-			HttpEntity entity = MultipartEntityBuilder
-					.create()
-					.addPart("project-file", new FileBody(original))
-					.addPart("project-name",
-							new StringBody(name, ContentType.TEXT_PLAIN))
-					.build();
+            HttpEntity entity = MultipartEntityBuilder
+                    .create()
+                    .addPart("project-file",
+                            new InputStreamBody(iStream, contentType(original, connection), BOGUS_FILENAME))
+                    .addPart("project-name",
+                            new StringBody(name, ContentType.TEXT_PLAIN))
+                    .build();
 
-			response = doPost("/command/core/create-project-from-upload",
-					entity);
+            response = doPost("/command/core/create-project-from-upload",
+                    entity);
 
-			URI projectURI = new URI(response.getFirstHeader("Location")
-					.getValue());
+            URI projectURI = new URI(response.getFirstHeader("Location")
+                    .getValue());
 
-			// XXX is this always UTF-8 or do we have to look somewhere?
-			return URLEncodedUtils.parse(projectURI, "UTF-8").get(0).getValue();
+            //TODO check if this is always UTF-8
+            return URLEncodedUtils.parse(projectURI, "UTF-8").get(0).getValue();
 
-		} catch (Exception e) {
-			throw launderedException(e);
-		} finally {
-			Utils.safeClose(response, false);
-		}
-	}
+        } catch (Exception e) {
+            throw launderedException(e);
+        } finally {
+            Utils.safeClose(response);
+        }
+    }
 
-	private boolean applyOperations(String handle, JSONArray transform)
-			throws IOException {
-		CloseableHttpResponse response = null;
+    private ContentType contentType(URL url, URLConnection connection) throws IOException {
+        String type = connection.getContentType();
 
-		try {
-			List<NameValuePair> pairs = new ArrayList<NameValuePair>();
-			pairs.add(new BasicNameValuePair("project", handle));
-			pairs.add(new BasicNameValuePair("operations", transform.toString()));
+        if (type.equals("content/unknown") && url.getProtocol().equals("file")) {
+            // Probes file.
+            type = Files.probeContentType(new File(url.getFile()).toPath());
+        }
 
-			response = doPost("/command/core/apply-operations",
-					new UrlEncodedFormEntity(pairs));
+        return type != null ? ContentType.create(type) : ContentType.DEFAULT_TEXT;
+    }
 
-			JSONObject content = decode(response);
-			if (content == null) {
-				return false;
-			}
+    private boolean applyOperations(String handle, JSONArray transform)
+            throws IOException {
+        CloseableHttpResponse response = null;
 
-			return "pending".equals(content.get("code"));
+        try {
+            List<NameValuePair> pairs = new ArrayList<NameValuePair>();
+            pairs.add(new BasicNameValuePair("project", handle));
+            pairs.add(new BasicNameValuePair("operations", transform.toString()));
 
-		} catch (Exception e) {
-			throw launderedException(e);
-		} finally {
-			Utils.safeClose(response, false);
-		}
-	}
+            response = doPost("/command/core/apply-operations",
+                    new UrlEncodedFormEntity(pairs));
 
-	private void join(String handle) throws IOException {
-		CloseableHttpResponse response = null;
+            JSONObject content = decode(response);
+            if (content == null) {
+                return false;
+            }
 
-		try {
-			long backoff = MIN_POLL_INTERVAL;
+            return "pending".equals(content.get("code"));
 
-			while (hasPendingOperations(handle)) {
-				Thread.sleep(backoff);
-				backoff = Math.min(backoff * 2, MAX_POLL_INTERVAL);
-			}
+        } catch (Exception e) {
+            throw launderedException(e);
+        } finally {
+            Utils.safeClose(response);
+        }
+    }
 
-		} catch (Exception e) {
-			throw launderedException(e);
-		} finally {
-			Utils.safeClose(response, false);
-		}
-	}
+    private void join(String handle) throws IOException {
+        CloseableHttpResponse response = null;
 
-	private CloseableHttpResponse results(String handle,
-			Properties exporterOptions) throws ClientProtocolException,
-			IOException, URISyntaxException, UnsupportedEncodingException {
-		CloseableHttpResponse response;
-		String format = checkedGet(exporterOptions, "format");
+        try {
+            long backoff = MIN_POLL_INTERVAL;
 
-		List<NameValuePair> pairs = new ArrayList<NameValuePair>();
+            while (hasPendingOperations(handle)) {
+                Thread.sleep(backoff);
+                backoff = Math.min(backoff * 2, MAX_POLL_INTERVAL);
+            }
 
-		pairs.add(new BasicNameValuePair("project", handle));
-		pairs.add(new BasicNameValuePair("format", format));
+        } catch (Exception e) {
+            throw launderedException(e);
+        } finally {
+            Utils.safeClose(response);
+        }
+    }
 
-		response = doPost("/command/core/export-rows/" + handle + "." + format,
-				new UrlEncodedFormEntity(pairs));
-		return response;
-	}
+    private CloseableHttpResponse results(String handle,
+                                          Properties exporterOptions) throws ClientProtocolException,
+            IOException, URISyntaxException, UnsupportedEncodingException {
+        CloseableHttpResponse response;
+        String format = checkedGet(exporterOptions, "format");
 
-	private String checkedGet(Properties p, String key) {
-		String value = p.getProperty(key);
+        List<NameValuePair> pairs = new ArrayList<NameValuePair>();
 
-		if (value == null) {
-			throw new IllegalArgumentException("Missing required parameter "
-					+ key + ".");
-		}
+        pairs.add(new BasicNameValuePair("project", handle));
+        pairs.add(new BasicNameValuePair("format", format));
 
-		return value;
-	}
+        response = doPost("/command/core/export-rows/" + handle + "." + format,
+                new UrlEncodedFormEntity(pairs));
+        return response;
+    }
 
-	private void deleteProject(String handle) throws IOException {
-		if (handle == null) {
-			return;
-		}
+    private String checkedGet(Properties p, String key) {
+        String value = p.getProperty(key);
 
-		CloseableHttpResponse response = null;
+        if (value == null) {
+            throw new IllegalArgumentException("Missing required parameter "
+                    + key + ".");
+        }
 
-		try {
-			List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
-			urlParameters.add(new BasicNameValuePair("project", handle));
-			response = doPost("/command/core/delete-project",
-					new UrlEncodedFormEntity(urlParameters));
+        return value;
+    }
 
-			// Not much of a point in checking the response as
-			// it will contain "OK" no matter what happens.
-		} catch (Exception e) {
-			throw launderedException(e);
-		} finally {
-			Utils.safeClose(response, false);
-		}
-	}
+    private void deleteProject(String handle) throws IOException {
+        if (handle == null) {
+            return;
+        }
 
-	private boolean hasPendingOperations(String handle) throws IOException,
-			URISyntaxException, JSONException {
-		CloseableHttpResponse response = null;
+        CloseableHttpResponse response = null;
 
-		try {
-			HttpGet poll = new HttpGet(new URIBuilder(fRefineURI)
-					.setPath("/command/core/get-processes")
-					.addParameter("project", handle).build());
+        try {
+            List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
+            urlParameters.add(new BasicNameValuePair("project", handle));
+            response = doPost("/command/core/delete-project",
+                    new UrlEncodedFormEntity(urlParameters));
 
-			logRequest(poll);
+            // Not much of a point in checking the response as
+            // it will contain "OK" no matter what happens.
+        } catch (Exception e) {
+            throw launderedException(e);
+        } finally {
+            Utils.safeClose(response);
+        }
+    }
 
-			response = logResponse(fHttpClient.execute(poll));
-			JSONArray pending = decode(response).getJSONArray("processes");
+    private boolean hasPendingOperations(String handle) throws IOException,
+            URISyntaxException, JSONException {
+        CloseableHttpResponse response = null;
 
-			fLogger.info(formatProgress(pending));
+        try {
+            HttpGet poll = new HttpGet(new URIBuilder(fRefineURI)
+                    .setPath("/command/core/get-processes")
+                    .addParameter("project", handle).build());
 
-			return pending.length() != 0;
-		} finally {
-			Utils.safeClose(response, true);
-		}
-	}
+            logRequest(poll);
 
-	private String formatProgress(JSONArray pending) {
-		StringBuffer formatString = new StringBuffer("[Progress: ");
-		Object[] progress = new Object[pending.length()];
+            response = logResponse(fHttpClient.execute(poll));
+            JSONArray pending = decode(response).getJSONArray("processes");
 
-		for (int i = 0; i < pending.length(); i++) {
-			formatString.append("%1$3s%% ");
-			try {
-				progress[i] = ((JSONObject) pending.get(i))
-						.getInt("progress");
-			} catch (JSONException ex) {
-				progress[i] = "error";
-			}
-		}
+            fLogger.info(formatProgress(pending));
 
-		formatString.setCharAt(formatString.length() - 1, ']');
+            return pending.length() != 0;
+        } finally {
+            Utils.safeClose(response);
+        }
+    }
 
-		return String.format(formatString.toString(), progress);
-	}
+    private String formatProgress(JSONArray pending) {
+        StringBuffer formatString = new StringBuffer("[Progress: ");
+        Object[] progress = new Object[pending.length()];
 
-	private CloseableHttpResponse doPost(String path, HttpEntity entity)
-			throws ClientProtocolException, IOException, URISyntaxException {
-		URI requestURI = new URIBuilder(fRefineURI).setPath(path).build();
-		HttpPost post = new HttpPost(requestURI);
+        for (int i = 0; i < pending.length(); i++) {
+            formatString.append("%1$3s%% ");
+            try {
+                progress[i] = ((JSONObject) pending.get(i))
+                        .getInt("progress");
+            } catch (JSONException ex) {
+                progress[i] = "error";
+            }
+        }
 
-		post.setEntity(entity);
+        formatString.setCharAt(formatString.length() - 1, ']');
 
-		logRequest(post);
-		return logResponse(fHttpClient.execute(post));
-	}
+        return String.format(formatString.toString(), progress);
+    }
 
-	private RuntimeException launderedException(Exception ex)
-			throws IOException, JSONException {
-		if (ex instanceof IOException) {
-			throw (IOException) ex;
-		} else if (ex instanceof JSONException) {
-			throw (JSONException) ex;
-		} else if (ex instanceof RuntimeException) {
+    private CloseableHttpResponse doPost(String path, HttpEntity entity)
+            throws ClientProtocolException, IOException, URISyntaxException {
+        URI requestURI = new URIBuilder(fRefineURI).setPath(path).build();
+        HttpPost post = new HttpPost(requestURI);
+
+        post.setEntity(entity);
+
+        logRequest(post);
+        return logResponse(fHttpClient.execute(post));
+    }
+
+    private RuntimeException launderedException(Exception ex)
+            throws IOException, JSONException {
+        if (ex instanceof IOException) {
+            throw (IOException) ex;
+        } else if (ex instanceof JSONException) {
+            throw (JSONException) ex;
+        } else if (ex instanceof RuntimeException) {
             throw (RuntimeException) ex;
         }
 
-		return new RuntimeException(ex);
-	}
+        return new RuntimeException(ex);
+    }
 
-	private JSONObject decode(CloseableHttpResponse response)
-			throws IOException {
-		try {
-			return new JSONObject(IOUtils.toString(response.getEntity()
-					.getContent()));
-		} catch (JSONException ex) {
-			fLogger.error("Error decoding server response: ", ex);
-			return null;
-		}
-	}
+    private JSONObject decode(CloseableHttpResponse response)
+            throws IOException {
+        try {
+            return new JSONObject(IOUtils.toString(response.getEntity()
+                    .getContent()));
+        } catch (JSONException ex) {
+            fLogger.error("Error decoding server response: ", ex);
+            return null;
+        }
+    }
 
-	private void logRequest(HttpRequest request) {
-		if (fLogger.isDebugEnabled()) {
-			fLogger.debug(request.toString());
-		}
-	}
+    private void logRequest(HttpRequest request) {
+        if (fLogger.isDebugEnabled()) {
+            fLogger.debug(request.toString());
+        }
+    }
 
-	private CloseableHttpResponse logResponse(CloseableHttpResponse response) {
-		if (fLogger.isDebugEnabled()) {
-			fLogger.debug(response.toString());
-		}
-		return response;
-	}
+    private CloseableHttpResponse logResponse(CloseableHttpResponse response) {
+        if (fLogger.isDebugEnabled()) {
+            fLogger.debug(response.toString());
+        }
+        return response;
+    }
 
-	private CloseableWrappingStream wrap(InputStream content, final String handle) {
-		return new CloseableWrappingStream(content, new Closeable() {
-			@Override
-			public void close() throws IOException {
-				deleteProject(handle);
-			}
-		});
-	}
-
-	@Override
-	public void close() throws IOException {
-		fHttpClient.close();
-	}
+    @Override
+    public void close() throws IOException {
+        fHttpClient.close();
+    }
 
 }

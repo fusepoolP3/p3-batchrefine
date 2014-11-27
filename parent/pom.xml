@@ -81,6 +81,7 @@
                         <reuseForks>false</reuseForks>
                     </configuration>
                 </plugin>
+
             </plugins>
         </pluginManagement>
     </build>

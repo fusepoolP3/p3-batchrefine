@@ -1,18 +1,7 @@
 package eu.spaziodati.batchrefine.java;
 
-import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URISyntaxException;
-
+import eu.spaziodati.batchrefine.core.ITransformEngine;
 import junit.framework.AssertionFailedError;
-
 import org.apache.clerezza.rdf.core.serializedform.Parser;
 import org.apache.commons.io.IOUtils;
 import org.json.JSONArray;
@@ -20,7 +9,8 @@ import org.json.JSONException;
 import org.json.JSONTokener;
 import org.junit.Assert;
 
-import eu.spaziodati.batchrefine.core.ITransformEngine;
+import java.io.*;
+import java.net.URISyntaxException;
 
 public class EngineTestUtils {
 
@@ -66,7 +56,7 @@ public class EngineTestUtils {
 		FileOutputStream oStream = null;
 		try {
 			iStream = find(name);
-			File copy = outputFile();
+			File copy = outputFile(extensionOf(name));
 			oStream = new FileOutputStream(copy);
 			IOUtils.copy(iStream, oStream);
 
@@ -95,6 +85,15 @@ public class EngineTestUtils {
 		return asJSONArray(transform);
 	}
 
+    private static String extensionOf(String name) {
+        int index = name.lastIndexOf('.');
+        if (index == -1) {
+            return null;
+        }
+
+        return name.substring(Math.min(index + 1, name.length() - 1));
+    }
+
 	public static File toFile(InputStream iStream) throws IOException {
 		File outputFile = outputFile();
 		try (FileOutputStream oStream = new FileOutputStream(outputFile)) {
@@ -103,7 +102,11 @@ public class EngineTestUtils {
 		return outputFile;
 	}
 
-	public static File outputFile() throws IOException {
+    public static File outputFile() throws IOException {
+        return outputFile(null);
+    }
+
+	public static File outputFile(String extension) throws IOException {
 		File output = File.createTempFile("batch-refine-test", null);
 		output.deleteOnExit();
 		return output;

@@ -20,13 +20,13 @@ public class Utils {
 	 *             if an exception is thrown, and <code>rethrow</code> is set to
 	 *             true.
 	 */
-	public static void safeClose(Closeable closeable, boolean rethrow)
-			throws IOException {
+	public static void safeClose(AutoCloseable closeable, boolean rethrow)
+			throws Exception {
 
 		if (closeable != null) {
 			try {
 				closeable.close();
-			} catch (IOException ex) {
+			} catch (Exception ex) {
 				if (rethrow) {
 					throw ex;
 				} else {
@@ -42,10 +42,10 @@ public class Utils {
 	 * except that it eliminates the {@link IOException} from its signature.
 	 * 
 	 */
-	public static void safeClose(Closeable closeable) {
+	public static void safeClose(AutoCloseable closeable) {
 		try {
 			safeClose(closeable, false);
-		} catch (IOException ex) {
+		} catch (Exception ex) {
 			// Should never happen!
 			throw new RuntimeException(
 					"Internal error.", ex);

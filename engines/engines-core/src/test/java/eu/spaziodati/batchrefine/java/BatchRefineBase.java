@@ -1,14 +1,14 @@
 package eu.spaziodati.batchrefine.java;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Properties;
-
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
+
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Properties;
 
 
 @RunWith(Parameterized.class)

@@ -1,10 +1,7 @@
 package eu.spaziodati.batchrefine.core.embedded;
 
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
+import java.io.*;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -50,262 +47,275 @@ import eu.spaziodati.batchrefine.core.ITransformEngine;
  * For now, it's clearly somewhat of a hack, and is not guaranteed to work with
  * future OpenRefine versions, nor is it guaranteed to work with all OpenRefine
  * plugins.
- * 
+ *
  * @author giuliano
  */
 public class TransformEngineImpl implements ITransformEngine {
 
-	private static final Logger fLogger = Logger
-			.getLogger(TransformEngineImpl.class);
+    private static final Logger fLogger = Logger
+            .getLogger(TransformEngineImpl.class);
 
-	private RefineServlet fServletStub;
+    private RefineServlet fServletStub;
 
-	public TransformEngineImpl init() throws IOException {
+    public TransformEngineImpl init() throws IOException {
 
-		RefineServlet servlet = new RefineServletStub();
-		fServletStub = servlet;
+        RefineServlet servlet = new RefineServletStub();
+        fServletStub = servlet;
 
-		ProjectManagerStub.initialize();
-		ImportingManager.initialize(servlet);
+        ProjectManagerStub.initialize();
+        ImportingManager.initialize(servlet);
 
-		loadModules();
+        loadModules();
 
-		return this;
-	}
+        return this;
+    }
 
-	@Override
-	public void transform(File original, JSONArray transform,
-			OutputStream transformed, Properties exporterProperties)
-			throws IOException, JSONException {
+    @Override
+    public void transform(URI original, JSONArray transform,
+                          URI transformed, Properties exporterProperties)
+            throws IOException, JSONException {
 
-		String exporter = exporterProperties.getProperty("format", "csv");
+        String exporter = exporterProperties.getProperty("format", "csv");
 
-		ensureInitialized();
+        File input = asFile(original);
+        File output = asFile(transformed);
 
-		Project project = loadData(original);
+        ensureInitialized();
 
-		applyTransform(project, transform);
+        Project project = loadData(input);
 
-		outputResults(project, transformed, exporter, exporterProperties);
-	}
+        applyTransform(project, transform);
 
-	private Project loadData(File original) throws IOException {
+        try (OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(output))) {
+            outputResults(project, writer, exporter, exporterProperties);
+        }
+    }
 
-		// Creates project. Project contain the RecordModel
-		// and ColumnModel instances, which contain the actual data.
-		Project project = new Project();
-		ProjectMetadata metadata = new ProjectMetadata();
+    private File asFile(URI candidate) throws IOException {
+        if (!candidate.getScheme().equals("file")) {
+            throw new IOException("Invalid URI: " + candidate +
+                    ". The embedded engine supports reading and writing to files only.");
+        }
 
-		// Engine will try to access project by calling this singleton
-		// later, so we have to register it.
-		ProjectManager.singleton.registerProject(project, metadata);
+        return new File(candidate);
+    }
 
-		// Imports, i.e. loads a CSV into the engine. This is a
-		// bureaucratic process.
+    private Project loadData(File original) throws IOException {
 
-		// 1. The importer requires a "job".
-		ImportingJob job = ImportingManager.createJob();
-		job.getOrCreateDefaultConfig();
+        // Creates project. Project contain the RecordModel
+        // and ColumnModel instances, which contain the actual data.
+        Project project = new Project();
+        ProjectMetadata metadata = new ProjectMetadata();
 
-		ensureFileInLocation(original, job.getRawDataDir());
+        // Engine will try to access project by calling this singleton
+        // later, so we have to register it.
+        ProjectManager.singleton.registerProject(project, metadata);
 
-		// 2. and a "file record" with things like the file format.
-		// The engine would normally get that from the browser.
-		JSONObject fileRecord = createFileRecord(original,
-				"text/line-based/*sv");
+        // Imports, i.e. loads a CSV into the engine. This is a
+        // bureaucratic process.
 
-		// Creates the CSV importer.
-		SeparatorBasedImporter importer = new SeparatorBasedImporter();
+        // 1. The importer requires a "job".
+        ImportingJob job = ImportingManager.createJob();
+        job.getOrCreateDefaultConfig();
 
-		// 3. we have to call this method to initialize the "options" object,
-		// which contains some more configuration options to the importer.
-		JSONObject options = importer.createParserUIInitializationData(job,
-				asList(fileRecord), "text/line-based/*sv");
+        ensureFileInLocation(original, job.getRawDataDir());
 
-		List<Exception> exceptions = new ArrayList<Exception>();
+        // 2. and a "file record" with things like the file format.
+        // The engine would normally get that from the browser.
+        JSONObject fileRecord = createFileRecord(original,
+                "text/line-based/*sv");
 
-		// 4. finally we can import.
-		importer.parseOneFile(project, metadata, job, fileRecord, -1, options,
-				exceptions, NULL_PROGRESS);
+        // Creates the CSV importer.
+        SeparatorBasedImporter importer = new SeparatorBasedImporter();
 
-		// After import we have to call update (which is a post-load
-		// initialization procedure, really) or the row model will be
-		// inconsistent.
-		project.update();
+        // 3. we have to call this method to initialize the "options" object,
+        // which contains some more configuration options to the importer.
+        JSONObject options = importer.createParserUIInitializationData(job,
+                asList(fileRecord), "text/line-based/*sv");
 
-		if (fLogger.isDebugEnabled()) {
-			fLogger.debug("Loaded file " + original.getName() + " with "
-					+ project.rows.size() + " rows.");
-		}
+        List<Exception> exceptions = new ArrayList<Exception>();
 
-		return project;
-	}
+        // 4. finally we can import.
+        importer.parseOneFile(project, metadata, job, fileRecord, -1, options,
+                exceptions, NULL_PROGRESS);
 
-	private void applyTransform(Project project, JSONArray transform)
-			throws JSONException {
+        // After import we have to call update (which is a post-load
+        // initialization procedure, really) or the row model will be
+        // inconsistent.
+        project.update();
 
-		for (int i = 0; i < transform.length(); i++) {
-			AbstractOperation operation = OperationRegistry.reconstruct(
-					project, transform.getJSONObject(i));
+        if (fLogger.isDebugEnabled()) {
+            fLogger.debug("Loaded file " + original.getName() + " with "
+                    + project.rows.size() + " rows.");
+        }
 
-			if (operation != null) {
-				try {
-					Process process = operation.createProcess(project,
-							new Properties());
+        return project;
+    }
 
-					project.processManager.queueProcess(process);
-				} catch (Exception ex) {
-					fLogger.error("Error applying operation.", ex);
-				}
-			} else {
-				fLogger.warn("Skipping unknown operation " + operation);
-			}
-		}
-	}
+    private void applyTransform(Project project, JSONArray transform)
+            throws JSONException {
 
-	private void outputResults(Project project, OutputStream transformed,
-			String exporterId, Properties exporterProperties)
-			throws IOException {
+        for (int i = 0; i < transform.length(); i++) {
+            AbstractOperation operation = OperationRegistry.reconstruct(
+                    project, transform.getJSONObject(i));
 
-		Exporter e = ExporterRegistry.getExporter(exporterId);
-		if (!(e instanceof WriterExporter)) {
-			throw new RuntimeException(e.getClass().getName()
-					+ " is not a WriterExporter.");
-		}
+            if (operation != null) {
+                try {
+                    Process process = operation.createProcess(project,
+                            new Properties());
 
-		WriterExporter we = (WriterExporter) e;
-		we.export(project, exporterProperties, new Engine(project),
-				new OutputStreamWriter(transformed));
-	}
+                    project.processManager.queueProcess(process);
+                } catch (Exception ex) {
+                    fLogger.error("Error applying operation.", ex);
+                }
+            } else {
+                fLogger.warn("Skipping unknown operation " + operation);
+            }
+        }
+    }
 
-	private void ensureFileInLocation(File original, File rawDataDir)
-			throws IOException {
+    private void outputResults(Project project, OutputStreamWriter transformed,
+                               String exporterId, Properties exporterProperties)
+            throws IOException {
 
-		// Is this where the refine engine expects to find it?
-		if (isParent(original, rawDataDir)) {
-			return;
-		}
+        Exporter e = ExporterRegistry.getExporter(exporterId);
+        if (!(e instanceof WriterExporter)) {
+            throw new RuntimeException(e.getClass().getName()
+                    + " is not a WriterExporter.");
+        }
 
-		// No, have to put it there.
-		FileUtils.copyFile(original, new File(rawDataDir, original.getName()));
-	}
+        WriterExporter we = (WriterExporter) e;
+        we.export(project, exporterProperties, new Engine(project), transformed);
+    }
 
-	private boolean isParent(File original, File rawDataDir) throws IOException {
+    private void ensureFileInLocation(File original, File rawDataDir)
+            throws IOException {
 
-		File parentFolder = original.getAbsoluteFile().getParentFile();
-		if (parentFolder == null) {
-			// Well, this should not happen, so I reserve the right to
-			// produce a crappy error message.
-			throw new IOException("Can't obtain a parent path for "
-					+ original.getAbsolutePath() + ".");
-		}
+        // Is this where the refine engine expects to find it?
+        if (isParent(original, rawDataDir)) {
+            return;
+        }
 
-		return rawDataDir.getAbsoluteFile().equals(original);
-	}
+        // No, have to put it there.
+        FileUtils.copyFile(original, new File(rawDataDir, original.getName()));
+    }
 
-	private void loadModules() throws IOException {
+    private boolean isParent(File original, File rawDataDir) throws IOException {
 
-		loadModule("core", "/main/webapp/modules/core/MOD-INF/controller.js",
-				"registerOperations");
+        File parentFolder = original.getAbsoluteFile().getParentFile();
+        if (parentFolder == null) {
+            // Well, this should not happen, so I reserve the right to
+            // produce a crappy error message.
+            throw new IOException("Can't obtain a parent path for "
+                    + original.getAbsolutePath() + ".");
+        }
 
-		loadModule("rdf-extension",
-				"/extensions/rdf-extension/module/MOD-INF/controller.js",
-				"registerOperations", "registerExporters");
-	}
+        return rawDataDir.getAbsoluteFile().equals(original);
+    }
 
-	/**
-	 * This method runs part of the core module controller.js script so that we
-	 * can register all operations without having to duplicate configuration
-	 * here.
-	 */
+    private void loadModules() throws IOException {
 
-	public void loadModule(String name, String path, String... initFunctions)
-			throws IOException {
+        loadModule("core", "/main/webapp/modules/core/MOD-INF/controller.js",
+                "registerOperations");
 
-		ButterflyModule core = new ButterflyModuleStub(name);
-		File controllerFile = new File(Configurations.get("refine.root",
-				"../OpenRefine"), path);
+        loadModule("rdf-extension",
+                "/extensions/rdf-extension/module/MOD-INF/controller.js",
+                "registerOperations", "registerExporters");
+    }
 
-		if (!controllerFile.exists()) {
-			fLogger.warn(String.format(
-					"Can't find controller script for module %s at %s -- "
-							+ "module may not work as expected.", name,
-					controllerFile.getAbsolutePath()));
-			return;
-		}
+    /**
+     * This method runs part of the core module controller.js script so that we
+     * can register all operations without having to duplicate configuration
+     * here.
+     */
 
-		// Compiles and "executes" the controller script. The script basically
-		// contains function declarations.
-		Context context = ContextFactory.getGlobal().enterContext();
-		Script controller = context.compileReader(
-				new FileReader(controllerFile), "init.js", 1, null);
+    public void loadModule(String name, String path, String... initFunctions)
+            throws IOException {
 
-		// Initializes the scope.
-		ScriptableObject scope = new ImporterTopLevel(context);
+        ButterflyModule core = new ButterflyModuleStub(name);
+        File controllerFile = new File(Configurations.get("refine.root",
+                "../OpenRefine"), path);
 
-		scope.put("module", scope, core);
-		controller.exec(context, scope);
+        if (!controllerFile.exists()) {
+            fLogger.warn(String.format(
+                    "Can't find controller script for module %s at %s -- "
+                            + "module may not work as expected.", name,
+                    controllerFile.getAbsolutePath()));
+            return;
+        }
 
-		for (String function : initFunctions) {
-			// Runs the function that initializes the OperationRegistry.
-			try {
-				Object fun = context.compileString(function, null, 1, null)
-						.exec(context, scope);
-				if (fun != null && fun instanceof Function) {
-					((Function) fun).call(context, scope, scope,
-							new Object[] {});
-				}
-			} catch (EcmaError ex) {
-				fLogger.error("Error running controller script.", ex);
-			}
-		}
-	}
+        // Compiles and "executes" the controller script. The script basically
+        // contains function declarations.
+        Context context = ContextFactory.getGlobal().enterContext();
+        Script controller = context.compileReader(
+                new FileReader(controllerFile), "init.js", 1, null);
 
-	private JSONObject createFileRecord(File original, String format) {
+        // Initializes the scope.
+        ScriptableObject scope = new ImporterTopLevel(context);
 
-		JSONObject fileRecord = new JSONObject();
+        scope.put("module", scope, core);
+        controller.exec(context, scope);
 
-		try {
-			fileRecord.put("declaredMimeType", "text/csv");
-			fileRecord.put("location", original.getName());
-			fileRecord.put("fileName", original.getName());
-			fileRecord.put("origin", "upload");
-			fileRecord.put("format", format);
-			fileRecord.put("size", original.length());
-		} catch (JSONException ex) {
-			throw new RuntimeException("Internal error.", ex);
-		}
+        for (String function : initFunctions) {
+            // Runs the function that initializes the OperationRegistry.
+            try {
+                Object fun = context.compileString(function, null, 1, null)
+                        .exec(context, scope);
+                if (fun != null && fun instanceof Function) {
+                    ((Function) fun).call(context, scope, scope,
+                            new Object[]{});
+                }
+            } catch (EcmaError ex) {
+                fLogger.error("Error running controller script.", ex);
+            }
+        }
+    }
 
-		return fileRecord;
-	}
+    private JSONObject createFileRecord(File original, String format) {
 
-	private List<JSONObject> asList(JSONObject object) {
-		ArrayList<JSONObject> list = new ArrayList<JSONObject>();
-		list.add(object);
-		return list;
-	}
+        JSONObject fileRecord = new JSONObject();
 
-	private void ensureInitialized() {
-		if (fServletStub == null) {
-			throw new IllegalStateException("Engine needs to be initialized.");
-		}
-	}
+        try {
+            fileRecord.put("declaredMimeType", "text/csv");
+            fileRecord.put("location", original.getName());
+            fileRecord.put("fileName", original.getName());
+            fileRecord.put("origin", "upload");
+            fileRecord.put("format", format);
+            fileRecord.put("size", original.length());
+        } catch (JSONException ex) {
+            throw new RuntimeException("Internal error.", ex);
+        }
 
-	private static final MultiFileReadingProgress NULL_PROGRESS = new MultiFileReadingProgress() {
-		@Override
-		public void startFile(String fileSource) {
-		}
+        return fileRecord;
+    }
 
-		@Override
-		public void readingFile(String fileSource, long bytesRead) {
-		}
+    private List<JSONObject> asList(JSONObject object) {
+        ArrayList<JSONObject> list = new ArrayList<JSONObject>();
+        list.add(object);
+        return list;
+    }
 
-		@Override
-		public void endFile(String fileSource, long bytesRead) {
-		}
-	};
+    private void ensureInitialized() {
+        if (fServletStub == null) {
+            throw new IllegalStateException("Engine needs to be initialized.");
+        }
+    }
 
-	@Override
-	public void close() throws IOException {
-	}
+    private static final MultiFileReadingProgress NULL_PROGRESS = new MultiFileReadingProgress() {
+        @Override
+        public void startFile(String fileSource) {
+        }
+
+        @Override
+        public void readingFile(String fileSource, long bytesRead) {
+        }
+
+        @Override
+        public void endFile(String fileSource, long bytesRead) {
+        }
+    };
+
+    @Override
+    public void close() throws IOException {
+    }
 }

@@ -1,16 +1,12 @@
 package eu.spaziodati.batchrefine.cli;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.net.ConnectException;
-import java.net.URISyntaxException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Properties;
-
+import com.google.refine.util.ParsingUtilities;
+import eu.spaziodati.batchrefine.core.ITransformEngine;
+import eu.spaziodati.batchrefine.core.Utils;
+import eu.spaziodati.batchrefine.core.embedded.TransformEngineImpl;
+import eu.spaziodati.batchrefine.core.http.RefineHTTPClient;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.json.JSONArray;
@@ -19,12 +15,14 @@ import org.kohsuke.args4j.CmdLineException;
 import org.kohsuke.args4j.CmdLineParser;
 import org.kohsuke.args4j.Option;
 
-import com.google.refine.util.ParsingUtilities;
-
-import eu.spaziodati.batchrefine.core.ITransformEngine;
-import eu.spaziodati.batchrefine.core.Utils;
-import eu.spaziodati.batchrefine.core.embedded.TransformEngineImpl;
-import eu.spaziodati.batchrefine.core.http.RefineHTTPClient;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.net.ConnectException;
+import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Properties;
 
 /**
  * Command line utility for BatchRefine.
@@ -98,10 +96,13 @@ public class BatchRefine {
 			if (engine == null) {
 				return;
 			}
-			
-			Properties exporterProperties = new Properties();
+
+            File output = File.createTempFile("batchrefine", "tmp");
+
+            Properties exporterProperties = new Properties();
 			exporterProperties.setProperty("format", fFormat.toString());
-			engine.transform(inputFile, transform, output(), exporterProperties);
+			engine.transform(inputFile.toURI(), transform, output.toURI(), exporterProperties);
+            output(output);
 		} catch (ConnectException ex) {
 			fLogger.error("Could not connect to host (is it running)? Error was:\n "
 					+ ex.getMessage());
@@ -164,12 +165,17 @@ public class BatchRefine {
 		}
 	}
 
-	private OutputStream output() throws IOException {
+	private void output(File intermediate) throws IOException {
 		if (fArguments.size() >= 3) {
-			return new FileOutputStream(new File(fArguments.get(2)));
+            File output = new File(fArguments.get(2));
+			intermediate.renameTo(output);
 		}
 
-		return System.out;
+        try (FileInputStream iStream = new FileInputStream(intermediate)) {
+            IOUtils.copy(iStream, System.out);
+        } finally {
+            intermediate.delete();
+        }
 	}
 
 	private void printUsage(CmdLineParser parser) {

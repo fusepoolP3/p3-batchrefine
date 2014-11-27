@@ -14,7 +14,9 @@ public class BaseHttpEngineTest extends EngineTest {
 
 	@Override
 	protected ITransformEngine engine() throws Exception {
-		return new RefineHTTPClient(new URI("http://localhost:3333"));
+		return new RefineHTTPClient(new URI(
+                System.getProperty(REFINE_URL, "http://localhost:3333")
+        ));
 	}
 
 }

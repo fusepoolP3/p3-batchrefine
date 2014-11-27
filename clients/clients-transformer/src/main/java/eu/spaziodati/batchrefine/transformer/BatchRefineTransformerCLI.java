@@ -1,12 +1,12 @@
 package eu.spaziodati.batchrefine.transformer;
 
-import java.net.URI;
-import java.net.URISyntaxException;
-
 import eu.fusepool.p3.transformer.server.TransformerServer;
 import org.kohsuke.args4j.CmdLineException;
 import org.kohsuke.args4j.CmdLineParser;
 import org.kohsuke.args4j.Option;
+
+import java.net.URI;
+import java.net.URISyntaxException;
 
 /**
  * Command Line Interface for launching {@link SynchronousTransformer}.
