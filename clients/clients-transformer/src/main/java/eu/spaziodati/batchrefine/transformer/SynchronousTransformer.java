@@ -54,8 +54,13 @@ public class SynchronousTransformer extends BatchRefineTransformer implements
             @Override
             public void writeData(OutputStream out) throws IOException {
                 try {
-                    engine.transform(input.toURI(), fetchTransform(request), output.toURI(),
-                            options.right);
+                    // Can't allow more than one transform at a time as OpenRefine is not
+                    // designed for that.
+                    synchronized(SynchronousTransformer.this) {
+                        engine.transform(input.toURI(), fetchTransform(request), output.toURI(),
+                                options.right);
+                    }
+
                     try (FileInputStream stream = new FileInputStream(output)) {
                         IOUtils.copy(stream, out);
                     }

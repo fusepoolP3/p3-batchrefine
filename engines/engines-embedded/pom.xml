@@ -1,159 +1,186 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  
-  <parent>
-    <groupId>eu.spaziodati.batchrefine</groupId>
-    <artifactId>batchrefine-parent</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
-    <relativePath>../../parent</relativePath>
-  </parent>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-  <artifactId>engines-embedded</artifactId>
-  <packaging>jar</packaging>
+    <parent>
+        <groupId>eu.spaziodati.batchrefine</groupId>
+        <artifactId>batchrefine-parent</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+        <relativePath>../../parent</relativePath>
+    </parent>
 
-  <name>BatchRefine Engines: embedded engine</name>
-  <description>
-    Library that ``embeds'' the OpenRefine engine---i.e., accesses it
-    without going through HTTP or Butterfly.
-  </description>
+    <artifactId>engines-embedded</artifactId>
+    <packaging>jar</packaging>
 
-  <build>
-    <plugins>
-      <!-- Unfortunately tests won't work, as the controller.js scripts
-	   are not bundled with the jar files and initialization will fail. 
-	   Need to define a more solid packaging strategy (see #4) -->
-      <plugin>
-	<groupId>org.apache.maven.plugins</groupId>
-	<artifactId>maven-surefire-plugin</artifactId>
-	<configuration>
-	  <skipTests>true</skipTests>
-	</configuration>
-      </plugin>
-    </plugins>
-  </build>
-  
-  <dependencies>
+    <name>BatchRefine Engines: embedded engine</name>
+    <description>
+        Library that ``embeds'' the OpenRefine engine---i.e., accesses it
+        without going through HTTP or Butterfly.
+    </description>
 
-    <dependency>
-      <groupId>eu.spaziodati.batchrefine</groupId>
-      <artifactId>engines-core</artifactId>
-      <version>${project.version}</version>
-    </dependency>
+    <build>
+        <plugins>
+            <!-- Unfortunately tests won't work, as the controller.js scripts
+             are not bundled with the jar files and initialization will fail.
+             Need to define a more solid packaging strategy (see #4) -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <skipTests>true</skipTests>
+                </configuration>
+            </plugin>
 
-    <dependency>
-      <groupId>eu.spaziodati.batchrefine</groupId>
-      <artifactId>engines-core</artifactId>
-      <version>${project.version}</version>
-      <type>test-jar</type>
-      <scope>test</scope>
-    </dependency>
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>2.4.1</version>
+                <configuration>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                    <archive>
+                        <manifest>
+                            <mainClass>eu.spaziodati.batchrefine.transformer.BatchRefineTransformerCLI</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
 
-    <dependency>
-      <groupId>org.json</groupId>
-      <artifactId>json</artifactId>
-    </dependency>
+        </plugins>
 
-    <dependency>
-      <groupId>rhino</groupId>
-      <artifactId>js</artifactId>
-      <version>1.7R2</version>
-    </dependency>
+    </build>
 
-    <dependency>
-      <groupId>org.openrefine</groupId>
-      <artifactId>openrefine-core</artifactId>
-    </dependency>
+    <dependencies>
 
-    <dependency>
-      <groupId>org.openrefine</groupId>
-      <artifactId>openrefine-server</artifactId>
-    </dependency>
+        <dependency>
+            <groupId>eu.spaziodati.batchrefine</groupId>
+            <artifactId>engines-core</artifactId>
+            <version>${project.version}</version>
+        </dependency>
 
-    <dependency>
-      <groupId>edu.mit.simile</groupId>
-      <artifactId>butterfly</artifactId>
-      <version>1.0.1</version>
-    </dependency>
+        <dependency>
+            <groupId>eu.spaziodati.batchrefine</groupId>
+            <artifactId>engines-core</artifactId>
+            <version>${project.version}</version>
+            <type>test-jar</type>
+            <scope>test</scope>
+        </dependency>
 
-    <dependency>
-      <groupId>commons-io</groupId>
-      <artifactId>commons-io</artifactId>
-    </dependency>
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+        </dependency>
 
-    <dependency>
-      <groupId>log4j</groupId>
-      <artifactId>log4j</artifactId>
-    </dependency>
-    
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <scope>test</scope>      
-    </dependency>
+        <dependency>
+            <groupId>rhino</groupId>
+            <artifactId>js</artifactId>
+            <version>1.7R2</version>
+        </dependency>
 
-    <!-- Dependencies required by OpenRefine -->
-    <dependency>
-      <groupId>org.apache.httpcomponents</groupId>
-      <artifactId>httpclient</artifactId>
-      <version>4.2.5</version>
-    </dependency>
-    
-    <dependency>
-      <groupId>com.metaweb</groupId>
-      <artifactId>lessen</artifactId>
-      <version>1.0</version>
-    </dependency>
+        <dependency>
+            <groupId>org.openrefine</groupId>
+            <artifactId>openrefine-core</artifactId>
+        </dependency>
 
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-log4j12</artifactId>
-      <version>1.5.6</version>
-    </dependency>
+        <dependency>
+            <groupId>org.openrefine</groupId>
+            <artifactId>openrefine-server</artifactId>
+        </dependency>
 
-    <dependency>
-      <groupId>ant-tools</groupId>
-      <artifactId>ant-tools</artifactId>
-      <version>1.8.0</version>
-    </dependency>
+        <dependency>
+            <groupId>edu.mit.simile</groupId>
+            <artifactId>butterfly</artifactId>
+            <version>1.0.1</version>
+        </dependency>
 
-    <dependency>
-      <groupId>com.google.guava</groupId>
-      <artifactId>guava</artifactId>
-      <version>13.0</version>
-    </dependency>
-    
-    <dependency>
-      <groupId>javax.servlet</groupId>
-      <artifactId>servlet-api</artifactId>
-      <version>2.5</version>
-    </dependency>
-    
-    <dependency>
-      <groupId>org.apache.velocity</groupId>
-      <artifactId>velocity</artifactId>
-      <version>1.5</version>
-    </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+        </dependency>
 
-    <dependency>
-      <groupId>commons-fileupload</groupId>
-      <artifactId>commons-fileupload</artifactId>
-      <version>1.2.1</version>
-    </dependency>
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+        </dependency>
 
-    <dependency>
-      <groupId>net.sf.opencsv</groupId>
-      <artifactId>opencsv</artifactId>
-      <version>2.4-SNAPSHOT</version>
-    </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
 
-    <dependency>
-      <groupId>org.apache.poi</groupId>
-      <artifactId>poi</artifactId>
-      <version>3.8</version>
-    </dependency>
-    
-  </dependencies>
+        <!-- Dependencies required by OpenRefine -->
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.2.5</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.metaweb</groupId>
+            <artifactId>lessen</artifactId>
+            <version>1.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>1.5.6</version>
+        </dependency>
+
+        <dependency>
+            <groupId>ant-tools</groupId>
+            <artifactId>ant-tools</artifactId>
+            <version>1.8.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>13.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <version>2.5</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.velocity</groupId>
+            <artifactId>velocity</artifactId>
+            <version>1.5</version>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-fileupload</groupId>
+            <artifactId>commons-fileupload</artifactId>
+            <version>1.2.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>net.sf.opencsv</groupId>
+            <artifactId>opencsv</artifactId>
+            <version>2.4-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>3.8</version>
+        </dependency>
+
+    </dependencies>
 
 </project>

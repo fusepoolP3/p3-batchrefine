@@ -44,5 +44,5 @@ RUN tar xzvf master.tar.gz; \
 RUN cd batchrefine; \
     mvn package -DskipTests
 
-CMD ["-m 8096M","-t sync"]
+CMD ["-m 4096","-t sync"]
 ENTRYPOINT ["/batchrefine/docker/internal/p3-transformer-start.sh"]
