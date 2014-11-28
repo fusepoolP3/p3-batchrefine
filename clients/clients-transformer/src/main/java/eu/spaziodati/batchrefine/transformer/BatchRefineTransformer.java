@@ -87,6 +87,7 @@ public class BatchRefineTransformer implements Transformer {
     }
 
     protected JSONArray fetchTransform(HttpRequestEntity request) throws IOException {
+
         String transformURI = getSingleParameter(TRANSFORM_PARAMETER,
                 request.getRequest());
 

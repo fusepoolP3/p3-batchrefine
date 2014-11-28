@@ -1,58 +1,89 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  
-  <parent>
-    <groupId>eu.spaziodati.batchrefine</groupId>
-    <artifactId>batchrefine-parent</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
-    <relativePath>../../parent</relativePath>
-  </parent>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-  <artifactId>clients-cli</artifactId>
-  <packaging>jar</packaging>
+    <parent>
+        <groupId>eu.spaziodati.batchrefine</groupId>
+        <artifactId>batchrefine-parent</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+        <relativePath>../../parent</relativePath>
+    </parent>
 
-  <name>BatchRefine Clients: Command-line Interface</name>
-  <description>
-    Simple command-line interface client to BatchRefine.
-  </description>
+    <artifactId>clients-cli</artifactId>
+    <packaging>jar</packaging>
 
-  <dependencies>
+    <name>BatchRefine Clients: Command-line Interface</name>
+    <description>
+        Simple command-line interface client to BatchRefine.
+    </description>
 
-    <dependency>
-      <groupId>args4j</groupId>
-      <artifactId>args4j</artifactId>
-    </dependency>
+    <build>
+        <plugins>
 
-    <dependency>
-      <groupId>org.openrefine</groupId>
-      <artifactId>openrefine-core</artifactId>
-    </dependency>
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>2.4.1</version>
+                <configuration>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                    <archive>
+                        <manifest>
+                            <mainClass>eu.spaziodati.batchrefine.cli.BatchRefine</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
 
-    <dependency>
-      <groupId>org.json</groupId>
-      <artifactId>json</artifactId>
-    </dependency>
+        </plugins>
+    </build>
 
-    <dependency> 
-      <groupId>log4j</groupId>
-      <artifactId>log4j</artifactId>
-    </dependency>
+    <dependencies>
 
-    <!-- These should probably be made runtime dependencies -->
-    <dependency>
-      <groupId>eu.spaziodati.batchrefine</groupId>
-      <artifactId>engines-http</artifactId>
-      <version>${project.version}</version>
-    </dependency>
+        <dependency>
+            <groupId>args4j</groupId>
+            <artifactId>args4j</artifactId>
+        </dependency>
 
-    <dependency>
-      <groupId>eu.spaziodati.batchrefine</groupId>
-      <artifactId>engines-embedded</artifactId>
-      <version>${project.version}</version>
-    </dependency>
+        <dependency>
+            <groupId>org.openrefine</groupId>
+            <artifactId>openrefine-core</artifactId>
+        </dependency>
 
-  </dependencies>
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+        </dependency>
+
+        <!-- These should probably be made runtime dependencies -->
+        <dependency>
+            <groupId>eu.spaziodati.batchrefine</groupId>
+            <artifactId>engines-http</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>eu.spaziodati.batchrefine</groupId>
+            <artifactId>engines-embedded</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+    </dependencies>
 
 </project>
