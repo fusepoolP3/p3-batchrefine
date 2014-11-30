@@ -15,11 +15,12 @@ Basics
 
 BatchRefine currently works by providing a collection of wrappers
 (referred to as _backends_) and, in some modes, a distribution layer,
-on top of OpenRefine.  It provides two main methods (access clients)
-for accessing these backends: a command line client, and an HTTP API
-(the Fusepool P3 transformer API). The latter allows BatchRefine to
-take part in P3 pipelines where it can be chained with other
-transformers.
+on top of OpenRefine.  It provides two main ways (access clients) to
+access these backends: a command line client, and an HTTP API based on
+the
+[Fusepool P3 transformer API](https://github.com/fusepoolP3/overall-architecture/blob/master/transformer-api.md). The
+latter allows BatchRefine to take part in P3 pipelines where it can be
+chained with other transformers.
 
 Backends and access clients can be combined to tailor the needs of the
 application. We will discuss two simple combinations that provide
@@ -105,20 +106,19 @@ where, as before, `input.csv` is the input file, `transform.json` is
 the transform script and `output.csv` is the output file to which to
 write the transformed data.
 
-# Building
+## Building
 
 Unfortunately, the command line tool has to be built from
 sources. Read the section on building BatchRefine from sources for
 instructions on how to do it.
 
-# Running
-
-## Embedded backend
+## Running With the Embedded Backend
 
 We ship a prepackaged script to start the command line tool under
 `./bin`. By default, it uses the _embedded_ backend so that you do not
 need to start OpenRefine to actually use it. You do need, however, to
-have OpenRefine around on your system (this limitation will be removed in
+have OpenRefine around on your system, as BatchRefine will import some
+initialization scripts from it (this limitation will be removed in
 future versions).
 
 To run, first set the `OPENREFINE_ROOT` and `BATCHREFINE_ROOT`
@@ -137,7 +137,8 @@ it.
 
 The embedded engine cannot currently do reconciliation, and extensions
 require customization to work (i.e. the RDF extension won't work out
-of the box).
+of the box). Further, it is likely that it has to be altered or
+rewritten  to work with newer versions of OpenRefine.
 
 ## Accessing a running OpenRefine instance
 
@@ -204,11 +205,11 @@ clean folder:
 
 The JAR for starting the P3 transformer will be located under:
 
-```./clients/clients-transformer/target/clients-transformer-{project.version}-jar-with-dependencies.jar```
+`./clients/clients-transformer/target/clients-transformer-{project.version}-jar-with-dependencies.jar`
 
 whereas the JAR for starting the command line client will be under:
 
-```./clients/clients-cli/target/clients-cli-{project.version}-jar-with-dependencies.jar```
+`./clients/clients-cli/target/clients-cli-{project.version}-jar-with-dependencies.jar`
 
 Miscellaneous
 =============
