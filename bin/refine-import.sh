@@ -4,7 +4,7 @@
 # into a local Maven repository.
 #
 
-OPENREFINE_ROOT=.${OPENREFINE_ROOT:-../OpenRefine-2.6-beta.1}
+OPENREFINE_ROOT=${OPENREFINE_ROOT:-../OpenRefine-2.6-beta.1}
 
 function import_jar {
     source=$1
@@ -13,7 +13,7 @@ function import_jar {
     version=$4
 
     mvn org.apache.maven.plugins:maven-install-plugin:2.3.1:install-file\
- -Dfile=${OPEN_REFINE_ROOT}/${source}\
+ -Dfile=${OPENREFINE_ROOT}/${source}\
  -DgroupId=${group}\
  -DartifactId=${id}\
  -Dversion=${version}\
