@@ -15,9 +15,9 @@
   <description>Parent POM for BatchRefine</description>
 
   <scm>
-    <url>https://github.com/fusepoolP3/batchrefine</url>
-    <connection>scm:git:https://github.com/fusepoolp3/batchrefine</connection>
-    <developerConnection>scm:git:git@github.com:fusepoolp3/batchrefine.git</developerConnection>
+    <url>https://github.com/fusepoolP3/batchrefine/batchrefine-parent</url>
+    <connection>scm:git:https://github.com/fusepoolp3/batchrefine/batchrefine-parent</connection>
+    <developerConnection>scm:git:git@github.com:fusepoolp3/batchrefine/batchrefine-parent.git</developerConnection>
   </scm>
 
   <prerequisites>
