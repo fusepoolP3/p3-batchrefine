@@ -3,3 +3,4 @@ target/
 *large*.csv
 /local-repository
 *.iml
+*release.properties
