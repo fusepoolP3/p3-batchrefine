@@ -39,10 +39,10 @@ ADD https://github.com/fusepoolP3/batchrefine/archive/master.tar.gz /
 RUN tar xzvf master.tar.gz; \
     mv p3-batchrefine-master batchrefine; \
     cd batchrefine; \
-    ./refine-import.sh
+    ./bin/refine-import.sh
 
 RUN cd batchrefine; \
     mvn package -DskipTests
 
-CMD ["-m 4096","-t sync"]
+CMD ["-m 1400M","-t sync"]
 ENTRYPOINT ["/batchrefine/docker/internal/p3-transformer-start.sh"]
