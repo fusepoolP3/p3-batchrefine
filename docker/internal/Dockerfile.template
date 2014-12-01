@@ -39,7 +39,7 @@ ADD https://github.com/fusepoolP3/batchrefine/archive/master.tar.gz /
 RUN tar xzvf master.tar.gz; \
     mv p3-batchrefine-master batchrefine; \
     cd batchrefine; \
-    ./bin/refine-import.sh
+    OPENREFINE_ROOT='/OpenRefine' ./bin/refine-import.sh
 
 RUN cd batchrefine; \
     mvn package -DskipTests
