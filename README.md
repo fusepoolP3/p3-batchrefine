@@ -115,11 +115,11 @@ instructions on how to do it.
 ## Running With the Embedded Backend
 
 We ship a prepackaged script to start the command line tool under
-`./bin`. By default, it uses the _embedded_ backend so that you do not
-need to start OpenRefine to actually use it. You do need, however, to
-have OpenRefine around on your system, as BatchRefine will import some
-initialization scripts from it (this limitation will be removed in
-future versions).
+`./bin`. We will show an example using the _embedded_ backend so that
+you do not need to start OpenRefine to actually use it. You do need,
+however, to have OpenRefine around on your system, as BatchRefine will
+import some initialization scripts from it (this limitation will be
+removed in future versions).
 
 To run, first set the `OPENREFINE_ROOT` and `BATCHREFINE_ROOT`
 environment variables so that they point to the paths of OpenRefine
@@ -147,7 +147,7 @@ OpenRefine instance. If you have OpenRefine running on
 `refine.example.com`, you can use the command line client as follows:
 
 ```sh
-./bin/batchrefine -e remote input.csv transform.json
+./bin/batchrefine -e remote -h refine.example.com input.csv transform.json
 ```
 
 Building from Sources
