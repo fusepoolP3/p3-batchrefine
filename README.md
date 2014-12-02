@@ -165,9 +165,9 @@ clean folder:
 2. Unzip, untar, and then build OpenRefine, the server and web app
    JARs by running:
 
-   ```sh
-   
-   ant build jar_server jar_webapp```
+```sh
+ant build jar_server jar_webapp
+```
 
 3. Switch to the `./extensions` folder under the OpenRefine root and
    then download the OpenRefine RDF extension alpha 0.9.0 source
@@ -178,12 +178,12 @@ clean folder:
    Unzip, untar, and then rename the folder it extracts into
    `rdf-extension` and build it as follows:
 
-   ```sh
-   mv grefine-rdf-extension-0.9.0 rdf-extension
-   cd rdf-extension
+```sh
+mv grefine-rdf-extension-0.9.0 rdf-extension
+cd rdf-extension
    
-   JAVA_TOOL_OPTIONS='-Dfile.encoding=UTF-8' ant build
-   ```
+JAVA_TOOL_OPTIONS='-Dfile.encoding=UTF-8' ant build
+```
    
 4. After that, switch back to the OpenRefine root and start it. A
    running instance is required for the tests that BatchRefine will
@@ -197,11 +197,11 @@ clean folder:
    BatchRefine should share the same parent folder). As usual, unzip
    and untar. Switch to the `p3-batchrefine-master` folder, and run:
 
-   ```sh
+```sh
    ./bin/refine-import.sh
 
    mvn package
-   ```
+```
 
 The JAR for starting the P3 transformer will be located under:
 
