@@ -129,9 +129,11 @@ public class RefineHTTPClient implements ITransformEngine {
             return;
         }
 
-        try (OutputStream oStream = outputStream(output)) {
-            IOUtils.copy(entity.getContent(), oStream);
-        }
+		try (OutputStream oStream = outputStream(output)) {
+			IOUtils.copy(entity.getContent(), oStream);
+		} finally {
+			Utils.safeClose(response);
+		}
     }
 
     private OutputStream outputStream(URL url) throws IOException {
