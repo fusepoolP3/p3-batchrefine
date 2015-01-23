@@ -51,6 +51,23 @@ public class AcceptHeaderTest {
     }
 
     @Test
+	public void testEmptyAcceptHeader() throws Exception {
+		String transformURI = fSupport.transformURI("osterie-mass-edit.json")
+				.toString();
+		Response response = RestAssured
+				.given()
+				.queryParam("refinejson", transformURI)
+				.and()
+				.contentType("text/csv")
+				.content(contentsAsBytes("inputs", "osterie", "csv")).when()
+				.post().andReturn();
+		
+		Assert.assertTrue(MimeUtils.isSameOrSubtype(
+				mimeType(response.contentType()), mimeType("text/csv")));
+	}
+    
+    
+    @Test
     public void testMultipleAcceptHeaders() throws Exception {
 
         String transformURI = fSupport.transformURI("osterie-rdfize.json").toString();
