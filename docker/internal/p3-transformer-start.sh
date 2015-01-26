@@ -15,4 +15,4 @@ echo "transformer options are $@"
 ${OPENREFINE_ROOT}/refine ${REFINE_OPTIONS} &
 
 # ... and the P3 transformer.
-java -jar ${BATCHREFINE_ROOT}/clients/clients-transformer/target/clients-transformer-${VERSION}-jar-with-dependencies.jar "$@"
+java -jar ${BATCHREFINE_ROOT}/clients/clients-transformer/target/clients-transformer-${VERSION}-jar-with-dependencies.jar $@
