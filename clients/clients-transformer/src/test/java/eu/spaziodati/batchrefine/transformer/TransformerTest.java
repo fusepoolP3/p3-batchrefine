@@ -6,29 +6,17 @@ import static eu.spaziodati.batchrefine.java.EngineTestUtils.contentsAsString;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.ServerSocket;
 import java.net.URISyntaxException;
-import java.net.URL;
 import java.util.NoSuchElementException;
 
 import javax.activation.MimeType;
 import javax.activation.MimeTypeParseException;
 
-import org.eclipse.jetty.server.Server;
-import org.eclipse.jetty.server.handler.DefaultHandler;
-import org.eclipse.jetty.server.handler.HandlerList;
-import org.eclipse.jetty.server.handler.ResourceHandler;
-import org.eclipse.jetty.util.resource.JarResource;
-import org.junit.Assert;
 import org.junit.Before;
 
-import com.jayway.restassured.RestAssured;
-
 import eu.fusepool.p3.transformer.Transformer;
-import eu.fusepool.p3.transformer.server.TransformerServer;
-import eu.spaziodati.batchrefine.transformer.BatchRefineTransformer.RefineMime;
 import eu.spaziodati.batchrefine.java.BatchRefineBase;
-import eu.spaziodati.batchrefine.java.EngineTest;
+import eu.spaziodati.batchrefine.transformer.BatchRefineTransformer.RefineMime;
 
 public abstract class TransformerTest extends BatchRefineBase {
 
@@ -69,7 +57,7 @@ public abstract class TransformerTest extends BatchRefineBase {
 				|| content.match("application/rdf+xml")) {
 			assertRDFEquals(contentsAsString(reference),
 					contentsAsString(output), content.toString(),
-					"application/rdf+xml");
+					content.toString());
 		}
 	}
 }

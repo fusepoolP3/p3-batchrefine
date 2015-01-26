@@ -31,67 +31,37 @@
           "nodeType": "cell-as-resource",
           "expression": "value",
           "isRowNumberCell": false,
-          "columnName": "Insegna",
+          "columnName": "Name",
           "rdfTypes": [],
           "links": [
             {
-              "uri": "http://www.w3.org/2000/01/rdf-schema#isDefinedBy",
-              "curie": "rdfs:isDefinedBy",
+              "uri": "http://xmlns.com/foaf/0.1/title",
+              "curie": "foaf:title",
               "target": {
                 "nodeType": "cell-as-literal",
                 "expression": "value",
                 "isRowNumberCell": false,
-                "columnName": "Nr"
+                "columnName": "Job Title"
               }
             },
             {
-              "uri": "http://xmlns.com/foaf/0.1/based_near",
-              "curie": "foaf:based_near",
+              "uri": "http://xmlns.com/foaf/0.1/fundedBy",
+              "curie": "foaf:fundedBy",
               "target": {
                 "nodeType": "cell-as-literal",
                 "expression": "value",
                 "isRowNumberCell": false,
-                "columnName": "Comune"
+                "columnName": "Organisation"
               }
             },
             {
-              "uri": "http://www.w3.org/2000/01/rdf-schema#seeAlso",
-              "curie": "rdfs:seeAlso",
+              "uri": "http://www.w3.org/2000/01/rdf-schema#comment",
+              "curie": "rdfs:comment",
               "target": {
                 "nodeType": "cell-as-literal",
                 "expression": "value",
                 "isRowNumberCell": false,
-                "columnName": "Tipo"
-              }
-            },
-            {
-              "uri": "http://xmlns.com/foaf/0.1/made",
-              "curie": "foaf:made",
-              "target": {
-                "nodeType": "cell-as-literal",
-                "expression": "value",
-                "isRowNumberCell": false,
-                "columnName": "Frazione"
-              }
-            },
-            {
-              "uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#rest",
-              "curie": "rdf:rest",
-              "target": {
-                "nodeType": "cell-as-literal",
-                "expression": "value",
-                "isRowNumberCell": false,
-                "columnName": "Indirizzo"
-              }
-            },
-            {
-              "uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#object",
-              "curie": "rdf:object",
-              "target": {
-                "nodeType": "cell-as-literal",
-                "expression": "value",
-                "isRowNumberCell": false,
-                "columnName": "Civico"
+                "columnName": "Notes"
               }
             }
           ]

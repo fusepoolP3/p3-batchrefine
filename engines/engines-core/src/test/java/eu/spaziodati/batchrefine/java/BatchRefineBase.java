@@ -26,7 +26,7 @@ public class BatchRefineBase {
 	
 	protected final CallType fType;
 
-	@Parameterized.Parameters
+	@Parameterized.Parameters(name = "{index}: {1}")
 	public static Collection<?> parameters() {
 		return Arrays.asList(new Object[][] {
 				{ "osterie", "mass-edit", "csv", CallType.sync },
@@ -37,13 +37,17 @@ public class BatchRefineBase {
 				{ "osterie", "column-split", "csv", CallType.sync },
 				{ "osterie", "column-addition-by-fetching-urls", "csv", CallType.async },
 				{ "osterie", "text-transform", "csv", CallType.sync },
+				{ "osterie", "rdfize", "rdf", CallType.sync },
+				{ "osterie", "rdfize", "turtle", CallType.sync },
 				{ "high-earners", "multivalued-cell-join", "csv", CallType.sync },
 				{ "high-earners", "multivalued-cell-split", "csv", CallType.sync },
 				{ "high-earners", "fill-down", "csv", CallType.sync },
 				{ "high-earners", "blank-down", "csv", CallType.sync },
 				{ "high-earners", "transpose-columns-into-rows", "csv", CallType.sync },
 				{ "high-earners", "transpose-rows-into-columns", "csv", CallType.sync },
-				{ "high-earners", "key-value-columnize", "csv", CallType.sync } });
+				{ "high-earners", "key-value-columnize", "csv", CallType.sync }, 
+				{ "high-earners", "save-rdf-schema", "rdf", CallType.sync }, 
+				{ "high-earners", "save-rdf-schema", "turtle", CallType.sync } });
 	}
 
 	public BatchRefineBase(String input, String transform, String format, CallType type) {

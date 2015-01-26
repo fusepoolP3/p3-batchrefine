@@ -1,0 +1,560 @@
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+
+
+<http://127.0.0.1:3333/Stephan+Wilcke> foaf:title "Chief Executive Officer" ;
+	foaf:fundedBy "Asset Protection Agency" .
+
+<http://127.0.0.1:3333/Jens+Bech> foaf:title "Chief Risk Officer" ;
+	foaf:fundedBy "Asset Protection Agency" ;
+	rdfs:comment "No pension" .
+
+<http://127.0.0.1:3333/Ion+Dagtoglou> foaf:title "Chief Invesment Officer" ;
+	foaf:fundedBy "Asset Protection Agency" ;
+	rdfs:comment "No pension" .
+
+<http://127.0.0.1:3333/Brian+Scammell> foaf:title "Chief Credit Officer" ;
+	foaf:fundedBy "Asset Protection Agency" ;
+	rdfs:comment "4 days per week" .
+
+<http://127.0.0.1:3333/Hamish+Buckland> foaf:title "Special Advisor" ;
+	foaf:fundedBy "Asset Protection Agency" ;
+	rdfs:comment "2 days per week" .
+
+<http://127.0.0.1:3333/Stephen+Lovegrove> foaf:title "Chief Executive, Shareholder Executive" ;
+	foaf:fundedBy "BIS" .
+
+<http://127.0.0.1:3333/Philip+Rutnam> foaf:title "Director General, Business Group" ;
+	foaf:fundedBy "BIS" .
+
+<http://127.0.0.1:3333/Vicky+Pryce> foaf:title "Director General, Economics and Joint Head, UK Government Economic Service" ;
+	foaf:fundedBy "BIS" .
+
+<http://127.0.0.1:3333/Prof.+John+Beddington> foaf:title "Government Chief Scientific Adviser" ;
+	foaf:fundedBy "BIS" .
+
+<http://127.0.0.1:3333/Prof.+Adrian+Smith> foaf:title "Director General, Science and Research" ;
+	foaf:fundedBy "BIS" .
+
+<http://127.0.0.1:3333/Philip+Rycroft> foaf:title "Director General, Innovation and Enterpriseand Chief Executive of the Better Regulation Executive" ;
+	foaf:fundedBy "BIS" .
+
+<http://127.0.0.1:3333/Howard+Orme> foaf:title "Director General, Finance and Commercial" ;
+	foaf:fundedBy "BIS" .
+
+<http://127.0.0.1:3333/Simon+Fraser> foaf:title "BIS Permanent Secretary" ;
+	foaf:fundedBy "BIS" .
+
+<http://127.0.0.1:3333/Mark+Russell> foaf:title "Deputy Chief Executive, Shareholder Executive" ;
+	foaf:fundedBy "BIS" .
+
+<http://127.0.0.1:3333/John+McCready> foaf:title "Managing Director, Property, Shareholder Executive" ;
+	foaf:fundedBy "BIS" .
+
+<http://127.0.0.1:3333/Marc+Middleton> foaf:title "Managing Director, Royal Mail & Postal Services, Shareholder Executive" ;
+	foaf:fundedBy "BIS" .
+
+<http://127.0.0.1:3333/Alison+Littley> foaf:title "Chief Executive" ;
+	foaf:fundedBy "Buying Solutions" .
+
+<http://127.0.0.1:3333/Gus+O%27Donnell> foaf:title "Cabinet Secretary and Head of the Home Civil Service" ;
+	foaf:fundedBy "Cabinet Office" .
+
+<http://127.0.0.1:3333/Stephen+Laws> foaf:title "First Parliamentary Counsel" ;
+	foaf:fundedBy "Cabinet Office" .
+
+<http://127.0.0.1:3333/Robert+Parker> foaf:title "Parliamentary Counsel" ;
+	foaf:fundedBy "Cabinet Office" .
+
+<http://127.0.0.1:3333/John+Suffolk> foaf:title "Chief Information Officer for HM Government and chair of the CIO Council" ;
+	foaf:fundedBy "Cabinet Office" .
+
+<http://127.0.0.1:3333/Philip+Davies> foaf:title "Parliamentary Counsel" ;
+	foaf:fundedBy "Cabinet Office" .
+
+<http://127.0.0.1:3333/Catherine+Johnston> foaf:title "Parliamentary Counsel" ;
+	foaf:fundedBy "Cabinet Office" .
+
+<http://127.0.0.1:3333/Gill+Rider> foaf:title "Head of Civil Service Capability Group" ;
+	foaf:fundedBy "Cabinet Office" ;
+	rdfs:comment "No pension" .
+
+<http://127.0.0.1:3333/David+Cook> foaf:title "Parliamentary Counsel" ;
+	foaf:fundedBy "Cabinet Office" .
+
+<http://127.0.0.1:3333/Elizabeth+Gardiner> foaf:title "Parliamentary Counsel" ;
+	foaf:fundedBy "Cabinet Office" .
+
+<http://127.0.0.1:3333/Adrian+Hogarth> foaf:title "Parliamentary Counsel" ;
+	foaf:fundedBy "Cabinet Office" .
+
+<http://127.0.0.1:3333/Leonie+McLaughlin> foaf:title "Parliamentary Counsel" ;
+	foaf:fundedBy "Cabinet Office" .
+
+<http://127.0.0.1:3333/Matt+Tee> foaf:title "Permanent Secretary for Government Communications" ;
+	foaf:fundedBy "Cabinet Office" .
+
+<http://127.0.0.1:3333/Alex+Allan> foaf:title "Chairman of the Joint Intelligence committee and Professional Head of Intelligence Analysis" ;
+	foaf:fundedBy "Cabinet Office" .
+
+<http://127.0.0.1:3333/Edward+Stell> foaf:title "Parliamentary Counsel" ;
+	foaf:fundedBy "Cabinet Office" .
+
+<http://127.0.0.1:3333/Hayley+Rogers> foaf:title "Parliamentary Counsel" ;
+	foaf:fundedBy "Cabinet Office" .
+
+<http://127.0.0.1:3333/Jonathan+Cunliffe> foaf:title "Prime Minister's Adviser on International Economic Affairs and Europe" ;
+	foaf:fundedBy "Cabinet Office" .
+
+<http://127.0.0.1:3333/David+Sprackling> foaf:title "Parliamentary Counsel" ;
+	foaf:fundedBy "Cabinet Office" .
+
+<http://127.0.0.1:3333/Jeremy+Heywood> foaf:title "Permanent Secretary, No.10" ;
+	foaf:fundedBy "Cabinet Office" .
+
+<http://127.0.0.1:3333/Douglas+Ramsay> foaf:title "Parliamentary Counsel" ;
+	foaf:fundedBy "Cabinet Office" ;
+	rdfs:comment "Equal to 0.8 Full Time Salary" .
+
+<http://127.0.0.1:3333/Janet+Paraskeva> foaf:title "First Civil Service Commissioner" ;
+	foaf:fundedBy "Cabinet Office" ;
+	rdfs:comment "Equal to 0.6 Full Time Salary" .
+
+<http://127.0.0.1:3333/Janet+Gaymer> foaf:title "Commissioner for Public Appointments" ;
+	foaf:fundedBy "Cabinet Office" ;
+	rdfs:comment "Equal to 0.6 Full Time Salary" .
+
+<http://127.0.0.1:3333/Joe+Montgomery> foaf:title "Director General, Regions and Communities " ;
+	foaf:fundedBy "Communities & Local Government" .
+
+<http://127.0.0.1:3333/Sir+Ken+Knight> foaf:title "Chief Fire and Rescue Adviser" ;
+	foaf:fundedBy "Communities & Local Government" .
+
+<http://127.0.0.1:3333/Richard+McCarthy> foaf:title "Director General, Housing and Planning " ;
+	foaf:fundedBy "Communities & Local Government" .
+
+<http://127.0.0.1:3333/Peter+Housden> foaf:title "Permanent Secretary" ;
+	foaf:fundedBy "Communities & Local Government" .
+
+<http://127.0.0.1:3333/Peter+Lewis> foaf:title "Chief Executive" ;
+	foaf:fundedBy "Crown Prosecution Service" .
+
+<http://127.0.0.1:3333/Keir+Starmer> foaf:title "Director of Public Prosecutions" ;
+	foaf:fundedBy "Crown Prosecution Service" .
+
+<http://127.0.0.1:3333/David+Green> foaf:title "Director of Revenues and Customs Division" ;
+	foaf:fundedBy "Crown Prosecution Service" ;
+	rdfs:comment "Officer was previously the Permanent Secretary for RCPO and currently retains this grade on a personal basis" .
+
+<http://127.0.0.1:3333/Jonathan+Stephens> foaf:title "Permanent Secretary" ;
+	foaf:fundedBy "DCMS" .
+
+<http://127.0.0.1:3333/Jeremy+Beeton> foaf:title "Director General,Government Olympic Executive" ;
+	foaf:fundedBy "DCMS" .
+
+<http://127.0.0.1:3333/David+Goldstone+> foaf:title "Director- Finance and Programme, Government Olympic Executive" ;
+	foaf:fundedBy "DCMS" .
+
+<http://127.0.0.1:3333/Moira+Wallace> foaf:title "Permanent Secretary" ;
+	foaf:fundedBy "DECC" .
+
+<http://127.0.0.1:3333/Dame+Helen+Ghosh> foaf:title "Permanent Secretary" ;
+	foaf:fundedBy "Defra" ;
+	rdfs:comment "4.5 days per week" .
+
+<http://127.0.0.1:3333/Prof+Robert+Watson> foaf:title "Chief Scientific Adviser" ;
+	foaf:fundedBy "Defra" ;
+	rdfs:comment "4 days per week" .
+
+<http://127.0.0.1:3333/Nemat+Shafik> foaf:title "Permanent Secretary" ;
+	foaf:fundedBy "Department for International Development" .
+
+<http://127.0.0.1:3333/Robert+Devereux> foaf:title "Permanent Secretary" ;
+	foaf:fundedBy "Department for Transport" .
+
+<http://127.0.0.1:3333/Dr+Mike+Mitchell> foaf:title "Head of National Networks Group" ;
+	foaf:fundedBy "Department for Transport (Centre)" .
+
+<http://127.0.0.1:3333/Nirmal+Kotecha> foaf:title "Major Projects Director " ;
+	foaf:fundedBy "Department for Transport, Highways Agency" .
+
+<http://127.0.0.1:3333/David+Nicholson> foaf:title "NHS Chief Executive" ;
+	foaf:fundedBy "Dept. of Health" ;
+	rdfs:comment "Includes a gross benefit in kind of �45-50k for a rented flat and associated expenses in London" .
+
+<http://127.0.0.1:3333/Clare+Chapman> foaf:title "Director General of Workforce" ;
+	foaf:fundedBy "Dept. of Health" ;
+	rdfs:comment "Contractual bonus not included" .
+
+<http://127.0.0.1:3333/Sir+Liam+Donaldson> foaf:title "Chief Medical Officer" ;
+	foaf:fundedBy "Dept. of Health" .
+
+<http://127.0.0.1:3333/Christine+Connelly> foaf:title "Chief Information Officer" ;
+	foaf:fundedBy "Dept. of Health" .
+
+<http://127.0.0.1:3333/Gabriel+Scally> foaf:title "Regional Director of Public Health" ;
+	foaf:fundedBy "Dept. of Health" .
+
+<http://127.0.0.1:3333/David+Behan> foaf:title "Director General of Social Care, Local Government and Carepartnerships" ;
+	foaf:fundedBy "Dept. of Health" .
+
+<http://127.0.0.1:3333/David+Salisbury> foaf:title "Director of Immunisation" ;
+	foaf:fundedBy "Dept. of Health" .
+
+<http://127.0.0.1:3333/Lindsey+Davies> foaf:title "Interim Regional Director of Public Health" ;
+	foaf:fundedBy "Dept. of Health" .
+
+<http://127.0.0.1:3333/Sir+Hugh+Taylor> foaf:title "Permanent Secretary, DH" ;
+	foaf:fundedBy "Dept. of Health" .
+
+<http://127.0.0.1:3333/Martin+Bellamy> foaf:title "ICT Director" ;
+	foaf:fundedBy "Dept. of Health" .
+
+<http://127.0.0.1:3333/Duncan+Selbie> foaf:title "Chief Executive" ;
+	foaf:fundedBy "Dept. of Health" ;
+	rdfs:comment "On secondment to Royal Sussex County Hospital" .
+
+<http://127.0.0.1:3333/Sir+Leigh+Lewis> foaf:title "Permanent Secretary" ;
+	foaf:fundedBy "DWP" .
+
+<http://127.0.0.1:3333/Hunada+Nouss> foaf:title "Finance Director General" ;
+	foaf:fundedBy "DWP" .
+
+<http://127.0.0.1:3333/Joe+Harley> foaf:title "IT Director General & Chief Information Officer" ;
+	foaf:fundedBy "DWP " .
+
+<http://127.0.0.1:3333/Chris+Last> foaf:title "HR Director General" ;
+	foaf:fundedBy "DWP " .
+
+<http://127.0.0.1:3333/Mel+Groves> foaf:title "Project Director, Welfare & Wellbeing" ;
+	foaf:fundedBy "DWP " ;
+	rdfs:comment "Left DWP 30/4/2010" .
+
+<http://127.0.0.1:3333/Stephen+Holt> foaf:title "Director of Change Management" ;
+	foaf:fundedBy "DWP " .
+
+<http://127.0.0.1:3333/Bill+Gunnyeon> foaf:title "Director of Health Work and Wellbeing, Chief Medical Adviser and Chief Scientist " ;
+	foaf:fundedBy "DWP " .
+
+<http://127.0.0.1:3333/David+Bell> foaf:title "Permanent Secretary" ;
+	foaf:fundedBy "Education" .
+
+<http://127.0.0.1:3333/Patrick+Crawford> foaf:title "Chief Executive" ;
+	foaf:fundedBy "Export Credits Guarantee Department" .
+
+<http://127.0.0.1:3333/Tim+Smith> foaf:title "Chief Executive" ;
+	foaf:fundedBy "Food Standards Agency" .
+
+<http://127.0.0.1:3333/Peter+Ricketts> foaf:title "Permanent Under-Secretary and Head of the Diplomatic Service" ;
+	foaf:fundedBy "Foreign & Commonwealth Office" ;
+	rdfs:comment "Left on 11 May 2010" .
+
+<http://127.0.0.1:3333/Nigel+Shienwald> foaf:title "HM Ambassador to the United States of America" ;
+	foaf:fundedBy "Foreign & Commonwealth Office" .
+
+<http://127.0.0.1:3333/Kim+Darroch> foaf:title "UK Permanent Representative to the European Union" ;
+	foaf:fundedBy "Foreign & Commonwealth Office" .
+
+<http://127.0.0.1:3333/Trevor+Llanwarne> foaf:title "Government Actuary" ;
+	foaf:fundedBy "Government Actuary's Dept" .
+
+<http://127.0.0.1:3333/Marco+Pierleoni> foaf:title "Chief Executive and Chief Land Registrar" ;
+	foaf:fundedBy "HM Land Registry (MoJ Executive Agency)" ;
+	rdfs:comment "Marco Pierleoni took up this role and full responsibility for Land Registry Business with effect from 1 February 2010" .
+
+<http://127.0.0.1:3333/Peter+Collis> foaf:title "Chief Executive and Chief Land Registrar" ;
+	foaf:fundedBy "HM Land Registry (MoJ Executive Agency)" ;
+	rdfs:comment "Peter Collis formally retired on 31 March 2010" .
+
+<http://127.0.0.1:3333/Mike+Clasper> foaf:title "Chair HM Revenue & Customs" ;
+	foaf:fundedBy "HM Revenue & Customs" ;
+	rdfs:comment "3 days per week" .
+
+<http://127.0.0.1:3333/Steve+Lamey> foaf:title "Director General Benefits & Credits" ;
+	foaf:fundedBy "HM Revenue & Customs" .
+
+<http://127.0.0.1:3333/Simon+Bowles> foaf:title "Chief Finance Officer" ;
+	foaf:fundedBy "HM Revenue & Customs" .
+
+<http://127.0.0.1:3333/Phil+Pavitt> foaf:title "Chief Information Officer" ;
+	foaf:fundedBy "HM Revenue & Customs" .
+
+<http://127.0.0.1:3333/Mike+Falvey> foaf:title "Chief People Officer" ;
+	foaf:fundedBy "HM Revenue & Customs" .
+
+<http://127.0.0.1:3333/Lesley+Strathie> foaf:title "Chief Executive Officer" ;
+	foaf:fundedBy "HM Revenue & Customs" .
+
+<http://127.0.0.1:3333/Dave+Hartnett> foaf:title "Permanent Secretary For Tax" ;
+	foaf:fundedBy "HM Revenue & Customs" .
+
+<http://127.0.0.1:3333/Sir+Nicholas+Macpherson> foaf:title "Permanent Secretary" ;
+	foaf:fundedBy "HM Treasury" .
+
+<http://127.0.0.1:3333/R+Shostak> foaf:title "Head of Prime Minister's Delivery Unit and DG Performance Management" ;
+	foaf:fundedBy "HM Treasury" .
+
+<http://127.0.0.1:3333/JMG+Taylor> foaf:title "Financial Services and Stability Director" ;
+	foaf:fundedBy "HM Treasury" .
+
+<http://127.0.0.1:3333/TW+Scholar> foaf:title "2nd Permanent Secretary" ;
+	foaf:fundedBy "HM Treasury" .
+
+<http://127.0.0.1:3333/Sir+David+Normington> foaf:title "Permanent Secretary" ;
+	foaf:fundedBy "Home Office" .
+
+<http://127.0.0.1:3333/Helen+Kilpatrick> foaf:title "Director General, Finance and Commercial" ;
+	foaf:fundedBy "Home Office" .
+
+<http://127.0.0.1:3333/Kevin+White> foaf:title "Director General, Human Resources" ;
+	foaf:fundedBy "Home Office" .
+
+<http://127.0.0.1:3333/Peter+Makeham> foaf:title "Director General, Strategy and Reform" ;
+	foaf:fundedBy "Home Office" .
+
+<http://127.0.0.1:3333/Paul+Wiles> foaf:title "Chief Scientific Adviser, Statistics and Research Group" ;
+	foaf:fundedBy "Home Office" ;
+	rdfs:comment "Retired on 31 March 2010" .
+
+<http://127.0.0.1:3333/James+Hall> foaf:title "Chief Executive, Identity and Passport Service" ;
+	foaf:fundedBy "Home Office (Agency-IPS)" .
+
+<http://127.0.0.1:3333/Lin+Homer> foaf:title "Chief Executive, United Kingdom Border Agency" ;
+	foaf:fundedBy "Home Office (Agency-UKBA)" .
+
+<http://127.0.0.1:3333/Geoffrey+Podger> foaf:title "Chief Executive" ;
+	foaf:fundedBy "Health & Safety Executive" .
+
+<http://127.0.0.1:3333/Darra+Singh> foaf:title "Chief Executive" ;
+	foaf:fundedBy "Jobcentre Plus" .
+
+<http://127.0.0.1:3333/Professor+Kent+Woods> foaf:title "Chief Executive" ;
+	foaf:fundedBy "MHRA" ;
+	rdfs:comment "On secondment from the University of Leicester." .
+
+<http://127.0.0.1:3333/Professor+Sir+Alasdair+Breckenridge> foaf:title "Chairman" ;
+	foaf:fundedBy "MHRA" ;
+	rdfs:comment "Contracted to work 3 days a week." .
+
+<http://127.0.0.1:3333/Sir+Jock+Stirrup> foaf:title "Chief of the Defence Staff" ;
+	foaf:fundedBy "Ministry of Defence" .
+
+<http://127.0.0.1:3333/Sir+Mark+Stanhope> foaf:title "First Sea Lord and Chief of the Naval staff" ;
+	foaf:fundedBy "Ministry of Defence" .
+
+<http://127.0.0.1:3333/Sir+Kevin+O%27Donoghue> foaf:title "Chief of Defence Materiel" ;
+	foaf:fundedBy "Ministry of Defence" .
+
+<http://127.0.0.1:3333/Peter+Ruddock> foaf:title "Saudi Arabia Project Team" ;
+	foaf:fundedBy "Ministry of Defence" .
+
+<http://127.0.0.1:3333/Sir+David+Richards> foaf:title "Chief of the General Staff" ;
+	foaf:fundedBy "Ministry of Defence" .
+
+<http://127.0.0.1:3333/Sir+Stephen+Dalton> foaf:title "Chief of the Air Staff" ;
+	foaf:fundedBy "Ministry of Defence" .
+
+<http://127.0.0.1:3333/Sir+Nicholas+Houghton> foaf:title "Vice Chief of the Defence Staff" ;
+	foaf:fundedBy "Ministry of Defence" .
+
+<http://127.0.0.1:3333/Sir+John+McColl> foaf:title "Deputy Supreme Allied Commander Europe" ;
+	foaf:fundedBy "Ministry of Defence" .
+
+<http://127.0.0.1:3333/Sir+Trevor+Soar> foaf:title "Commander-In-Chief Fleet" ;
+	foaf:fundedBy "Ministry of Defence" .
+
+<http://127.0.0.1:3333/Sir+Peter+Wall> foaf:title "Commander-in-Chief Land Forces" ;
+	foaf:fundedBy "Ministry of Defence" .
+
+<http://127.0.0.1:3333/Andrew+Tyler> foaf:title "Chief Operating Officer Defence Equipment and Support" ;
+	foaf:fundedBy "Ministry of Defence" .
+
+<http://127.0.0.1:3333/Andrew+Manley> foaf:title "DG Defence Commercial" ;
+	foaf:fundedBy "Ministry of Defence" .
+
+<http://127.0.0.1:3333/Sir+Bill+Jeffrey> foaf:title "Permanent Under Secretary" ;
+	foaf:fundedBy "Ministry of Defence" .
+
+<http://127.0.0.1:3333/Jon+Thompson> foaf:title "DG Finance" ;
+	foaf:fundedBy "Ministry of Defence" .
+
+<http://127.0.0.1:3333/John+Hirst> foaf:title "Chief Executive Met Office" ;
+	foaf:fundedBy "Ministry of Defence" .
+
+<http://127.0.0.1:3333/Mike+Robinson> foaf:title "Chief Executive UK Hydrographic Office" ;
+	foaf:fundedBy "Ministry of Defence" .
+
+<http://127.0.0.1:3333/Les+Mosco> foaf:title "Director Commercial Defence Equipment and Support" ;
+	foaf:fundedBy "Ministry of Defence" .
+
+<http://127.0.0.1:3333/Susanna+Mason> foaf:title "Director Industrial Relationships" ;
+	foaf:fundedBy "Ministry of Defence" .
+
+<http://127.0.0.1:3333/Ursula+Brennan> foaf:title "2nd Permanent Under Secretary" ;
+	foaf:fundedBy "Ministry of Defence" .
+
+<http://127.0.0.1:3333/Archie+Hughes> foaf:title "Chief Executive Defence Support Group" ;
+	foaf:fundedBy "Ministry of Defence" .
+
+<http://127.0.0.1:3333/Stephen+Love> foaf:title "Chief Executive/Chief Constable MoD Police and Guarding Agency" ;
+	foaf:fundedBy "Ministry of Defence" .
+
+<http://127.0.0.1:3333/Bruce+Houlder+QC> foaf:title "Director Service Prosecutions" ;
+	foaf:fundedBy "Ministry of Defence" .
+
+<http://127.0.0.1:3333/Ian+Rushby> foaf:title "Non-Executive Director Defence Board and Chair Audit Committee" ;
+	foaf:fundedBy "Ministry of Defence" ;
+	rdfs:comment "Works a minimum of 40 days per annum" .
+
+<http://127.0.0.1:3333/David+Allen> foaf:title "Non-Executive Director Defence Board and Chair Audit Committee" ;
+	foaf:fundedBy "Ministry of Defence" ;
+	rdfs:comment "Works a minimum of 30 days per annum" .
+
+<http://127.0.0.1:3333/Sir+Richard+Mottram> foaf:title "Non-Executive Chair Dstl" ;
+	foaf:fundedBy "Ministry of Defence" ;
+	rdfs:comment "Works a minimum of 40 days per annum" .
+
+<http://127.0.0.1:3333/Sandra+Rogers> foaf:title "Non-Executive Chair UKHO" ;
+	foaf:fundedBy "Ministry of Defence" ;
+	rdfs:comment "Works a minimum of 40 days per annum" .
+
+<http://127.0.0.1:3333/Jamie+Pike> foaf:title "Non-Executive Chair DSG" ;
+	foaf:fundedBy "Ministry of Defence" ;
+	rdfs:comment "Works a minimum of 40 days per annum" .
+
+<http://127.0.0.1:3333/Robert+Napier> foaf:title "Non-Executive Chair Met Office" ;
+	foaf:fundedBy "Ministry of Defence" ;
+	rdfs:comment "Works a minimum of 40 days per annum" .
+
+<http://127.0.0.1:3333/Suma+Chakrabarti> foaf:title "Permanent Secretary" ;
+	foaf:fundedBy "Ministry of Justice" .
+
+<http://127.0.0.1:3333/Carolyn+Downs> foaf:title "Director General - Corporate Performance Group and Deputy Permanent Secretary (now Interim Chief Executive of the Legal Services Commission)" ;
+	foaf:fundedBy "Ministry of Justice" .
+
+<http://127.0.0.1:3333/Helen+Edwards> foaf:title "Director General - Criminal Justice Group (now Director General - Justice Policy Group)" ;
+	foaf:fundedBy "Ministry of Justice" .
+
+<http://127.0.0.1:3333/Jim+Gallagher> foaf:title "Director General - Devolution" ;
+	foaf:fundedBy "Ministry of Justice" .
+
+<http://127.0.0.1:3333/Neil+Hayward> foaf:title "Group HR Director" ;
+	foaf:fundedBy "Ministry of Justice" .
+
+<http://127.0.0.1:3333/Andy+Nelson> foaf:title "Chief Information Officer" ;
+	foaf:fundedBy "Ministry of Justice" .
+
+<http://127.0.0.1:3333/Nick+Ramsay> foaf:title "Director ICT Portfolio and Programmes" ;
+	foaf:fundedBy "Ministry of Justice" .
+
+<http://127.0.0.1:3333/Beverley+Shears> foaf:title "Director of Offender Management - East Midlands" ;
+	foaf:fundedBy "National Offender Management Service (MoJ Executive Agency)" .
+
+<http://127.0.0.1:3333/Phil+Wheatley> foaf:title "Director General - National Offender Management Service" ;
+	foaf:fundedBy "National Offender Management Service (MoJ Executive Agency)" .
+
+<http://127.0.0.1:3333/Jane+Platt> foaf:title "Chief Executive" ;
+	foaf:fundedBy "National Savings & Investments" .
+
+<http://127.0.0.1:3333/Sir+Jonathan+Phillips> foaf:title "Permanent Secretary" ;
+	foaf:fundedBy "Northern Ireland Office" ;
+	rdfs:comment "Retired on 13 May, not replaced" .
+
+<http://127.0.0.1:3333/Christine+Gilbert> foaf:title "Her Majesty's Chief Inspector" ;
+	foaf:fundedBy "OFSTED" .
+
+<http://127.0.0.1:3333/Lorraine+Langham> foaf:title "Director, Corporate Services" ;
+	foaf:fundedBy "OFSTED" .
+
+<http://127.0.0.1:3333/Melanie+Hunt> foaf:title "Director, Development Learning and Skills" ;
+	foaf:fundedBy "OFSTED" .
+
+<http://127.0.0.1:3333/John+Goldup> foaf:title "Director, Development Social Care" ;
+	foaf:fundedBy "OFSTED" .
+
+<http://127.0.0.1:3333/Patrick+Leeson> foaf:title "Director, Development Education and Care" ;
+	foaf:fundedBy "OFSTED" .
+
+<http://127.0.0.1:3333/Philip+Collins> foaf:title "Chairman" ;
+	foaf:fundedBy "Office of Fair Trading" .
+
+<http://127.0.0.1:3333/John+Fingleton> foaf:title "Chief Executive" ;
+	foaf:fundedBy "Office of Fair Trading" .
+
+<http://127.0.0.1:3333/William+Emery> foaf:title "Chief Executive" ;
+	foaf:fundedBy "Office of Rail Regulation" .
+
+<http://127.0.0.1:3333/Philip+Fletcher> foaf:title "Chairman" ;
+	foaf:fundedBy "Ofwat" ;
+	rdfs:comment "Works 3 days per week" .
+
+<http://127.0.0.1:3333/D+Pitchford> foaf:title "Major Projects Executive Director" ;
+	foaf:fundedBy "OGC" .
+
+<http://127.0.0.1:3333/N+Smith> foaf:title "Chief Executive" ;
+	foaf:fundedBy "OGC" .
+
+<http://127.0.0.1:3333/DA+Shields> foaf:title "Programme Director" ;
+	foaf:fundedBy "OGC" .
+
+<http://127.0.0.1:3333/Vanessa+Lawrence> foaf:title "Director General & Chief Executive Officer" ;
+	foaf:fundedBy "Ordnance Survey" .
+
+<http://127.0.0.1:3333/Paul+Hemsley> foaf:title "Director of Finance" ;
+	foaf:fundedBy "Ordnance Survey" ;
+	rdfs:comment "Fixed Term Appointment" .
+
+<http://127.0.0.1:3333/Terry+Moran> foaf:title "Chief Executive" ;
+	foaf:fundedBy "Pension, Disability & Carers Service" .
+
+<http://127.0.0.1:3333/Nigel+Stapleton> foaf:title "Chairman" ;
+	foaf:fundedBy "Postcomm" ;
+	rdfs:comment "2.5 days per week" .
+
+<http://127.0.0.1:3333/Tim+Brown> foaf:title "Chief Executive" ;
+	foaf:fundedBy "Postcomm" .
+
+<http://127.0.0.1:3333/Sir+Alisdair+Fraser> foaf:title "Director of Public Prosecution, NI " ;
+	foaf:fundedBy "Public Prosecution Service" ;
+	rdfs:comment "This post became part of the NI PPS, an NMDB, from 12 April 2010" .
+
+<http://127.0.0.1:3333/Sir+John+Elvidge> foaf:title "Permanent Secretary" ;
+	foaf:fundedBy "Scottish Government" ;
+	rdfs:comment "Leaving on 21 June 2010" .
+
+<http://127.0.0.1:3333/Dr+Kevin+Woods> foaf:title "Director General, Health and Chief Executive NHS Scotland" ;
+	foaf:fundedBy "Scottish Government" .
+
+<http://127.0.0.1:3333/Ms+Stella+Manzie> foaf:title "Director General,Justice and Communities" ;
+	foaf:fundedBy "Scottish Government" .
+
+<http://127.0.0.1:3333/Richard+Alderman> foaf:title "Director" ;
+	foaf:fundedBy "Serious Fraud Office" .
+
+<http://127.0.0.1:3333/Paul+Jenkins+Q.C.> foaf:title "Treasury Solicitor" ;
+	foaf:fundedBy "Treasury Solicitors Department" .
+
+<http://127.0.0.1:3333/Sir+Michael+Scholar> foaf:title "Chair of UK Statistics Authority" ;
+	foaf:fundedBy "UK Statistics Authority" ;
+	rdfs:comment " at least 3 days per week" .
+
+<http://127.0.0.1:3333/Professor+Sir+Roger+Jowell> foaf:title "Deputy Chair (Statistics System)" ;
+	foaf:fundedBy "UK Statistics Authority" ;
+	rdfs:comment " at least 4 days per month" .
+
+<http://127.0.0.1:3333/Lord+David+Rowe-Beddoe+of+Kilgetty> foaf:title "Deputy Chair (ONS)" ;
+	foaf:fundedBy "UK Statistics Authority" ;
+	rdfs:comment " at least 4 days per month" .
+
+<http://127.0.0.1:3333/Sir+Andrew+Cahn> foaf:title "Chief Executive, UK Trade & Investment" ;
+	foaf:fundedBy "UKTI (joint BIS/FCO)" .
+
+<http://127.0.0.1:3333/Richard+Paniguian> foaf:title "Head of UK Trade & Investment Defence and Security Organsation" ;
+	foaf:fundedBy "UKTI (joint BIS/FCO)" .
+
+<http://127.0.0.1:3333/Fiona+Adshead> foaf:title "Director General on secondment" ;
+	foaf:fundedBy "World Health Organisation" ;
+	rdfs:comment "On secondment" .
