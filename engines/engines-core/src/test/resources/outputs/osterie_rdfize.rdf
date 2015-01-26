@@ -2,296 +2,440 @@
 <rdf:RDF
 	xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
 	xmlns:foaf="http://xmlns.com/foaf/0.1/"
-	xmlns:owl="http://www.w3.org/2002/07/owl#"
 	xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+	xmlns:owl="http://www.w3.org/2002/07/owl#"
 	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
 
-<rdf:Description rdf:about="http://127.0.0.1:3333/0">
-	<rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
-	<foaf:name>AL FAGGIO </foaf:name>
-	<foaf:theme>Ristorante</foaf:theme>
+<rdf:Description rdf:about="http://127.0.0.1:3333/AL+FAGGIO+">
+	<rdfs:isDefinedBy>1</rdfs:isDefinedBy>
+	<foaf:based_near>ANDALO</foaf:based_near>
+	<rdfs:seeAlso>Ristorante</rdfs:seeAlso>
+	<foaf:made>Andalo</foaf:made>
+	<rdf:rest>Via Fovo</rdf:rest>
+	<rdf:object>11</rdf:object>
 </rdf:Description>
 
-<rdf:Description rdf:about="http://127.0.0.1:3333/1">
-	<rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
-	<foaf:name>OSTERIA IL RITRATTO</foaf:name>
-	<foaf:theme>Ristorante-Bar</foaf:theme>
+<rdf:Description rdf:about="http://127.0.0.1:3333/OSTERIA+IL+RITRATTO">
+	<rdfs:isDefinedBy>2</rdfs:isDefinedBy>
+	<foaf:based_near>ARCO</foaf:based_near>
+	<rdfs:seeAlso>Ristorante-Bar</rdfs:seeAlso>
+	<foaf:made>Arco</foaf:made>
+	<rdf:rest>Via Ferrera</rdf:rest>
+	<rdf:object>30</rdf:object>
 </rdf:Description>
 
-<rdf:Description rdf:about="http://127.0.0.1:3333/2">
-	<rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
-	<foaf:name>AI DUE CAMI</foaf:name>
-	<foaf:theme>Albergo-Ristorante-Bar</foaf:theme>
+<rdf:Description rdf:about="http://127.0.0.1:3333/AI+DUE+CAMI">
+	<rdfs:isDefinedBy>3</rdfs:isDefinedBy>
+	<foaf:based_near>BASELGA DI PINE'</foaf:based_near>
+	<rdfs:seeAlso>Albergo-Ristorante-Bar</rdfs:seeAlso>
+	<foaf:made>Baselga Di Pine'</foaf:made>
+	<rdf:rest>Via Pontara</rdf:rest>
+	<rdf:object>352</rdf:object>
 </rdf:Description>
 
-<rdf:Description rdf:about="http://127.0.0.1:3333/3">
-	<rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
-	<foaf:name>AL POSTA HOTEL - RISTORANTE CA' DEI BOCI </foaf:name>
-	<foaf:theme>Albergo-Ristorante-Bar</foaf:theme>
+<rdf:Description rdf:about="http://127.0.0.1:3333/AL+POSTA+HOTEL+-+RISTORANTE+CA%27+DEI+BOCI+">
+	<rdfs:isDefinedBy>4</rdfs:isDefinedBy>
+	<foaf:based_near>BASELGA DI PINE'</foaf:based_near>
+	<rdfs:seeAlso>Albergo-Ristorante-Bar</rdfs:seeAlso>
+	<foaf:made>Montagnaga,  Loc. Cadrobbi</foaf:made>
+	<rdf:rest>Via Targa</rdf:rest>
+	<rdf:object>1</rdf:object>
 </rdf:Description>
 
-<rdf:Description rdf:about="http://127.0.0.1:3333/4">
-	<rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
-	<foaf:name>LA RUPE DI BESE</foaf:name>
-	<foaf:theme>Ristorante-Bar</foaf:theme>
+<rdf:Description rdf:about="http://127.0.0.1:3333/LA+RUPE+DI+BESE">
+	<rdfs:isDefinedBy>5</rdfs:isDefinedBy>
+	<foaf:based_near>BESENELLO</foaf:based_near>
+	<rdfs:seeAlso>Ristorante-Bar</rdfs:seeAlso>
+	<foaf:made>Besenello</foaf:made>
+	<rdf:rest>Via Castel Beseno</rdf:rest>
+	<rdf:object>6</rdf:object>
 </rdf:Description>
 
-<rdf:Description rdf:about="http://127.0.0.1:3333/5">
-	<rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
-	<foaf:name>HOSTERIA TOBLISELLIPOINT</foaf:name>
-	<foaf:theme>Ristorante-Bar</foaf:theme>
+<rdf:Description rdf:about="http://127.0.0.1:3333/HOSTERIA+TOBLISELLIPOINT">
+	<rdfs:isDefinedBy>8</rdfs:isDefinedBy>
+	<foaf:based_near>CALAVINO</foaf:based_near>
+	<rdfs:seeAlso>Ristorante-Bar</rdfs:seeAlso>
+	<foaf:made>Sarche</foaf:made>
+	<rdf:rest>Via Garda</rdf:rest>
+	<rdf:object>3</rdf:object>
 </rdf:Description>
 
-<rdf:Description rdf:about="http://127.0.0.1:3333/6">
-	<rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
-	<foaf:name>LA STALLA DEL NON</foaf:name>
-	<foaf:theme>Ristorante-Bar</foaf:theme>
+<rdf:Description rdf:about="http://127.0.0.1:3333/LA+STALLA+DEL+NON">
+	<rdfs:isDefinedBy>9</rdfs:isDefinedBy>
+	<foaf:based_near>CAMPITELLO DI FASSA-CIAMPEDEL</foaf:based_near>
+	<rdfs:seeAlso>Ristorante-Bar</rdfs:seeAlso>
+	<foaf:made>Campitello Di Fassa-Ciampedel</foaf:made>
+	<rdf:rest>Piaz Veie</rdf:rest>
+	<rdf:object>28</rdf:object>
 </rdf:Description>
 
-<rdf:Description rdf:about="http://127.0.0.1:3333/7">
-	<rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
-	<foaf:name>EL PAEL </foaf:name>
-	<foaf:theme>Ristorante-Pizzeria</foaf:theme>
+<rdf:Description rdf:about="http://127.0.0.1:3333/EL+PAEL+">
+	<rdfs:isDefinedBy>10</rdfs:isDefinedBy>
+	<foaf:based_near>CANAZEI-CIANACEI</foaf:based_near>
+	<rdfs:seeAlso>Ristorante-Pizzeria</rdfs:seeAlso>
+	<foaf:made>Canazei-Cianacei</foaf:made>
+	<rdf:rest>Via Roma</rdf:rest>
+	<rdf:object>54</rdf:object>
 </rdf:Description>
 
-<rdf:Description rdf:about="http://127.0.0.1:3333/8">
-	<rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
-	<foaf:name>COSTA SALICI </foaf:name>
-	<foaf:theme>Ristorante</foaf:theme>
+<rdf:Description rdf:about="http://127.0.0.1:3333/COSTA+SALICI+">
+	<rdfs:isDefinedBy>11</rdfs:isDefinedBy>
+	<foaf:based_near>CAVALESE</foaf:based_near>
+	<rdfs:seeAlso>Ristorante</rdfs:seeAlso>
+	<foaf:made>Cavalese</foaf:made>
+	<rdf:rest>Via Costa Salici</rdf:rest>
+	<rdf:object>10</rdf:object>
 </rdf:Description>
 
-<rdf:Description rdf:about="http://127.0.0.1:3333/9">
-	<rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
-	<foaf:name>RISTORANTE AL CONVENTO</foaf:name>
-	<foaf:theme>Ristorante-Bar</foaf:theme>
+<rdf:Description rdf:about="http://127.0.0.1:3333/RISTORANTE+AL+CONVENTO">
+	<rdfs:isDefinedBy>12</rdfs:isDefinedBy>
+	<foaf:based_near>CAVALESE</foaf:based_near>
+	<rdfs:seeAlso>Ristorante-Bar</rdfs:seeAlso>
+	<foaf:made>Cavalese</foaf:made>
+	<rdf:rest>Piazzetta Rizzoli</rdf:rest>
+	<rdf:object>4</rdf:object>
 </rdf:Description>
 
-<rdf:Description rdf:about="http://127.0.0.1:3333/10">
-	<rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
-	<foaf:name>AURORA</foaf:name>
-	<foaf:theme>Albergo-Ristorante-Bar</foaf:theme>
+<rdf:Description rdf:about="http://127.0.0.1:3333/AURORA">
+	<rdfs:isDefinedBy>13</rdfs:isDefinedBy>
+	<foaf:based_near>CIMEGO</foaf:based_near>
+	<rdfs:seeAlso>Albergo-Ristorante-Bar</rdfs:seeAlso>
+	<foaf:made>Cimego</foaf:made>
+	<rdf:rest>Loc. Cascidei Pomi</rdf:rest>
+	<rdf:object>139</rdf:object>
 </rdf:Description>
 
-<rdf:Description rdf:about="http://127.0.0.1:3333/11">
-	<rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
-	<foaf:name>GIARDINO</foaf:name>
-	<foaf:theme>Ristorante-Pizzeria-Bar</foaf:theme>
+<rdf:Description rdf:about="http://127.0.0.1:3333/GIARDINO">
+	<rdfs:isDefinedBy>14</rdfs:isDefinedBy>
+	<foaf:based_near>CLES</foaf:based_near>
+	<rdfs:seeAlso>Ristorante-Pizzeria-Bar</rdfs:seeAlso>
+	<foaf:made>Cles</foaf:made>
+	<rdf:rest>Via  Pilati</rdf:rest>
+	<rdf:object>16</rdf:object>
 </rdf:Description>
 
-<rdf:Description rdf:about="http://127.0.0.1:3333/12">
-	<rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
-	<foaf:name>BURBA </foaf:name>
-	<foaf:theme>Ristorante</foaf:theme>
+<rdf:Description rdf:about="http://127.0.0.1:3333/BURBA+">
+	<rdfs:isDefinedBy>15</rdfs:isDefinedBy>
+	<foaf:based_near>COMMEZZADURA</foaf:based_near>
+	<rdfs:seeAlso>Ristorante</rdfs:seeAlso>
+	<foaf:made>Piadi Commezzadura</foaf:made>
+	<rdf:rest>Via Pietro Bernardelli</rdf:rest>
+	<rdf:object>32</rdf:object>
 </rdf:Description>
 
-<rdf:Description rdf:about="http://127.0.0.1:3333/13">
-	<rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
-	<foaf:name>HOTEL PINETA</foaf:name>
-	<foaf:theme>Albergo-Ristorante-Bar</foaf:theme>
+<rdf:Description rdf:about="http://127.0.0.1:3333/HOTEL+PINETA">
+	<rdfs:isDefinedBy>17</rdfs:isDefinedBy>
+	<foaf:based_near>COREDO</foaf:based_near>
+	<rdfs:seeAlso>Albergo-Ristorante-Bar</rdfs:seeAlso>
+	<foaf:made>Tavon</foaf:made>
+	<rdf:rest>Via Al Santuario</rdf:rest>
+	<rdf:object>17</rdf:object>
 </rdf:Description>
 
-<rdf:Description rdf:about="http://127.0.0.1:3333/14">
-	<rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
-	<foaf:name>ALP &amp; WELLNESS SPORT HOTEL PANORAMA</foaf:name>
-	<foaf:theme>Albergo-Ristorante-Bar</foaf:theme>
+<rdf:Description rdf:about="http://127.0.0.1:3333/ALP+%26+WELLNESS+SPORT+HOTEL+PANORAMA">
+	<rdfs:isDefinedBy>18</rdfs:isDefinedBy>
+	<foaf:based_near>FAI DELLA PAGANELLA</foaf:based_near>
+	<rdfs:seeAlso>Albergo-Ristorante-Bar</rdfs:seeAlso>
+	<foaf:made>Fai Della Paganella</foaf:made>
+	<rdf:rest>Via Carletti</rdf:rest>
+	<rdf:object>6</rdf:object>
 </rdf:Description>
 
-<rdf:Description rdf:about="http://127.0.0.1:3333/15">
-	<rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
-	<foaf:name>OSTARIA DEL CARADOR </foaf:name>
-	<foaf:theme>Ristorante-Bar</foaf:theme>
+<rdf:Description rdf:about="http://127.0.0.1:3333/OSTARIA+DEL+CARADOR+">
+	<rdfs:isDefinedBy>19</rdfs:isDefinedBy>
+	<foaf:based_near>FOLGARIA</foaf:based_near>
+	<rdfs:seeAlso>Ristorante-Bar</rdfs:seeAlso>
+	<foaf:made>Costa</foaf:made>
+	<rdf:rest>Via Negheli</rdf:rest>
+	<rdf:object>58</rdf:object>
 </rdf:Description>
 
-<rdf:Description rdf:about="http://127.0.0.1:3333/16">
-	<rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
-	<foaf:name>ALBERGO RISTORANTE BAR AL SOLE</foaf:name>
-	<foaf:theme>Albergo-Ristorante-Bar</foaf:theme>
+<rdf:Description rdf:about="http://127.0.0.1:3333/ALBERGO+RISTORANTE+BAR+AL+SOLE">
+	<rdfs:isDefinedBy>20</rdfs:isDefinedBy>
+	<foaf:based_near>FIAVE'</foaf:based_near>
+	<rdfs:seeAlso>Albergo-Ristorante-Bar</rdfs:seeAlso>
+	<foaf:made>Fiave'</foaf:made>
+	<rdf:rest>Via 3 Novembre</rdf:rest>
+	<rdf:object>12</rdf:object>
 </rdf:Description>
 
-<rdf:Description rdf:about="http://127.0.0.1:3333/17">
-	<rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
-	<foaf:name>LOCANDA DELLE TRE CHIAVI  -</foaf:name>
-	<foaf:theme>Ristorante</foaf:theme>
+<rdf:Description rdf:about="http://127.0.0.1:3333/LOCANDA+DELLE+TRE+CHIAVI++-">
+	<rdfs:isDefinedBy>21</rdfs:isDefinedBy>
+	<foaf:based_near>ISERA</foaf:based_near>
+	<rdfs:seeAlso>Ristorante</rdfs:seeAlso>
+	<foaf:made>Isera</foaf:made>
+	<rdf:rest>Via C. Vannetti</rdf:rest>
+	<rdf:object>2</rdf:object>
 </rdf:Description>
 
-<rdf:Description rdf:about="http://127.0.0.1:3333/18">
-	<rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
-	<foaf:name>ALBERGO CERVO RISTORANTE STUBE DEL CERVO</foaf:name>
-	<foaf:theme>Albergo-Ristorante-Pizzeria-Bar</foaf:theme>
+<rdf:Description rdf:about="http://127.0.0.1:3333/ALBERGO+CERVO+RISTORANTE+STUBE+DEL+CERVO">
+	<rdfs:isDefinedBy>22</rdfs:isDefinedBy>
+	<foaf:based_near>LAVARONE</foaf:based_near>
+	<rdfs:seeAlso>Albergo-Ristorante-Pizzeria-Bar</rdfs:seeAlso>
+	<foaf:made>Chiesa</foaf:made>
+	<rdf:rest>Piazza Milano</rdf:rest>
+	<rdf:object>2</rdf:object>
 </rdf:Description>
 
-<rdf:Description rdf:about="http://127.0.0.1:3333/19">
-	<rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
-	<foaf:name>CANTINOTA</foaf:name>
-	<foaf:theme>Ristorante-Pizzeria</foaf:theme>
+<rdf:Description rdf:about="http://127.0.0.1:3333/CANTINOTA">
+	<rdfs:isDefinedBy>25</rdfs:isDefinedBy>
+	<foaf:based_near>LEVICO TERME</foaf:based_near>
+	<rdfs:seeAlso>Ristorante-Pizzeria</rdfs:seeAlso>
+	<foaf:made>Levico Terme</foaf:made>
+	<rdf:rest>Via Trieste</rdf:rest>
+	<rdf:object>1</rdf:object>
 </rdf:Description>
 
-<rdf:Description rdf:about="http://127.0.0.1:3333/20">
-	<rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
-	<foaf:name>ALBERGO LUSERNARHOF BAR RISTORANTE</foaf:name>
-	<foaf:theme>Albergo-Ristorante-Bar</foaf:theme>
+<rdf:Description rdf:about="http://127.0.0.1:3333/ALBERGO+LUSERNARHOF+BAR+RISTORANTE">
+	<rdfs:isDefinedBy>27</rdfs:isDefinedBy>
+	<foaf:based_near>LUSERNA-LUSERN</foaf:based_near>
+	<rdfs:seeAlso>Albergo-Ristorante-Bar</rdfs:seeAlso>
+	<foaf:made>Luserna-Lusern</foaf:made>
+	<rdf:rest>Via Tezze</rdf:rest>
+	<rdf:object>43</rdf:object>
 </rdf:Description>
 
-<rdf:Description rdf:about="http://127.0.0.1:3333/21">
-	<rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
-	<foaf:name>PER BACCO </foaf:name>
-	<foaf:theme>Ristorante-Bar</foaf:theme>
+<rdf:Description rdf:about="http://127.0.0.1:3333/PER+BACCO+">
+	<rdfs:isDefinedBy>28</rdfs:isDefinedBy>
+	<foaf:based_near>MEZZOLOMBARDO</foaf:based_near>
+	<rdfs:seeAlso>Ristorante-Bar</rdfs:seeAlso>
+	<foaf:made>Mezzolombardo</foaf:made>
+	<rdf:rest>Via E. Devarda</rdf:rest>
+	<rdf:object>28</rdf:object>
 </rdf:Description>
 
-<rdf:Description rdf:about="http://127.0.0.1:3333/22">
-	<rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
-	<foaf:name>MALGA PAN</foaf:name>
-	<foaf:theme>Ristorante</foaf:theme>
+<rdf:Description rdf:about="http://127.0.0.1:3333/MALGA+PAN">
+	<rdfs:isDefinedBy>30</rdfs:isDefinedBy>
+	<foaf:based_near>MOENA</foaf:based_near>
+	<rdfs:seeAlso>Ristorante</rdfs:seeAlso>
+	<foaf:made>Moena</foaf:made>
+	<rdf:rest>Via Costalunga</rdf:rest>
+	<rdf:object>56</rdf:object>
 </rdf:Description>
 
-<rdf:Description rdf:about="http://127.0.0.1:3333/23">
-	<rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
-	<foaf:name>POST HOTEL RESTAURATYROL</foaf:name>
-	<foaf:theme>Ristorante</foaf:theme>
+<rdf:Description rdf:about="http://127.0.0.1:3333/POST+HOTEL+RESTAURATYROL">
+	<rdfs:isDefinedBy>31</rdfs:isDefinedBy>
+	<foaf:based_near>MOENA</foaf:based_near>
+	<rdfs:seeAlso>Ristorante</rdfs:seeAlso>
+	<foaf:made>Moena</foaf:made>
+	<rdf:rest>Piazza Italia</rdf:rest>
+	<rdf:object>10</rdf:object>
 </rdf:Description>
 
-<rdf:Description rdf:about="http://127.0.0.1:3333/24">
-	<rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
-	<foaf:name>ALEXANDER HOTEL</foaf:name>
-	<foaf:theme>Albergo-Ristorante-Bar</foaf:theme>
+<rdf:Description rdf:about="http://127.0.0.1:3333/ALEXANDER+HOTEL">
+	<rdfs:isDefinedBy>32</rdfs:isDefinedBy>
+	<foaf:based_near>MOLVENO</foaf:based_near>
+	<rdfs:seeAlso>Albergo-Ristorante-Bar</rdfs:seeAlso>
+	<foaf:made>Molveno</foaf:made>
+	<rdf:rest>Piazza Scuole</rdf:rest>
+	<rdf:object>7</rdf:object>
 </rdf:Description>
 
-<rdf:Description rdf:about="http://127.0.0.1:3333/25">
-	<rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
-	<foaf:name>RISTORANTE AN</foaf:name>
-	<foaf:theme>Ristorante-Bar</foaf:theme>
+<rdf:Description rdf:about="http://127.0.0.1:3333/RISTORANTE+AN">
+	<rdfs:isDefinedBy>34</rdfs:isDefinedBy>
+	<foaf:based_near>MONCLASSICO</foaf:based_near>
+	<rdfs:seeAlso>Ristorante-Bar</rdfs:seeAlso>
+	<foaf:made>Monclassico</foaf:made>
+	<rdf:rest>Via Nazionale</rdf:rest>
+	<rdf:object>20</rdf:object>
 </rdf:Description>
 
-<rdf:Description rdf:about="http://127.0.0.1:3333/26">
-	<rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
-	<foaf:name>AL FORTE ALTO </foaf:name>
-	<foaf:theme>Ristorante-Bar</foaf:theme>
+<rdf:Description rdf:about="http://127.0.0.1:3333/AL+FORTE+ALTO+">
+	<rdfs:isDefinedBy>35</rdfs:isDefinedBy>
+	<foaf:based_near>NAGO-TORBOLE</foaf:based_near>
+	<rdfs:seeAlso>Ristorante-Bar</rdfs:seeAlso>
+	<foaf:made>Nago</foaf:made>
+	<rdf:rest>Via Castel Penede</rdf:rest>
+	<rdf:object>16</rdf:object>
 </rdf:Description>
 
-<rdf:Description rdf:about="http://127.0.0.1:3333/27">
-	<rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
-	<foaf:name>CEVEDALE LIVIROMANCE HOTEL </foaf:name>
-	<foaf:theme>Albergo-Ristorante-Bar</foaf:theme>
+<rdf:Description rdf:about="http://127.0.0.1:3333/CEVEDALE+LIVIROMANCE+HOTEL+">
+	<rdfs:isDefinedBy>37</rdfs:isDefinedBy>
+	<foaf:based_near>PEIO</foaf:based_near>
+	<rdfs:seeAlso>Albergo-Ristorante-Bar</rdfs:seeAlso>
+	<foaf:made>Cogolo</foaf:made>
+	<rdf:rest>Via Roma</rdf:rest>
+	<rdf:object>33</rdf:object>
 </rdf:Description>
 
-<rdf:Description rdf:about="http://127.0.0.1:3333/28">
-	<rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
-	<foaf:name>RISTORANTE RODODENDRO</foaf:name>
-	<foaf:theme>Ristorante</foaf:theme>
+<rdf:Description rdf:about="http://127.0.0.1:3333/RISTORANTE+RODODENDRO">
+	<rdfs:isDefinedBy>39</rdfs:isDefinedBy>
+	<foaf:based_near>PELLIZZANO</foaf:based_near>
+	<rdfs:seeAlso>Ristorante</rdfs:seeAlso>
+	<foaf:made>Pellizzano</foaf:made>
+	<rdf:rest>Strada Per Pontesana</rdf:rest>
+	<rdf:object>5</rdf:object>
 </rdf:Description>
 
-<rdf:Description rdf:about="http://127.0.0.1:3333/29">
-	<rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
-	<foaf:name>EL FILO'</foaf:name>
-	<foaf:theme>Ristorante-Bar</foaf:theme>
+<rdf:Description rdf:about="http://127.0.0.1:3333/EL+FILO%27">
+	<rdfs:isDefinedBy>44</rdfs:isDefinedBy>
+	<foaf:based_near>POZZA DI FASSA-POZA</foaf:based_near>
+	<rdfs:seeAlso>Ristorante-Bar</rdfs:seeAlso>
+	<foaf:made>Pozza Di Fassa-Poza</foaf:made>
+	<rdf:rest>Via Roma</rdf:rest>
+	<rdf:object>42</rdf:object>
 </rdf:Description>
 
-<rdf:Description rdf:about="http://127.0.0.1:3333/30">
-	<rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
-	<foaf:name>LE GIARE </foaf:name>
-	<foaf:theme>Ristorante-Pizzeria-Bar</foaf:theme>
+<rdf:Description rdf:about="http://127.0.0.1:3333/LE+GIARE+">
+	<rdfs:isDefinedBy>45</rdfs:isDefinedBy>
+	<foaf:based_near>POZZA DI FASSA-POZA</foaf:based_near>
+	<rdfs:seeAlso>Ristorante-Pizzeria-Bar</rdfs:seeAlso>
+	<foaf:made>Pozza Di Fassa-Poza</foaf:made>
+	<rdf:rest>Via Parco</rdf:rest>
+	<rdf:object>7</rdf:object>
 </rdf:Description>
 
-<rdf:Description rdf:about="http://127.0.0.1:3333/31">
-	<rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
-	<foaf:name>ALBERGO MARTINELLI </foaf:name>
-	<foaf:theme>Albergo-Ristorante-Bar</foaf:theme>
+<rdf:Description rdf:about="http://127.0.0.1:3333/ALBERGO+MARTINELLI+">
+	<rdfs:isDefinedBy>46</rdfs:isDefinedBy>
+	<foaf:based_near>RONZO-CHIENIS</foaf:based_near>
+	<rdfs:seeAlso>Albergo-Ristorante-Bar</rdfs:seeAlso>
+	<foaf:made>Ronzo-Chienis</foaf:made>
+	<rdf:rest>Via Del Car</rdf:rest>
+	<rdf:object>4</rdf:object>
 </rdf:Description>
 
-<rdf:Description rdf:about="http://127.0.0.1:3333/32">
-	<rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
-	<foaf:name>RISTORANTE ANTICA GARDUMO </foaf:name>
-	<foaf:theme>Ristorante</foaf:theme>
+<rdf:Description rdf:about="http://127.0.0.1:3333/RISTORANTE+ANTICA+GARDUMO+">
+	<rdfs:isDefinedBy>47</rdfs:isDefinedBy>
+	<foaf:based_near>RONZO-CHIENIS</foaf:based_near>
+	<rdfs:seeAlso>Ristorante</rdfs:seeAlso>
+	<foaf:made>Ronzo-Chienis</foaf:made>
+	<rdf:rest>Via Ai Piani</rdf:rest>
+	<rdf:object>1</rdf:object>
 </rdf:Description>
 
-<rdf:Description rdf:about="http://127.0.0.1:3333/33">
-	<rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
-	<foaf:name>SAN COLOMBANO</foaf:name>
-	<foaf:theme>Ristorante</foaf:theme>
+<rdf:Description rdf:about="http://127.0.0.1:3333/SAN+COLOMBANO">
+	<rdfs:isDefinedBy>48</rdfs:isDefinedBy>
+	<foaf:based_near>ROVERETO</foaf:based_near>
+	<rdfs:seeAlso>Ristorante</rdfs:seeAlso>
+	<foaf:made>Rovereto</foaf:made>
+	<rdf:rest>Via Vicenza</rdf:rest>
+	<rdf:object>28</rdf:object>
 </rdf:Description>
 
-<rdf:Description rdf:about="http://127.0.0.1:3333/34">
-	<rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
-	<foaf:name>RISTORANTE DA PINO</foaf:name>
-	<foaf:theme>Ristorante-Bar</foaf:theme>
+<rdf:Description rdf:about="http://127.0.0.1:3333/RISTORANTE+DA+PINO">
+	<rdfs:isDefinedBy>49</rdfs:isDefinedBy>
+	<foaf:based_near>SAN MICHELE ALL'ADIGE</foaf:based_near>
+	<rdfs:seeAlso>Ristorante-Bar</rdfs:seeAlso>
+	<foaf:made>Grumo-San Michele</foaf:made>
+	<rdf:rest>Via Postal</rdf:rest>
+	<rdf:object>39</rdf:object>
 </rdf:Description>
 
-<rdf:Description rdf:about="http://127.0.0.1:3333/35">
-	<rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
-	<foaf:name>OSTARIA DEL FILO' </foaf:name>
-	<foaf:theme>Ristorante-Bar</foaf:theme>
+<rdf:Description rdf:about="http://127.0.0.1:3333/OSTARIA+DEL+FILO%27+">
+	<rdfs:isDefinedBy>51</rdfs:isDefinedBy>
+	<foaf:based_near>SMARANO</foaf:based_near>
+	<rdfs:seeAlso>Ristorante-Bar</rdfs:seeAlso>
+	<foaf:made>Smarano</foaf:made>
+	<rdf:rest>Viale Merlonga</rdf:rest>
+	<rdf:object> 48/A</rdf:object>
 </rdf:Description>
 
-<rdf:Description rdf:about="http://127.0.0.1:3333/36">
-	<rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
-	<foaf:name>OSTERIA CA' DEI GIOSI </foaf:name>
-	<foaf:theme>Ristorante-Bar</foaf:theme>
+<rdf:Description rdf:about="http://127.0.0.1:3333/OSTERIA+CA%27+DEI+GIOSI+">
+	<rdfs:isDefinedBy>55</rdfs:isDefinedBy>
+	<foaf:based_near>TERLAGO</foaf:based_near>
+	<rdfs:seeAlso>Ristorante-Bar</rdfs:seeAlso>
+	<foaf:made>Covelo</foaf:made>
+	<rdf:rest>Via Villa Alta</rdf:rest>
+	<rdf:object> 9/A</rdf:object>
 </rdf:Description>
 
-<rdf:Description rdf:about="http://127.0.0.1:3333/37">
-	<rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
-	<foaf:name>ALLA CORTE DEI TOLDI</foaf:name>
-	<foaf:theme>Ristorante-Bar</foaf:theme>
+<rdf:Description rdf:about="http://127.0.0.1:3333/ALLA+CORTE+DEI+TOLDI">
+	<rdfs:isDefinedBy>56</rdfs:isDefinedBy>
+	<foaf:based_near>TERZOLAS</foaf:based_near>
+	<rdfs:seeAlso>Ristorante-Bar</rdfs:seeAlso>
+	<foaf:made>Terzolas</foaf:made>
+	<rdf:rest>Via Dei Falidoni</rdf:rest>
+	<rdf:object>32</rdf:object>
 </rdf:Description>
 
-<rdf:Description rdf:about="http://127.0.0.1:3333/38">
-	<rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
-	<foaf:name>AL VO'</foaf:name>
-	<foaf:theme>Ristorante-Bar</foaf:theme>
+<rdf:Description rdf:about="http://127.0.0.1:3333/AL+VO%27">
+	<rdfs:isDefinedBy>58</rdfs:isDefinedBy>
+	<foaf:based_near>TRENTO</foaf:based_near>
+	<rdfs:seeAlso>Ristorante-Bar</rdfs:seeAlso>
+	<foaf:made>Trento</foaf:made>
+	<rdf:rest>Vicolo Del Vo'</rdf:rest>
+	<rdf:object>11</rdf:object>
 </rdf:Description>
 
-<rdf:Description rdf:about="http://127.0.0.1:3333/39">
-	<rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
-	<foaf:name>ANTICA TRATTORIA AL VOLT</foaf:name>
-	<foaf:theme>Trattoria-Bar</foaf:theme>
+<rdf:Description rdf:about="http://127.0.0.1:3333/ANTICA+TRATTORIA+AL+VOLT">
+	<rdfs:isDefinedBy>59</rdfs:isDefinedBy>
+	<foaf:based_near>TRENTO</foaf:based_near>
+	<rdfs:seeAlso>Trattoria-Bar</rdfs:seeAlso>
+	<foaf:made>Trento</foaf:made>
+	<rdf:rest>Via S. Croce</rdf:rest>
+	<rdf:object>16</rdf:object>
 </rdf:Description>
 
-<rdf:Description rdf:about="http://127.0.0.1:3333/40">
-	<rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
-	<foaf:name>ANTICA TRATTORIA DUE MORI </foaf:name>
-	<foaf:theme>Ristorante-Bar</foaf:theme>
+<rdf:Description rdf:about="http://127.0.0.1:3333/ANTICA+TRATTORIA+DUE+MORI+">
+	<rdfs:isDefinedBy>60</rdfs:isDefinedBy>
+	<foaf:based_near>TRENTO</foaf:based_near>
+	<rdfs:seeAlso>Ristorante-Bar</rdfs:seeAlso>
+	<foaf:made>Trento</foaf:made>
+	<rdf:rest>Via S. Marco</rdf:rest>
+	<rdf:object>11</rdf:object>
 </rdf:Description>
 
-<rdf:Description rdf:about="http://127.0.0.1:3333/41">
-	<rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
-	<foaf:name>HOTEL VILLA MADRUZZO </foaf:name>
-	<foaf:theme>Albergo-Ristorante-Bar</foaf:theme>
+<rdf:Description rdf:about="http://127.0.0.1:3333/HOTEL+VILLA+MADRUZZO+">
+	<rdfs:isDefinedBy>63</rdfs:isDefinedBy>
+	<foaf:based_near>TRENTO</foaf:based_near>
+	<rdfs:seeAlso>Albergo-Ristorante-Bar</rdfs:seeAlso>
+	<foaf:made>Cognola</foaf:made>
+	<rdf:rest>Via Ponte Alto</rdf:rest>
+	<rdf:object>26</rdf:object>
 </rdf:Description>
 
-<rdf:Description rdf:about="http://127.0.0.1:3333/42">
-	<rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
-	<foaf:name>LA CANTINOTA  </foaf:name>
-	<foaf:theme>Ristorante-Bar</foaf:theme>
+<rdf:Description rdf:about="http://127.0.0.1:3333/LA+CANTINOTA++">
+	<rdfs:isDefinedBy>65</rdfs:isDefinedBy>
+	<foaf:based_near>TRENTO</foaf:based_near>
+	<rdfs:seeAlso>Ristorante-Bar</rdfs:seeAlso>
+	<foaf:made>Trento</foaf:made>
+	<rdf:rest>Via S. Marco</rdf:rest>
+	<rdf:object> 22-24</rdf:object>
 </rdf:Description>
 
-<rdf:Description rdf:about="http://127.0.0.1:3333/43">
-	<rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
-	<foaf:name>OLD BAR &amp; FOOD </foaf:name>
-	<foaf:theme>Ristorante-Bar</foaf:theme>
+<rdf:Description rdf:about="http://127.0.0.1:3333/OLD+BAR+%26+FOOD+">
+	<rdfs:isDefinedBy>66</rdfs:isDefinedBy>
+	<foaf:based_near>TRENTO</foaf:based_near>
+	<rdfs:seeAlso>Ristorante-Bar</rdfs:seeAlso>
+	<foaf:made>Trento</foaf:made>
+	<rdf:rest>Via Della Roggia Grande</rdf:rest>
+	<rdf:object>8</rdf:object>
 </rdf:Description>
 
-<rdf:Description rdf:about="http://127.0.0.1:3333/44">
-	<rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
-	<foaf:name>OSTERIA A LE DUE SPADE</foaf:name>
-	<foaf:theme>Ristorante-Bar</foaf:theme>
+<rdf:Description rdf:about="http://127.0.0.1:3333/OSTERIA+A+LE+DUE+SPADE">
+	<rdfs:isDefinedBy>67</rdfs:isDefinedBy>
+	<foaf:based_near>TRENTO</foaf:based_near>
+	<rdfs:seeAlso>Ristorante-Bar</rdfs:seeAlso>
+	<foaf:made>Trento</foaf:made>
+	<rdf:rest>Via Don Rizzi</rdf:rest>
+	<rdf:object>11</rdf:object>
 </rdf:Description>
 
-<rdf:Description rdf:about="http://127.0.0.1:3333/45">
-	<rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
-	<foaf:name>SCRIGDEL DUOMO </foaf:name>
-	<foaf:theme>Ristorante-Bar</foaf:theme>
+<rdf:Description rdf:about="http://127.0.0.1:3333/SCRIGDEL+DUOMO+">
+	<rdfs:isDefinedBy>68</rdfs:isDefinedBy>
+	<foaf:based_near>TRENTO</foaf:based_near>
+	<rdfs:seeAlso>Ristorante-Bar</rdfs:seeAlso>
+	<foaf:made>Trento</foaf:made>
+	<rdf:rest>Piazza Del Duomo</rdf:rest>
+	<rdf:object>29</rdf:object>
 </rdf:Description>
 
-<rdf:Description rdf:about="http://127.0.0.1:3333/46">
-	<rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
-	<foaf:name>TRATTORIA AL TINO</foaf:name>
-	<foaf:theme>Ristorante-Bar</foaf:theme>
+<rdf:Description rdf:about="http://127.0.0.1:3333/TRATTORIA+AL+TINO">
+	<rdfs:isDefinedBy>69</rdfs:isDefinedBy>
+	<foaf:based_near>TRENTO</foaf:based_near>
+	<rdfs:seeAlso>Ristorante-Bar</rdfs:seeAlso>
+	<foaf:made>Trento</foaf:made>
+	<rdf:rest>Via SS. Trinita'</rdf:rest>
+	<rdf:object>10</rdf:object>
 </rdf:Description>
 
-<rdf:Description rdf:about="http://127.0.0.1:3333/47">
-	<rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
-	<foaf:name>ALPINO</foaf:name>
-	<foaf:theme>Albergo-Ristorante-Bar</foaf:theme>
+<rdf:Description rdf:about="http://127.0.0.1:3333/ALPINO">
+	<rdf:rest>Via Di Pizzano</rdf:rest>
+	<rdfs:isDefinedBy>70</rdfs:isDefinedBy>
+	<foaf:based_near>VERMIGLIO</foaf:based_near>
+	<rdfs:seeAlso>Albergo-Ristorante-Bar</rdfs:seeAlso>
+	<foaf:made>Vermiglio</foaf:made>
+	<rdf:object>32</rdf:object>
 </rdf:Description>
 
 </rdf:RDF>

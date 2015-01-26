@@ -1,18 +1,18 @@
 package eu.spaziodati.batchrefine.transformer;
 
-import com.jayway.restassured.RestAssured;
-import com.jayway.restassured.response.Response;
-import eu.fusepool.p3.transformer.util.MimeTypeComparator;
-import eu.fusepool.p3.transformer.util.MimeUtils;
+import static eu.fusepool.p3.transformer.util.MimeUtils.mimeType;
+import static eu.spaziodati.batchrefine.java.EngineTestUtils.contentsAsBytes;
+
+import java.net.URI;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.net.URI;
+import com.jayway.restassured.RestAssured;
+import com.jayway.restassured.response.Response;
 
-import static eu.fusepool.p3.transformer.util.MimeUtils.*;
-import static eu.fusepool.p3.transformer.util.MimeUtils.mimeType;
-import static eu.spaziodati.batchrefine.java.EngineTestUtils.contentsAsBytes;
+import eu.fusepool.p3.transformer.util.MimeUtils;
 
 public class AcceptHeaderTest {
 

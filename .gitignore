@@ -4,3 +4,6 @@ target/
 /local-repository
 *.iml
 *release.properties
+.classpath
+.project
+.settings
