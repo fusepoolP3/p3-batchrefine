@@ -7,11 +7,14 @@ import eu.spaziodati.batchrefine.core.IAsyncTransformEngine;
 import eu.spaziodati.batchrefine.core.ITransformEngine;
 import eu.spaziodati.batchrefine.core.MultiInstanceEngine;
 import eu.spaziodati.batchrefine.core.http.RefineHTTPClient;
+
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.log4j.Logger;
 
 import javax.activation.MimeType;
+import javax.servlet.http.HttpServletRequest;
+
 import java.io.*;
 import java.net.URI;
 import java.util.Collections;
@@ -56,6 +59,8 @@ public class AsynchronousTransformer extends BatchRefineTransformer implements
     @Override
     public void transform(HttpRequestEntity entity, String requestId)
             throws IOException {
+        
+        logMessage(entity.getRequest());
 
         if (!fActive.add(requestId)) {
             throw new IllegalStateException("A request with ID " + requestId + " was already in progress.");

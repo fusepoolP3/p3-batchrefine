@@ -41,6 +41,8 @@ public class SynchronousTransformer extends BatchRefineTransformer implements
 
     @Override
     public Entity transform(HttpRequestEntity entity) throws IOException {
+    	logMessage(entity.getRequest());
+    	
         final HttpRequestEntity request = cast(entity);
 
         final ImmutablePair<MimeType, Properties> options = exporterOptions(request);

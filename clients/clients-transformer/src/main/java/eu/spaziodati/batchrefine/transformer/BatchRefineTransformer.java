@@ -1,13 +1,16 @@
 package eu.spaziodati.batchrefine.transformer;
 
 import com.google.refine.util.ParsingUtilities;
+
 import eu.fusepool.p3.transformer.HttpRequestEntity;
 import eu.fusepool.p3.transformer.Transformer;
 import eu.fusepool.p3.transformer.commons.Entity;
 import eu.fusepool.p3.transformer.util.AcceptPreference;
+
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.http.HttpEntity;
+import org.apache.http.HttpMessage;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpRequestBase;
@@ -19,6 +22,7 @@ import org.json.JSONArray;
 import javax.activation.MimeType;
 import javax.activation.MimeTypeParseException;
 import javax.servlet.http.HttpServletRequest;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -100,7 +104,7 @@ public class BatchRefineTransformer implements Transformer {
 			get.addHeader("Accept", "application/json");
 
 			client = HttpClients.createDefault();
-			response = loggedRequest(get, client);
+			response = performRequest(get, client);
 
 			HttpEntity responseEntity = response.getEntity();
 			if (responseEntity == null) {
@@ -191,18 +195,35 @@ public class BatchRefineTransformer implements Transformer {
 		return values[0];
 	}
 
-	private CloseableHttpResponse loggedRequest(HttpRequestBase request,
+	protected void logMessage(HttpServletRequest request) {
+		if (fLogger.isDebugEnabled()) {
+			Enumeration<String> headers = request.getHeaderNames();
+			while(headers.hasMoreElements()) {
+				String header = headers.nextElement();
+				Enumeration<String> values = request.getHeaders(header);
+				while(values.hasMoreElements()) {
+					fLogger.debug(header + ":" + values.nextElement());
+				}
+			}
+			fLogger.debug("-----------------------------------------------------");
+		}
+	}
+	
+	protected void logMessage(HttpMessage message) {
+		if (fLogger.isDebugEnabled()) {
+			fLogger.debug(message.toString());
+		}
+	}
+
+	private CloseableHttpResponse performRequest(HttpRequestBase request,
 			CloseableHttpClient client) throws IOException {
-		if (fLogger.isDebugEnabled()) {
-			fLogger.debug(request.toString());
-		}
 
+		logMessage(request);
+		
 		CloseableHttpResponse response = client.execute(request);
-
-		if (fLogger.isDebugEnabled()) {
-			fLogger.debug(response.toString());
-		}
-
+		
+		logMessage(response);
+		
 		return response;
 	}
 
