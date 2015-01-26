@@ -9,7 +9,7 @@ VERSION=`cat ${BATCHREFINE_ROOT}/version`
 shift 1
 
 echo "refine options are ${REFINE_OPTIONS}"
-echo "transformer options are ${TRANSFORMER_OPTIONS}"
+echo "transformer options are $@"
 
 # Starts OpenRefine ...
 ${OPENREFINE_ROOT}/refine ${REFINE_OPTIONS} &
