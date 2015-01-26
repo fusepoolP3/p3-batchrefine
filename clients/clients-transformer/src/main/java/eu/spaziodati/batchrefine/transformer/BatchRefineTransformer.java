@@ -63,14 +63,14 @@ public class BatchRefineTransformer implements Transformer {
 			DEFAULT_EXPORT_MIME = new RefineMime("text/csv", "csv");
 			SUPPORTED_OUTPUTS = Collections
 					.unmodifiableMap(new HashMap<String, RefineMime>() {
-						{
-							put("text/csv", DEFAULT_EXPORT_MIME);
-							put("application/rdf+xml", new RefineMime(
-									"application/rdf+xml", "rdf"));
-							put("text/turtle", new RefineMime("text/turtle",
-									"turtle"));
-						}
-					});
+                        {
+                            put("text/csv", DEFAULT_EXPORT_MIME);
+                            put("application/rdf+xml", new RefineMime(
+                                    "application/rdf+xml", "rdf"));
+                            put("text/turtle", new RefineMime("text/turtle",
+                                    "turtle"));
+                        }
+                    });
 
 		} catch (MimeTypeParseException ex) {
 			// if this happens, it's a bug, no way to recover.
@@ -126,21 +126,22 @@ public class BatchRefineTransformer implements Transformer {
 
 	protected ImmutablePair<MimeType, Properties> exporterOptions(
 			HttpRequestEntity request) {
-		RefineMime mime = findMatchingMIME(request);
+		RefineMime mime = findMatchingMIME(request.getAcceptPreference(), request.getRequest());
 		Properties exporterOptions = new Properties();
 		exporterOptions.put(FORMAT_PARAMETER, mime.exporter());
 		return new ImmutablePair<MimeType, Properties>(mime, exporterOptions);
 	}
 
-	private RefineMime findMatchingMIME(HttpRequestEntity request) {
-		String accept = request.getRequest().getHeader("Accept");
-		if (accept != null && !accept.equals("*/*"))
-			return findMatchingMIME(request.getAcceptPreference());
-		else
-			return DEFAULT_EXPORT_MIME;
-	}
+	private RefineMime findMatchingMIME(AcceptPreference preference, HttpServletRequest request) {
+        //FIXME this is a HACK. We have to remove the unsupported formats by parsing
+        //the transform JSON.
+        if (preference.getPreferredAccept().toString().equals("*/*")) {
+            return DEFAULT_EXPORT_MIME;
+        }
 
-	private RefineMime findMatchingMIME(AcceptPreference preference) {
+        //FIXME workaround to getPreferredAccept not being idempotent.
+        preference = AcceptPreference.fromRequest(request);
+
 		RefineMime mime = (RefineMime) preference
 				.getPreferredAccept(getSupportedOutputFormats());
 		if (mime == null) {
@@ -188,8 +189,8 @@ public class BatchRefineTransformer implements Transformer {
 
 		if (values.length > 1) {
 			fLogger.warn("More than one " + parameter
-					+ " specified in request URL, using the first one ("
-					+ values[0] + ")");
+                    + " specified in request URL, using the first one ("
+                    + values[0] + ")");
 		}
 
 		return values[0];
