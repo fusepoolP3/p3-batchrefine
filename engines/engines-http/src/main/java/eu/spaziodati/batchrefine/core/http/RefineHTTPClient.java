@@ -16,7 +16,6 @@ import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
-import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.entity.mime.content.InputStreamBody;
 import org.apache.http.entity.mime.content.StringBody;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -29,7 +28,6 @@ import org.json.JSONObject;
 
 import java.io.*;
 import java.net.*;
-import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
@@ -43,8 +41,13 @@ public class RefineHTTPClient implements ITransformEngine {
 
     private static final Logger fLogger = Logger
             .getLogger(RefineHTTPClient.class);
-
-    private static final String BOGUS_FILENAME = "bogus";
+    
+    /**
+     * Filename is passed to OpenRefine inside {@link InputStreamBody}.
+     * In case OpenRefine is not able to guess the input format type, 
+     * extension is used to identify it.
+     */
+    private static final String BOGUS_FILENAME = "input.csv";
 
     /**
      * Poll intervals for asynchronous operations should start at
