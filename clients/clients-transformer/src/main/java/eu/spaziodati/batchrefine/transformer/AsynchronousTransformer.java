@@ -86,11 +86,6 @@ public class AsynchronousTransformer extends BatchRefineTransformer implements
         return fActive.contains(requestId);
     }
 
-    private void done(String id, Exception exception) {
-        fHandler.reportException(id, exception);
-        inactive(id);
-    }
-
     private void inactive(String id) {
         if (!fActive.remove(id)) {
             fLogger.error("Unknown job has been marked as done (" + id + ").");
