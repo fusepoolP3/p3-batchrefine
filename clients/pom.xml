@@ -19,6 +19,7 @@
   <modules>
     <module>clients-cli</module>
     <module>clients-transformer</module> 
+    <module>clients-core</module>
   </modules>
 
 </project>
