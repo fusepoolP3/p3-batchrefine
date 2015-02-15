@@ -77,6 +77,11 @@
             <artifactId>engines-http</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>eu.spaziodati.batchrefine</groupId>
+            <artifactId>clients-core</artifactId>
+            <version>${project.version}</version>
+        </dependency>
 
         <dependency>
             <groupId>eu.spaziodati.batchrefine</groupId>
