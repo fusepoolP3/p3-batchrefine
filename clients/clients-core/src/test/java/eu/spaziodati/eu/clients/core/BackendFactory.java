@@ -18,7 +18,7 @@ public class BackendFactory {
 
     }
 
-    private static enum Engine {
+    public static enum Engine {
         embedded, remote, spark, split
     }
 
