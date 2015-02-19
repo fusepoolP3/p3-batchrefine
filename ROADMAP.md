@@ -22,3 +22,4 @@ Deploying a collection of OpenRefine instances should be easy with the SpazioDat
 1. Basic implementation of backend with rollout of FP3 transformer and command line client bindings (mid-February 2015);
 2. development of support scripts for on-demand materialization of OpenRefine instances in EC2 (end of February 2015);
 3. revamp of documentation with a discussion of all options and lots of examples (mid-March 2015).
+
