@@ -12,7 +12,11 @@ public class BackendFactory {
 
 
     public ITransformEngine getEngine(EngineCommand cmd) {
-return null;
+        switch (Engine.valueOf(cmd.toString())) {
+            case remote :
+                (RemoteCommand) cmd;
+        }
+        return null;
     }
 
 

@@ -12,6 +12,9 @@ private final String fHost = "localhost";
 @Option(name="-p",aliases={"-port"},metaVar = "localhost", usage = "configure to which port to connect to")
 private final int fPort = 3333;
 
+    public String toString() {
+        return "remote";
+    }
 
 }
 
