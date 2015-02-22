@@ -5,8 +5,8 @@ import eu.spaziodati.batchrefine.core.ITransformEngine;
 import eu.spaziodati.batchrefine.core.Utils;
 import eu.spaziodati.batchrefine.core.embedded.TransformEngineImpl;
 import eu.spaziodati.batchrefine.core.http.RefineHTTPClient;
-import eu.spaziodati.eu.clients.core.EmbeddedCommand;
-import eu.spaziodati.eu.clients.core.RemoteCommand;
+import eu.spaziodati.eu.clients.core.BackendFactory;
+import eu.spaziodati.eu.clients.core.commands.*;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Level;
@@ -25,6 +25,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.ConnectException;
 import java.net.URISyntaxException;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -35,24 +36,21 @@ import java.util.Properties;
  * @author giuliano
  */
 public class BatchRefine {
-    @Argument(handler = SubCommandHandler.class)
-    @SubCommands({
-            @SubCommand(name = "remote", impl= RemoteCommand.class),
-            @SubCommand(name = "embedded", impl = EmbeddedCommand.class)
-    })
-
-    @Option(name = "-h", aliases = {"--host"}, usage = "OpenRefine host (remote engine only, defaults to localhost)", required = false)
-    private String fHost = "localhost";
-
-    @Option(name = "-p", aliases = {"--port"}, usage = "OpenRefine port  (remote engine only, defaults to 3333)", required = false)
-    private int fPort = 3333;
-
     @Option(name = "-v", aliases = {"--verbose"}, usage = "Prints debug information", required = false)
     private boolean fVerbose;
 
-    @Argument
-    private List<String> fArguments = new ArrayList<String>();
+    @Argument(handler = SubCommandHandler.class,required = true)
+    @SubCommands({
+            @SubCommand(name = "remote", impl= RemoteCommand.class),
+            @SubCommand(name = "embedded", impl = EmbeddedCommand.class),
+            @SubCommand(name = "spark", impl = SparkCommand.class),
+            @SubCommand(name = "split", impl = SplitCommand.class)
+    })
+    EngineCommand cmd;
 
+
+
+    private List<String> fArguments;
     private Logger fLogger;
 
     private void _main(String[] args) {
@@ -62,17 +60,27 @@ public class BatchRefine {
         try {
             parser.parseArgument(args);
 
+            fArguments = cmd.getArguments();
+
             if (fArguments.size() < 2) {
-                printUsage(parser);
-                System.exit(-1);
+                throw new CmdLineException(parser,"Not enough arguments");
             }
 
         } catch (CmdLineException ex) {
-            printUsage(parser);
+            printUsage(ex.getParser());
             System.exit(-1);
         }
 
         configureLogging();
+
+        BackendFactory engineFacotry = new BackendFactory();
+        ITransformEngine engine = null;
+        try {
+            engine = engineFacotry.getEngine(cmd);
+
+            if (engine == null) {
+                return;
+            }
 
         File inputFile = checkExists(fArguments.get(0));
         File transformFile = checkExists(fArguments.get(1));
@@ -85,30 +93,31 @@ public class BatchRefine {
             return;
         }
 
-        ITransformEngine engine = null;
-
-        try {
-            engine = batchEngine();
-            if (engine == null) {
-                return;
-            }
-
             File output = File.createTempFile("batchrefine", "tmp");
 
             Properties exporterProperties = new Properties();
-            exporterProperties.setProperty("format", fFormat.toString());
+            exporterProperties.setProperty("format", cmd.getFormat().toString());
             engine.transform(inputFile.toURI(), transform, output.toURI(), exporterProperties);
             output(output);
+
         } catch (ConnectException ex) {
             fLogger.error("Could not connect to host (is it running)? Error was:\n "
                     + ex.getMessage());
-        } catch (Exception ex) {
+        } catch (URISyntaxException ex) {
+            fLogger.error(
+                    "Can't build a meaningful host URI. Is your hostname correct?",
+                    ex);
+        }
+        catch (IOException ex) {
+            fLogger.error("Error initializing engine.", ex);
+        }
+        catch (Exception ex) {
             fLogger.error("Error running transform.", ex);
             return;
-        } finally {
+        }
+        finally {
             Utils.safeClose(engine);
         }
-
         // Have to be brutal as refine keeps non-daemon threads
         // running everywhere and there's no API to shut them down.
         System.exit(0);
@@ -139,27 +148,6 @@ public class BatchRefine {
         return file;
     }
 
-    private ITransformEngine batchEngine() {
-        try {
-            switch (fType) {
-                case embedded:
-                    return new TransformEngineImpl().init();
-                case remote:
-                    return new RefineHTTPClient(fHost, fPort);
-                default:
-                    return null;
-            }
-
-        } catch (IOException ex) {
-            fLogger.error("Error initializing engine.", ex);
-            return null;
-        } catch (URISyntaxException ex) {
-            fLogger.error(
-                    "Can't build a meaningful host URI. Is your hostname correct?",
-                    ex);
-            return null;
-        }
-    }
 
     private void output(File intermediate) throws IOException {
         if (fArguments.size() >= 3) {
@@ -177,7 +165,7 @@ public class BatchRefine {
     private void printUsage(CmdLineParser parser) {
         System.err
                 .println("batchrefine: missing parameter(s).\n"
-                        + "Usage: batchrefine [OPTION...] INPUT TRANSFORM [OUTPUT]\n"
+                        + "Usage: batchrefine [OPTION...] ENGINETYPE INPUT TRANSFORM [OUTPUT]\n"
                         + "Applies an OpenRefine TRANSFORM to an INPUT file, and writes it to an OUTPUT\nfile.\n");
         parser.printUsage(System.err);
         System.err

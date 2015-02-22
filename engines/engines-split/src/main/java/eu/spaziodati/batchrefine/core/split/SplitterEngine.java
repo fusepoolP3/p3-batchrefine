@@ -25,7 +25,13 @@ public class SplitterEngine implements ITransformEngine {
 
 	private final MultiInstanceEngine engine;
 
-	public SplitterEngine(ITransformEngine... engines) {
+
+    public SplitterEngine(Properties configuration) {
+        engine = null; //TODO
+    }
+
+
+    public SplitterEngine(ITransformEngine... engines) {
 		engine = new MultiInstanceEngine(engines);
 		fLogger.debug("Splitter Engine started with " + engines.length
 				+ " instance.");
