@@ -80,16 +80,9 @@
             <version>${project.version}</version>
         </dependency>
 
-
         <dependency>
             <groupId>eu.spaziodati.batchrefine</groupId>
             <artifactId>clients-core</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>eu.spaziodati.batchrefine</groupId>
-            <artifactId>engines-embedded</artifactId>
             <version>${project.version}</version>
         </dependency>
 
