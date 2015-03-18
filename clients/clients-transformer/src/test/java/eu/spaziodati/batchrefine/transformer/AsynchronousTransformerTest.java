@@ -10,6 +10,8 @@ import java.net.URISyntaxException;
 import javax.activation.MimeType;
 
 import eu.fusepool.p3.transformer.Transformer;
+import eu.spaziodati.batchrefine.core.MultiInstanceEngine;
+import eu.spaziodati.batchrefine.core.http.RefineHTTPClient;
 import org.apache.http.HttpStatus;
 import org.junit.Assert;
 import org.junit.Test;
@@ -78,8 +80,8 @@ public class AsynchronousTransformerTest extends TransformerTest {
 
     @Override
     protected Transformer transformer() throws URISyntaxException {
-        return new AsynchronousTransformer(new URI("http://localhost:"
-                + REFINE_PORT));
+        return new AsynchronousTransformer(new MultiInstanceEngine(new RefineHTTPClient(new URI("http://localhost:"
+                + REFINE_PORT))));
     }
 
 }

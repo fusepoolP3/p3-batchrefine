@@ -21,6 +21,7 @@
     <module>engines-embedded</module>
     <module>engines-http</module>
     <module>engines-spark</module>
+    <module>engines-split</module>
   </modules>
  
 </project>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>eu.spaziodati.batchrefine</groupId>
+		<artifactId>batchrefine-parent</artifactId>
+		<version>1.0.0</version>
+		<relativePath>../../parent</relativePath>
+	</parent>
+
+	<artifactId>engines-split</artifactId>
+	<packaging>jar</packaging>
+
+	<name>BatchRefine Engines: Splitter</name>
+	<description>
+    Simple engine that splits input and process it on the MultiInstanceEngine
+  </description>
+
+	<dependencies>
+
+		<dependency>
+			<groupId>eu.spaziodati.batchrefine</groupId>
+			<artifactId>engines-core</artifactId>
+			<version>${project.version}</version>
+			<type>test-jar</type>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>eu.spaziodati.batchrefine</groupId>
+			<artifactId>engines-http</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>eu.spaziodati.batchrefine</groupId>
+			<artifactId>engines-core</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.clerezza</groupId>
+			<artifactId>rdf.jena.parser</artifactId>
+			<version>0.11</version>
+			<scope>test</scope>
+		</dependency>
+
+	</dependencies>
+
+
+	<scm>
+		<tag>dev</tag>
+	</scm>
+</project>
