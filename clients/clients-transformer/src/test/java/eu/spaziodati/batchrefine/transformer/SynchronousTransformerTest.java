@@ -10,6 +10,7 @@ import java.net.URISyntaxException;
 
 import javax.activation.MimeType;
 
+import eu.spaziodati.batchrefine.core.http.RefineHTTPClient;
 import org.apache.commons.io.IOUtils;
 import org.junit.Test;
 
@@ -20,41 +21,41 @@ import eu.fusepool.p3.transformer.Transformer;
 import eu.spaziodati.batchrefine.java.EngineTestUtils;
 
 public class SynchronousTransformerTest extends TransformerTest {
-	
-	private static final int REFINE_PORT = 3333;
 
-	public SynchronousTransformerTest(String input, String transform, String format,
-			CallType type) {
-		super(input, transform, format, type);
-	}
+    private static final int REFINE_PORT = 3333;
 
-	@Test
-	public void testTransform() throws Exception {
-		File reference = findAndCopy("outputs/" + fInput + "_" + fTransform
-				+ "." + fFormat);
-		Response response = doRequest(fInput, fTransform, fFormat,
-				mapContentType(fFormat));
-		File output = EngineTestUtils.outputFile();
-		try (FileOutputStream oStream = new FileOutputStream(output)) {
-			IOUtils.copy(response.asInputStream(), oStream);
-		}
-		assertEquals(reference, output, mapContentType(fFormat));
-	}
+    public SynchronousTransformerTest(String input, String transform, String format,
+                                      CallType type) {
+        super(input, transform, format, type);
+    }
 
-	private Response doRequest(String input, String transform, String format,
-			MimeType contentType) throws Exception {
-		String transformURI = fServers.transformURI(input + "-" + transform + ".json").toString();
+    @Test
+    public void testTransform() throws Exception {
+        File reference = findAndCopy("outputs/" + fInput + "_" + fTransform
+                + "." + fFormat);
+        Response response = doRequest(fInput, fTransform, fFormat,
+                mapContentType(fFormat));
+        File output = EngineTestUtils.outputFile();
+        try (FileOutputStream oStream = new FileOutputStream(output)) {
+            IOUtils.copy(response.asInputStream(), oStream);
+        }
+        assertEquals(reference, output, mapContentType(fFormat));
+    }
 
-		return RestAssured.given().queryParam("refinejson", transformURI)
-				.queryParam("format", format).and()
-				.header("Accept", contentType.toString() + ";q=1.0")
+    private Response doRequest(String input, String transform, String format,
+                               MimeType contentType) throws Exception {
+        String transformURI = fServers.transformURI(input + "-" + transform + ".json").toString();
+
+        return RestAssured.given().queryParam("refinejson", transformURI)
+                .queryParam("format", format).and()
+                .header("Accept", contentType.toString() + ";q=1.0")
                 .contentType("text/csv")
-				.content(contentsAsBytes("inputs", input, "csv")).when().post()
-				.andReturn();
-	}
+                .content(contentsAsBytes("inputs", input, "csv")).when().post()
+                .andReturn();
+    }
 
-	@Override
-	protected Transformer transformer() throws URISyntaxException {
-		return new SynchronousTransformer(new URI("http://localhost:" + REFINE_PORT));
-	}
+    @Override
+    protected Transformer transformer() throws URISyntaxException {
+        return new SynchronousTransformer(new RefineHTTPClient(new URI("http://localhost:" + REFINE_PORT)));
+    }
 }

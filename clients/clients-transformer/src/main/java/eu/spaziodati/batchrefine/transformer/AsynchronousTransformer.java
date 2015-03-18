@@ -38,14 +38,10 @@ public class AsynchronousTransformer extends BatchRefineTransformer implements
 
     private volatile CallBackHandler fHandler = NULL_HANDLER;
 
-    private final MultiInstanceEngine fEngine;
+    private final IAsyncTransformEngine fEngine;
 
-    public AsynchronousTransformer(URI... refineURIs) {
-        ITransformEngine[] engines = new ITransformEngine[refineURIs.length];
-        for (int i = 0; i < refineURIs.length; i++) {
-            engines[i] = new RefineHTTPClient(refineURIs[i]);
-        }
-        fEngine = new MultiInstanceEngine(engines);
+    public AsynchronousTransformer(IAsyncTransformEngine engine) {
+        fEngine = engine;
     }
 
     @Override
@@ -59,7 +55,7 @@ public class AsynchronousTransformer extends BatchRefineTransformer implements
     @Override
     public void transform(HttpRequestEntity entity, String requestId)
             throws IOException {
-        
+
         logMessage(entity.getRequest());
 
         if (!fActive.add(requestId)) {

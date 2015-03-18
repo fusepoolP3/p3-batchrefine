@@ -1,0 +1,11 @@
+language: java
+
+before_script:
+  - wget --no-check-certificate https://github.com/OpenRefine/OpenRefine/archive/2.6-beta.1.tar.gz -O /tmp/OpenRefine.tar.gz
+  - tar xzf /tmp/OpenRefine.tar.gz; rm /tmp/OpenRefine.tar.gz
+  - wget https://github.com/fadmaa/grefine-rdf-extension/archive/v0.9.0.tar.gz -O /tmp/v0.9.0.tar.gz
+  - tar xzvf /tmp/v0.9.0.tar.gz && rm /tmp/v0.9.0.tar.gz; mv grefine-rdf-extension-0.9.0 OpenRefine/extensions/rdf-extension
+  - cd OpenRefine/extensions/rdf-extension; JAVA_TOOL_OPTIONS='-Dfile.encoding=UTF-8' ant build
+  - cd ~/OpenRefine; ant build jar_server jar_webapp
+  - cd ~/; REFINE_ROOT=./OpenRefine ./bin/refine-import.sh
+  - ./OpenRefine/refine -x refine.headless=true &
