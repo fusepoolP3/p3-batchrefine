@@ -29,15 +29,14 @@ public class SplitJob extends Callback {
     private ISplitLogic splitLogic;
     private ArrayList<TransformTask> chunks;
     private Properties exporterProperties;
-    @SuppressWarnings("unused")
-    private volatile int taskCounter;
+    private Callback callback;
 
     public SplitJob(int idNumber) {
         id = idNumber;
     }
 
     public SplitJob configure(URI original, JSONArray transform,
-                              URI transformed, Properties jobConfig) throws Exception {
+                              URI transformed, Properties jobConfig, Callback callback) throws Exception {
         inputFile = new File(original);
         this.transform = transform;
         outputFile = new File(transformed);
@@ -52,6 +51,7 @@ public class SplitJob extends Callback {
                                 + ".splitProperty"));
         exporterProperties = jobConfig;
         splitInputFile();
+        this.callback = callback;
         return this;
     }
 
@@ -62,7 +62,7 @@ public class SplitJob extends Callback {
                 + ".output"));
         JSONArray transform = deserialize(new File(checkParatmeterExist(
                 jobConfig, "job." + id + ".transform")));
-        return this.configure(original, transform, transformed, jobConfig);
+        return this.configure(original, transform, transformed, jobConfig, null);
     }
 
     public void submit(MultiInstanceEngine engine) {
@@ -79,12 +79,13 @@ public class SplitJob extends Callback {
             t.get();
         }
         reassambleOutput();
+        if (callback != null)
+            callback.done();
     }
 
     private void splitInputFile() throws IOException {
         Files.createDirectories(new File(tempDir, "/out/").toPath());
         chunks = splitLogic.splitFile(inputFile, tempDir);
-        taskCounter = chunks.size();
     }
 
     private void reassambleOutput() throws IOException {
@@ -121,12 +122,10 @@ public class SplitJob extends Callback {
 
     @Override
     public void done() {
-        taskCounter--;
     }
 
     @Override
     public void failed(Exception ex) {
-        taskCounter--;
     }
 
     public void cleanup() {
