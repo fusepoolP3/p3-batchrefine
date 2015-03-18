@@ -53,4 +53,4 @@ ADD ./internal/p3-transformer-start.sh ./
 ADD ./supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 RUN supervisord
 
-CMD ["./p3-transformer-start.sh", "-t async"]
+CMD ["./p3-transformer-start.sh","-t async","remote"]
