@@ -28,8 +28,8 @@ public class SynchronousTransformer extends BatchRefineTransformer implements
 
     private ITransformEngine fRefineEngine;
 
-    public SynchronousTransformer(URI refineURI) {
-        fRefineEngine = new RefineHTTPClient(refineURI);
+    public SynchronousTransformer(ITransformEngine engine) {
+        fRefineEngine = engine;
     }
 
     @Override
@@ -41,8 +41,8 @@ public class SynchronousTransformer extends BatchRefineTransformer implements
 
     @Override
     public Entity transform(HttpRequestEntity entity) throws IOException {
-    	logMessage(entity.getRequest());
-    	
+        logMessage(entity.getRequest());
+
         final HttpRequestEntity request = cast(entity);
 
         final ImmutablePair<MimeType, Properties> options = exporterOptions(request);
@@ -58,7 +58,7 @@ public class SynchronousTransformer extends BatchRefineTransformer implements
                 try {
                     // Can't allow more than one transform at a time as OpenRefine is not
                     // designed for that.
-                    synchronized(SynchronousTransformer.this) {
+                    synchronized (SynchronousTransformer.this) {
                         engine.transform(input.toURI(), fetchTransform(request), output.toURI(),
                                 options.right);
                     }
