@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/fusepoolP3/p3-batchrefine.svg?branch=master)](https://travis-ci.org/fusepoolP3/p3-batchrefine)
 BatchRefine
 ===========
 
@@ -217,4 +218,3 @@ Miscellaneous
 This work is partially funded by
 [Fusepool P3](http://www.fusepool.eu/p3) project, under FP7 grant
 609696.
-

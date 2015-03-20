@@ -89,7 +89,7 @@
 
         <dependency>
             <groupId>eu.spaziodati.batchrefine</groupId>
-            <artifactId>engines-embedded</artifactId>
+            <artifactId>clients-core</artifactId>
             <version>${project.version}</version>
         </dependency>
 
