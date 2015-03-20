@@ -1,0 +1,94 @@
+{
+    "preferences": {
+        "entries": {
+            "reconciliation.standardServices": [
+                {
+                    "identifierSpace": "http://www.ietf.org/rfc/rfc3986",
+                    "name": "Sindice",
+                    "preview": {
+                        "height": 300,
+                        "url": "http://localhost:3333/extension/rdf-extension/services/sindice/preview/template?id={{id}}",
+                        "width": 430
+                    },
+                    "schemaSpace": "http://www.ietf.org/rfc/rfc3986",
+                    "suggest": {
+                        "entity": {
+                            "flyout_service_path": "/suggest/entity/preview",
+                            "flyout_service_url": "http://localhost:3333/extension/rdf-extension/services/sindice",
+                            "service_path": "/suggest/entity",
+                            "service_url": "http://localhost:3333/extension/rdf-extension/services/sindice"
+                        },
+                        "property": {
+                            "flyout_service_path": "/suggest/property/preview",
+                            "flyout_service_url": "http://localhost:3333/extension/rdf-extension/services/sindice",
+                            "service_path": "/suggest/property",
+                            "service_url": "http://localhost:3333/extension/rdf-extension/services/sindice"
+                        },
+                        "type": {
+                            "flyout_service_path": "/suggest/type/preview",
+                            "flyout_service_url": "http://localhost:3333/extension/rdf-extension/services/sindice",
+                            "service_path": "/suggest/type",
+                            "service_url": "http://localhost:3333/extension/rdf-extension/services/sindice"
+                        }
+                    },
+                    "ui": {
+                        "handler": "ReconStandardServicePanel"
+                    },
+                    "url": "http://localhost:3333/extension/rdf-extension/services/sindice",
+                    "view": {
+                        "url": "http://localhost:3333/extension/rdf-extension/services/sindice/view?id={{id}}"
+                    }
+                },
+                {
+                    "identifierSpace": "http://www.ietf.org/rfc/rfc3986",
+                    "name": "DBPedia",
+                    "preview": {
+                        "height": 300,
+                        "url": "http://localhost:3333/extension/rdf-extension/services/dbpedia/preview/template?id={{id}}",
+                        "width": 430
+                    },
+                    "schemaSpace": "http://www.ietf.org/rfc/rfc3986",
+                    "suggest": {
+                        "entity": {
+                            "flyout_service_path": "/suggest/entity/preview",
+                            "flyout_service_url": "http://localhost:3333/extension/rdf-extension/services/dbpedia",
+                            "service_path": "/suggest/entity",
+                            "service_url": "http://localhost:3333/extension/rdf-extension/services/dbpedia"
+                        },
+                        "property": {
+                            "flyout_service_path": "/suggest/property/preview",
+                            "flyout_service_url": "http://localhost:3333/extension/rdf-extension/services/dbpedia",
+                            "service_path": "/suggest/property",
+                            "service_url": "http://localhost:3333/extension/rdf-extension/services/dbpedia"
+                        },
+                        "type": {
+                            "flyout_service_path": "/suggest/type/preview",
+                            "flyout_service_url": "http://localhost:3333/extension/rdf-extension/services/dbpedia",
+                            "service_path": "/suggest/type",
+                            "service_url": "http://localhost:3333/extension/rdf-extension/services/dbpedia"
+                        }
+                    },
+                    "ui": {
+                        "handler": "ReconStandardServicePanel"
+                    },
+                    "url": "http://localhost:3333/extension/rdf-extension/services/dbpedia",
+                    "view": {
+                        "url": "http://localhost:3333/extension/rdf-extension/services/dbpedia/view?id={{id}}"
+                    }
+                }
+            ],
+            "scripting.expressions": {
+                "class": "com.google.refine.preference.TopList",
+                "list": [],
+                "top": 100
+            },
+            "scripting.starred-expressions": {
+                "class": "com.google.refine.preference.TopList",
+                "list": [],
+                "top": 2147483647
+            }
+        }
+    },
+    "projectIDs": [
+    ]
+}

@@ -1,0 +1,1 @@
+{"services":[{"type":"rdf","id":"dbpedia","name":"DBPedia","matchThreshold":0.9,"searchPropertyUris":["http://www.w3.org/2000/01/rdf-schema#label"],"endpoint":{"type":"default","queryFactory":{"type":"virtuoso"},"queryExecutor":{"type":"remote-virtuoso","sparql-url":"http://it.dbpedia.org/sparql"}}}]}
