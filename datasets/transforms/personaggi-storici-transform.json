@@ -1,0 +1,399 @@
+[
+  {
+    "op": "core/text-transform",
+    "description": "Text transform on cells in column Nome using expression jython:# \n# Inverts name and surname and creates column.\n#\nparsed = value.split(' ')\n\nif len(parsed) == 1:\n   return value\n\nreturn value + '|' + ' '.join([parsed[-1]] + parsed[0:-1])",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Nome",
+    "expression": "jython:# \n# Inverts name and surname and creates column.\n#\nparsed = value.split(' ')\n\nif len(parsed) == 1:\n   return value\n\nreturn value + '|' + ' '.join([parsed[-1]] + parsed[0:-1])",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10
+  },
+  {
+    "op": "core/column-split",
+    "description": "Split column Nome by separator",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Nome",
+    "guessCellType": true,
+    "removeOriginalColumn": true,
+    "mode": "separator",
+    "separator": "|",
+    "regex": false,
+    "maxColumns": 0
+  },
+  {
+    "op": "core/column-rename",
+    "description": "Rename column Nome 1 to Nome",
+    "oldColumnName": "Nome 1",
+    "newColumnName": "Nome"
+  },
+  {
+    "op": "core/column-rename",
+    "description": "Rename column Nome 2 to InvertedNome",
+    "oldColumnName": "Nome 2",
+    "newColumnName": "InvertedNome"
+  },
+  {
+    "op": "core/recon",
+    "description": "Reconcile cells in column Nome to type http://dbpedia.org/ontology/Person",
+    "columnName": "Nome",
+    "config": {
+      "mode": "standard-service",
+      "service": "http://localhost:3333/extension/rdf-extension/services/dbpedia",
+      "identifierSpace": "http://www.ietf.org/rfc/rfc3986",
+      "schemaSpace": "http://www.ietf.org/rfc/rfc3986",
+      "type": {
+        "id": "http://dbpedia.org/ontology/Person",
+        "name": "dbo:Person"
+      },
+      "autoMatch": true,
+      "columnDetails": []
+    },
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    }
+  },
+  {
+    "op": "core/recon",
+    "description": "Reconcile cells in column InvertedNome to type http://dbpedia.org/ontology/Person",
+    "columnName": "InvertedNome",
+    "config": {
+      "mode": "standard-service",
+      "service": "http://localhost:3333/extension/rdf-extension/services/dbpedia",
+      "identifierSpace": "http://www.ietf.org/rfc/rfc3986",
+      "schemaSpace": "http://www.ietf.org/rfc/rfc3986",
+      "type": {
+        "id": "http://dbpedia.org/ontology/Person",
+        "name": "http://dbpedia.org/ontology/Person"
+      },
+      "autoMatch": true,
+      "columnDetails": []
+    },
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    }
+  },
+  {
+    "op": "core/recon-match-best-candidates",
+    "description": "Match each cell to its best recon candidate in column Nome",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Nome"
+  },
+  {
+    "op": "core/recon-match-best-candidates",
+    "description": "Match each cell to its best recon candidate in column InvertedNome",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "InvertedNome"
+  },
+  {
+    "op": "core/text-transform",
+    "description": "Text transform on cells in column Nome using expression jython:#\n# Merges recon results.\n#\ndef get(adict, key, default):\n\n   try:\n      if len(key) == 1:\n         return adict[key[0]]\n\n      return get(adict[key[0]], key[1:], default)\n\n   except (KeyError, TypeError):\n      return default\n\nname = get(cells, ['Nome'], None)\ninverted = get(cells, ['InvertedNome'], None)\n\nif get(inverted, ['recon', 'best', 'score'], 0.0) > get(name, ['recon', 'best', 'score'], 0.0):\n   return inverted\n\nreturn name",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Nome",
+    "expression": "jython:#\n# Merges recon results.\n#\ndef get(adict, key, default):\n\n   try:\n      if len(key) == 1:\n         return adict[key[0]]\n\n      return get(adict[key[0]], key[1:], default)\n\n   except (KeyError, TypeError):\n      return default\n\nname = get(cells, ['Nome'], None)\ninverted = get(cells, ['InvertedNome'], None)\n\nif get(inverted, ['recon', 'best', 'score'], 0.0) > get(name, ['recon', 'best', 'score'], 0.0):\n   return inverted\n\nreturn name",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10
+  },
+  {
+    "op": "core/recon",
+    "description": "Reconcile cells in column Luogo di Nascita to type http://dbpedia.org/ontology/PopulatedPlace",
+    "columnName": "Luogo di Nascita",
+    "config": {
+      "mode": "standard-service",
+      "service": "http://localhost:3333/extension/rdf-extension/services/dbpedia",
+      "identifierSpace": "http://www.ietf.org/rfc/rfc3986",
+      "schemaSpace": "http://www.ietf.org/rfc/rfc3986",
+      "type": {
+        "id": "http://dbpedia.org/ontology/PopulatedPlace",
+        "name": "dbo:PopulatedPlace"
+      },
+      "autoMatch": true,
+      "columnDetails": []
+    },
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    }
+  },
+  {
+    "op": "core/recon",
+    "description": "Reconcile cells in column Luogo di Morte to type http://dbpedia.org/ontology/PopulatedPlace",
+    "columnName": "Luogo di Morte",
+    "config": {
+      "mode": "standard-service",
+      "service": "http://localhost:3333/extension/rdf-extension/services/dbpedia",
+      "identifierSpace": "http://www.ietf.org/rfc/rfc3986",
+      "schemaSpace": "http://www.ietf.org/rfc/rfc3986",
+      "type": {
+        "id": "http://dbpedia.org/ontology/PopulatedPlace",
+        "name": "dbo:PopulatedPlace"
+      },
+      "autoMatch": true,
+      "columnDetails": []
+    },
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    }
+  },
+  {
+    "op": "core/column-removal",
+    "description": "Remove column InvertedNome",
+    "columnName": "InvertedNome"
+  },
+  {
+    "op": "core/recon-match-best-candidates",
+    "description": "Match each cell to its best recon candidate in column Luogo di Morte",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Luogo di Morte"
+  },
+  {
+    "op": "core/recon-match-best-candidates",
+    "description": "Match each cell to its best recon candidate in column Luogo di Nascita",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Luogo di Nascita"
+  },
+  {
+    "op": "core/column-addition",
+    "description": "Create column nomeuri at index 4 based on column Nome using expression grel:cells[\"Nome\"].recon.best.id",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "newColumnName": "nomeuri",
+    "columnInsertIndex": 4,
+    "baseColumnName": "Nome",
+    "expression": "grel:cells[\"Nome\"].recon.best.id",
+    "onError": "set-to-blank"
+  },
+  {
+    "op": "core/column-addition",
+    "description": "Create column morteuri at index 7 based on column Luogo di Morte using expression grel:cells[\"Luogo di Morte\"].recon.best.id",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "newColumnName": "morteuri",
+    "columnInsertIndex": 7,
+    "baseColumnName": "Luogo di Morte",
+    "expression": "grel:cells[\"Luogo di Morte\"].recon.best.id",
+    "onError": "set-to-blank"
+  },
+  {
+    "op": "core/column-addition",
+    "description": "Create column nascitauri at index 9 based on column Luogo di Nascita using expression grel:cells[\"Luogo di Nascita\"].recon.best.id",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "newColumnName": "nascitauri",
+    "columnInsertIndex": 9,
+    "baseColumnName": "Luogo di Nascita",
+    "expression": "grel:cells[\"Luogo di Nascita\"].recon.best.id",
+    "onError": "set-to-blank"
+  },
+  {
+    "op": "core/text-transform",
+    "description": "Text transform on cells in column Data di morte using expression jython:from time import strptime, mktime\nfrom datetime import datetime\nimport locale\n\n#\n# Cleans up dates\n#\n\nif value is None:\n   return value\n\ntranslation = [\n   ('gennaio', 'january'),\n   ('febbraio', 'february'),\n   ('marzo', 'march'),\n   ('aprile', 'april'),\n   ('maggio', 'may'),\n   ('giugno', 'june'),\n   ('luglio', 'july'),\n   ('agosto', 'august'),\n   ('settembre', 'september'),\n   ('ottobre', 'october'),\n   ('novembre', 'november'),\n   ('dicembre', 'december')\n]\n\npatterns = [\n   '%d %b %Y', \n   '%d/%m/%Y', \n   '%Y', \n   'verso la metà del %Y', \n   'prima metà del %Y', \n   'seconda metà del %Y',\n   'inizio del %Y'\n]\n\nvalue = value.lower()\n\n# First, translates months if possible.\nfor italian, english in translation:\n   if italian in value:\n      value = value.replace(italian, english)\n      break\n\n# Tries all patterns.\ndate = None\nfor pattern in patterns:\n   try:\n      date = strptime(value, pattern)\n      break\n   except (TypeError, ValueError):\n      pass\n\nreturn datetime.fromtimestamp(mktime(date)).isoformat() if not date is None else value",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Data di morte",
+    "expression": "jython:from time import strptime, mktime\nfrom datetime import datetime\nimport locale\n\n#\n# Cleans up dates\n#\n\nif value is None:\n   return value\n\ntranslation = [\n   ('gennaio', 'january'),\n   ('febbraio', 'february'),\n   ('marzo', 'march'),\n   ('aprile', 'april'),\n   ('maggio', 'may'),\n   ('giugno', 'june'),\n   ('luglio', 'july'),\n   ('agosto', 'august'),\n   ('settembre', 'september'),\n   ('ottobre', 'october'),\n   ('novembre', 'november'),\n   ('dicembre', 'december')\n]\n\npatterns = [\n   '%d %b %Y', \n   '%d/%m/%Y', \n   '%Y', \n   'verso la metà del %Y', \n   'prima metà del %Y', \n   'seconda metà del %Y',\n   'inizio del %Y'\n]\n\nvalue = value.lower()\n\n# First, translates months if possible.\nfor italian, english in translation:\n   if italian in value:\n      value = value.replace(italian, english)\n      break\n\n# Tries all patterns.\ndate = None\nfor pattern in patterns:\n   try:\n      date = strptime(value, pattern)\n      break\n   except (TypeError, ValueError):\n      pass\n\nreturn datetime.fromtimestamp(mktime(date)).isoformat() if not date is None else value",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10
+  },
+  {
+    "op": "core/text-transform",
+    "description": "Text transform on cells in column Data di nascita using expression jython:from time import strptime, mktime\nfrom datetime import datetime\nimport locale\n\n#\n# Cleans up dates\n#\n\nif value is None:\n   return value\n\ntranslation = [\n   ('gennaio', 'january'),\n   ('febbraio', 'february'),\n   ('marzo', 'march'),\n   ('aprile', 'april'),\n   ('maggio', 'may'),\n   ('giugno', 'june'),\n   ('luglio', 'july'),\n   ('agosto', 'august'),\n   ('settembre', 'september'),\n   ('ottobre', 'october'),\n   ('novembre', 'november'),\n   ('dicembre', 'december')\n]\n\npatterns = [\n   '%d %b %Y', \n   '%d/%m/%Y', \n   '%Y', \n   'verso la metà del %Y', \n   'prima metà del %Y', \n   'seconda metà del %Y',\n   'inizio del %Y'\n]\n\nvalue = value.lower()\n\n# First, translates months if possible.\nfor italian, english in translation:\n   if italian in value:\n      value = value.replace(italian, english)\n      break\n\n# Tries all patterns.\ndate = None\nfor pattern in patterns:\n   try:\n      date = strptime(value, pattern)\n      break\n   except (TypeError, ValueError):\n      pass\n\nreturn datetime.fromtimestamp(mktime(date)).isoformat() if not date is None else value",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Data di nascita",
+    "expression": "jython:from time import strptime, mktime\nfrom datetime import datetime\nimport locale\n\n#\n# Cleans up dates\n#\n\nif value is None:\n   return value\n\ntranslation = [\n   ('gennaio', 'january'),\n   ('febbraio', 'february'),\n   ('marzo', 'march'),\n   ('aprile', 'april'),\n   ('maggio', 'may'),\n   ('giugno', 'june'),\n   ('luglio', 'july'),\n   ('agosto', 'august'),\n   ('settembre', 'september'),\n   ('ottobre', 'october'),\n   ('novembre', 'november'),\n   ('dicembre', 'december')\n]\n\npatterns = [\n   '%d %b %Y', \n   '%d/%m/%Y', \n   '%Y', \n   'verso la metà del %Y', \n   'prima metà del %Y', \n   'seconda metà del %Y',\n   'inizio del %Y'\n]\n\nvalue = value.lower()\n\n# First, translates months if possible.\nfor italian, english in translation:\n   if italian in value:\n      value = value.replace(italian, english)\n      break\n\n# Tries all patterns.\ndate = None\nfor pattern in patterns:\n   try:\n      date = strptime(value, pattern)\n      break\n   except (TypeError, ValueError):\n      pass\n\nreturn datetime.fromtimestamp(mktime(date)).isoformat() if not date is None else value",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10
+  },
+  {
+    "op": "rdf-extension/save-rdf-schema",
+    "description": "Save RDF schema skeleton",
+    "schema": {
+      "baseUri": "http://localhost:3333/",
+      "prefixes": [
+        {
+          "name": "rdfs",
+          "uri": "http://www.w3.org/2000/01/rdf-schema#"
+        },
+        {
+          "name": "dbo",
+          "uri": "http://dbpedia.org/ontology/"
+        },
+        {
+          "name": "foaf",
+          "uri": "http://xmlns.com/foaf/0.1/"
+        },
+        {
+          "name": "owl",
+          "uri": "http://www.w3.org/2002/07/owl#"
+        },
+        {
+          "name": "xsd",
+          "uri": "http://www.w3.org/2001/XMLSchema#"
+        },
+        {
+          "name": "rdf",
+          "uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+        },
+        {
+          "name": "sdo",
+          "uri": "http://schema.org/"
+        }
+      ],
+      "rootNodes": [
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value",
+          "isRowNumberCell": false,
+          "columnName": "url",
+          "rdfTypes": [
+            {
+              "uri": "http://schema.org/Person",
+              "curie": "sdo:Person"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://schema.org/jobTitle",
+              "curie": "sdo:jobTitle",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "Attivita"
+              }
+            },
+            {
+              "uri": "http://schema.org/name",
+              "curie": "sdo:name",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "Nome"
+              }
+            },
+            {
+              "uri": "http://www.w3.org/2002/07/owl#sameAs",
+              "curie": "owl:sameAs",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "nomeuri",
+                "rdfTypes": [
+                  {
+                    "uri": "http://dbpedia.org/ontology/Person",
+                    "curie": "dbo:Person"
+                  }
+                ],
+                "links": []
+              }
+            },
+            {
+              "uri": "http://schema.org/birthDate",
+              "curie": "sdo:birthDate",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "Data di nascita"
+              }
+            },
+            {
+              "uri": "http://schema.org/deathPlace",
+              "curie": "sdo:deathPlace",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "morteuri",
+                "rdfTypes": [
+                  {
+                    "uri": "http://schema.org/Place",
+                    "curie": "sdo:Place"
+                  }
+                ],
+                "links": []
+              }
+            },
+            {
+              "uri": "http://schema.org/birthPlace",
+              "curie": "sdo:birthPlace",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "nascitauri",
+                "rdfTypes": [
+                  {
+                    "uri": "http://schema.org/Place",
+                    "curie": "sdo:Place"
+                  }
+                ],
+                "links": []
+              }
+            },
+            {
+              "uri": "http://schema.org/description",
+              "curie": "sdo:description",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "La vita"
+              }
+            },
+            {
+              "uri": "http://schema.org/deathDate",
+              "curie": "sdo:deathDate",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "Data di morte"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  }
+]
