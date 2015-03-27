@@ -10,7 +10,7 @@
 	</parent>
 
 	<artifactId>engines-split</artifactId>
-  <version>1.1.0</version>
+  <version>1.1.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>BatchRefine Engines: Splitter</name>
@@ -77,6 +77,6 @@
 
 
 	<scm>
-		<tag>v1.1.0</tag>
+		<tag>pre-release</tag>
 	</scm>
 </project>
