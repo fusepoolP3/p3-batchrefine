@@ -23,9 +23,10 @@ import eu.spaziodati.batchrefine.core.MultiInstanceEngine;
 
 public class SplitterEngine implements ITransformEngine, IAsyncTransformEngine {
 
-    public static enum Split {
-        line,chunk
+    public enum Split {
+        LINE, CHUNK
     }
+
     private static final Logger fLogger = Logger
             .getLogger(SplitterEngine.class);
 

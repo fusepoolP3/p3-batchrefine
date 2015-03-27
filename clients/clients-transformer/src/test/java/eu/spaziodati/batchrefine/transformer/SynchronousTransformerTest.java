@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Properties;
 
 import javax.activation.MimeType;
 
@@ -56,6 +57,6 @@ public class SynchronousTransformerTest extends TransformerTest {
 
     @Override
     protected Transformer transformer() throws URISyntaxException {
-        return new SynchronousTransformer(new RefineHTTPClient(new URI("http://localhost:" + REFINE_PORT)));
+        return new SynchronousTransformer(new RefineHTTPClient(new URI("http://localhost:" + REFINE_PORT)), new Properties());
     }
 }

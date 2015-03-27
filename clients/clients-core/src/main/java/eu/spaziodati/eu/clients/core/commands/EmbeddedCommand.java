@@ -7,6 +7,7 @@ import org.kohsuke.args4j.Argument;
 import org.kohsuke.args4j.CmdLineException;
 import org.kohsuke.args4j.CmdLineParser;
 
+import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -38,8 +39,8 @@ public class EmbeddedCommand extends EngineCommand {
     }
 
     @Override
-    public ITransformEngine getEngine() throws URISyntaxException {
-        return new TransformEngineImpl();
+    public ITransformEngine getEngine() throws URISyntaxException, IOException {
+        return new TransformEngineImpl().init();
     }
 
     @Override
@@ -52,5 +53,11 @@ public class EmbeddedCommand extends EngineCommand {
         Properties exporterProperties = new Properties();
         exporterProperties.setProperty("format", fFormat.toString());
         return exporterProperties;
+    }
+
+    @Override
+    public void help() throws CmdLineException {
+        if (help)
+            throw new CmdLineException(parser,"");
     }
 }

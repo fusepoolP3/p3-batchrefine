@@ -27,9 +27,11 @@ public class SynchronousTransformer extends BatchRefineTransformer implements
         SyncTransformer {
 
     private ITransformEngine fRefineEngine;
-
-    public SynchronousTransformer(ITransformEngine engine) {
+    private Properties transformerConfig;
+    public SynchronousTransformer(ITransformEngine engine, Properties config) {
         fRefineEngine = engine;
+        transformerConfig = config;
+        transformerConfig.remove("format");
     }
 
     @Override
@@ -46,7 +48,7 @@ public class SynchronousTransformer extends BatchRefineTransformer implements
         final HttpRequestEntity request = cast(entity);
 
         final ImmutablePair<MimeType, Properties> options = exporterOptions(request);
-
+        options.right.putAll(transformerConfig);
         final File input = downloadInput(entity);
         final File output = File.createTempFile("reply", "tmp");
 

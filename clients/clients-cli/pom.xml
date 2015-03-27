@@ -49,6 +49,8 @@
         </plugins>
     </build>
 
+
+
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
@@ -61,13 +63,13 @@
         </dependency>
 
         <dependency>
-            <groupId>org.openrefine</groupId>
-            <artifactId>openrefine-core</artifactId>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>org.json</groupId>
-            <artifactId>json</artifactId>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
         </dependency>
 
         <dependency>
@@ -78,18 +80,25 @@
         <!-- These should probably be made runtime dependencies -->
         <dependency>
             <groupId>eu.spaziodati.batchrefine</groupId>
-            <artifactId>engines-http</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>eu.spaziodati.batchrefine</groupId>
-            <artifactId>clients-core</artifactId>
+            <artifactId>engines-spark</artifactId>
             <version>${project.version}</version>
         </dependency>
 
         <dependency>
             <groupId>eu.spaziodati.batchrefine</groupId>
-            <artifactId>engines-embedded</artifactId>
+            <artifactId>engines-split</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>eu.spaziodati.batchrefine</groupId>
+            <artifactId>engines-http</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>eu.spaziodati.batchrefine</groupId>
+            <artifactId>clients-core</artifactId>
             <version>${project.version}</version>
         </dependency>
 

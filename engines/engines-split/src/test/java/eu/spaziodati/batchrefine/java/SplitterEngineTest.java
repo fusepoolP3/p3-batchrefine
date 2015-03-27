@@ -15,7 +15,7 @@ public class SplitterEngineTest extends EngineTest {
 	protected Properties properties() {
 		Properties options = new Properties();
 		options.put("format", fFormat);
-		options.put("job.1.splitStrategy", "lines");
+		options.put("job.1.splitStrategy", "LINE");
 		options.put("job.1.splitProperty", "10,20,25");
 		return options;
 	}

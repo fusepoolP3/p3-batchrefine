@@ -31,7 +31,6 @@ public class BatchRefineTransformerCLI {
     @Argument(handler = SubCommandHandler.class, required = true, metaVar = "[remote | spark | split]", usage = "configure engine type")
     @SubCommands({
             @SubCommand(name = "remote", impl = RemoteCommand.class),
-            @SubCommand(name = "spark", impl = SparkCommand.class),
             @SubCommand(name = "split", impl = SplitCommand.class)
     })
     EngineCommand cmd;
@@ -51,8 +50,9 @@ public class BatchRefineTransformerCLI {
 
         try {
             parser.parseArgument(args);
+            cmd.help();
         } catch (CmdLineException ex) {
-            printUsage(parser);
+            printUsage(ex.getParser());
             System.exit(-1);
         }
         configureLogging();
@@ -64,7 +64,7 @@ public class BatchRefineTransformerCLI {
         switch (fTransformer) {
 
             case sync:
-                server.start(new SynchronousTransformer(cmd.getEngine()));
+                server.start(new SynchronousTransformer(cmd.getEngine(),cmd.getExporterProperties()));
                 break;
 
             case async:

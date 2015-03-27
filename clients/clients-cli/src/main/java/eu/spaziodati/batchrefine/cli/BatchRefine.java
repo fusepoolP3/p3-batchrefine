@@ -31,12 +31,12 @@ import java.util.List;
 public class BatchRefine {
     @Option(name = "-v", aliases = {"--verbose"}, usage = "Prints debug information")
     private boolean fVerbose;
-    @Argument(handler = SubCommandHandler.class, required = true, usage = "ENGINETYPE", metaVar = "[remote | embedded | spark | split]")
+    @Argument(handler = SubCommandHandler.class, required = true, usage = "choose batchrefine engine type", metaVar = "ENGINETYPE")
     @SubCommands({
             @SubCommand(name = "remote", impl = RemoteCommand.class),
             @SubCommand(name = "embedded", impl = EmbeddedCommand.class),
-            @SubCommand(name = "spark", impl = SparkCommand.class),
-            @SubCommand(name = "split", impl = SplitCommand.class)
+            @SubCommand(name = "split", impl = SplitCommand.class),
+            @SubCommand(name = "spark", impl = SparkCommand.class)
     })
     EngineCommand cmd;
     @Option(name = "--help", help = true, usage = "Display this message")
@@ -148,14 +148,11 @@ public class BatchRefine {
     private void printUsage(CmdLineException ex) {
         System.err.println(ex.getMessage());
         System.err
-                .println("Batchrefine applies an OpenRefine TRANSFORM on INPUT, and writes it to an OUTPUT file.\n" +
-                        "USAGE: batchrefine [GLOBAL OPTIONS] ENGINETYPE [ENGINE OPTIONS] INPUT TRANSFORM [OUTPUT]\n" +
+                .println("Batchrefine applies OpenRefine TRANSFORM on INPUT, and writes to OUTPUT file.\n\n" +
+                        "USAGE: batchrefine [-v] ENGINETYPE [ENGINE OPTS] INPUT TRANSFORM [OUTPUT]\n\n" +
                         "If no OUTPUT is specified, writes to standard output.\n" +
-                        "----------------------------------------------------------------------------------------");
-        System.err
-                .println();
+                        "-------------------------------------------------------------------------------");
         ex.getParser().printUsage(System.err);
-
     }
 
     public static void main(String[] args) {

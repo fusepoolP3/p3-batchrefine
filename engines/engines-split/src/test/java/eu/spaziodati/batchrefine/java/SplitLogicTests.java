@@ -40,7 +40,7 @@ public class SplitLogicTests {
 		SplitLogicFactory factory = new SplitLogicFactory();
 		File reconstructed = Files.createTempFile("tmp_output", "_test")
 				.toFile();
-		ISplitLogic fileSplitter = factory.getSplitter("lines", "10,30,35");
+		ISplitLogic fileSplitter = factory.getSplitter("LINE", "10,30,35");
 		File inputFile = EngineTestUtils.findAndCopy("inputs/osterie.csv");
 		fileSplitter.splitFile(inputFile, fTempDir);
 		PartFilesReassembly.reconstructLineBased(fTempDir, reconstructed, true);
@@ -61,7 +61,7 @@ public class SplitLogicTests {
 		SplitLogicFactory factory = new SplitLogicFactory();
 		File reconstructed = Files.createTempFile("tmp_output", "_test")
 				.toFile();
-		ISplitLogic fileSplitter = factory.getSplitter("lines", "3,10,25,70");
+		ISplitLogic fileSplitter = factory.getSplitter("LINE", "3,10,25,70");
 		File inputFile = EngineTestUtils.findAndCopy("inputs/osterie.csv");
 		fileSplitter.splitFile(inputFile, fTempDir);
 		PartFilesReassembly.reconstructLineBased(fTempDir, reconstructed, true);
@@ -73,7 +73,7 @@ public class SplitLogicTests {
 		SplitLogicFactory factory = new SplitLogicFactory();
 		File reconstructed = Files.createTempFile("tmp_output", "_test")
 				.toFile();
-		ISplitLogic fileSplitter = factory.getSplitter("chunks", "3");
+		ISplitLogic fileSplitter = factory.getSplitter("CHUNK", "3");
 		File inputFile = EngineTestUtils.findAndCopy("inputs/osterie.csv");
 		fileSplitter.splitFile(inputFile, fTempDir);
 		PartFilesReassembly.reconstructLineBased(fTempDir, reconstructed, true);

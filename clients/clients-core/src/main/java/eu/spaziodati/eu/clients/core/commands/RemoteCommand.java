@@ -62,6 +62,10 @@ public class RemoteCommand extends EngineCommand {
         return ENGINE_TYPE;
     }
 
+    public void help() throws CmdLineException {
+        if (help)
+            throw new CmdLineException(parser, "");
+    }
 }
 
 

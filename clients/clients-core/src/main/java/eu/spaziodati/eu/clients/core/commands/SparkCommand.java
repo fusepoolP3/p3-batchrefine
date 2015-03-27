@@ -4,6 +4,8 @@ package eu.spaziodati.eu.clients.core.commands;
 import eu.spaziodati.batchrefine.core.IAsyncTransformEngine;
 import eu.spaziodati.batchrefine.core.ITransformEngine;
 import eu.spaziodati.batchrefine.core.spark.SparkRefine;
+import org.kohsuke.args4j.CmdLineException;
+import org.kohsuke.args4j.CmdLineParser;
 import org.kohsuke.args4j.Option;
 
 import java.net.URISyntaxException;
@@ -18,6 +20,8 @@ public class SparkCommand extends EngineCommand {
     private String sparkMaster = "local";
 
     private final static String ENGINE_TYPE = "spark";
+
+    private final CmdLineParser parser = new CmdLineParser(this);
 
     public String toString() {
         return ENGINE_TYPE;
@@ -42,4 +46,11 @@ public class SparkCommand extends EngineCommand {
     public Properties getExporterProperties() {
         return null;
     }
+
+    @Override
+    public void help() throws CmdLineException {
+        if (help)
+            throw new CmdLineException(parser,"");
+    }
+
 }

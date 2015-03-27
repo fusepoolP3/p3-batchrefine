@@ -11,9 +11,9 @@ public class SplitLogicFactory {
 
 	public ISplitLogic getSplitter(String name, String parameter) {
 
-		if (name.equals("lines"))
+		if (name.equals("LINE"))
 			return new LineNumberSplit(parameter);
-		else if (name.equals("chunks"))
+		else if (name.equals("CHUNK"))
 			return new ChunkSplit(parameter);
 		else
 			throw new RuntimeException("Split logic is not identified: " + name);

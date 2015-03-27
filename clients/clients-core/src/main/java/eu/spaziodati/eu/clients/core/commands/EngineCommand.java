@@ -2,12 +2,12 @@ package eu.spaziodati.eu.clients.core.commands;
 
 import eu.spaziodati.batchrefine.core.IAsyncTransformEngine;
 import eu.spaziodati.batchrefine.core.ITransformEngine;
-import eu.spaziodati.batchrefine.core.MultiInstanceEngine;
 import eu.spaziodati.batchrefine.core.http.RefineHTTPClient;
 import org.kohsuke.args4j.CmdLineException;
 import org.kohsuke.args4j.Option;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -40,11 +40,13 @@ public abstract class EngineCommand {
 
     public abstract List<String> getArguments() throws CmdLineException;
 
-    public abstract ITransformEngine getEngine() throws URISyntaxException;
+    public abstract ITransformEngine getEngine() throws URISyntaxException, IOException;
 
     public abstract IAsyncTransformEngine getAsyncEngine() throws URISyntaxException;
 
     public abstract Properties getExporterProperties();
+
+    public abstract void help() throws CmdLineException;
 
     protected RefineHTTPClient[] refineClients(String hosts) throws URISyntaxException {
         String[] list = hosts.split(",");

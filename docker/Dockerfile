@@ -2,8 +2,6 @@ FROM ubuntu:trusty
 
 RUN groupadd user
 RUN useradd -ms /bin/bash -g user user
-RUN mkdir -p /home/user/code
-WORKDIR /home/user/code
 
 # Disable Oracle Java 7's prompts.
 RUN echo debconf shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections
@@ -21,9 +19,11 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y -q oracle-java7-installer
 RUN DEBIAN_FRONTEND=noninteractive apt-get -y --force-yes -q install ant maven3; \
     ln -s /usr/bin/mvn3 /bin/mvn
 
+RUN mkdir -p /home/user/code
+WORKDIR /home/user/code
 
 # Download and assemble OpenRefine 2.6-beta.1 and the RDF extension.
-RUN wget -O - --no-check-certificate https://github.com/OpenRefine/OpenRefine/archive/2.6-beta.1.tar.gz -O ./2.6-beta.1.tar.gz; \  
+RUN wget --no-check-certificate https://github.com/OpenRefine/OpenRefine/archive/2.6-beta.1.tar.gz -O ./2.6-beta.1.tar.gz; \
     tar xzvf 2.6-beta.1.tar.gz; rm 2.6-beta.1.tar.gz
 
 RUN mv OpenRefine-2.6-beta.1 OpenRefine; \
@@ -39,7 +39,7 @@ RUN cd ./OpenRefine/extensions; \
     JAVA_TOOL_OPTIONS='-Dfile.encoding=UTF-8' ant build
 
 # Downloads and builds batchrefine.
-ADD https://github.com/fusepoolP3/batchrefine/archive/master.tar.gz /home/user/code/
+RUN wget https://github.com/fusepoolP3/batchrefine/archive/master.tar.gz
 RUN tar xzvf master.tar.gz; \
     mv p3-batchrefine-master batchrefine; \
     cd batchrefine; \
@@ -50,7 +50,8 @@ RUN cd batchrefine; \
 
 EXPOSE 7100
 ADD ./internal/p3-transformer-start.sh ./
-ADD ./supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+ADD ./supervisord.conf /etc/supervisord.conf
 RUN supervisord
 
-CMD ["./p3-transformer-start.sh","-t async","remote"]
+CMD ["-t async","remote"]
+ENTRYPOINT ["./p3-transformer-start.sh"]

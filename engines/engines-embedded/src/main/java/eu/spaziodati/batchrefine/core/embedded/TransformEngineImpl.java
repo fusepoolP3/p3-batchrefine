@@ -215,12 +215,12 @@ public class TransformEngineImpl implements ITransformEngine {
 
     private void loadModules() throws IOException {
 
-        loadModule("core", "/main/webapp/modules/core/MOD-INF/controller.js",
+        loadModule("core", "controller.js",
                 "registerOperations");
 
-        loadModule("rdf-extension",
-                "/extensions/rdf-extension/module/MOD-INF/controller.js",
-                "registerOperations", "registerExporters");
+//        loadModule("rdf-extension",
+//                "rdf-controller.js",
+//                "init");
     }
 
     /**
@@ -233,9 +233,9 @@ public class TransformEngineImpl implements ITransformEngine {
             throws IOException {
 
         ButterflyModule core = new ButterflyModuleStub(name);
-        File controllerFile = new File(Configurations.get("refine.root",
-                "../OpenRefine"), path);
-
+//        File controllerFile = new File(Configurations.get("refine.root",
+//                "../OpenRefine"), path);
+        File controllerFile = new File(getClass().getClassLoader().getResource(path).getFile());
         if (!controllerFile.exists()) {
             fLogger.warn(String.format(
                     "Can't find controller script for module %s at %s -- "

@@ -30,3 +30,5 @@ import_jar "main/webapp/WEB-INF/lib/opencsv-2.4-SNAPSHOT.jar" "net.sf.opencsv" "
 
 import_jar "build/openrefine-trunk.jar" "org.openrefine" "openrefine-core" "2.6.1"
 import_jar "build/openrefine-trunk-server.jar" "org.openrefine" "openrefine-server" "2.6.1"
+
+mvn org.apache.maven.plugins:maven-resources-plugin:2.7:copy-resources

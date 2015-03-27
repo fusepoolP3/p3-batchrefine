@@ -4,6 +4,7 @@ import static eu.fusepool.p3.accept.util.MimeUtils.mimeType;
 import static eu.spaziodati.batchrefine.java.EngineTestUtils.contentsAsBytes;
 
 import java.net.URI;
+import java.util.Properties;
 
 import eu.fusepool.p3.accept.util.MimeUtils;
 import eu.spaziodati.batchrefine.core.http.RefineHTTPClient;
@@ -23,7 +24,7 @@ public class AcceptHeaderTest {
     @Before
     public void setUp() throws Exception {
         fSupport = new TestSupport();
-        fSupport.start(new SynchronousTransformer(new RefineHTTPClient(new URI("http://localhost:" + REFINE_PORT))));
+        fSupport.start(new SynchronousTransformer(new RefineHTTPClient(new URI("http://localhost:" + REFINE_PORT)),new Properties()));
     }
 
     @Test

@@ -80,10 +80,15 @@
             <version>${project.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>eu.spaziodati.batchrefine</groupId>
+            <artifactId>engines-split</artifactId>
+            <version>${project.version}</version>
+        </dependency>
 
         <dependency>
             <groupId>eu.spaziodati.batchrefine</groupId>
-            <artifactId>clients-core</artifactId>
+            <artifactId>engines-spark</artifactId>
             <version>${project.version}</version>
         </dependency>
 
@@ -92,6 +97,7 @@
             <artifactId>clients-core</artifactId>
             <version>${project.version}</version>
         </dependency>
+
 
         <dependency>
             <groupId>eu.spaziodati.batchrefine</groupId>
