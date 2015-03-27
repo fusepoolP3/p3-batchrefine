@@ -9,7 +9,7 @@
   <groupId>eu.spaziodati.batchrefine</groupId>
   <artifactId>batchrefine-parent</artifactId>
   <packaging>pom</packaging>
-  <version>1.0.0</version>
+  <version>1.1.0</version>
 
   <name>BatchRefine Parent</name>
   <description>Parent POM for BatchRefine</description>
