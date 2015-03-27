@@ -37,7 +37,7 @@ RUN cd ./OpenRefine/extensions; \
     mv grefine-rdf-extension-0.9.0 rdf-extension; \
     cd rdf-extension; \
     JAVA_TOOL_OPTIONS='-Dfile.encoding=UTF-8' ant build
-
+RUN rm -rf
 # Downloads and builds batchrefine.
 RUN wget https://github.com/fusepoolP3/batchrefine/archive/master.tar.gz
 RUN tar xzvf master.tar.gz; \
@@ -49,9 +49,13 @@ RUN cd batchrefine; \
     mvn package -DskipTests
 
 EXPOSE 7100
-ADD ./internal/p3-transformer-start.sh ./
-ADD ./supervisord.conf /etc/supervisord.conf
-RUN supervisord
 
-CMD ["-t async","remote"]
+ADD ./internal/config/openrefine /home/user/refinedata/
+ADD ./internal/p3-transformer-start.sh ./
+ADD ./supervisord.conf /etc/supervisor/
+
+USER user
+RUN mkdir /home/user/log
+
+CMD ["-v", "-t async", "remote"]
 ENTRYPOINT ["./p3-transformer-start.sh"]
