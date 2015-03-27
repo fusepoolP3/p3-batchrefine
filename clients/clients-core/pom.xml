@@ -11,7 +11,7 @@
     </parent>
 
     <artifactId>clients-core</artifactId>
-  <version>1.1.0-SNAPSHOT</version>
+  <version>1.1.0</version>
     <packaging>jar</packaging>
 
     <name>BatchRefine Clients: Core Components</name>
@@ -78,6 +78,6 @@
 
 
   <scm>
-    <tag>pre-release</tag>
+    <tag>v1.1.0</tag>
   </scm>
 </project>

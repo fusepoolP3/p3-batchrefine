@@ -9,7 +9,7 @@
   </parent>
 
   <artifactId>batchrefine-reactor</artifactId>
-  <version>1.1.0-SNAPSHOT</version>
+  <version>1.1.0</version>
   <packaging>pom</packaging>
 
   <name>BatchRefine</name>
@@ -19,7 +19,7 @@
     <url>https://github.com/fusepoolP3/batchrefine</url>
     <connection>scm:git:https://github.com/fusepoolp3/batchrefine</connection>
     <developerConnection>scm:git:git@github.com:fusepoolp3/batchrefine.git</developerConnection>
-    <tag>pre-release</tag>
+    <tag>v1.1.0</tag>
   </scm>
 
     

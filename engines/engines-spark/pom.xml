@@ -11,7 +11,7 @@
 	</parent>
 
 	<artifactId>engines-spark</artifactId>
-  <version>1.1.0-SNAPSHOT</version>
+  <version>1.1.0</version>
 	<packaging>jar</packaging>
 
 	<name>BatchRefine Engines: SparkRefine engine</name>
@@ -70,6 +70,6 @@
 
 
   <scm>
-    <tag>pre-release</tag>
+    <tag>v1.1.0</tag>
   </scm>
 </project>
