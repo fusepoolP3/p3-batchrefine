@@ -1,0 +1,6 @@
+#!/bin/bash
+
+BATCHREFINE_ROOT=${BATCHREFINE_ROOT:-$PWD}
+VERSION=`cat ${BATCHREFINE_ROOT}/version`
+
+java -jar ./clients/clients-transformer/target/clients-transformer-${VERSION}-jar-with-dependencies.jar "$@"

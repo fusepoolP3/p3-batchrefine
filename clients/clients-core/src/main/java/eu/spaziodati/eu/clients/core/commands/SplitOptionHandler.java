@@ -61,8 +61,8 @@ public class SplitOptionHandler extends OneArgumentOptionHandler<ImmutablePair> 
         StringBuffer rv = new StringBuffer();
         rv.append("[");
         for (Split t : Split.class.getEnumConstants()) {
-            rv.append(":int");
-            rv.append(t).append(" | ");
+            rv.append(t).append(":int")
+                    .append(" | ");
         }
         rv.delete(rv.length() - 3, rv.length());
         rv.append("]");

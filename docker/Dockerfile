@@ -16,10 +16,10 @@ RUN apt-add-repository -y ppa:webupd8team/java
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get -y -q update
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y -q oracle-java7-installer
-RUN DEBIAN_FRONTEND=noninteractive apt-get -y --force-yes -q install ant maven3; \
+RUN DEBIAN_FRONTEND=noninteractive apt-get -y --force-yes -q install ant maven3 && rm -Rf /var/cache/apt/*; \
     ln -s /usr/bin/mvn3 /bin/mvn
 
-USER user
+#USER user #more secure option
 RUN mkdir -p /home/user/code;
 WORKDIR /home/user/code
 
@@ -47,8 +47,7 @@ RUN tar xzvf master.tar.gz; rm master.tar.gz; \
     OPENREFINE_ROOT='/home/user/code/OpenRefine' ./bin/refine-import.sh
 
 RUN cd batchrefine; \
-    mvn package -DskipTests
-RUN rm -rf /home/user/.m2
+    mvn package -DskipTests && rm -rf $HOME/.m2
 
 RUN mv /home/user/code/batchrefine/docker/internal/config/openrefine \
        /home/user/refinedata
@@ -61,5 +60,5 @@ ADD ./internal/supervisord.conf /home/user/supervisor/
 
 RUN mkdir /home/user/log
 
-CMD ["-v", "-t async", "remote"]
+CMD ["-v", "-t sync", "remote"]
 ENTRYPOINT ["./p3-transformer-start.sh"]

@@ -9,13 +9,12 @@ import eu.spaziodati.eu.clients.core.commands.SparkCommand;
 import eu.spaziodati.eu.clients.core.commands.SplitCommand;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
-import org.kohsuke.args4j.Argument;
-import org.kohsuke.args4j.CmdLineException;
-import org.kohsuke.args4j.CmdLineParser;
-import org.kohsuke.args4j.Option;
+import org.kohsuke.args4j.*;
 import org.kohsuke.args4j.spi.SubCommand;
 import org.kohsuke.args4j.spi.SubCommandHandler;
 import org.kohsuke.args4j.spi.SubCommands;
+
+import java.io.OutputStreamWriter;
 
 /**
  * Command Line Interface for launching {@link SynchronousTransformer}.
@@ -80,7 +79,7 @@ public class BatchRefineTransformerCLI {
     private void printUsage(CmdLineParser parser) {
         System.err.println("Usage: batchrefine-transformer [TRANSFORMER OPTIONS] ENGINETYPE [ENGINEOPTIONS]\n"
                 + "Starts the BatchRefine Fusepool P3 Transformer.\n");
-        parser.printUsage(System.err);
+       parser.printUsage(new OutputStreamWriter(System.err), null, OptionHandlerFilter.PUBLIC);
     }
 
     public static void main(String[] args) throws Exception {

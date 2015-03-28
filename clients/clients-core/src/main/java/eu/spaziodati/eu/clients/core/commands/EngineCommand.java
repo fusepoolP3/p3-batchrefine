@@ -25,7 +25,7 @@ public abstract class EngineCommand {
     }
 
 
-    @Option(name = "-f", aliases = {("--format")}, usage = "The format in which to output the transformed data")
+    @Option(name = "-f", aliases = {("--format")}, usage = "The format in which to output the transformed data",hidden = true)
     protected Format fFormat = Format.csv;
     @Option(name = "-c", aliases = {("--config")}, metaVar = "config.properties", usage = "Load batchrefine config from properties file", handler = FileOptionHandler.class)
     protected File configFile;

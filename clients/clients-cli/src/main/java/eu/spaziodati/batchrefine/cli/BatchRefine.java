@@ -8,10 +8,7 @@ import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.json.JSONArray;
-import org.kohsuke.args4j.Argument;
-import org.kohsuke.args4j.CmdLineException;
-import org.kohsuke.args4j.CmdLineParser;
-import org.kohsuke.args4j.Option;
+import org.kohsuke.args4j.*;
 import org.kohsuke.args4j.spi.SubCommand;
 import org.kohsuke.args4j.spi.SubCommandHandler;
 import org.kohsuke.args4j.spi.SubCommands;
@@ -19,6 +16,7 @@ import org.kohsuke.args4j.spi.SubCommands;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.net.ConnectException;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -152,7 +150,7 @@ public class BatchRefine {
                         "USAGE: batchrefine [-v] ENGINETYPE [ENGINE OPTS] INPUT TRANSFORM [OUTPUT]\n\n" +
                         "If no OUTPUT is specified, writes to standard output.\n" +
                         "-------------------------------------------------------------------------------");
-        ex.getParser().printUsage(System.err);
+        ex.getParser().printUsage(new OutputStreamWriter(System.err),null, OptionHandlerFilter.ALL);
     }
 
     public static void main(String[] args) {
