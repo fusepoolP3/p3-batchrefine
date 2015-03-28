@@ -12,7 +12,6 @@ This is a work in progress, and so is this documentation.
 
 ### Introduction
 
-
 BatchRefine currently works by providing a collection of wrappers
 (referred to as _backends_) and, in some modes, a distribution layer,
 on top of OpenRefine.  It provides two main ways (access clients) to
@@ -40,7 +39,7 @@ To try BatchRefine right away, use the pre-built docker image
 docker run --rm -it -p 7100:7100 fusepool/batchrefine
 ```
 
-This will start the [P3 Batchrefine transformer](#p3t) with default configurations,
+This will start the [P3 Batchrefine transformer](#p3-transformer) with default configurations,
 which can be accessed as follows:
 
 ```sh
@@ -199,7 +198,7 @@ there are two main options, depending on your mileage:
 
 ```sh
 cd docker
-./batchrefine-docker.sh bootstrap -t sync
+./batchrefine-docker.sh bootstrap
 ```
 
 ### Running
@@ -261,15 +260,7 @@ instructions on how to do it.
 
 We ship a prepackaged script to start the command line tool under
 `./bin`. We will show an example using the _embedded_ backend so that
-you do not need to start OpenRefine to actually use it. You do need,
-however, to have OpenRefine around on your system, as BatchRefine will
-import some initialization scripts from it (this limitation will be
-removed in future versions).
-
-To run, first set the `OPENREFINE_ROOT` and `BATCHREFINE_ROOT`
-environment variables so that they point to the paths of OpenRefine
-and BatchRefine, respectively. Then, to transform a file, from the
-BatchRefine root, do:
+you do not need to start OpenRefine to actually use it.
 
 ```sh
 ./bin/batchrefine embedded input.csv transform.json
@@ -278,7 +269,7 @@ BatchRefine root, do:
 this will produce a CSV file on stdout with the transform applied to
 it.
 
-### Limitations
+### Limitations of the embedded engine
 
 The embedded engine cannot currently do reconciliation, and extensions
 require customization to work (i.e. the RDF extension won't work out
@@ -289,10 +280,10 @@ rewritten  to work with newer versions of OpenRefine.
 
 The command line tool can also act as a direct client to a running
 OpenRefine instance. If you have OpenRefine running on
-`refine.example.com`, you can use the command line client as follows:
+`refine.example.com:3333`, you can use the command line client as follows:
 
 ```sh
-./bin/batchrefine -e remote -h refine.example.com input.csv transform.json
+./bin/batchrefine remote -l refine.example.com:3333 input.csv transform.json
 ```
 
 

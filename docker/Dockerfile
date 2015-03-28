@@ -8,7 +8,7 @@ RUN echo debconf shared/accepted-oracle-license-v1-1 select true | /usr/bin/debc
 RUN echo debconf shared/accepted-oracle-license-v1-1 seen true | /usr/bin/debconf-set-selections
 
 # Adds repositories for, and installs, Java and Maven 3.
-RUN DEBIAN_FRONTEND=noninteractive apt-get -y -q update
+RUN DEBIAN_FRONTEND=noninteractive apt-get -y -qq update
 RUN DEBIAN_FRONTEND=noninteractive apt-get -y -q install software-properties-common unzip supervisor
 
 RUN add-apt-repository 'deb http://ppa.launchpad.net/natecarlson/maven3/ubuntu precise main'

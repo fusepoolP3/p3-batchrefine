@@ -3,6 +3,7 @@ package eu.spaziodati.eu.clients.core.commands;
 
 import eu.spaziodati.batchrefine.core.IAsyncTransformEngine;
 import eu.spaziodati.batchrefine.core.ITransformEngine;
+import eu.spaziodati.batchrefine.core.MultiInstanceEngine;
 import eu.spaziodati.batchrefine.core.spark.SparkRefine;
 import org.kohsuke.args4j.Argument;
 import org.kohsuke.args4j.CmdLineException;
@@ -53,7 +54,7 @@ public class SparkCommand extends EngineCommand {
 
     @Override
     public IAsyncTransformEngine getAsyncEngine() throws URISyntaxException {
-        return null;
+        return new MultiInstanceEngine(getEngine());
     }
 
     @Override

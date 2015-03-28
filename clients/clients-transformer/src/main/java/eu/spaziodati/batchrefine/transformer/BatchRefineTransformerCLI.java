@@ -77,7 +77,7 @@ public class BatchRefineTransformerCLI {
     }
 
     private void printUsage(CmdLineParser parser) {
-        System.err.println("Usage: batchrefine-transformer [TRANSFORMER OPTIONS] ENGINETYPE [ENGINEOPTIONS]\n"
+        System.err.println("Usage: transformer [TRANSFORMER OPTIONS] ENGINETYPE [ENGINEOPTIONS]\n"
                 + "Starts the BatchRefine Fusepool P3 Transformer.\n");
        parser.printUsage(new OutputStreamWriter(System.err), null, OptionHandlerFilter.PUBLIC);
     }
