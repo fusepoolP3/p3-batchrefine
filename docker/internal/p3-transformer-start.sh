@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
-
+set -eo pipefail
 BATCHREFINE_ROOT=/home/user/code/batchrefine
 
+# Start OpenRefine using the supervisor daemon
 echo "starting supervisor"
 supervisord -c /home/user/supervisor/supervisord.conf
 

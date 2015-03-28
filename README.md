@@ -1,5 +1,5 @@
-[![Build Status](https://travis-ci.org/fusepoolP3/p3-batchrefine.svg?branch=master)](https://travis-ci.org/fusepoolP3/p3-batchrefine)
-BatchRefine
+# BatchRefine [![Build Status](https://travis-ci.org/fusepoolP3/p3-batchrefine.svg?branch=master)](https://travis-ci.org/fusepoolP3/p3-batchrefine)
+
 ===========
 
 BatchRefine is an effort to run [OpenRefine](http://openrefine.org)
@@ -11,7 +11,7 @@ effectively in batch workloads and ETL pipelines. Goals include:
 
 This is a work in progress, and so is this documentation.
 
-Basics
+Introduction
 ------
 
 BatchRefine currently works by providing a collection of wrappers
