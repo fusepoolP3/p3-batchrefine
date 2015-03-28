@@ -19,7 +19,8 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y -q oracle-java7-installer
 RUN DEBIAN_FRONTEND=noninteractive apt-get -y --force-yes -q install ant maven3; \
     ln -s /usr/bin/mvn3 /bin/mvn
 
-RUN mkdir -p /home/user/code
+USER user
+RUN mkdir -p /home/user/code;
 WORKDIR /home/user/code
 
 # Download and assemble OpenRefine 2.6-beta.1 and the RDF extension.
@@ -37,24 +38,27 @@ RUN cd ./OpenRefine/extensions; \
     mv grefine-rdf-extension-0.9.0 rdf-extension; \
     cd rdf-extension; \
     JAVA_TOOL_OPTIONS='-Dfile.encoding=UTF-8' ant build
-RUN rm -rf
+
 # Downloads and builds batchrefine.
 RUN wget https://github.com/fusepoolP3/batchrefine/archive/master.tar.gz
-RUN tar xzvf master.tar.gz; \
+RUN tar xzvf master.tar.gz; rm master.tar.gz; \
     mv p3-batchrefine-master batchrefine; \
     cd batchrefine; \
     OPENREFINE_ROOT='/home/user/code/OpenRefine' ./bin/refine-import.sh
 
 RUN cd batchrefine; \
     mvn package -DskipTests
+RUN rm -rf /home/user/.m2
+
+RUN mv /home/user/code/batchrefine/docker/internal/config/openrefine \
+       /home/user/refinedata
+RUN cp /home/user/code/batchrefine/docker/internal/p3-transformer-start.sh \
+       /home/user/code/
 
 EXPOSE 7100
 
-ADD ./internal/config/openrefine /home/user/refinedata/
-ADD ./internal/p3-transformer-start.sh ./
-ADD ./supervisord.conf /etc/supervisor/
+ADD ./internal/supervisord.conf /home/user/supervisor/
 
-USER user
 RUN mkdir /home/user/log
 
 CMD ["-v", "-t async", "remote"]

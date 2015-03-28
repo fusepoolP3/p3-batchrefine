@@ -3,7 +3,7 @@
 BATCHREFINE_ROOT=/home/user/code/batchrefine
 
 echo "starting supervisor"
-supervisord
+supervisord -c /home/user/supervisor/supervisord.conf
 
 VERSION=`cat ${BATCHREFINE_ROOT}/version`
 echo "transformer version is $VERSION"
