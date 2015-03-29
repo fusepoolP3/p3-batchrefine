@@ -143,7 +143,7 @@ To list the `backend_specific_options`:
 **Run the [P3 Transformer](#p3-transformer)**
 
 ```sh
-./bin/transformer.sh [TRANSFORMER_OPTIONS] BACKEND_TYPE [backend_specific_options]
+./bin/transformer [TRANSFORMER_OPTIONS] BACKEND_TYPE [backend_specific_options]
 ```
 
 `TRANSOFRMER_OPTIONS` are:
@@ -179,9 +179,14 @@ and [P3 Transformer](#p3-transformer)
 
 Command Line Tool
 =================
+Unfortunately, the command line tool has to be built from sources. 
+Read the section on [building BatchRefine from sources](#building-from-sources) for
+instructions on how to do it. 
+
 
 The HTTP API is convenient for integrating BatchRefine as a service,
-but clumsy for manual usage. The command line tool works better in
+but clumsy for manual usage.
+The command line tool works better in
 these cases, as you can simply do:
 
 ```sh
@@ -192,11 +197,7 @@ where, as before, `input.csv` is the input file, `transform.json` is
 the transform script and `output.csv` is the output file to which to
 write the transformed data.
 
-## Building
 
-Unfortunately, the command line tool has to be built from
-sources. Read the section on building BatchRefine from sources for
-instructions on how to do it.
 
 ## Running With the Embedded Backend
 
@@ -211,7 +212,7 @@ you do not need to start OpenRefine to actually use it.
 this will produce a CSV file on stdout with the transform applied to
 it.
 
-### Limitations of the embedded engine
+#### Limitations of the embedded engine
 
 The embedded engine cannot currently do reconciliation, and extensions
 require customization to work (i.e. the RDF extension won't work out
@@ -241,7 +242,7 @@ to split your file in half:
 the Batchrefine `split` backend will split an input file in 2 chunks, upload them to available OpenRefine
 instances and handle the reassembling of the result.
  
-### Command line options of split backend:
+#### Command line options of split backend:
 To get the list of available options, use `--help` option.
 
 ```
