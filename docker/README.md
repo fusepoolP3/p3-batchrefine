@@ -2,7 +2,7 @@ Fusepool P3 Batchrefine Transformer Docker
 ============
 
 The provided image simplifies the deployment of the Batchrefine transformer,
-while retaining the flexibility of configuring batchrefine.
+while retaining the flexibility of configuring it.
  
  The image can be obtained in two ways:
  
@@ -77,4 +77,3 @@ refine instances by splitting the input in 2 pieces.
  ```
  docker run --rm -it --name batchrefine -v /tmp/:/home/user/log/ fusepool/p3-batchrefine -v -t sync split -l localhost:3333,refine.example.com:3333 -s CHUNK:2
  ```
- 

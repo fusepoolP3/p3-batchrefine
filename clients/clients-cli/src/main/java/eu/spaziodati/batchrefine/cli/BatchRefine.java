@@ -134,12 +134,12 @@ public class BatchRefine {
         if (fArguments.size() >= 3) {
             File output = new File(fArguments.get(2));
             intermediate.renameTo(output);
-        }
-
-        try (FileInputStream iStream = new FileInputStream(intermediate)) {
-            IOUtils.copy(iStream, System.out);
-        } finally {
-            intermediate.delete();
+        } else {
+            try (FileInputStream iStream = new FileInputStream(intermediate)) {
+                IOUtils.copy(iStream, System.out);
+            } finally {
+                intermediate.delete();
+            }
         }
     }
 
@@ -150,7 +150,7 @@ public class BatchRefine {
                         "USAGE: batchrefine [-v] ENGINETYPE [ENGINE OPTS] INPUT TRANSFORM [OUTPUT]\n\n" +
                         "If no OUTPUT is specified, writes to standard output.\n" +
                         "-------------------------------------------------------------------------------");
-        ex.getParser().printUsage(new OutputStreamWriter(System.err),null, OptionHandlerFilter.ALL);
+        ex.getParser().printUsage(new OutputStreamWriter(System.err), null, OptionHandlerFilter.ALL);
     }
 
     public static void main(String[] args) {

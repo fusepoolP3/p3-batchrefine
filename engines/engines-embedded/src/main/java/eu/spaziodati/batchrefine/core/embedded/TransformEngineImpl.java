@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Properties;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -235,20 +236,22 @@ public class TransformEngineImpl implements ITransformEngine {
         ButterflyModule core = new ButterflyModuleStub(name);
 //        File controllerFile = new File(Configurations.get("refine.root",
 //                "../OpenRefine"), path);
-        File controllerFile = new File(getClass().getClassLoader().getResource(path).getFile());
-        if (!controllerFile.exists()) {
+
+        String script = IOUtils.toString(getClass().getClassLoader().getResourceAsStream(path));
+
+        if (script == null) {
             fLogger.warn(String.format(
                     "Can't find controller script for module %s at %s -- "
                             + "module may not work as expected.", name,
-                    controllerFile.getAbsolutePath()));
+                    name));
             return;
         }
 
         // Compiles and "executes" the controller script. The script basically
         // contains function declarations.
         Context context = ContextFactory.getGlobal().enterContext();
-        Script controller = context.compileReader(
-                new FileReader(controllerFile), "init.js", 1, null);
+        Script controller = context.compileString(
+                script, "init.js", 1, null);
 
         // Initializes the scope.
         ScriptableObject scope = new ImporterTopLevel(context);
