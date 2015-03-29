@@ -36,7 +36,7 @@ Whatever way you choose to use BatchRefine, you will need two things:
 To try BatchRefine right away, use the pre-built docker image
 
 ```sh
-docker run --rm -it -p 7100:7100 fusepool/batchrefine
+docker run --rm -it -p 7100:7100 fusepool/p3-batchrefine
 ```
 
 This will start the [P3 Batchrefine transformer](#p3-transformer) with default configurations,
@@ -280,7 +280,7 @@ Building and deploying the P3 transformer with
 there are two main options, depending on your mileage:
 
 1. use the
-   [dockerfile](https://github.com/fusepoolP3/batchrefine/blob/master/docker/Dockerfile)
+   [Dockerfile](https://github.com/fusepoolP3/batchrefine/blob/master/docker/Dockerfile)
    we provide;
 
 2. use our wrapper script. At the BatchRefine source root, run:
@@ -295,6 +295,8 @@ After running the bootstrap step, you just have to run:
 ```sh
 ./batchrefine-docker.sh run
 ```
+
+**For more information regarding docker, refer to the docker [README](docker/README.md)**
 
 and this will expose a synchronous BatchRefine [P3 transformer]() on
 port 7100. To access the transformer, you have to make a POST request
