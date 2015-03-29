@@ -123,13 +123,16 @@ This section describes how to run the tools, for more details refer to [Usage](#
 
 If no `OUTPUTFILE` is specified, writes to `STDOUT`
 
+```
 Available backends:
-* remote    - simple http client that connects to an OpenRefine instance
-* embedded  - built-in OpenRefine version [(currently has limited functionality)](#running-with-the-embedded-backend)
-* split     - distributed backend able to connect to multiple OpenRefine instances and improve
- performance by splitting input file.
-* spark     - distributed backend based on [Apache Spark](http://spark.apache.org) aimed at very large workloads 
-(currently has limited functionality)
+remote    - simple http client that connects to an OpenRefine instance
+split     - distributed backend able to connect to multiple OpenRefine instances and improve
+            performance by splitting input file.
+embedded  - built-in OpenRefine allows to run transforms without starting
+            an external OpenRefine instance (currently has limited functionality)
+spark     - distributed backend based on Apache Spark aimed at very large workloads 
+            (currently has limited functionality)
+```
 
 To list the `backend_specific_options`:
 
@@ -152,88 +155,27 @@ To list the `backend_specific_options`:
 -t [sync|async]   -- transformer type: synchronous or asynchronous (defaults to sync)
 ```
 
-Available backends:
-* remote
-* split
-* spark
+Available backends for the transformer are: remote, split, spark
 
 `backend_specific_options` are the same as for the command line client and can be listed with
-a help option.
+a `--help` option or, consult the [Usage](#usage) section
 
-To start the most common configuration of the transformer that
-connects to a locally running instance of OpenRefine
+To start the most common configuration of the transformer: synchronous and
+connects to a locally running instance of OpenRefine, binds to port 7100.
 
 ```sh
 ./bin/transformer remote
 
 #which is equivalent to:
 
-./bin/transformer -v -t sync remote -l localhost:3333
+./bin/transformer -v -t sync -p 7100 remote -l localhost:3333
 ```
-
 
 
 Usage
 -----
-
-## P3 Transformer
-
-
-The BatchRefine P3 transformer wraps (multiple instances of)
-OpenRefine under the Fusepool P3 HTTP API. We will show how to build a
-transformer that operates over a single instance, running locally.
-
-### Building with Docker
-
-Building and deploying the P3 transformer with
-[Docker](https://www.docker.com/) is easy. Assuming you have Docker
-[already installed](https://docs.docker.com/installation/#installation),
-there are two main options, depending on your mileage:
-
-1. use the
-   [dockerfile](https://github.com/fusepoolP3/batchrefine/blob/master/docker/Dockerfile)
-   we provide;
-
-2. use our wrapper script. At the BatchRefine source root, run:
-
-```sh
-cd docker
-./batchrefine-docker.sh bootstrap
-```
-
-### Running
-
-After running the bootstrap step, you just have to run:
-
-```sh
-./batchrefine-docker.sh run
-```
-
-and this will expose a synchronous BatchRefine [P3 transformer]() on
-port 7100. To access the transformer, you have to make a POST request
-to it.
-
-As per the P3 transformer API, the input file goes in the body of the
-POST request, whereas the transform script goes as an URI passed as a
-query parameter called `refinejson` in our case. Assuming our input
-file is called `input.csv` and is available locally, and our transform
-script is called `transform.json` and is available at
-`http://www.example.org/transform.json`, we could do a request like:
-
-```sh
-curl -XPOST --data-binary @input.csv --H 'Content-Type:text/csv' -H 'Accept:text/csv'
-	'http://localhost:7100?refinejson=http://www.example.org/transform.json'
-```
-
-to which the transformer will reply with a CSV file that has been
-transformed according to what is described in `transform.json`.
-
-*NB:* Although transform scripts can be taken from local URIs such as
- `file://tmp/transform.json`, BatchRefine won't be able to access them
- when running inside Docker. If you want to post `file` URIs, it's
- best to build and run the transformer from sources (see the section
- on building BatchRefine from sources).
-
+This section provides usage examples for both [Command Line Tool](#command-line-tool)
+and [P3 Transformer](#p3-transformer)
 
 Command Line Tool
 =================
@@ -286,6 +228,112 @@ OpenRefine instance. If you have OpenRefine running on
 ./bin/batchrefine remote -l refine.example.com:3333 input.csv transform.json
 ```
 
+## Simple distributed backend, accesing multiple OpenRefine instances
+
+The command line tool can also split a large file for you and submit it
+to multiple OpenRefine instances. For example, you have two OpenRefine instances and you want
+to split your file in half:
+
+```sh
+./bin/batchrefine split -l refine.example.com:3333,refine1.example.com:3333 -s CHUNK:2 input.csv transform.json
+```
+
+the Batchrefine `split` backend will split an input file in 2 chunks, upload them to available OpenRefine
+instances and handle the reassembling of the result.
+ 
+### Command line options of split backend:
+To get the list of available options, use `--help` option.
+
+```
+./bin/batchrefine split --help
+```
+
+```
+ --help                              : Prints usage information
+ -c (--config) config.properties     : Load batchrefine config from properties
+                                       file
+ -f (--format) [csv | rdf | turtle]  : The format in which to output the
+                                       transformed data
+ -h (--hosts) localhost              : OpenRefine instances hosts
+ -s (--split) [LINE:int | CHUNK:int] : Set default split logic
+```
+
+#### Split logic
+Two split strategies are supported:
+* CHUNK:N - splits a file into N equal pieces
+* LINE:N1,N2,N3 - split the file on the specified line numbers, such that `LINE:30,50,80` will split a file into 4 pieces on 
+exectly specified lines.
+
+
+## P3 Transformer
+
+The BatchRefine P3 transformer wraps (multiple instances of)
+OpenRefine under the Fusepool P3 HTTP API. We will show how to build a
+transformer that operates over a single instance, running locally.
+
+### Building with Docker
+
+Building and deploying the P3 transformer with
+[Docker](https://www.docker.com/) is easy. Assuming you have Docker
+[already installed](https://docs.docker.com/installation/#installation),
+there are two main options, depending on your mileage:
+
+1. use the
+   [dockerfile](https://github.com/fusepoolP3/batchrefine/blob/master/docker/Dockerfile)
+   we provide;
+
+2. use our wrapper script. At the BatchRefine source root, run:
+
+```sh
+cd docker
+./batchrefine-docker.sh bootstrap
+```
+
+After running the bootstrap step, you just have to run:
+
+```sh
+./batchrefine-docker.sh run
+```
+
+and this will expose a synchronous BatchRefine [P3 transformer]() on
+port 7100. To access the transformer, you have to make a POST request
+to it.
+
+Docker image provides a running OpenRefine instance together with the transformer
+so you don't have to care about running your own.
+
+### Running with your OpenRefine instance
+ 
+```
+./bin/transformer -v -t sync remote -l refine.example.com:3333
+```
+
+Will start a synchronous P3 Transformer which will connect to the specified OpenRefine instance.
+If no URI is specified, defaults to: `localhost:3333`.
+
+### Running
+
+As per the P3 transformer API, the input file goes in the body of the
+POST request, whereas the transform script goes as an URI passed as a
+query parameter called `refinejson` in our case. Assuming our input
+file is called `input.csv` and is available locally, and our transform
+script is called `transform.json` and is available at
+`http://www.example.org/transform.json`, we could do a request like:
+
+```sh
+curl -XPOST --data-binary @input.csv --H 'Content-Type:text/csv' -H 'Accept:text/csv'
+	'http://localhost:7100?refinejson=http://www.example.org/transform.json'
+```
+
+to which the transformer will reply with a CSV file that has been
+transformed according to what is described in `transform.json`.
+
+*NB:* Although transform scripts can be taken from local URIs such as
+ `file://tmp/transform.json`, BatchRefine won't be able to access them
+ when running inside Docker. If you want to post `file` URIs, it's
+ best to build and run the transformer from sources (see the section
+ on building BatchRefine from sources).
+ 
 
 Miscellaneous
 =============

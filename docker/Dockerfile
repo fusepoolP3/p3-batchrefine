@@ -9,18 +9,18 @@ RUN echo debconf shared/accepted-oracle-license-v1-1 seen true | /usr/bin/debcon
 
 # Adds repositories for, and installs, Java and Maven 3.
 RUN DEBIAN_FRONTEND=noninteractive apt-get -y -qq update
-RUN DEBIAN_FRONTEND=noninteractive apt-get -y -q install software-properties-common unzip supervisor
+RUN DEBIAN_FRONTEND=noninteractive apt-get -y -qq install software-properties-common unzip supervisor
 
 RUN add-apt-repository 'deb http://ppa.launchpad.net/natecarlson/maven3/ubuntu precise main'
 RUN apt-add-repository -y ppa:webupd8team/java
 
-RUN DEBIAN_FRONTEND=noninteractive apt-get -y -q update
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y -q oracle-java7-installer
-RUN DEBIAN_FRONTEND=noninteractive apt-get -y --force-yes -q install ant maven3 && rm -Rf /var/cache/apt/*; \
+RUN DEBIAN_FRONTEND=noninteractive apt-get -y -qq update
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y -qq oracle-java7-installer
+RUN DEBIAN_FRONTEND=noninteractive apt-get -y --force-yes -qq install ant maven3 && rm -Rf /var/cache/apt/*; \
     ln -s /usr/bin/mvn3 /bin/mvn
 
 #USER user #more secure option
-RUN mkdir -p /home/user/code;
+RUN mkdir -p /home/user/code; mkdir /home/user/supervisor/; mkdir /home/user/log
 WORKDIR /home/user/code
 
 # Download and assemble OpenRefine 2.6-beta.1 and the RDF extension.
@@ -53,12 +53,14 @@ RUN mv /home/user/code/batchrefine/docker/internal/config/openrefine \
        /home/user/refinedata
 RUN cp /home/user/code/batchrefine/docker/internal/p3-transformer-start.sh \
        /home/user/code/
+RUN cp /home/user/code/batchrefine/docker/internal/supervisord.conf \
+       /home/user/supervisor/
 
 EXPOSE 7100
 
-ADD ./internal/supervisord.conf /home/user/supervisor/
+ENV REFINE_MEMORY=1400M
 
-RUN mkdir /home/user/log
+#ADD ./internal/supervisord.conf /home/user/supervisor/ # if you want to override it.
 
 CMD ["-v", "-t sync", "remote"]
 ENTRYPOINT ["./p3-transformer-start.sh"]
