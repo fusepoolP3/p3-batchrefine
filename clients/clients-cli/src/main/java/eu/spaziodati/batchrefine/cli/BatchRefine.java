@@ -147,9 +147,9 @@ public class BatchRefine {
         System.err.println(ex.getMessage());
         System.err
                 .println("Batchrefine applies OpenRefine TRANSFORM on INPUT, and writes to OUTPUT file.\n\n" +
-                        "USAGE: batchrefine [-v] ENGINETYPE [ENGINE OPTS] INPUT TRANSFORM [OUTPUT]\n\n" +
+                        "USAGE: batchrefine [-v] ENGINETYPE [ENGINE OPTS] INPUT TRANSFORM [OUTPUT]\n" +
                         "If no OUTPUT is specified, writes to standard output.\n" +
-                        "-------------------------------------------------------------------------------");
+                        "------------------------------------------------------------------------------");
         ex.getParser().printUsage(new OutputStreamWriter(System.err), null, OptionHandlerFilter.ALL);
     }
 

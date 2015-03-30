@@ -18,9 +18,9 @@ import java.util.*;
  */
 public class SplitCommand extends EngineCommand {
     private final static String ENGINE_TYPE = "split";
-    @Option(name = "-l", aliases = {"--uri-list"}, usage = "OpenRefine instances hosts", metaVar = "localhost")
+    @Option(name = "-l", aliases = {"--uri-list"}, usage = "OpenRefine instances hosts (default: localhost:3333)", metaVar = "localhost:3333")
     private String fHosts = "localhost:3333";
-    @Option(name = "-s", aliases = {"--split"}, usage = "Set default split logic", metaVar = "chunk", handler = SplitOptionHandler.class)
+    @Option(name = "-s", aliases = {"--split"}, usage = "Configure split logic (defaults to CHUNK:2)", metaVar = "chunk", handler = SplitOptionHandler.class)
     private ImmutablePair<Enum, String> fSplit = new ImmutablePair(Split.CHUNK, "2");
 
     @Argument

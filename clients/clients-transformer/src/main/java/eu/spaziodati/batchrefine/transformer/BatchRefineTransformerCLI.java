@@ -64,7 +64,7 @@ public class BatchRefineTransformerCLI {
         switch (fTransformer) {
 
             case sync:
-                server.start(new SynchronousTransformer(cmd.getEngine(),cmd.getExporterProperties()));
+                server.start(new SynchronousTransformer(cmd.getEngine(), cmd.getExporterProperties()));
                 break;
 
             case async:
@@ -78,8 +78,9 @@ public class BatchRefineTransformerCLI {
 
     private void printUsage(CmdLineParser parser) {
         System.err.println("Usage: transformer [TRANSFORMER OPTIONS] ENGINETYPE [ENGINEOPTIONS]\n"
-                + "Starts the BatchRefine Fusepool P3 Transformer.\n");
-       parser.printUsage(new OutputStreamWriter(System.err), null, OptionHandlerFilter.PUBLIC);
+                + "Starts the BatchRefine Fusepool P3 Transformer.\n" +
+                "-------------------------------------------------------------------------\n");
+        parser.printUsage(new OutputStreamWriter(System.err), null, OptionHandlerFilter.PUBLIC);
     }
 
     public static void main(String[] args) throws Exception {
