@@ -56,7 +56,7 @@ RUN cp /home/user/code/batchrefine/docker/internal/p3-transformer-start.sh \
 RUN cp /home/user/code/batchrefine/docker/internal/supervisord.conf \
        /home/user/supervisor/
 
-EXPOSE 7100
+EXPOSE 8310
 
 ENV REFINE_MEMORY=1400M
 

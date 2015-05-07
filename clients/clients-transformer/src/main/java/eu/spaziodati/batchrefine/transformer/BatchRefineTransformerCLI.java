@@ -36,7 +36,7 @@ public class BatchRefineTransformerCLI {
     EngineCommand cmd;
 
     @Option(name = "-p", aliases = {"--port"}, usage = "Port for the transformer service (defaults to 7100)", required = false)
-    private int fPort = 7100;
+    private int fPort = 8310;
 
     @Option(name = "-t", aliases = {"--transformer"}, usage = "Type of transformer to start (defaults to sync)", required = false)
     private Transformer fTransformer = Transformer.sync;
