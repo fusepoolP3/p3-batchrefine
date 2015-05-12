@@ -1,0 +1,411 @@
+#!/usr/bin/env python
+import os
+import sys
+import time
+import random
+import tarfile
+import urllib2
+from sys import stderr
+import hashlib
+from datetime import datetime
+from optparse import OptionParser
+
+OPENREFINE_AMI = 'ami-fd29438a'
+DEFAULT_INSTANCE_TYPE = 'm3.medium'
+REFINE_PORT = 3333
+WORKDIR = os.path.dirname(os.path.realpath(__file__))
+VERSION = 0.1
+SUPPORTED_INSTANCE_TYPES = ['t2.small', 't2.medium', 'm3.medium', 'm3.large', 'm3.xlarge',
+                            'm3.2xlarge', 'c4.large', 'c4.xlarge', 'c4.2xlarge',
+                            'c4.4xlarge', 'c4.8xlarge', 'c3.large', 'c3.xlarge',
+                            'c3.2xlarge', 'c3.4xlarge', 'r3.large', 'r3.xlarge', 'r3.2xlarge', 'r3.4xlarge',
+                            'r3.8xlarge']
+
+
+def setup_boto():
+    # Download Boto if it's not already present in the SPARK_EC2_DIR/lib folder:
+    version = "boto-2.38.0"
+    md5 = "28112f29e9c7b10e12b6917a325e70ce"
+    url = "https://pypi.python.org/packages/source/b/boto/%s.tar.gz" % version
+    lib_dir = os.path.join(WORKDIR, "lib")
+    if not os.path.exists(lib_dir):
+        os.mkdir(lib_dir)
+    boto_lib_dir = os.path.join(lib_dir, version)
+    if not os.path.isdir(boto_lib_dir):
+        tgz_file_path = os.path.join(lib_dir, "%s.tar.gz" % version)
+        print "Downloading Boto from PyPi"
+        download_stream = urllib2.urlopen(url)
+        with open(tgz_file_path, "wb") as tgz_file:
+            tgz_file.write(download_stream.read())
+        with open(tgz_file_path) as tar:
+            if hashlib.md5(tar.read()).hexdigest() != md5:
+                print >> stderr, "ERROR: Got wrong md5sum for Boto"
+                sys.exit(1)
+        tar = tarfile.open(tgz_file_path)
+        tar.extractall(path=lib_dir)
+        tar.close()
+        os.remove(tgz_file_path)
+        print "Finished downloading Boto"
+    sys.path.insert(0, boto_lib_dir)
+
+
+setup_boto()
+
+from boto import ec2
+
+
+def parse_args():
+    parser = OptionParser(prog='ec2-cluster',
+                          version='%prog {v}'.format(v=VERSION),
+                          usage='%prog [options] <action> <cluster_name>\n\n' +
+                                '<action> can be: launch, destroy, get-slaves, reboot, clean')
+    parser.add_option('-i', '--instances', type=int, default=1,
+                      help='Number of OpenRefine instances to launch (default: %default)')
+    parser.add_option('-r', '--region', default='eu-west-1',
+                      help='EC2 region to launch instances in (default: %default)')
+    parser.add_option('-k', '--key-pair', help='Key pair to use on instances')
+    parser.add_option('-t', '--instance-type', default=DEFAULT_INSTANCE_TYPE,
+                      help='Type of instance to launch (default: %default)')
+    parser.add_option('--spot-price', metavar="PRICE", type=float,
+                      help='If specified, launch slaves as spot instances with the given ' +
+                           'maximum price (in US dollars)')
+    parser.add_option(
+        "--delete-groups", action="store_true", default=False,
+        help="When destroying a cluster, delete the security groups that were created")
+
+    (opts, args) = parser.parse_args()
+    if len(args) != 2:
+        print >> stderr, ("MISSING ARGUMENTS")
+        parser.print_help()
+        sys.exit(1)
+    (action, cluster_name) = args
+
+    if os.getenv('AWS_ACCESS_KEY_ID') is None:
+        print >> stderr, ("ERROR: The environment variable AWS_ACCESS_KEY_ID " +
+                          "must be set")
+        sys.exit(1)
+    if os.getenv('AWS_SECRET_ACCESS_KEY') is None:
+        print >> stderr, ("ERROR: The environment variable AWS_SECRET_ACCESS_KEY " +
+                          "must be set")
+        sys.exit(1)
+    return opts, action, cluster_name
+
+
+def check_instance_type(type, spot=False):
+    if type in (SUPPORTED_INSTANCE_TYPES, SUPPORTED_INSTANCE_TYPES[2:])[spot]:
+        return type
+    else:
+        print >> stderr, ("ERROR: wrong, instance type!")
+        print >> stderr, ("Supported instance types for " + ("nornal_instance", "spot_instance")[spot])
+        print >> stderr, '\n'.join((SUPPORTED_INSTANCE_TYPES, SUPPORTED_INSTANCE_TYPES[2:])[spot])
+        sys.exit(1)
+
+
+def is_active(instance):
+    return (instance.state in ['pending', 'running', 'stopping', 'stopped'])
+
+
+def delete_sg(conn, cluster_name, opts):
+    print "Deleting security groups (this will take some time)..."
+    group_names = [cluster_name + "-openrefine-sg"]
+    slave_nodes = get_existing_cluster(conn, cluster_name, die_on_error=False)
+    if slave_nodes:
+        wait_for_cluster_state(
+            conn=conn,
+            opts=opts,
+            cluster_instances=slave_nodes,
+            cluster_state='terminated'
+        )
+    attempt = 1
+    while attempt <= 3:
+        print "Attempt %d" % attempt
+        groups = [g for g in conn.get_all_security_groups() if g.name in group_names]
+        success = True
+        # Delete individual rules in all groups before deleting groups to
+        # remove dependencies between them
+        for group in groups:
+            print "Deleting rules in security group " + group.name
+            for rule in group.rules:
+                for grant in rule.grants:
+                    success &= group.revoke(ip_protocol=rule.ip_protocol,
+                                            from_port=rule.from_port,
+                                            to_port=rule.to_port,
+                                            src_group=grant)
+
+        # Sleep for AWS eventual-consistency to catch up, and for instances
+        # to terminate
+        time.sleep(30)  # Yes, it does have to be this long :-(
+        for group in groups:
+            try:
+                # It is needed to use group_id to make it work with VPC
+                conn.delete_security_group(group_id=group.id)
+                print "Deleted security group %s" % group.name
+            except boto.exception.EC2ResponseError:
+                success = False
+                print "Failed to delete security group %s" % group.name
+
+        # Unfortunately, group.revoke() returns True even if a rule was not
+        # deleted, so this needs to be rerun if something fails
+        if success:
+            break
+
+        attempt += 1
+
+    if not success:
+        print "Failed to delete all security groups after 3 tries."
+        print "Try re-running in a few minutes."
+
+
+def launch_cluster(conn, opts, cluster_name):
+    # if opts.key_pair is None:
+    # print >> stderr, "ERROR: Must provide a key pair name (-k) to use on instances."
+    # sys.exit(1)
+    opts.ami = OPENREFINE_AMI
+    opts.zone = random.choice(conn.get_all_zones()).name
+    security_group = get_or_make_group(conn, cluster_name + "-openrefine-sg")
+    existing_slaves = get_existing_cluster(conn, cluster_name,
+                                           die_on_error=False)
+    if existing_slaves:
+        print >> stderr, ("ERROR: There are already instances running in " +
+                          "group %s" % security_group.name)
+        sys.exit(1)
+
+    if opts.spot_price is not None:
+        # Launch spot instances with the requested price
+        print ("Requesting %d slaves as spot instances with price $%.3f" % (opts.instances, opts.spot_price))
+        slave_reqs = conn.request_spot_instances(
+            price=opts.spot_price,
+            image_id=opts.ami,
+            launch_group="launch-group-%s" % cluster_name,
+            placement=opts.zone,
+            count=opts.instances,
+            key_name=opts.key_pair,
+            security_group_ids=[security_group.id],
+            instance_type=check_instance_type(opts.instance_type, spot=True))
+        my_req_ids = [req.id for req in slave_reqs]
+
+        print "Waiting for spot instances to be granted..."
+        try:
+            while True:
+                time.sleep(10)
+                reqs = conn.get_all_spot_instance_requests()
+                id_to_req = {}
+                for r in reqs:
+                    id_to_req[r.id] = r
+                active_instance_ids = []
+                for i in my_req_ids:
+                    if i in id_to_req and id_to_req[i].state == "active":
+                        active_instance_ids.append(id_to_req[i].instance_id)
+                if len(active_instance_ids) == opts.instances:
+                    print "All %d slaves granted" % opts.instances
+                    reservations = conn.get_all_reservations(active_instance_ids)
+                    slave_nodes = []
+                    for r in reservations:
+                        slave_nodes += r.instances
+                    break
+                else:
+                    print "%d of %d slaves granted, waiting longer" % (
+                        len(active_instance_ids), opts.instances)
+        except:
+            print "Canceling spot instance requests"
+            conn.cancel_spot_instance_requests(my_req_ids)
+            # Log a warning if any of these requests actually launched instances:
+            slave_nodes = get_existing_cluster(
+                conn, cluster_name, die_on_error=False)
+            running = len(slave_nodes)
+            if running:
+                print >> stderr, ("WARNING: %d instances are still running, check manually"
+                                  % running)
+            sys.exit(0)
+
+    else:
+        print "Spot-price not specified, launching %d normal EC2 instances" % opts.instances
+        # Launch non-spot instances
+        slave_res = conn.run_instances(image_id=opts.ami,
+                                       key_name=opts.key_pair,
+                                       security_group_ids=[security_group.id],
+                                       instance_type=check_instance_type(opts.instance_type),
+                                       placement=opts.zone,
+                                       min_count=opts.instances,
+                                       max_count=opts.instances)
+        slave_nodes = slave_res.instances
+        print "Launched %d slaves in %s, regid = %s" % (len(slave_nodes), opts.zone, slave_res.id)
+
+    print "Waiting for AWS to propagate instance metadata..."
+    time.sleep(5)
+    for slave in slave_nodes:
+        slave.add_tag(
+            key='Name',
+            value='{cn}-slave-{iid}'.format(cn=cluster_name, iid=slave.id))
+    # Return all the instances
+    return slave_nodes
+
+
+def get_or_make_group(conn, name):
+    groups = conn.get_all_security_groups()
+    group = [g for g in groups if g.name == name]
+    if len(group) > 0:
+        return group[0]
+    else:
+        print "Creating security group " + name
+        sg = conn.create_security_group(name, "OpenRefine cluster EC2 group")
+        sg.authorize('tcp', REFINE_PORT, REFINE_PORT, '0.0.0.0/0')
+        sg.authorize('tcp', 22, 22, '0.0.0.0/0')
+        return sg
+
+
+def wait_for_cluster_state(cluster_instances, cluster_state):
+    """
+    Wait for all the instances in the cluster to reach a designated state.
+
+    cluster_instances: a list of boto.ec2.instance.Instance
+    cluster_state: a string representing the desired state of all the instances in the cluster
+           value can be 'ssh-ready' or a valid value from boto.ec2.instance.InstanceState such as
+           'running', 'terminated', etc.
+           (would be nice to replace this with a proper enum: http://stackoverflow.com/a/1695250)
+    """
+    sys.stdout.write(
+        "Waiting for cluster to enter '{s}' state.".format(s=cluster_state)
+    )
+    sys.stdout.flush()
+
+    start_time = datetime.now()
+    num_attempts = 0
+
+    while True:
+        time.sleep(5 * num_attempts)  # seconds
+
+        for i in cluster_instances:
+            i.update()
+
+        if cluster_state == 'refine-ready':
+            if all(i.state == 'running' for i in cluster_instances) and \
+                    is_cluster_refine_available(cluster_instances):
+                break
+        else:
+            if all(i.state == cluster_state for i in cluster_instances):
+                break
+
+        num_attempts += 1
+
+        sys.stdout.write(".")
+        sys.stdout.flush()
+
+    sys.stdout.write("\n")
+
+    end_time = datetime.now()
+    print "Cluster is now in '{s}' state. Waited {t} seconds.".format(
+        s=cluster_state,
+        t=(end_time - start_time).seconds
+    )
+
+
+def get_existing_cluster(conn, cluster_name, die_on_error=True):
+    print "Searching for existing cluster " + cluster_name + "..."
+    reservations = conn.get_all_reservations()
+    slave_nodes = []
+    for res in reservations:
+        active = [i for i in res.instances if is_active(i)]
+        for inst in active:
+            group_names = [g.name for g in inst.groups]
+            if (cluster_name + "-openrefine-sg") in group_names:
+                slave_nodes.append(inst)
+
+    if slave_nodes != [] or not die_on_error:
+        print "Found  %d slaves" % len(slave_nodes)
+        return slave_nodes
+    else:
+        if slave_nodes != [] or die_on_error:
+            print >> sys.stderr, "ERROR: Could not find any existing cluster: %s" % cluster_name
+        sys.exit(1)
+
+
+def is_cluster_refine_available(cluster_instances):
+    """
+    Check if SSH is available on all the instances in a cluster.
+    """
+    for i in cluster_instances:
+        if not is_refine_available(host=i.ip_address):
+            return False
+    else:
+        return True
+
+
+def is_refine_available(host):
+    """
+    Check if OpenRefine is available on a host.
+    """
+    try:
+        urllib2.urlopen('http://' + host + ":%d" % REFINE_PORT, timeout=2)
+    except urllib2.URLError:
+        return False
+
+    return True
+
+
+def main():
+    (opts, action, cluster_name) = parse_args()
+    try:
+        conn = ec2.connect_to_region(opts.region)
+    except Exception as e:
+        print >> stderr, (e)
+        sys.exit(1)
+
+    if action == "launch":
+        if opts.instances <= 0:
+            print >> sys.stderr, "ERROR: You have to start at least 1 instance"
+            sys.exit(1)
+        slave_nodes = launch_cluster(conn, opts, cluster_name)
+
+        print "Succesfully started %d instances." % len(slave_nodes)
+        wait_for_cluster_state(conn, opts, slave_nodes, 'refine-ready')
+
+        slave_nodes_ips = [slave_node.ip_address + ":%d" % REFINE_PORT for slave_node in
+                           slave_nodes]
+        print ','.join(slave_nodes_ips)
+
+    elif action == "destroy":
+        print "Are you sure you want to destroy the cluster %s?" % cluster_name
+        print "The following instances will be terminated:"
+        slave_nodes = get_existing_cluster(
+            conn, cluster_name, die_on_error=True)
+        for inst in slave_nodes:
+            print "> %s" % inst.public_dns_name
+
+        msg = "ALL DATA ON ALL NODES WILL BE LOST!!\nDestroy cluster %s (y/N): " % cluster_name
+        response = raw_input(msg)
+        if response == "y":
+            print "Terminating slaves..."
+            for inst in slave_nodes:
+                inst.terminate()
+
+            if opts.delete_groups:
+                delete_sg(conn, cluster_name, opts)
+
+
+    elif action == "reboot":
+        response = raw_input(
+            "Are you sure you want to reboot the cluster " +
+            cluster_name + "?\n" +
+            "Reboot cluster " + cluster_name + " (y/N): ")
+        if response == "y":
+            slave_nodes = get_existing_cluster(
+                conn, cluster_name, die_on_error=True)
+            print "Rebooting slaves..."
+            for inst in slave_nodes:
+                if inst.state not in ["shutting-down", "terminated"]:
+                    print "Rebooting " + inst.id
+                    inst.reboot()
+    elif action == "get-slaves":
+        slave_nodes = [slave_node.ip_address + ":%d" % REFINE_PORT for slave_node in
+                       get_existing_cluster(conn, cluster_name)]
+        print ','.join(slave_nodes)
+    elif action == "clean":
+        delete_sg(conn, cluster_name, opts)
+    else:
+        print >> stderr, "Invalid action: %s" % action
+        sys.exit(1)
+
+
+if __name__ == "__main__":
+    main()
