@@ -1,60 +1,58 @@
 # OpenRefine image builder
 
-The idea is to have a maintainable image of OpenRefine, that can also be built for various platformas or cloud services.
-Though, our main focus will be on [AWS EC2](http://aws.amazon.com/ec2/) service.
+The idea is to have a maintainable image of OpenRefine, that can also be built for various platforms or cloud services.
 
 ## How to use it
 To achieve maintainability and platform-independence of the image, we use [Packer](https://packer.io/) - 
 _a tool for creating identical machine images for multiple platforms from a single source configuration_.
 
-To make use of it, you need:
+To make use of it, it is required to:
 
 * have packer installed on your machine
 * packer configuration file `packer.json` (provided)
-* script to install OpenRefin `install-refine.sh` (provided)
+* script to install OpenRefine `install-refine.sh` (provided)
 
 Current packer configuration file allows you to build OpenRefine image for 
-Docker or to create an equivalent amazon-ebs AMI.
+Docker or to create an equivalent [amazon-ebs AMI](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ComponentsAMIs.html).
 
 1. To create a docker image issue the following command:
 
 
-```sh
-packer build -only=docker packer.json
-```
+  ```sh
+  packer build -only=docker packer.json
+  ```
 
-To run the created docker image:
+  To run the created docker image:
 
-```sh
-docker run --rm -p 3333:3333 openrefine /start.sh
-```
+  ```sh
+  docker run --rm -p 3333:3333 openrefine /start.sh
+  ```
 
 2. Building amazon-ebs AMI
 
-```sh
-packer build -only=amazon-ebs packer.json
-```
+  ```sh
+  packer build -only=amazon-ebs packer.json
+  ```
 
 
-## Community OpenRefine AMI
+## Community OpenRefine AMI and cluster management
  
  We provide a command line tool to launch an arbitrary number of OpenRefine instances on EC2.
  
  ```
  NOTE: it is required to have your AWS keys set as environmental variables:
- 
  AWS_ACCESS_KEY_ID
  AWS_SECRET_ACCESS_KEY
  ```
  
- From the root of the project type:
+ From the root of the [p3-batchrefine](https://github.com/fusepoolP3/p3-batchrefine) project type:
  
   ```sh
   bin/ec2-cluster --help
   ```
  
-  this will display a list of actions and options to manage a cluster of OpenRefine instances on Amazon EC2.
-  The script has two mandatory arguments: action, cluster name and a list of options.
+  this will display a list of actions and options to manage a cluster of OpenRefine instances on [Amazon EC2](http://aws.amazon.com/ec2/).
+  The script has two mandatory arguments: **action**, **cluster name** and a list of options.
   
   Cluster name serves as a unique identifier of a cluster and therefore it is a required parameter together with the desired action.
   
@@ -93,9 +91,9 @@ packer build -only=amazon-ebs packer.json
                         that were created                      
   ```
   
-  ### Example of usage:
+### Example of usage:
   
-  To start two m3.medium instances with a maximum prices of 0.04:
+  To start two _m3.medium_ instances with a maximum price of 0.04:
   
   ```sh
   bin/ec2-cluster launch myname -i 2 --spot-price 0.04
