@@ -36,14 +36,14 @@ Whatever way you choose to use BatchRefine, you will need two things:
 To try BatchRefine right away, use the pre-built docker image
 
 ```sh
-docker run --rm -it -p 7100:7100 fusepool/p3-batchrefine
+docker run --rm -it -p 8310:8310 fusepool/p3-batchrefine
 ```
 
 This will start the [P3 Batchrefine transformer](#p3-transformer) with default configurations,
 which can be accessed as follows:
 
 ```sh
-curl -XPOST -H 'Content-Type:text/csv' --data-binary @input.csv 'localhost:7100/?refinejson=http://url.to/transform.json'
+curl -XPOST -H 'Content-Type:text/csv' --data-binary @input.csv 'localhost:8310/?refinejson=http://url.to/transform.json'
 ```
 
 Compiling and Running
@@ -53,7 +53,7 @@ Compiling and Running
 
 Building BatchRefine from sources requires Maven 3 and Apache ant (for
 building OpenRefine). The procedure, which is somewhat complex because
-OpenRefine is not meant to be used as a library, is as follows. On a
+OpenRefine is not meant to be used as a library, is as follows. In a
 clean folder:
 
 1. Download the OpenRefine 2.6-beta.1 source distribution from:
@@ -151,7 +151,7 @@ To list the `backend_specific_options`:
 
 ```
 -v                -- verbose logging
--p [PORT]         -- port to which transformer listens (defaults: 7100)
+-p [PORT]         -- port to which transformer listens (defaults: 8310)
 -t [sync|async]   -- transformer type: synchronous or asynchronous (defaults to sync)
 ```
 
@@ -160,15 +160,15 @@ Available backends for the transformer are: remote, split, spark
 `backend_specific_options` are the same as for the command line client and can be listed with
 a `--help` option or, consult the [Usage](#usage) section
 
-To start the most common configuration of the transformer: synchronous and
-connects to a locally running instance of OpenRefine, binds to port 7100.
+To start the most common configuration of the transformer (running synchronously on port 8310 and
+connecting to a locally running instance of OpenRefine):
 
 ```sh
 ./bin/transformer remote
 
 #which is equivalent to:
 
-./bin/transformer -v -t sync -p 7100 remote -l localhost:3333
+./bin/transformer -v -t sync -p 8310 remote -l localhost:3333
 ```
 
 
@@ -185,8 +185,7 @@ instructions on how to do it.
 
 
 The HTTP API is convenient for integrating BatchRefine as a service,
-but clumsy for manual usage.
-The command line tool works better in
+but clumsy for manual usage. The command line tool works better in
 these cases, as you can simply do:
 
 ```sh
@@ -196,8 +195,6 @@ these cases, as you can simply do:
 where, as before, `input.csv` is the input file, `transform.json` is
 the transform script and `output.csv` is the output file to which to
 write the transformed data.
-
-
 
 ## Running With the Embedded Backend
 
@@ -299,7 +296,7 @@ After running the bootstrap step, you just have to run:
 **For more information regarding docker, refer to the docker [README](docker/README.md)**
 
 and this will expose a synchronous BatchRefine [P3 transformer]() on
-port 7100. To access the transformer, you have to make a POST request
+port 8310. To access the transformer, you have to make a POST request
 to it.
 
 Docker image provides a running OpenRefine instance together with the transformer
@@ -325,7 +322,7 @@ script is called `transform.json` and is available at
 
 ```sh
 curl -XPOST --data-binary @input.csv --H 'Content-Type:text/csv' -H 'Accept:text/csv'
-	'http://localhost:7100?refinejson=http://www.example.org/transform.json'
+	'http://localhost:8310?refinejson=http://www.example.org/transform.json'
 ```
 
 to which the transformer will reply with a CSV file that has been
