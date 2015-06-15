@@ -1,5 +1,5 @@
 BatchRefine [![Build Status](https://travis-ci.org/fusepoolP3/p3-batchrefine.svg?branch=master)](https://travis-ci.org/fusepoolP3/p3-batchrefine)
-==========
+===========
 
 BatchRefine is an effort to run [OpenRefine](http://openrefine.org)
 effectively in batch workloads and ETL pipelines. Goals include:
@@ -9,8 +9,6 @@ effectively in batch workloads and ETL pipelines. Goals include:
 2. scaling the engine to run over huge data sets.
 
 This is a work in progress, and so is this documentation.
-
-### Introduction
 
 BatchRefine currently works by providing a collection of wrappers
 (referred to as _backends_) and, in some modes, a distribution layer,
@@ -31,7 +29,7 @@ Whatever way you choose to use BatchRefine, you will need two things:
 2. an OpenRefine command history (referred to as a _transform
    script_), packaged as a JSON file.
 
-### Try it out
+## Try it out
 
 To try BatchRefine right away, use the pre-built docker image
 
@@ -46,8 +44,7 @@ which can be accessed as follows:
 curl -XPOST -H 'Content-Type:text/csv' --data-binary @input.csv 'localhost:8310/?refinejson=http://url.to/transform.json'
 ```
 
-Compiling and Running
---------------
+## Compiling and Running
 
 ### Building from Sources
 
@@ -109,8 +106,6 @@ whereas the JAR for starting the command line client will be under:
 
 `./clients/clients-cli/target/clients-cli-{project.version}-jar-with-dependencies.jar`
 
-
-
 ### Running
 
 This section describes how to run the tools, for more details refer to [Usage](#usage) section.  
@@ -171,14 +166,13 @@ connecting to a locally running instance of OpenRefine):
 ./bin/transformer -v -t sync -p 8310 remote -l localhost:3333
 ```
 
+## Usage
 
-Usage
------
 This section provides usage examples for both [Command Line Tool](#command-line-tool)
 and [P3 Transformer](#p3-transformer)
 
-Command Line Tool
-=================
+### Command Line Tool
+
 Unfortunately, the command line tool has to be built from sources. 
 Read the section on [building BatchRefine from sources](#building-from-sources) for
 instructions on how to do it. 
@@ -196,7 +190,7 @@ where, as before, `input.csv` is the input file, `transform.json` is
 the transform script and `output.csv` is the output file to which to
 write the transformed data.
 
-## Running With the Embedded Backend
+#### Running With the Embedded Backend
 
 We ship a prepackaged script to start the command line tool under
 `./bin`. We will show an example using the _embedded_ backend so that
@@ -209,14 +203,14 @@ you do not need to start OpenRefine to actually use it.
 this will produce a CSV file on stdout with the transform applied to
 it.
 
-#### Limitations of the embedded engine
+##### Limitations of the embedded engine
 
 The embedded engine cannot currently do reconciliation, and extensions
 require customization to work (i.e. the RDF extension won't work out
 of the box). Further, it is likely that it has to be altered or
 rewritten  to work with newer versions of OpenRefine.
 
-## Accessing a running OpenRefine instance
+#### Accessing a running OpenRefine instance
 
 The command line tool can also act as a direct client to a running
 OpenRefine instance. If you have OpenRefine running on
@@ -226,7 +220,7 @@ OpenRefine instance. If you have OpenRefine running on
 ./bin/batchrefine remote -l refine.example.com:3333 input.csv transform.json
 ```
 
-## Simple distributed backend, accesing multiple OpenRefine instances
+#### Simple distributed backend, accesing multiple OpenRefine instances
 
 The command line tool can also split a large file for you and submit it
 to multiple OpenRefine instances. For example, you have two OpenRefine instances and you want
@@ -239,7 +233,7 @@ to split your file in half:
 the Batchrefine `split` backend will split an input file in 2 chunks, upload them to available OpenRefine
 instances and handle the reassembling of the result.
  
-#### Command line options of split backend:
+##### Command line options of split backend:
 To get the list of available options, use `--help` option.
 
 ```
@@ -256,20 +250,20 @@ To get the list of available options, use `--help` option.
  -s (--split) [LINE:int | CHUNK:int] : Set default split logic
 ```
 
-#### Split logic
+##### Split logic
 Two split strategies are supported:
 * CHUNK:N - splits a file into N equal pieces
 * LINE:N1,N2,N3 - split the file on the specified line numbers, such that `LINE:30,50,80` will split a file into 4 pieces on 
 exectly specified lines.
 
 
-## P3 Transformer
+### P3 Transformer
 
 The BatchRefine P3 transformer wraps (multiple instances of)
 OpenRefine under the Fusepool P3 HTTP API. We will show how to build a
 transformer that operates over a single instance, running locally.
 
-### Building with Docker
+#### Building with Docker
 
 Building and deploying the P3 transformer with
 [Docker](https://www.docker.com/) is easy. Assuming you have Docker
@@ -302,7 +296,7 @@ to it.
 Docker image provides a running OpenRefine instance together with the transformer
 so you don't have to care about running your own.
 
-### Running with your OpenRefine instance
+#### Running with your OpenRefine instance
  
 ```
 ./bin/transformer -v -t sync remote -l refine.example.com:3333
@@ -311,7 +305,7 @@ so you don't have to care about running your own.
 Will start a synchronous P3 Transformer which will connect to the specified OpenRefine instance.
 If no URI is specified, defaults to: `localhost:3333`.
 
-### Running
+#### Running
 
 As per the P3 transformer API, the input file goes in the body of the
 POST request, whereas the transform script goes as an URI passed as a
@@ -335,8 +329,7 @@ transformed according to what is described in `transform.json`.
  on building BatchRefine from sources).
  
 
-Miscellaneous
-=============
+## Miscellaneous
 
 This work is partially funded by
 [Fusepool P3](http://www.fusepool.eu/p3) project, under FP7 grant
