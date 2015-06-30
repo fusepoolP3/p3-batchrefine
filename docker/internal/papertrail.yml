@@ -1,0 +1,10 @@
+files:
+  - /home/user/log/openrefine.log
+  - /home/user/log/transformer.log
+
+destination:
+  host: logs2.papertrailapp.com
+  port: 54008
+  protocol: tls
+exclude_patterns:
+  - don't log on me

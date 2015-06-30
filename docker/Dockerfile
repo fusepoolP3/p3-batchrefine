@@ -60,6 +60,11 @@ EXPOSE 8310
 
 ENV REFINE_MEMORY=1400M
 
+RUN wget --no-check-certificate https://github.com/papertrail/remote_syslog2/releases/download/v0.14/remote_syslog_linux_amd64.tar.gz \
+-O remote_syslog_linux_amd64.tar.gz; tar xzf remote_syslog_linux_amd64.tar.gz; rm remote_syslog_linux_amd64.tar.gz
+RUN cp /home/user/code/batchrefine/docker/internal/papertrail.yml \
+       /home/user/code/remote_syslog/
+RUN ./remote_syslog/remote_syslog -c /home/user/code/remote_syslog/papertrail.yml
 #ADD ./internal/supervisord.conf /home/user/supervisor/ # if you want to override it.
 
 CMD ["-v", "-t sync", "remote"]
