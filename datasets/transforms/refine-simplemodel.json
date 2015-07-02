@@ -1,0 +1,664 @@
+[
+  {
+    "op": "rdf-extension/save-rdf-schema",
+    "description": "Save RDF schema skeleton",
+    "schema": {
+      "baseUri": "http://127.0.0.1:3333/",
+      "prefixes": [
+        {
+          "name": "rdfs",
+          "uri": "http://www.w3.org/2000/01/rdf-schema#"
+        },
+        {
+          "name": "foaf",
+          "uri": "http://xmlns.com/foaf/0.1/"
+        },
+        {
+          "name": "xsd",
+          "uri": "http://www.w3.org/2001/XMLSchema#"
+        },
+        {
+          "name": "owl",
+          "uri": "http://www.w3.org/2002/07/owl#"
+        },
+        {
+          "name": "krw",
+          "uri": "http://test.org/krw2015/"
+        },
+        {
+          "name": "rdf",
+          "uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+        }
+      ],
+      "rootNodes": [
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value",
+          "isRowNumberCell": false,
+          "columnName": "LISTE",
+          "rdfTypes": [],
+          "links": [
+            {
+              "uri": "http://test.org/krw2015parteiName",
+              "curie": "krw:parteiName",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "LISTE"
+              }
+            }
+          ]
+        },
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value",
+          "isRowNumberCell": true,
+          "rdfTypes": [],
+          "links": []
+        }
+      ]
+    }
+  },
+  {
+    "op": "rdf-extension/save-rdf-schema",
+    "description": "Save RDF schema skeleton",
+    "schema": {
+      "baseUri": "http://test.org/krw2015/",
+      "prefixes": [
+        {
+          "name": "rdfs",
+          "uri": "http://www.w3.org/2000/01/rdf-schema#"
+        },
+        {
+          "name": "foaf",
+          "uri": "http://xmlns.com/foaf/0.1/"
+        },
+        {
+          "name": "xsd",
+          "uri": "http://www.w3.org/2001/XMLSchema#"
+        },
+        {
+          "name": "owl",
+          "uri": "http://www.w3.org/2002/07/owl#"
+        },
+        {
+          "name": "krw",
+          "uri": "http://test.org/krw2015/"
+        },
+        {
+          "name": "rdf",
+          "uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+        }
+      ],
+      "rootNodes": [
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value",
+          "isRowNumberCell": false,
+          "columnName": "LISTE",
+          "rdfTypes": [],
+          "links": [
+            {
+              "uri": "http://test.org/krw2015parteiName",
+              "curie": "krw:parteiName",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "LISTE"
+              }
+            }
+          ]
+        },
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value",
+          "isRowNumberCell": false,
+          "columnName": "KAND_ID_UNIQUE",
+          "rdfTypes": [],
+          "links": [
+            {
+              "uri": "http://test.org/krw2015ID",
+              "curie": "krw:ID",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "KAND_ID_UNIQUE"
+              }
+            },
+            {
+              "uri": "http://xmlns.com/foaf/0.1/firstName",
+              "curie": "foaf:firstName",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "KAND_VORNAME"
+              }
+            },
+            {
+              "uri": "http://xmlns.com/foaf/0.1/familyName",
+              "curie": "foaf:familyName",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "KAND_NACHNAME"
+              }
+            },
+            {
+              "uri": "http://test.org/krw2015/Partei",
+              "curie": "krw:Partei",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "LISTE",
+                "rdfTypes": [],
+                "links": []
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "op": "rdf-extension/save-rdf-schema",
+    "description": "Save RDF schema skeleton",
+    "schema": {
+      "baseUri": "http://test.org/krw2015/",
+      "prefixes": [
+        {
+          "name": "rdfs",
+          "uri": "http://www.w3.org/2000/01/rdf-schema#"
+        },
+        {
+          "name": "foaf",
+          "uri": "http://xmlns.com/foaf/0.1/"
+        },
+        {
+          "name": "xsd",
+          "uri": "http://www.w3.org/2001/XMLSchema#"
+        },
+        {
+          "name": "owl",
+          "uri": "http://www.w3.org/2002/07/owl#"
+        },
+        {
+          "name": "krw",
+          "uri": "http://test.org/krw2015/"
+        },
+        {
+          "name": "rdf",
+          "uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+        }
+      ],
+      "rootNodes": [
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value",
+          "isRowNumberCell": false,
+          "columnName": "LISTE",
+          "rdfTypes": [],
+          "links": [
+            {
+              "uri": "http://test.org/krw2015/parteiName",
+              "curie": "krw:parteiName",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "LISTE"
+              }
+            }
+          ]
+        },
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value",
+          "isRowNumberCell": false,
+          "columnName": "KAND_ID_UNIQUE",
+          "rdfTypes": [],
+          "links": [
+            {
+              "uri": "http://xmlns.com/foaf/0.1/firstName",
+              "curie": "foaf:firstName",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "KAND_VORNAME"
+              }
+            },
+            {
+              "uri": "http://xmlns.com/foaf/0.1/familyName",
+              "curie": "foaf:familyName",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "KAND_NACHNAME"
+              }
+            },
+            {
+              "uri": "http://test.org/krw2015/Partei",
+              "curie": "krw:Partei",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "LISTE",
+                "rdfTypes": [],
+                "links": []
+              }
+            },
+            {
+              "uri": "http://test.org/krw2015/ID",
+              "curie": "krw:ID",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "KAND_ID_UNIQUE"
+              }
+            },
+            {
+              "uri": "http://test.org/krw2015/stimmenSVP",
+              "curie": "krw:stimmenSVP",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#int",
+                "columnName": "SVP_VERAENDERT"
+              }
+            },
+            {
+              "uri": "http://test.org/krw2015/stimmenSP",
+              "curie": "krw:stimmenSP",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#int",
+                "columnName": "SP_VERAENDERT"
+              }
+            },
+            {
+              "uri": "http://test.org/krw2015/stimmenFDP",
+              "curie": "krw:stimmenFDP",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#int",
+                "columnName": "FDP_VERAENDERT"
+              }
+            },
+            {
+              "uri": "http://test.org/krw2015/stimmenGruene",
+              "curie": "krw:stimmenGruene",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#int",
+                "columnName": "GRÜNE_VERAENDERT"
+              }
+            },
+            {
+              "uri": "http://test.org/krw2015/stimmenGLP",
+              "curie": "krw:stimmenGLP",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#int",
+                "columnName": "GLP_VERAENDERT"
+              }
+            },
+            {
+              "uri": "http://test.org/krw2015/stimmenCVP",
+              "curie": "krw:stimmenCVP",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#int",
+                "columnName": "CVP_VERAENDERT"
+              }
+            },
+            {
+              "uri": "http://test.org/krw2015/stimmenEVP",
+              "curie": "krw:stimmenEVP",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#int",
+                "columnName": "EVP_VERAENDERT"
+              }
+            },
+            {
+              "uri": "http://test.org/krw2015/stimmenBDP",
+              "curie": "krw:stimmenBDP",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#int",
+                "columnName": "BDP_VERAENDERT"
+              }
+            },
+            {
+              "uri": "http://test.org/krw2015/stimmenEDU",
+              "curie": "krw:stimmenEDU",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#int",
+                "columnName": "EDU_VERAENDERT"
+              }
+            },
+            {
+              "uri": "http://test.org/krw2015/stimmenAL",
+              "curie": "krw:stimmenAL",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#int",
+                "columnName": "AL_VERAENDERT"
+              }
+            },
+            {
+              "uri": "http://test.org/krw2015/stimmenIPZH",
+              "curie": "krw:stimmenIPZH",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#int",
+                "columnName": "IPZH_VERAENDERT"
+              }
+            },
+            {
+              "uri": "http://test.org/krw2015/stimmenJUSO",
+              "curie": "krw:stimmenJUSO",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#int",
+                "columnName": "JUSO_VERAENDERT"
+              }
+            },
+            {
+              "uri": "http://test.org/krw2015/stimmenPiraten",
+              "curie": "krw:stimmenPiraten",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#int",
+                "columnName": "PIRATEN_VERAENDERT"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "op": "rdf-extension/save-rdf-schema",
+    "description": "Save RDF schema skeleton",
+    "schema": {
+      "baseUri": "http://test.org/krw2015/",
+      "prefixes": [
+        {
+          "name": "rdfs",
+          "uri": "http://www.w3.org/2000/01/rdf-schema#"
+        },
+        {
+          "name": "foaf",
+          "uri": "http://xmlns.com/foaf/0.1/"
+        },
+        {
+          "name": "xsd",
+          "uri": "http://www.w3.org/2001/XMLSchema#"
+        },
+        {
+          "name": "owl",
+          "uri": "http://www.w3.org/2002/07/owl#"
+        },
+        {
+          "name": "krw",
+          "uri": "http://test.org/krw2015/"
+        },
+        {
+          "name": "rdf",
+          "uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+        }
+      ],
+      "rootNodes": [
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value",
+          "isRowNumberCell": false,
+          "columnName": "LISTE",
+          "rdfTypes": [],
+          "links": [
+            {
+              "uri": "http://test.org/krw2015/parteiName",
+              "curie": "krw:parteiName",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "LISTE"
+              }
+            }
+          ]
+        },
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value",
+          "isRowNumberCell": false,
+          "columnName": "KAND_ID_UNIQUE",
+          "rdfTypes": [],
+          "links": [
+            {
+              "uri": "http://xmlns.com/foaf/0.1/firstName",
+              "curie": "foaf:firstName",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "KAND_VORNAME"
+              }
+            },
+            {
+              "uri": "http://xmlns.com/foaf/0.1/familyName",
+              "curie": "foaf:familyName",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "KAND_NACHNAME"
+              }
+            },
+            {
+              "uri": "http://test.org/krw2015/Partei",
+              "curie": "krw:Partei",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "LISTE",
+                "rdfTypes": [],
+                "links": []
+              }
+            },
+            {
+              "uri": "http://test.org/krw2015/ID",
+              "curie": "krw:ID",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "KAND_ID_UNIQUE"
+              }
+            },
+            {
+              "uri": "http://test.org/krw2015/stimmenSVP",
+              "curie": "krw:stimmenSVP",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#int",
+                "columnName": "SVP_VERAENDERT"
+              }
+            },
+            {
+              "uri": "http://test.org/krw2015/stimmenSP",
+              "curie": "krw:stimmenSP",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#int",
+                "columnName": "SP_VERAENDERT"
+              }
+            },
+            {
+              "uri": "http://test.org/krw2015/stimmenFDP",
+              "curie": "krw:stimmenFDP",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#int",
+                "columnName": "FDP_VERAENDERT"
+              }
+            },
+            {
+              "uri": "http://test.org/krw2015/stimmenGruene",
+              "curie": "krw:stimmenGruene",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#int",
+                "columnName": "GRÜNE_VERAENDERT"
+              }
+            },
+            {
+              "uri": "http://test.org/krw2015/stimmenGLP",
+              "curie": "krw:stimmenGLP",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#int",
+                "columnName": "GLP_VERAENDERT"
+              }
+            },
+            {
+              "uri": "http://test.org/krw2015/stimmenCVP",
+              "curie": "krw:stimmenCVP",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#int",
+                "columnName": "CVP_VERAENDERT"
+              }
+            },
+            {
+              "uri": "http://test.org/krw2015/stimmenEVP",
+              "curie": "krw:stimmenEVP",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#int",
+                "columnName": "EVP_VERAENDERT"
+              }
+            },
+            {
+              "uri": "http://test.org/krw2015/stimmenBDP",
+              "curie": "krw:stimmenBDP",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#int",
+                "columnName": "BDP_VERAENDERT"
+              }
+            },
+            {
+              "uri": "http://test.org/krw2015/stimmenEDU",
+              "curie": "krw:stimmenEDU",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#int",
+                "columnName": "EDU_VERAENDERT"
+              }
+            },
+            {
+              "uri": "http://test.org/krw2015/stimmenAL",
+              "curie": "krw:stimmenAL",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#int",
+                "columnName": "AL_VERAENDERT"
+              }
+            },
+            {
+              "uri": "http://test.org/krw2015/stimmenIPZH",
+              "curie": "krw:stimmenIPZH",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#int",
+                "columnName": "IPZH_VERAENDERT"
+              }
+            },
+            {
+              "uri": "http://test.org/krw2015/stimmenJUSO",
+              "curie": "krw:stimmenJUSO",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#int",
+                "columnName": "JUSO_VERAENDERT"
+              }
+            },
+            {
+              "uri": "http://test.org/krw2015/stimmenPiraten",
+              "curie": "krw:stimmenPiraten",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#int",
+                "columnName": "PIRATEN_VERAENDERT"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  }
+]
