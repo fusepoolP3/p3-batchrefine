@@ -1,29 +1,15 @@
 BatchRefine [![Build Status](https://travis-ci.org/fusepoolP3/p3-batchrefine.svg?branch=master)](https://travis-ci.org/fusepoolP3/p3-batchrefine)
 ===========
 
-BatchRefine is an effort to run [OpenRefine](http://openrefine.org)
-effectively in batch workloads and ETL pipelines. Goals include:
+P3-BatchRefine provides methods to run [OpenRefine](http://openrefine.org) in batch mode.
+It does so by providing a collection of wrappers (called _backends_) and a distribution layer on top of OpenRefine.
 
-1. providing APIs for embedding and/or otherwise driving the engine
-   programmatically;
-2. scaling the engine to run over huge data sets.
-
-This is a work in progress, and so is this documentation.
-
-BatchRefine currently works by providing a collection of wrappers
-(referred to as _backends_) and, in some modes, a distribution layer,
-on top of OpenRefine.  It provides two main ways (access clients) to
-access these backends: a command line client, and an HTTP API based on
+Clients can access the backends by two ways: using a commandline client or using an HTTP API based on
 the
-[Fusepool P3 transformer API](https://github.com/fusepoolP3/overall-architecture/blob/master/transformer-api.md). The
-latter allows BatchRefine to take part in P3 pipelines where it can be
-chained with other transformers.
+[Fusepool P3 transformer API](https://github.com/fusepoolP3/overall-architecture/blob/master/transformer-api.md). 
+The latter allows BatchRefine to take part in P3 pipelines where it can be chained with other transformers.
 
-Backends and access clients can be combined to tailor the needs of the
-application. We will discuss two simple combinations that provide
-basic functionality: [Command Line Tool](#command-line-tool) and a [Fusepool P3 transformer](#p3-transformer) (accessible via HTTP).
-
-Whatever way you choose to use BatchRefine, you will need two things:
+In either case, two things are needed to run BatchRefine:
 
 1. a CSV to use as input file;
 2. an OpenRefine command history (referred to as a _transform
