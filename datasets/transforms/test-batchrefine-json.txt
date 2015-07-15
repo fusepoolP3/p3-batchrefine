@@ -1,0 +1,4874 @@
+[
+  {
+    "op": "rdf-extension/save-rdf-schema",
+    "description": "Save RDF schema skeleton",
+    "schema": {
+      "baseUri": "http://data.zh/krw/",
+      "prefixes": [
+        {
+          "name": "rdfs",
+          "uri": "http://www.w3.org/2000/01/rdf-schema#"
+        },
+        {
+          "name": "foaf",
+          "uri": "http://xmlns.com/foaf/0.1/"
+        },
+        {
+          "name": "xsd",
+          "uri": "http://www.w3.org/2001/XMLSchema#"
+        },
+        {
+          "name": "owl",
+          "uri": "http://www.w3.org/2002/07/owl#"
+        },
+        {
+          "name": "krw",
+          "uri": "http://data.zh/krw/"
+        },
+        {
+          "name": "rdf",
+          "uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+        }
+      ],
+      "rootNodes": [
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value",
+          "isRowNumberCell": false,
+          "columnName": "LISTE",
+          "rdfTypes": [],
+          "links": [
+            {
+              "uri": "http://data.zh/krw/parteiName",
+              "curie": "krw:parteiName",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "LISTE"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "op": "rdf-extension/save-rdf-schema",
+    "description": "Save RDF schema skeleton",
+    "schema": {
+      "baseUri": "http://data.zh/krw/",
+      "prefixes": [
+        {
+          "name": "rdfs",
+          "uri": "http://www.w3.org/2000/01/rdf-schema#"
+        },
+        {
+          "name": "foaf",
+          "uri": "http://xmlns.com/foaf/0.1/"
+        },
+        {
+          "name": "xsd",
+          "uri": "http://www.w3.org/2001/XMLSchema#"
+        },
+        {
+          "name": "owl",
+          "uri": "http://www.w3.org/2002/07/owl#"
+        },
+        {
+          "name": "krw",
+          "uri": "http://data.zh/krw/"
+        },
+        {
+          "name": "rdf",
+          "uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+        }
+      ],
+      "rootNodes": [
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value",
+          "isRowNumberCell": false,
+          "columnName": "LISTE",
+          "rdfTypes": [],
+          "links": [
+            {
+              "uri": "http://data.zh/krw/parteiName",
+              "curie": "krw:parteiName",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "LISTE"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "op": "rdf-extension/save-rdf-schema",
+    "description": "Save RDF schema skeleton",
+    "schema": {
+      "baseUri": "http://data.zh/krw/",
+      "prefixes": [
+        {
+          "name": "rdfs",
+          "uri": "http://www.w3.org/2000/01/rdf-schema#"
+        },
+        {
+          "name": "foaf",
+          "uri": "http://xmlns.com/foaf/0.1/"
+        },
+        {
+          "name": "xsd",
+          "uri": "http://www.w3.org/2001/XMLSchema#"
+        },
+        {
+          "name": "owl",
+          "uri": "http://www.w3.org/2002/07/owl#"
+        },
+        {
+          "name": "krw",
+          "uri": "http://data.zh/krw/"
+        },
+        {
+          "name": "rdf",
+          "uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+        }
+      ],
+      "rootNodes": [
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value",
+          "isRowNumberCell": false,
+          "columnName": "LISTE",
+          "rdfTypes": [],
+          "links": [
+            {
+              "uri": "http://data.zh/krw/parteiName",
+              "curie": "krw:parteiName",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "LISTE"
+              }
+            }
+          ]
+        },
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value",
+          "isRowNumberCell": false,
+          "columnName": "KAND_ID_UNIQUE",
+          "rdfTypes": [],
+          "links": []
+        },
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value",
+          "isRowNumberCell": true,
+          "rdfTypes": [],
+          "links": []
+        }
+      ]
+    }
+  },
+  {
+    "op": "rdf-extension/save-rdf-schema",
+    "description": "Save RDF schema skeleton",
+    "schema": {
+      "baseUri": "http://data.zh/krw/",
+      "prefixes": [
+        {
+          "name": "rdfs",
+          "uri": "http://www.w3.org/2000/01/rdf-schema#"
+        },
+        {
+          "name": "foaf",
+          "uri": "http://xmlns.com/foaf/0.1/"
+        },
+        {
+          "name": "krw",
+          "uri": "http://data.zh/krw/"
+        },
+        {
+          "name": "owl",
+          "uri": "http://www.w3.org/2002/07/owl#"
+        },
+        {
+          "name": "xsd",
+          "uri": "http://www.w3.org/2001/XMLSchema#"
+        },
+        {
+          "name": "rdf",
+          "uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+        }
+      ],
+      "rootNodes": [
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value",
+          "isRowNumberCell": false,
+          "columnName": "LISTE",
+          "rdfTypes": [],
+          "links": [
+            {
+              "uri": "http://data.zh/krw/parteiName",
+              "curie": "krw:parteiName",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "LISTE"
+              }
+            }
+          ]
+        },
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value",
+          "isRowNumberCell": false,
+          "columnName": "KAND_ID_UNIQUE",
+          "rdfTypes": [],
+          "links": [
+            {
+              "uri": "http://xmlns.com/foaf/0.1/firstName",
+              "curie": "foaf:firstName",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "KAND_VORNAME"
+              }
+            },
+            {
+              "uri": "http://xmlns.com/foaf/0.1/lastName",
+              "curie": "foaf:lastName",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "KAND_NACHNAME"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/wahlKreis",
+              "curie": "krw:wahlKreis",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "WAHLKREIS_NAME"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/wahlKreisID",
+              "curie": "krw:wahlKreisID",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#int",
+                "columnName": "﻿WAHLKREIS_ID"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/partei",
+              "curie": "krw:partei",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "LISTE",
+                "rdfTypes": [],
+                "links": []
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/panaschierStimmenTotal",
+              "curie": "krw:panaschierStimmenTotal",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#int",
+                "columnName": "KAND_STIMMENPANASCH_TOT"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/stimmenTotal",
+              "curie": "krw:stimmenTotal",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#int",
+                "columnName": "KAND_STIMMEN_TOTAL"
+              }
+            }
+          ]
+        },
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value",
+          "isRowNumberCell": true,
+          "rdfTypes": [],
+          "links": []
+        }
+      ]
+    }
+  },
+  {
+    "op": "rdf-extension/save-rdf-schema",
+    "description": "Save RDF schema skeleton",
+    "schema": {
+      "baseUri": "http://data.zh/krw/",
+      "prefixes": [
+        {
+          "name": "rdfs",
+          "uri": "http://www.w3.org/2000/01/rdf-schema#"
+        },
+        {
+          "name": "foaf",
+          "uri": "http://xmlns.com/foaf/0.1/"
+        },
+        {
+          "name": "krw",
+          "uri": "http://data.zh/krw/"
+        },
+        {
+          "name": "owl",
+          "uri": "http://www.w3.org/2002/07/owl#"
+        },
+        {
+          "name": "xsd",
+          "uri": "http://www.w3.org/2001/XMLSchema#"
+        },
+        {
+          "name": "rdf",
+          "uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+        }
+      ],
+      "rootNodes": [
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value",
+          "isRowNumberCell": false,
+          "columnName": "LISTE",
+          "rdfTypes": [
+            {
+              "uri": "http://data.zh/krw/Partei",
+              "curie": "krw:Partei"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://data.zh/krw/parteiName",
+              "curie": "krw:parteiName",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "LISTE"
+              }
+            }
+          ]
+        },
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value",
+          "isRowNumberCell": false,
+          "columnName": "KAND_ID_UNIQUE",
+          "rdfTypes": [
+            {
+              "uri": "http://xmlns.com/foaf/0.1/Person",
+              "curie": "foaf:Person"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://xmlns.com/foaf/0.1/firstName",
+              "curie": "foaf:firstName",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "KAND_VORNAME"
+              }
+            },
+            {
+              "uri": "http://xmlns.com/foaf/0.1/lastName",
+              "curie": "foaf:lastName",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "KAND_NACHNAME"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/wahlKreis",
+              "curie": "krw:wahlKreis",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "WAHLKREIS_NAME"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/wahlKreisID",
+              "curie": "krw:wahlKreisID",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#int",
+                "columnName": "﻿WAHLKREIS_ID"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/partei",
+              "curie": "krw:partei",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "LISTE",
+                "rdfTypes": [],
+                "links": []
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/panaschierStimmenTotal",
+              "curie": "krw:panaschierStimmenTotal",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#int",
+                "columnName": "KAND_STIMMENPANASCH_TOT"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/stimmenTotal",
+              "curie": "krw:stimmenTotal",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#int",
+                "columnName": "KAND_STIMMEN_TOTAL"
+              }
+            }
+          ]
+        },
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value",
+          "isRowNumberCell": false,
+          "columnName": "SVP_VERAENDERT",
+          "rdfTypes": [
+            {
+              "uri": "http://data.zh/krw/Panaschierstimmen",
+              "curie": "krw:Panaschierstimmen"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://data.zh/krw/stimmen",
+              "curie": "krw:stimmen",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#int",
+                "columnName": "SVP_VERAENDERT"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/partei",
+              "curie": "krw:partei",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "http://data.zh/krw/SVP",
+                "isRowNumberCell": false,
+                "columnName": "LISTE",
+                "rdfTypes": [],
+                "links": []
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "op": "rdf-extension/save-rdf-schema",
+    "description": "Save RDF schema skeleton",
+    "schema": {
+      "baseUri": "http://data.zh/krw/",
+      "prefixes": [
+        {
+          "name": "rdfs",
+          "uri": "http://www.w3.org/2000/01/rdf-schema#"
+        },
+        {
+          "name": "foaf",
+          "uri": "http://xmlns.com/foaf/0.1/"
+        },
+        {
+          "name": "krw",
+          "uri": "http://data.zh/krw/"
+        },
+        {
+          "name": "owl",
+          "uri": "http://www.w3.org/2002/07/owl#"
+        },
+        {
+          "name": "xsd",
+          "uri": "http://www.w3.org/2001/XMLSchema#"
+        },
+        {
+          "name": "rdf",
+          "uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+        }
+      ],
+      "rootNodes": [
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value",
+          "isRowNumberCell": false,
+          "columnName": "LISTE",
+          "rdfTypes": [
+            {
+              "uri": "http://data.zh/krw/Partei",
+              "curie": "krw:Partei"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://data.zh/krw/parteiName",
+              "curie": "krw:parteiName",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "LISTE"
+              }
+            }
+          ]
+        },
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value",
+          "isRowNumberCell": false,
+          "columnName": "KAND_ID_UNIQUE",
+          "rdfTypes": [
+            {
+              "uri": "http://xmlns.com/foaf/0.1/Person",
+              "curie": "foaf:Person"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://xmlns.com/foaf/0.1/firstName",
+              "curie": "foaf:firstName",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "KAND_VORNAME"
+              }
+            },
+            {
+              "uri": "http://xmlns.com/foaf/0.1/lastName",
+              "curie": "foaf:lastName",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "KAND_NACHNAME"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/wahlKreis",
+              "curie": "krw:wahlKreis",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "WAHLKREIS_NAME"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/wahlKreisID",
+              "curie": "krw:wahlKreisID",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#int",
+                "columnName": "﻿WAHLKREIS_ID"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/partei",
+              "curie": "krw:partei",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "LISTE",
+                "rdfTypes": [],
+                "links": []
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/panaschierStimmenTotal",
+              "curie": "krw:panaschierStimmenTotal",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#int",
+                "columnName": "KAND_STIMMENPANASCH_TOT"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/stimmenTotal",
+              "curie": "krw:stimmenTotal",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#int",
+                "columnName": "KAND_STIMMEN_TOTAL"
+              }
+            }
+          ]
+        },
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value",
+          "isRowNumberCell": false,
+          "columnName": "SVP_VERAENDERT",
+          "rdfTypes": [
+            {
+              "uri": "http://data.zh/krw/Panaschierstimmen",
+              "curie": "krw:Panaschierstimmen"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://data.zh/krw/stimmen",
+              "curie": "krw:stimmen",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#int",
+                "columnName": "SVP_VERAENDERT"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/partei",
+              "curie": "krw:partei",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "http://data.zh/krw/SVP",
+                "isRowNumberCell": false,
+                "columnName": "LISTE",
+                "rdfTypes": [],
+                "links": []
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "op": "rdf-extension/save-rdf-schema",
+    "description": "Save RDF schema skeleton",
+    "schema": {
+      "baseUri": "http://data.zh/krw/",
+      "prefixes": [
+        {
+          "name": "rdfs",
+          "uri": "http://www.w3.org/2000/01/rdf-schema#"
+        },
+        {
+          "name": "foaf",
+          "uri": "http://xmlns.com/foaf/0.1/"
+        },
+        {
+          "name": "krw",
+          "uri": "http://data.zh/krw/"
+        },
+        {
+          "name": "owl",
+          "uri": "http://www.w3.org/2002/07/owl#"
+        },
+        {
+          "name": "xsd",
+          "uri": "http://www.w3.org/2001/XMLSchema#"
+        },
+        {
+          "name": "rdf",
+          "uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+        }
+      ],
+      "rootNodes": [
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value",
+          "isRowNumberCell": false,
+          "columnName": "LISTE",
+          "rdfTypes": [
+            {
+              "uri": "http://data.zh/krw/Partei",
+              "curie": "krw:Partei"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://data.zh/krw/parteiName",
+              "curie": "krw:parteiName",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "LISTE"
+              }
+            }
+          ]
+        },
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value",
+          "isRowNumberCell": false,
+          "columnName": "KAND_ID_UNIQUE",
+          "rdfTypes": [
+            {
+              "uri": "http://xmlns.com/foaf/0.1/Person",
+              "curie": "foaf:Person"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://xmlns.com/foaf/0.1/firstName",
+              "curie": "foaf:firstName",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "KAND_VORNAME"
+              }
+            },
+            {
+              "uri": "http://xmlns.com/foaf/0.1/lastName",
+              "curie": "foaf:lastName",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "KAND_NACHNAME"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/wahlKreis",
+              "curie": "krw:wahlKreis",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "WAHLKREIS_NAME"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/wahlKreisID",
+              "curie": "krw:wahlKreisID",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#int",
+                "columnName": "﻿WAHLKREIS_ID"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/partei",
+              "curie": "krw:partei",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "LISTE",
+                "rdfTypes": [],
+                "links": []
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/panaschierStimmenTotal",
+              "curie": "krw:panaschierStimmenTotal",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#int",
+                "columnName": "KAND_STIMMENPANASCH_TOT"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/stimmenTotal",
+              "curie": "krw:stimmenTotal",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#int",
+                "columnName": "KAND_STIMMEN_TOTAL"
+              }
+            }
+          ]
+        },
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value",
+          "isRowNumberCell": false,
+          "columnName": "SVP_VERAENDERT",
+          "rdfTypes": [
+            {
+              "uri": "http://data.zh/krw/Panaschierstimmen",
+              "curie": "krw:Panaschierstimmen"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://data.zh/krw/stimmen",
+              "curie": "krw:stimmen",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#int",
+                "columnName": "SVP_VERAENDERT"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/partei",
+              "curie": "krw:partei",
+              "target": {
+                "nodeType": "resource",
+                "value": "http://data.zh/krw/SVP",
+                "rdfTypes": [],
+                "links": []
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/kandidat",
+              "curie": "krw:kandidat",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "KAND_ID_UNIQUE",
+                "rdfTypes": [],
+                "links": []
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "op": "rdf-extension/save-rdf-schema",
+    "description": "Save RDF schema skeleton",
+    "schema": {
+      "baseUri": "http://data.zh/krw/",
+      "prefixes": [
+        {
+          "name": "rdfs",
+          "uri": "http://www.w3.org/2000/01/rdf-schema#"
+        },
+        {
+          "name": "foaf",
+          "uri": "http://xmlns.com/foaf/0.1/"
+        },
+        {
+          "name": "xsd",
+          "uri": "http://www.w3.org/2001/XMLSchema#"
+        },
+        {
+          "name": "owl",
+          "uri": "http://www.w3.org/2002/07/owl#"
+        },
+        {
+          "name": "krw",
+          "uri": "http://data.zh/krw/"
+        },
+        {
+          "name": "rdf",
+          "uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+        }
+      ],
+      "rootNodes": [
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value",
+          "isRowNumberCell": false,
+          "columnName": "LISTE",
+          "rdfTypes": [
+            {
+              "uri": "http://data.zh/krw/Partei",
+              "curie": "krw:Partei"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://data.zh/krw/parteiName",
+              "curie": "krw:parteiName",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "LISTE"
+              }
+            }
+          ]
+        },
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value",
+          "isRowNumberCell": false,
+          "columnName": "KAND_ID_UNIQUE",
+          "rdfTypes": [
+            {
+              "uri": "http://xmlns.com/foaf/0.1/Person",
+              "curie": "foaf:Person"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://xmlns.com/foaf/0.1/firstName",
+              "curie": "foaf:firstName",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "KAND_VORNAME"
+              }
+            },
+            {
+              "uri": "http://xmlns.com/foaf/0.1/lastName",
+              "curie": "foaf:lastName",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "KAND_NACHNAME"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/wahlKreis",
+              "curie": "krw:wahlKreis",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "WAHLKREIS_NAME"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/wahlKreisID",
+              "curie": "krw:wahlKreisID",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#int",
+                "columnName": "﻿WAHLKREIS_ID"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/partei",
+              "curie": "krw:partei",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "LISTE",
+                "rdfTypes": [],
+                "links": []
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/panaschierStimmenTotal",
+              "curie": "krw:panaschierStimmenTotal",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#int",
+                "columnName": "KAND_STIMMENPANASCH_TOT"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/stimmenTotal",
+              "curie": "krw:stimmenTotal",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#int",
+                "columnName": "KAND_STIMMEN_TOTAL"
+              }
+            }
+          ]
+        },
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value",
+          "isRowNumberCell": false,
+          "columnName": "SVP_VERAENDERT",
+          "rdfTypes": [
+            {
+              "uri": "http://data.zh/krw/Panaschierstimmen",
+              "curie": "krw:Panaschierstimmen"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://data.zh/krw/stimmen",
+              "curie": "krw:stimmen",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#int",
+                "columnName": "SVP_VERAENDERT"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/partei",
+              "curie": "krw:partei",
+              "target": {
+                "nodeType": "resource",
+                "value": "http://data.zh/krw/SVP",
+                "rdfTypes": [],
+                "links": []
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/kandidat",
+              "curie": "krw:kandidat",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "KAND_ID_UNIQUE",
+                "rdfTypes": [],
+                "links": []
+              }
+            }
+          ]
+        },
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value",
+          "isRowNumberCell": false,
+          "columnName": "SP_VERAENDERT",
+          "rdfTypes": [
+            {
+              "uri": "http://data.zh/krw/Panaschierstimmen",
+              "curie": "krw:Panaschierstimmen"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://data.zh/krw/stimmen",
+              "curie": "krw:stimmen",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#int",
+                "columnName": "SP_VERAENDERT"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/partei",
+              "curie": "krw:partei",
+              "target": {
+                "nodeType": "literal",
+                "value": "http://data.zh/krw/SP"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/kandidat",
+              "curie": "krw:kandidat",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "KAND_ID_UNIQUE",
+                "rdfTypes": [],
+                "links": []
+              }
+            }
+          ]
+        },
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value",
+          "isRowNumberCell": false,
+          "columnName": "FDP_VERAENDERT",
+          "rdfTypes": [
+            {
+              "uri": "http://data.zh/krw/Panaschierstimmen",
+              "curie": "krw:Panaschierstimmen"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://data.zh/krw/stimmen",
+              "curie": "krw:stimmen",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "FDP_VERAENDERT"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/partei",
+              "curie": "krw:partei",
+              "target": {
+                "nodeType": "literal",
+                "value": "http://data.zh/krw/FDP"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/kandidat",
+              "curie": "krw:kandidat",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "KAND_ID_UNIQUE",
+                "rdfTypes": [],
+                "links": []
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "op": "rdf-extension/save-rdf-schema",
+    "description": "Save RDF schema skeleton",
+    "schema": {
+      "baseUri": "http://data.zh/krw/",
+      "prefixes": [
+        {
+          "name": "rdfs",
+          "uri": "http://www.w3.org/2000/01/rdf-schema#"
+        },
+        {
+          "name": "foaf",
+          "uri": "http://xmlns.com/foaf/0.1/"
+        },
+        {
+          "name": "xsd",
+          "uri": "http://www.w3.org/2001/XMLSchema#"
+        },
+        {
+          "name": "owl",
+          "uri": "http://www.w3.org/2002/07/owl#"
+        },
+        {
+          "name": "krw",
+          "uri": "http://data.zh/krw/"
+        },
+        {
+          "name": "rdf",
+          "uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+        }
+      ],
+      "rootNodes": [
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value",
+          "isRowNumberCell": false,
+          "columnName": "LISTE",
+          "rdfTypes": [
+            {
+              "uri": "http://data.zh/krw/Partei",
+              "curie": "krw:Partei"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://data.zh/krw/parteiName",
+              "curie": "krw:parteiName",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "LISTE"
+              }
+            }
+          ]
+        },
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value",
+          "isRowNumberCell": false,
+          "columnName": "KAND_ID_UNIQUE",
+          "rdfTypes": [
+            {
+              "uri": "http://xmlns.com/foaf/0.1/Person",
+              "curie": "foaf:Person"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://xmlns.com/foaf/0.1/firstName",
+              "curie": "foaf:firstName",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "KAND_VORNAME"
+              }
+            },
+            {
+              "uri": "http://xmlns.com/foaf/0.1/lastName",
+              "curie": "foaf:lastName",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "KAND_NACHNAME"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/wahlKreis",
+              "curie": "krw:wahlKreis",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "WAHLKREIS_NAME"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/wahlKreisID",
+              "curie": "krw:wahlKreisID",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#int",
+                "columnName": "﻿WAHLKREIS_ID"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/partei",
+              "curie": "krw:partei",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "LISTE",
+                "rdfTypes": [],
+                "links": []
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/panaschierStimmenTotal",
+              "curie": "krw:panaschierStimmenTotal",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#int",
+                "columnName": "KAND_STIMMENPANASCH_TOT"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/stimmenTotal",
+              "curie": "krw:stimmenTotal",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#int",
+                "columnName": "KAND_STIMMEN_TOTAL"
+              }
+            }
+          ]
+        },
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value",
+          "isRowNumberCell": false,
+          "columnName": "SVP_VERAENDERT",
+          "rdfTypes": [
+            {
+              "uri": "http://data.zh/krw/Panaschierstimmen",
+              "curie": "krw:Panaschierstimmen"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://data.zh/krw/stimmen",
+              "curie": "krw:stimmen",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#int",
+                "columnName": "SVP_VERAENDERT"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/partei",
+              "curie": "krw:partei",
+              "target": {
+                "nodeType": "resource",
+                "value": "http://data.zh/krw/SVP",
+                "rdfTypes": [],
+                "links": []
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/kandidat",
+              "curie": "krw:kandidat",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "KAND_ID_UNIQUE",
+                "rdfTypes": [],
+                "links": []
+              }
+            }
+          ]
+        },
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value",
+          "isRowNumberCell": false,
+          "columnName": "SP_VERAENDERT",
+          "rdfTypes": [
+            {
+              "uri": "http://data.zh/krw/Panaschierstimmen",
+              "curie": "krw:Panaschierstimmen"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://data.zh/krw/stimmen",
+              "curie": "krw:stimmen",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#int",
+                "columnName": "SP_VERAENDERT"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/partei",
+              "curie": "krw:partei",
+              "target": {
+                "nodeType": "literal",
+                "value": "http://data.zh/krw/SP"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/kandidat",
+              "curie": "krw:kandidat",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "KAND_ID_UNIQUE",
+                "rdfTypes": [],
+                "links": []
+              }
+            }
+          ]
+        },
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value",
+          "isRowNumberCell": false,
+          "columnName": "FDP_VERAENDERT",
+          "rdfTypes": [
+            {
+              "uri": "http://data.zh/krw/Panaschierstimmen",
+              "curie": "krw:Panaschierstimmen"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://data.zh/krw/stimmen",
+              "curie": "krw:stimmen",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "FDP_VERAENDERT"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/partei",
+              "curie": "krw:partei",
+              "target": {
+                "nodeType": "literal",
+                "value": "http://data.zh/krw/FDP"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/kandidat",
+              "curie": "krw:kandidat",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "KAND_ID_UNIQUE",
+                "rdfTypes": [],
+                "links": []
+              }
+            }
+          ]
+        },
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value",
+          "isRowNumberCell": false,
+          "columnName": "GRÜNE_VERAENDERT",
+          "rdfTypes": [
+            {
+              "uri": "http://data.zh/krw/Panaschierstimmen",
+              "curie": "krw:Panaschierstimmen"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://data.zh/krw/stimmen",
+              "curie": "krw:stimmen",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#int",
+                "columnName": "GRÜNE_VERAENDERT"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/partei",
+              "curie": "krw:partei",
+              "target": {
+                "nodeType": "literal",
+                "value": "http://data.zh/krw/Grüne"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/kandidat",
+              "curie": "krw:kandidat",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "KAND_ID_UNIQUE",
+                "rdfTypes": [],
+                "links": []
+              }
+            }
+          ]
+        },
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value",
+          "isRowNumberCell": false,
+          "columnName": "GLP_VERAENDERT",
+          "rdfTypes": [
+            {
+              "uri": "http://data.zh/krw/Panaschierstimmen",
+              "curie": "krw:Panaschierstimmen"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://data.zh/krw/stimmen",
+              "curie": "krw:stimmen",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#int",
+                "columnName": "GLP_VERAENDERT"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/partei",
+              "curie": "krw:partei",
+              "target": {
+                "nodeType": "literal",
+                "value": "http://data.zh/krw/glp"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "op": "rdf-extension/save-rdf-schema",
+    "description": "Save RDF schema skeleton",
+    "schema": {
+      "baseUri": "http://data.zh/krw/",
+      "prefixes": [
+        {
+          "name": "rdfs",
+          "uri": "http://www.w3.org/2000/01/rdf-schema#"
+        },
+        {
+          "name": "foaf",
+          "uri": "http://xmlns.com/foaf/0.1/"
+        },
+        {
+          "name": "xsd",
+          "uri": "http://www.w3.org/2001/XMLSchema#"
+        },
+        {
+          "name": "owl",
+          "uri": "http://www.w3.org/2002/07/owl#"
+        },
+        {
+          "name": "krw",
+          "uri": "http://data.zh/krw/"
+        },
+        {
+          "name": "rdf",
+          "uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+        }
+      ],
+      "rootNodes": [
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value",
+          "isRowNumberCell": false,
+          "columnName": "LISTE",
+          "rdfTypes": [
+            {
+              "uri": "http://data.zh/krw/Partei",
+              "curie": "krw:Partei"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://data.zh/krw/parteiName",
+              "curie": "krw:parteiName",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "LISTE"
+              }
+            }
+          ]
+        },
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value",
+          "isRowNumberCell": false,
+          "columnName": "KAND_ID_UNIQUE",
+          "rdfTypes": [
+            {
+              "uri": "http://xmlns.com/foaf/0.1/Person",
+              "curie": "foaf:Person"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://xmlns.com/foaf/0.1/firstName",
+              "curie": "foaf:firstName",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "KAND_VORNAME"
+              }
+            },
+            {
+              "uri": "http://xmlns.com/foaf/0.1/lastName",
+              "curie": "foaf:lastName",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "KAND_NACHNAME"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/wahlKreis",
+              "curie": "krw:wahlKreis",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "WAHLKREIS_NAME"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/wahlKreisID",
+              "curie": "krw:wahlKreisID",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#int",
+                "columnName": "﻿WAHLKREIS_ID"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/partei",
+              "curie": "krw:partei",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "LISTE",
+                "rdfTypes": [],
+                "links": []
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/panaschierStimmenTotal",
+              "curie": "krw:panaschierStimmenTotal",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#int",
+                "columnName": "KAND_STIMMENPANASCH_TOT"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/stimmenTotal",
+              "curie": "krw:stimmenTotal",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#int",
+                "columnName": "KAND_STIMMEN_TOTAL"
+              }
+            }
+          ]
+        },
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value",
+          "isRowNumberCell": false,
+          "columnName": "SVP_VERAENDERT",
+          "rdfTypes": [
+            {
+              "uri": "http://data.zh/krw/Panaschierstimmen",
+              "curie": "krw:Panaschierstimmen"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://data.zh/krw/stimmen",
+              "curie": "krw:stimmen",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#int",
+                "columnName": "SVP_VERAENDERT"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/partei",
+              "curie": "krw:partei",
+              "target": {
+                "nodeType": "resource",
+                "value": "http://data.zh/krw/SVP",
+                "rdfTypes": [],
+                "links": []
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/kandidat",
+              "curie": "krw:kandidat",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "KAND_ID_UNIQUE",
+                "rdfTypes": [],
+                "links": []
+              }
+            }
+          ]
+        },
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value",
+          "isRowNumberCell": false,
+          "columnName": "SP_VERAENDERT",
+          "rdfTypes": [
+            {
+              "uri": "http://data.zh/krw/Panaschierstimmen",
+              "curie": "krw:Panaschierstimmen"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://data.zh/krw/stimmen",
+              "curie": "krw:stimmen",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#int",
+                "columnName": "SP_VERAENDERT"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/partei",
+              "curie": "krw:partei",
+              "target": {
+                "nodeType": "literal",
+                "value": "http://data.zh/krw/SP"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/kandidat",
+              "curie": "krw:kandidat",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "KAND_ID_UNIQUE",
+                "rdfTypes": [],
+                "links": []
+              }
+            }
+          ]
+        },
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value",
+          "isRowNumberCell": false,
+          "columnName": "FDP_VERAENDERT",
+          "rdfTypes": [
+            {
+              "uri": "http://data.zh/krw/Panaschierstimmen",
+              "curie": "krw:Panaschierstimmen"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://data.zh/krw/stimmen",
+              "curie": "krw:stimmen",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "FDP_VERAENDERT"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/partei",
+              "curie": "krw:partei",
+              "target": {
+                "nodeType": "literal",
+                "value": "http://data.zh/krw/FDP"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/kandidat",
+              "curie": "krw:kandidat",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "KAND_ID_UNIQUE",
+                "rdfTypes": [],
+                "links": []
+              }
+            }
+          ]
+        },
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value",
+          "isRowNumberCell": false,
+          "columnName": "GRÜNE_VERAENDERT",
+          "rdfTypes": [
+            {
+              "uri": "http://data.zh/krw/Panaschierstimmen",
+              "curie": "krw:Panaschierstimmen"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://data.zh/krw/stimmen",
+              "curie": "krw:stimmen",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#int",
+                "columnName": "GRÜNE_VERAENDERT"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/partei",
+              "curie": "krw:partei",
+              "target": {
+                "nodeType": "literal",
+                "value": "http://data.zh/krw/Grüne"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/kandidat",
+              "curie": "krw:kandidat",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "KAND_ID_UNIQUE",
+                "rdfTypes": [],
+                "links": []
+              }
+            }
+          ]
+        },
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value",
+          "isRowNumberCell": false,
+          "columnName": "GLP_VERAENDERT",
+          "rdfTypes": [
+            {
+              "uri": "http://data.zh/krw/Panaschierstimmen",
+              "curie": "krw:Panaschierstimmen"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://data.zh/krw/stimmen",
+              "curie": "krw:stimmen",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#int",
+                "columnName": "GLP_VERAENDERT"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/partei",
+              "curie": "krw:partei",
+              "target": {
+                "nodeType": "literal",
+                "value": "http://data.zh/krw/glp"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/kandidat",
+              "curie": "krw:kandidat",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "KAND_ID_UNIQUE",
+                "rdfTypes": [],
+                "links": []
+              }
+            }
+          ]
+        },
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value",
+          "isRowNumberCell": false,
+          "columnName": "CVP_VERAENDERT",
+          "rdfTypes": [
+            {
+              "uri": "http://data.zh/krw/Panaschierstimmen",
+              "curie": "krw:Panaschierstimmen"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://data.zh/krw/stimmen",
+              "curie": "krw:stimmen",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#int",
+                "columnName": "CVP_VERAENDERT"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/partei",
+              "curie": "krw:partei",
+              "target": {
+                "nodeType": "literal",
+                "value": "http://data.zh/krw/CVP"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/kandidat",
+              "curie": "krw:kandidat",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "KAND_ID_UNIQUE",
+                "rdfTypes": [],
+                "links": []
+              }
+            }
+          ]
+        },
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value",
+          "isRowNumberCell": false,
+          "columnName": "EVP_VERAENDERT",
+          "rdfTypes": [
+            {
+              "uri": "http://data.zh/krw/Panaschierstimmen",
+              "curie": "krw:Panaschierstimmen"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://data.zh/krw/stimmen",
+              "curie": "krw:stimmen",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#int",
+                "columnName": "EVP_VERAENDERT"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/partei",
+              "curie": "krw:partei",
+              "target": {
+                "nodeType": "literal",
+                "value": "http://data.zh/krw/EVP"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/kandidat",
+              "curie": "krw:kandidat",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "KAND_ID_UNIQUE",
+                "rdfTypes": [],
+                "links": []
+              }
+            }
+          ]
+        },
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value",
+          "isRowNumberCell": false,
+          "columnName": "BDP_VERAENDERT",
+          "rdfTypes": [
+            {
+              "uri": "http://data.zh/krw/Panaschierstimmen",
+              "curie": "krw:Panaschierstimmen"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://data.zh/krw/stimmen",
+              "curie": "krw:stimmen",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "BDP_VERAENDERT"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/partei",
+              "curie": "krw:partei",
+              "target": {
+                "nodeType": "literal",
+                "value": "http://data.zh/krw/BDP"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/kandidat",
+              "curie": "krw:kandidat",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "KAND_ID_UNIQUE",
+                "rdfTypes": [],
+                "links": []
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "op": "rdf-extension/save-rdf-schema",
+    "description": "Save RDF schema skeleton",
+    "schema": {
+      "baseUri": "http://data.zh/krw/",
+      "prefixes": [
+        {
+          "name": "rdfs",
+          "uri": "http://www.w3.org/2000/01/rdf-schema#"
+        },
+        {
+          "name": "foaf",
+          "uri": "http://xmlns.com/foaf/0.1/"
+        },
+        {
+          "name": "xsd",
+          "uri": "http://www.w3.org/2001/XMLSchema#"
+        },
+        {
+          "name": "owl",
+          "uri": "http://www.w3.org/2002/07/owl#"
+        },
+        {
+          "name": "krw",
+          "uri": "http://data.zh/krw/"
+        },
+        {
+          "name": "rdf",
+          "uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+        }
+      ],
+      "rootNodes": [
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value",
+          "isRowNumberCell": false,
+          "columnName": "LISTE",
+          "rdfTypes": [
+            {
+              "uri": "http://data.zh/krw/Partei",
+              "curie": "krw:Partei"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://data.zh/krw/parteiName",
+              "curie": "krw:parteiName",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "LISTE"
+              }
+            }
+          ]
+        },
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value",
+          "isRowNumberCell": false,
+          "columnName": "KAND_ID_UNIQUE",
+          "rdfTypes": [
+            {
+              "uri": "http://xmlns.com/foaf/0.1/Person",
+              "curie": "foaf:Person"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://xmlns.com/foaf/0.1/firstName",
+              "curie": "foaf:firstName",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "KAND_VORNAME"
+              }
+            },
+            {
+              "uri": "http://xmlns.com/foaf/0.1/lastName",
+              "curie": "foaf:lastName",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "KAND_NACHNAME"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/wahlKreis",
+              "curie": "krw:wahlKreis",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "WAHLKREIS_NAME"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/wahlKreisID",
+              "curie": "krw:wahlKreisID",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#int",
+                "columnName": "﻿WAHLKREIS_ID"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/partei",
+              "curie": "krw:partei",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "LISTE",
+                "rdfTypes": [],
+                "links": []
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/panaschierStimmenTotal",
+              "curie": "krw:panaschierStimmenTotal",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#int",
+                "columnName": "KAND_STIMMENPANASCH_TOT"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/stimmenTotal",
+              "curie": "krw:stimmenTotal",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#int",
+                "columnName": "KAND_STIMMEN_TOTAL"
+              }
+            }
+          ]
+        },
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value",
+          "isRowNumberCell": false,
+          "columnName": "SVP_VERAENDERT",
+          "rdfTypes": [
+            {
+              "uri": "http://data.zh/krw/Panaschierstimmen",
+              "curie": "krw:Panaschierstimmen"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://data.zh/krw/stimmen",
+              "curie": "krw:stimmen",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#int",
+                "columnName": "SVP_VERAENDERT"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/partei",
+              "curie": "krw:partei",
+              "target": {
+                "nodeType": "resource",
+                "value": "http://data.zh/krw/SVP",
+                "rdfTypes": [],
+                "links": []
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/kandidat",
+              "curie": "krw:kandidat",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "KAND_ID_UNIQUE",
+                "rdfTypes": [],
+                "links": []
+              }
+            }
+          ]
+        },
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value",
+          "isRowNumberCell": false,
+          "columnName": "SP_VERAENDERT",
+          "rdfTypes": [
+            {
+              "uri": "http://data.zh/krw/Panaschierstimmen",
+              "curie": "krw:Panaschierstimmen"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://data.zh/krw/stimmen",
+              "curie": "krw:stimmen",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#int",
+                "columnName": "SP_VERAENDERT"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/partei",
+              "curie": "krw:partei",
+              "target": {
+                "nodeType": "literal",
+                "value": "http://data.zh/krw/SP"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/kandidat",
+              "curie": "krw:kandidat",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "KAND_ID_UNIQUE",
+                "rdfTypes": [],
+                "links": []
+              }
+            }
+          ]
+        },
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value",
+          "isRowNumberCell": false,
+          "columnName": "FDP_VERAENDERT",
+          "rdfTypes": [
+            {
+              "uri": "http://data.zh/krw/Panaschierstimmen",
+              "curie": "krw:Panaschierstimmen"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://data.zh/krw/stimmen",
+              "curie": "krw:stimmen",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "FDP_VERAENDERT"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/partei",
+              "curie": "krw:partei",
+              "target": {
+                "nodeType": "literal",
+                "value": "http://data.zh/krw/FDP"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/kandidat",
+              "curie": "krw:kandidat",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "KAND_ID_UNIQUE",
+                "rdfTypes": [],
+                "links": []
+              }
+            }
+          ]
+        },
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value",
+          "isRowNumberCell": false,
+          "columnName": "GRÜNE_VERAENDERT",
+          "rdfTypes": [
+            {
+              "uri": "http://data.zh/krw/Panaschierstimmen",
+              "curie": "krw:Panaschierstimmen"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://data.zh/krw/stimmen",
+              "curie": "krw:stimmen",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#int",
+                "columnName": "GRÜNE_VERAENDERT"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/partei",
+              "curie": "krw:partei",
+              "target": {
+                "nodeType": "literal",
+                "value": "http://data.zh/krw/Grüne"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/kandidat",
+              "curie": "krw:kandidat",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "KAND_ID_UNIQUE",
+                "rdfTypes": [],
+                "links": []
+              }
+            }
+          ]
+        },
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value",
+          "isRowNumberCell": false,
+          "columnName": "GLP_VERAENDERT",
+          "rdfTypes": [
+            {
+              "uri": "http://data.zh/krw/Panaschierstimmen",
+              "curie": "krw:Panaschierstimmen"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://data.zh/krw/stimmen",
+              "curie": "krw:stimmen",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#int",
+                "columnName": "GLP_VERAENDERT"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/partei",
+              "curie": "krw:partei",
+              "target": {
+                "nodeType": "literal",
+                "value": "http://data.zh/krw/glp"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/kandidat",
+              "curie": "krw:kandidat",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "KAND_ID_UNIQUE",
+                "rdfTypes": [],
+                "links": []
+              }
+            }
+          ]
+        },
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value",
+          "isRowNumberCell": false,
+          "columnName": "CVP_VERAENDERT",
+          "rdfTypes": [
+            {
+              "uri": "http://data.zh/krw/Panaschierstimmen",
+              "curie": "krw:Panaschierstimmen"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://data.zh/krw/stimmen",
+              "curie": "krw:stimmen",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#int",
+                "columnName": "CVP_VERAENDERT"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/partei",
+              "curie": "krw:partei",
+              "target": {
+                "nodeType": "literal",
+                "value": "http://data.zh/krw/CVP"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/kandidat",
+              "curie": "krw:kandidat",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "KAND_ID_UNIQUE",
+                "rdfTypes": [],
+                "links": []
+              }
+            }
+          ]
+        },
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value",
+          "isRowNumberCell": false,
+          "columnName": "EVP_VERAENDERT",
+          "rdfTypes": [
+            {
+              "uri": "http://data.zh/krw/Panaschierstimmen",
+              "curie": "krw:Panaschierstimmen"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://data.zh/krw/stimmen",
+              "curie": "krw:stimmen",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#int",
+                "columnName": "EVP_VERAENDERT"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/partei",
+              "curie": "krw:partei",
+              "target": {
+                "nodeType": "literal",
+                "value": "http://data.zh/krw/EVP"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/kandidat",
+              "curie": "krw:kandidat",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "KAND_ID_UNIQUE",
+                "rdfTypes": [],
+                "links": []
+              }
+            }
+          ]
+        },
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value",
+          "isRowNumberCell": false,
+          "columnName": "BDP_VERAENDERT",
+          "rdfTypes": [
+            {
+              "uri": "http://data.zh/krw/Panaschierstimmen",
+              "curie": "krw:Panaschierstimmen"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://data.zh/krw/stimmen",
+              "curie": "krw:stimmen",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "BDP_VERAENDERT"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/partei",
+              "curie": "krw:partei",
+              "target": {
+                "nodeType": "literal",
+                "value": "http://data.zh/krw/BDP"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/kandidat",
+              "curie": "krw:kandidat",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "KAND_ID_UNIQUE",
+                "rdfTypes": [],
+                "links": []
+              }
+            }
+          ]
+        },
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value",
+          "isRowNumberCell": false,
+          "columnName": "EDU_VERAENDERT",
+          "rdfTypes": [],
+          "links": [
+            {
+              "uri": "http://data.zh/krw/stimmen",
+              "curie": "krw:stimmen",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "EDU_VERAENDERT"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/partei",
+              "curie": "krw:partei",
+              "target": {
+                "nodeType": "literal",
+                "value": "http://data.zh/krw/EDU"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/kandidat",
+              "curie": "krw:kandidat",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "KAND_ID_UNIQUE",
+                "rdfTypes": [],
+                "links": []
+              }
+            }
+          ]
+        },
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value",
+          "isRowNumberCell": false,
+          "columnName": "AL_VERAENDERT",
+          "rdfTypes": [],
+          "links": [
+            {
+              "uri": "http://data.zh/krw/stimmen",
+              "curie": "krw:stimmen",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "AL_VERAENDERT"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/partei",
+              "curie": "krw:partei",
+              "target": {
+                "nodeType": "literal",
+                "value": "http://data.zh/krw/AL"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/kandidat",
+              "curie": "krw:kandidat",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "KAND_ID_UNIQUE",
+                "rdfTypes": [],
+                "links": []
+              }
+            }
+          ]
+        },
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value",
+          "isRowNumberCell": false,
+          "columnName": "IPZH_VERAENDERT",
+          "rdfTypes": [],
+          "links": [
+            {
+              "uri": "http://data.zh/krw/stimmen",
+              "curie": "krw:stimmen",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#int",
+                "columnName": "IPZH_VERAENDERT"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/partei",
+              "curie": "krw:partei",
+              "target": {
+                "nodeType": "literal",
+                "value": "http://data.zh/krw/IP ZH"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "op": "rdf-extension/save-rdf-schema",
+    "description": "Save RDF schema skeleton",
+    "schema": {
+      "baseUri": "http://data.zh/krw/",
+      "prefixes": [
+        {
+          "name": "rdfs",
+          "uri": "http://www.w3.org/2000/01/rdf-schema#"
+        },
+        {
+          "name": "foaf",
+          "uri": "http://xmlns.com/foaf/0.1/"
+        },
+        {
+          "name": "xsd",
+          "uri": "http://www.w3.org/2001/XMLSchema#"
+        },
+        {
+          "name": "owl",
+          "uri": "http://www.w3.org/2002/07/owl#"
+        },
+        {
+          "name": "krw",
+          "uri": "http://data.zh/krw/"
+        },
+        {
+          "name": "rdf",
+          "uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+        }
+      ],
+      "rootNodes": [
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value",
+          "isRowNumberCell": false,
+          "columnName": "LISTE",
+          "rdfTypes": [
+            {
+              "uri": "http://data.zh/krw/Partei",
+              "curie": "krw:Partei"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://data.zh/krw/parteiName",
+              "curie": "krw:parteiName",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "LISTE"
+              }
+            }
+          ]
+        },
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value",
+          "isRowNumberCell": false,
+          "columnName": "KAND_ID_UNIQUE",
+          "rdfTypes": [
+            {
+              "uri": "http://xmlns.com/foaf/0.1/Person",
+              "curie": "foaf:Person"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://xmlns.com/foaf/0.1/firstName",
+              "curie": "foaf:firstName",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "KAND_VORNAME"
+              }
+            },
+            {
+              "uri": "http://xmlns.com/foaf/0.1/lastName",
+              "curie": "foaf:lastName",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "KAND_NACHNAME"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/wahlKreis",
+              "curie": "krw:wahlKreis",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "WAHLKREIS_NAME"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/wahlKreisID",
+              "curie": "krw:wahlKreisID",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#int",
+                "columnName": "﻿WAHLKREIS_ID"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/partei",
+              "curie": "krw:partei",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "LISTE",
+                "rdfTypes": [],
+                "links": []
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/panaschierStimmenTotal",
+              "curie": "krw:panaschierStimmenTotal",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#int",
+                "columnName": "KAND_STIMMENPANASCH_TOT"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/stimmenTotal",
+              "curie": "krw:stimmenTotal",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#int",
+                "columnName": "KAND_STIMMEN_TOTAL"
+              }
+            }
+          ]
+        },
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value",
+          "isRowNumberCell": false,
+          "columnName": "SVP_VERAENDERT",
+          "rdfTypes": [
+            {
+              "uri": "http://data.zh/krw/Panaschierstimmen",
+              "curie": "krw:Panaschierstimmen"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://data.zh/krw/stimmen",
+              "curie": "krw:stimmen",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#int",
+                "columnName": "SVP_VERAENDERT"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/partei",
+              "curie": "krw:partei",
+              "target": {
+                "nodeType": "resource",
+                "value": "http://data.zh/krw/SVP",
+                "rdfTypes": [],
+                "links": []
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/kandidat",
+              "curie": "krw:kandidat",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "KAND_ID_UNIQUE",
+                "rdfTypes": [],
+                "links": []
+              }
+            }
+          ]
+        },
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value",
+          "isRowNumberCell": false,
+          "columnName": "SP_VERAENDERT",
+          "rdfTypes": [
+            {
+              "uri": "http://data.zh/krw/Panaschierstimmen",
+              "curie": "krw:Panaschierstimmen"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://data.zh/krw/stimmen",
+              "curie": "krw:stimmen",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#int",
+                "columnName": "SP_VERAENDERT"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/partei",
+              "curie": "krw:partei",
+              "target": {
+                "nodeType": "literal",
+                "value": "http://data.zh/krw/SP"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/kandidat",
+              "curie": "krw:kandidat",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "KAND_ID_UNIQUE",
+                "rdfTypes": [],
+                "links": []
+              }
+            }
+          ]
+        },
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value",
+          "isRowNumberCell": false,
+          "columnName": "FDP_VERAENDERT",
+          "rdfTypes": [
+            {
+              "uri": "http://data.zh/krw/Panaschierstimmen",
+              "curie": "krw:Panaschierstimmen"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://data.zh/krw/stimmen",
+              "curie": "krw:stimmen",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "FDP_VERAENDERT"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/partei",
+              "curie": "krw:partei",
+              "target": {
+                "nodeType": "literal",
+                "value": "http://data.zh/krw/FDP"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/kandidat",
+              "curie": "krw:kandidat",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "KAND_ID_UNIQUE",
+                "rdfTypes": [],
+                "links": []
+              }
+            }
+          ]
+        },
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value",
+          "isRowNumberCell": false,
+          "columnName": "GRÜNE_VERAENDERT",
+          "rdfTypes": [
+            {
+              "uri": "http://data.zh/krw/Panaschierstimmen",
+              "curie": "krw:Panaschierstimmen"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://data.zh/krw/stimmen",
+              "curie": "krw:stimmen",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#int",
+                "columnName": "GRÜNE_VERAENDERT"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/partei",
+              "curie": "krw:partei",
+              "target": {
+                "nodeType": "literal",
+                "value": "http://data.zh/krw/Grüne"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/kandidat",
+              "curie": "krw:kandidat",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "KAND_ID_UNIQUE",
+                "rdfTypes": [],
+                "links": []
+              }
+            }
+          ]
+        },
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value",
+          "isRowNumberCell": false,
+          "columnName": "GLP_VERAENDERT",
+          "rdfTypes": [
+            {
+              "uri": "http://data.zh/krw/Panaschierstimmen",
+              "curie": "krw:Panaschierstimmen"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://data.zh/krw/stimmen",
+              "curie": "krw:stimmen",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#int",
+                "columnName": "GLP_VERAENDERT"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/partei",
+              "curie": "krw:partei",
+              "target": {
+                "nodeType": "literal",
+                "value": "http://data.zh/krw/glp"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/kandidat",
+              "curie": "krw:kandidat",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "KAND_ID_UNIQUE",
+                "rdfTypes": [],
+                "links": []
+              }
+            }
+          ]
+        },
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value",
+          "isRowNumberCell": false,
+          "columnName": "CVP_VERAENDERT",
+          "rdfTypes": [
+            {
+              "uri": "http://data.zh/krw/Panaschierstimmen",
+              "curie": "krw:Panaschierstimmen"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://data.zh/krw/stimmen",
+              "curie": "krw:stimmen",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#int",
+                "columnName": "CVP_VERAENDERT"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/partei",
+              "curie": "krw:partei",
+              "target": {
+                "nodeType": "literal",
+                "value": "http://data.zh/krw/CVP"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/kandidat",
+              "curie": "krw:kandidat",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "KAND_ID_UNIQUE",
+                "rdfTypes": [],
+                "links": []
+              }
+            }
+          ]
+        },
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value",
+          "isRowNumberCell": false,
+          "columnName": "EVP_VERAENDERT",
+          "rdfTypes": [
+            {
+              "uri": "http://data.zh/krw/Panaschierstimmen",
+              "curie": "krw:Panaschierstimmen"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://data.zh/krw/stimmen",
+              "curie": "krw:stimmen",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#int",
+                "columnName": "EVP_VERAENDERT"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/partei",
+              "curie": "krw:partei",
+              "target": {
+                "nodeType": "literal",
+                "value": "http://data.zh/krw/EVP"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/kandidat",
+              "curie": "krw:kandidat",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "KAND_ID_UNIQUE",
+                "rdfTypes": [],
+                "links": []
+              }
+            }
+          ]
+        },
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value",
+          "isRowNumberCell": false,
+          "columnName": "BDP_VERAENDERT",
+          "rdfTypes": [
+            {
+              "uri": "http://data.zh/krw/Panaschierstimmen",
+              "curie": "krw:Panaschierstimmen"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://data.zh/krw/stimmen",
+              "curie": "krw:stimmen",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "BDP_VERAENDERT"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/partei",
+              "curie": "krw:partei",
+              "target": {
+                "nodeType": "literal",
+                "value": "http://data.zh/krw/BDP"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/kandidat",
+              "curie": "krw:kandidat",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "KAND_ID_UNIQUE",
+                "rdfTypes": [],
+                "links": []
+              }
+            }
+          ]
+        },
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value",
+          "isRowNumberCell": false,
+          "columnName": "EDU_VERAENDERT",
+          "rdfTypes": [
+            {
+              "uri": "http://data.zh/krw/Panaschierstimmen",
+              "curie": "krw:Panaschierstimmen"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://data.zh/krw/stimmen",
+              "curie": "krw:stimmen",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "EDU_VERAENDERT"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/partei",
+              "curie": "krw:partei",
+              "target": {
+                "nodeType": "literal",
+                "value": "http://data.zh/krw/EDU"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/kandidat",
+              "curie": "krw:kandidat",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "KAND_ID_UNIQUE",
+                "rdfTypes": [],
+                "links": []
+              }
+            }
+          ]
+        },
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value",
+          "isRowNumberCell": false,
+          "columnName": "AL_VERAENDERT",
+          "rdfTypes": [
+            {
+              "uri": "http://data.zh/krw/Panaschierstimmen",
+              "curie": "krw:Panaschierstimmen"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://data.zh/krw/stimmen",
+              "curie": "krw:stimmen",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "AL_VERAENDERT"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/partei",
+              "curie": "krw:partei",
+              "target": {
+                "nodeType": "literal",
+                "value": "http://data.zh/krw/AL"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/kandidat",
+              "curie": "krw:kandidat",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "KAND_ID_UNIQUE",
+                "rdfTypes": [],
+                "links": []
+              }
+            }
+          ]
+        },
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value",
+          "isRowNumberCell": false,
+          "columnName": "IPZH_VERAENDERT",
+          "rdfTypes": [
+            {
+              "uri": "http://data.zh/krw/Panaschierstimmen",
+              "curie": "krw:Panaschierstimmen"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://data.zh/krw/stimmen",
+              "curie": "krw:stimmen",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#int",
+                "columnName": "IPZH_VERAENDERT"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/partei",
+              "curie": "krw:partei",
+              "target": {
+                "nodeType": "literal",
+                "value": "http://data.zh/krw/IP ZH"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/kandidat",
+              "curie": "krw:kandidat",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "KAND_ID_UNIQUE",
+                "rdfTypes": [],
+                "links": []
+              }
+            }
+          ]
+        },
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value",
+          "isRowNumberCell": false,
+          "columnName": "JUSO_VERAENDERT",
+          "rdfTypes": [
+            {
+              "uri": "http://data.zh/krw/Panaschierstimmen",
+              "curie": "krw:Panaschierstimmen"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://data.zh/krw/stimmen",
+              "curie": "krw:stimmen",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#int",
+                "columnName": "JUSO_VERAENDERT"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/partei",
+              "curie": "krw:partei",
+              "target": {
+                "nodeType": "literal",
+                "value": "http://data.zh/krw/JUSO"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/kandidat",
+              "curie": "krw:kandidat",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "KAND_ID_UNIQUE",
+                "rdfTypes": [],
+                "links": []
+              }
+            }
+          ]
+        },
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value",
+          "isRowNumberCell": false,
+          "columnName": "PIRATEN_VERAENDERT",
+          "rdfTypes": [
+            {
+              "uri": "http://data.zh/krw/Panaschierstimmen",
+              "curie": "krw:Panaschierstimmen"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://data.zh/krw/stimmen",
+              "curie": "krw:stimmen",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#int",
+                "columnName": "PIRATEN_VERAENDERT"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/partei",
+              "curie": "krw:partei",
+              "target": {
+                "nodeType": "literal",
+                "value": "http://data.zh/krw/Piraten"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/kandidat",
+              "curie": "krw:kandidat",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "KAND_ID_UNIQUE",
+                "rdfTypes": [],
+                "links": []
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "op": "rdf-extension/save-rdf-schema",
+    "description": "Save RDF schema skeleton",
+    "schema": {
+      "baseUri": "http://data.zh/krw/",
+      "prefixes": [
+        {
+          "name": "rdfs",
+          "uri": "http://www.w3.org/2000/01/rdf-schema#"
+        },
+        {
+          "name": "foaf",
+          "uri": "http://xmlns.com/foaf/0.1/"
+        },
+        {
+          "name": "xsd",
+          "uri": "http://www.w3.org/2001/XMLSchema#"
+        },
+        {
+          "name": "owl",
+          "uri": "http://www.w3.org/2002/07/owl#"
+        },
+        {
+          "name": "krw",
+          "uri": "http://data.zh/krw/"
+        },
+        {
+          "name": "rdf",
+          "uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+        }
+      ],
+      "rootNodes": [
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value",
+          "isRowNumberCell": false,
+          "columnName": "LISTE",
+          "rdfTypes": [
+            {
+              "uri": "http://data.zh/krw/Partei",
+              "curie": "krw:Partei"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://data.zh/krw/parteiName",
+              "curie": "krw:parteiName",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "LISTE"
+              }
+            }
+          ]
+        },
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value",
+          "isRowNumberCell": false,
+          "columnName": "KAND_ID_UNIQUE",
+          "rdfTypes": [
+            {
+              "uri": "http://xmlns.com/foaf/0.1/Person",
+              "curie": "foaf:Person"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://xmlns.com/foaf/0.1/firstName",
+              "curie": "foaf:firstName",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "KAND_VORNAME"
+              }
+            },
+            {
+              "uri": "http://xmlns.com/foaf/0.1/lastName",
+              "curie": "foaf:lastName",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "KAND_NACHNAME"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/wahlKreis",
+              "curie": "krw:wahlKreis",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "WAHLKREIS_NAME"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/wahlKreisID",
+              "curie": "krw:wahlKreisID",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#int",
+                "columnName": "﻿WAHLKREIS_ID"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/partei",
+              "curie": "krw:partei",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "LISTE",
+                "rdfTypes": [],
+                "links": []
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/panaschierStimmenTotal",
+              "curie": "krw:panaschierStimmenTotal",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#int",
+                "columnName": "KAND_STIMMENPANASCH_TOT"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/stimmenTotal",
+              "curie": "krw:stimmenTotal",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#int",
+                "columnName": "KAND_STIMMEN_TOTAL"
+              }
+            }
+          ]
+        },
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value",
+          "isRowNumberCell": false,
+          "columnName": "SVP_VERAENDERT",
+          "rdfTypes": [
+            {
+              "uri": "http://data.zh/krw/Panaschierstimmen",
+              "curie": "krw:Panaschierstimmen"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://data.zh/krw/stimmen",
+              "curie": "krw:stimmen",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#int",
+                "columnName": "SVP_VERAENDERT"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/partei",
+              "curie": "krw:partei",
+              "target": {
+                "nodeType": "resource",
+                "value": "http://data.zh/krw/SVP",
+                "rdfTypes": [],
+                "links": []
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/kandidat",
+              "curie": "krw:kandidat",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "KAND_ID_UNIQUE",
+                "rdfTypes": [],
+                "links": []
+              }
+            }
+          ]
+        },
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value",
+          "isRowNumberCell": false,
+          "columnName": "SP_VERAENDERT",
+          "rdfTypes": [
+            {
+              "uri": "http://data.zh/krw/Panaschierstimmen",
+              "curie": "krw:Panaschierstimmen"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://data.zh/krw/stimmen",
+              "curie": "krw:stimmen",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#int",
+                "columnName": "SP_VERAENDERT"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/partei",
+              "curie": "krw:partei",
+              "target": {
+                "nodeType": "literal",
+                "value": "http://data.zh/krw/SP"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/kandidat",
+              "curie": "krw:kandidat",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "KAND_ID_UNIQUE",
+                "rdfTypes": [],
+                "links": []
+              }
+            }
+          ]
+        },
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value",
+          "isRowNumberCell": false,
+          "columnName": "FDP_VERAENDERT",
+          "rdfTypes": [
+            {
+              "uri": "http://data.zh/krw/Panaschierstimmen",
+              "curie": "krw:Panaschierstimmen"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://data.zh/krw/stimmen",
+              "curie": "krw:stimmen",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "FDP_VERAENDERT"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/partei",
+              "curie": "krw:partei",
+              "target": {
+                "nodeType": "literal",
+                "value": "http://data.zh/krw/FDP"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/kandidat",
+              "curie": "krw:kandidat",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "KAND_ID_UNIQUE",
+                "rdfTypes": [],
+                "links": []
+              }
+            }
+          ]
+        },
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value",
+          "isRowNumberCell": false,
+          "columnName": "GRÜNE_VERAENDERT",
+          "rdfTypes": [
+            {
+              "uri": "http://data.zh/krw/Panaschierstimmen",
+              "curie": "krw:Panaschierstimmen"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://data.zh/krw/stimmen",
+              "curie": "krw:stimmen",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#int",
+                "columnName": "GRÜNE_VERAENDERT"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/partei",
+              "curie": "krw:partei",
+              "target": {
+                "nodeType": "literal",
+                "value": "http://data.zh/krw/Grüne"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/kandidat",
+              "curie": "krw:kandidat",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "KAND_ID_UNIQUE",
+                "rdfTypes": [],
+                "links": []
+              }
+            }
+          ]
+        },
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value",
+          "isRowNumberCell": false,
+          "columnName": "GLP_VERAENDERT",
+          "rdfTypes": [
+            {
+              "uri": "http://data.zh/krw/Panaschierstimmen",
+              "curie": "krw:Panaschierstimmen"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://data.zh/krw/stimmen",
+              "curie": "krw:stimmen",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#int",
+                "columnName": "GLP_VERAENDERT"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/partei",
+              "curie": "krw:partei",
+              "target": {
+                "nodeType": "literal",
+                "value": "http://data.zh/krw/glp"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/kandidat",
+              "curie": "krw:kandidat",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "KAND_ID_UNIQUE",
+                "rdfTypes": [],
+                "links": []
+              }
+            }
+          ]
+        },
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value",
+          "isRowNumberCell": false,
+          "columnName": "CVP_VERAENDERT",
+          "rdfTypes": [
+            {
+              "uri": "http://data.zh/krw/Panaschierstimmen",
+              "curie": "krw:Panaschierstimmen"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://data.zh/krw/stimmen",
+              "curie": "krw:stimmen",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#int",
+                "columnName": "CVP_VERAENDERT"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/partei",
+              "curie": "krw:partei",
+              "target": {
+                "nodeType": "literal",
+                "value": "http://data.zh/krw/CVP"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/kandidat",
+              "curie": "krw:kandidat",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "KAND_ID_UNIQUE",
+                "rdfTypes": [],
+                "links": []
+              }
+            }
+          ]
+        },
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value",
+          "isRowNumberCell": false,
+          "columnName": "EVP_VERAENDERT",
+          "rdfTypes": [
+            {
+              "uri": "http://data.zh/krw/Panaschierstimmen",
+              "curie": "krw:Panaschierstimmen"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://data.zh/krw/stimmen",
+              "curie": "krw:stimmen",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#int",
+                "columnName": "EVP_VERAENDERT"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/partei",
+              "curie": "krw:partei",
+              "target": {
+                "nodeType": "literal",
+                "value": "http://data.zh/krw/EVP"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/kandidat",
+              "curie": "krw:kandidat",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "KAND_ID_UNIQUE",
+                "rdfTypes": [],
+                "links": []
+              }
+            }
+          ]
+        },
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value",
+          "isRowNumberCell": false,
+          "columnName": "BDP_VERAENDERT",
+          "rdfTypes": [
+            {
+              "uri": "http://data.zh/krw/Panaschierstimmen",
+              "curie": "krw:Panaschierstimmen"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://data.zh/krw/stimmen",
+              "curie": "krw:stimmen",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "BDP_VERAENDERT"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/partei",
+              "curie": "krw:partei",
+              "target": {
+                "nodeType": "literal",
+                "value": "http://data.zh/krw/BDP"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/kandidat",
+              "curie": "krw:kandidat",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "KAND_ID_UNIQUE",
+                "rdfTypes": [],
+                "links": []
+              }
+            }
+          ]
+        },
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value",
+          "isRowNumberCell": false,
+          "columnName": "EDU_VERAENDERT",
+          "rdfTypes": [
+            {
+              "uri": "http://data.zh/krw/Panaschierstimmen",
+              "curie": "krw:Panaschierstimmen"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://data.zh/krw/stimmen",
+              "curie": "krw:stimmen",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "EDU_VERAENDERT"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/partei",
+              "curie": "krw:partei",
+              "target": {
+                "nodeType": "literal",
+                "value": "http://data.zh/krw/EDU"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/kandidat",
+              "curie": "krw:kandidat",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "KAND_ID_UNIQUE",
+                "rdfTypes": [],
+                "links": []
+              }
+            }
+          ]
+        },
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value",
+          "isRowNumberCell": false,
+          "columnName": "AL_VERAENDERT",
+          "rdfTypes": [
+            {
+              "uri": "http://data.zh/krw/Panaschierstimmen",
+              "curie": "krw:Panaschierstimmen"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://data.zh/krw/stimmen",
+              "curie": "krw:stimmen",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "AL_VERAENDERT"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/partei",
+              "curie": "krw:partei",
+              "target": {
+                "nodeType": "literal",
+                "value": "http://data.zh/krw/AL"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/kandidat",
+              "curie": "krw:kandidat",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "KAND_ID_UNIQUE",
+                "rdfTypes": [],
+                "links": []
+              }
+            }
+          ]
+        },
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value",
+          "isRowNumberCell": false,
+          "columnName": "IPZH_VERAENDERT",
+          "rdfTypes": [
+            {
+              "uri": "http://data.zh/krw/Panaschierstimmen",
+              "curie": "krw:Panaschierstimmen"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://data.zh/krw/stimmen",
+              "curie": "krw:stimmen",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#int",
+                "columnName": "IPZH_VERAENDERT"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/partei",
+              "curie": "krw:partei",
+              "target": {
+                "nodeType": "literal",
+                "value": "http://data.zh/krw/IP ZH"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/kandidat",
+              "curie": "krw:kandidat",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "KAND_ID_UNIQUE",
+                "rdfTypes": [],
+                "links": []
+              }
+            }
+          ]
+        },
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value",
+          "isRowNumberCell": false,
+          "columnName": "JUSO_VERAENDERT",
+          "rdfTypes": [
+            {
+              "uri": "http://data.zh/krw/Panaschierstimmen",
+              "curie": "krw:Panaschierstimmen"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://data.zh/krw/stimmen",
+              "curie": "krw:stimmen",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#int",
+                "columnName": "JUSO_VERAENDERT"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/partei",
+              "curie": "krw:partei",
+              "target": {
+                "nodeType": "literal",
+                "value": "http://data.zh/krw/JUSO"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/kandidat",
+              "curie": "krw:kandidat",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "KAND_ID_UNIQUE",
+                "rdfTypes": [],
+                "links": []
+              }
+            }
+          ]
+        },
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value",
+          "isRowNumberCell": false,
+          "columnName": "PIRATEN_VERAENDERT",
+          "rdfTypes": [
+            {
+              "uri": "http://data.zh/krw/Panaschierstimmen",
+              "curie": "krw:Panaschierstimmen"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://data.zh/krw/stimmen",
+              "curie": "krw:stimmen",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#int",
+                "columnName": "PIRATEN_VERAENDERT"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/partei",
+              "curie": "krw:partei",
+              "target": {
+                "nodeType": "literal",
+                "value": "http://data.zh/krw/Piraten"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/kandidat",
+              "curie": "krw:kandidat",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "KAND_ID_UNIQUE",
+                "rdfTypes": [],
+                "links": []
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "op": "rdf-extension/save-rdf-schema",
+    "description": "Save RDF schema skeleton",
+    "schema": {
+      "baseUri": "http://data.zh/krw/",
+      "prefixes": [
+        {
+          "name": "rdfs",
+          "uri": "http://www.w3.org/2000/01/rdf-schema#"
+        },
+        {
+          "name": "foaf",
+          "uri": "http://xmlns.com/foaf/0.1/"
+        },
+        {
+          "name": "krw",
+          "uri": "http://data.zh/krw/"
+        },
+        {
+          "name": "owl",
+          "uri": "http://www.w3.org/2002/07/owl#"
+        },
+        {
+          "name": "xsd",
+          "uri": "http://www.w3.org/2001/XMLSchema#"
+        },
+        {
+          "name": "rdf",
+          "uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+        }
+      ],
+      "rootNodes": [
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value",
+          "isRowNumberCell": false,
+          "columnName": "LISTE",
+          "rdfTypes": [
+            {
+              "uri": "http://data.zh/krw/Partei",
+              "curie": "krw:Partei"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://data.zh/krw/parteiName",
+              "curie": "krw:parteiName",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "LISTE"
+              }
+            }
+          ]
+        },
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value",
+          "isRowNumberCell": false,
+          "columnName": "KAND_ID_UNIQUE",
+          "rdfTypes": [
+            {
+              "uri": "http://xmlns.com/foaf/0.1/Person",
+              "curie": "foaf:Person"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://xmlns.com/foaf/0.1/firstName",
+              "curie": "foaf:firstName",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "KAND_VORNAME"
+              }
+            },
+            {
+              "uri": "http://xmlns.com/foaf/0.1/lastName",
+              "curie": "foaf:lastName",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "KAND_NACHNAME"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/wahlKreis",
+              "curie": "krw:wahlKreis",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "WAHLKREIS_NAME"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/wahlKreisID",
+              "curie": "krw:wahlKreisID",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#int",
+                "columnName": "﻿WAHLKREIS_ID"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/partei",
+              "curie": "krw:partei",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "LISTE",
+                "rdfTypes": [],
+                "links": []
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/panaschierStimmenTotal",
+              "curie": "krw:panaschierStimmenTotal",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#int",
+                "columnName": "KAND_STIMMENPANASCH_TOT"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/stimmenTotal",
+              "curie": "krw:stimmenTotal",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#int",
+                "columnName": "KAND_STIMMEN_TOTAL"
+              }
+            }
+          ]
+        },
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value",
+          "isRowNumberCell": false,
+          "columnName": "SVP_VERAENDERT",
+          "rdfTypes": [
+            {
+              "uri": "http://data.zh/krw/Panaschierstimmen",
+              "curie": "krw:Panaschierstimmen"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://data.zh/krw/stimmen",
+              "curie": "krw:stimmen",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#int",
+                "columnName": "SVP_VERAENDERT"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/partei",
+              "curie": "krw:partei",
+              "target": {
+                "nodeType": "resource",
+                "value": "http://data.zh/krw/SVP",
+                "rdfTypes": [],
+                "links": []
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/kandidat",
+              "curie": "krw:kandidat",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "KAND_ID_UNIQUE",
+                "rdfTypes": [],
+                "links": []
+              }
+            }
+          ]
+        },
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value",
+          "isRowNumberCell": false,
+          "columnName": "SP_VERAENDERT",
+          "rdfTypes": [
+            {
+              "uri": "http://data.zh/krw/Panaschierstimmen",
+              "curie": "krw:Panaschierstimmen"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://data.zh/krw/stimmen",
+              "curie": "krw:stimmen",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#int",
+                "columnName": "SP_VERAENDERT"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/partei",
+              "curie": "krw:partei",
+              "target": {
+                "nodeType": "resource",
+                "value": "http://data.zh/krw/SP",
+                "rdfTypes": [],
+                "links": []
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/kandidat",
+              "curie": "krw:kandidat",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "KAND_ID_UNIQUE",
+                "rdfTypes": [],
+                "links": []
+              }
+            }
+          ]
+        },
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value",
+          "isRowNumberCell": false,
+          "columnName": "FDP_VERAENDERT",
+          "rdfTypes": [
+            {
+              "uri": "http://data.zh/krw/Panaschierstimmen",
+              "curie": "krw:Panaschierstimmen"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://data.zh/krw/stimmen",
+              "curie": "krw:stimmen",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "FDP_VERAENDERT"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/partei",
+              "curie": "krw:partei",
+              "target": {
+                "nodeType": "resource",
+                "value": "http://data.zh/krw/FDP",
+                "rdfTypes": [],
+                "links": []
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/kandidat",
+              "curie": "krw:kandidat",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "KAND_ID_UNIQUE",
+                "rdfTypes": [],
+                "links": []
+              }
+            }
+          ]
+        },
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value",
+          "isRowNumberCell": false,
+          "columnName": "GRÜNE_VERAENDERT",
+          "rdfTypes": [
+            {
+              "uri": "http://data.zh/krw/Panaschierstimmen",
+              "curie": "krw:Panaschierstimmen"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://data.zh/krw/stimmen",
+              "curie": "krw:stimmen",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#int",
+                "columnName": "GRÜNE_VERAENDERT"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/partei",
+              "curie": "krw:partei",
+              "target": {
+                "nodeType": "resource",
+                "value": "http://data.zh/krw/Grüne",
+                "rdfTypes": [],
+                "links": []
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/kandidat",
+              "curie": "krw:kandidat",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "KAND_ID_UNIQUE",
+                "rdfTypes": [],
+                "links": []
+              }
+            }
+          ]
+        },
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value",
+          "isRowNumberCell": false,
+          "columnName": "GLP_VERAENDERT",
+          "rdfTypes": [
+            {
+              "uri": "http://data.zh/krw/Panaschierstimmen",
+              "curie": "krw:Panaschierstimmen"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://data.zh/krw/stimmen",
+              "curie": "krw:stimmen",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#int",
+                "columnName": "GLP_VERAENDERT"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/partei",
+              "curie": "krw:partei",
+              "target": {
+                "nodeType": "resource",
+                "value": "http://data.zh/krw/glp",
+                "rdfTypes": [],
+                "links": []
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/kandidat",
+              "curie": "krw:kandidat",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "KAND_ID_UNIQUE",
+                "rdfTypes": [],
+                "links": []
+              }
+            }
+          ]
+        },
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value",
+          "isRowNumberCell": false,
+          "columnName": "CVP_VERAENDERT",
+          "rdfTypes": [
+            {
+              "uri": "http://data.zh/krw/Panaschierstimmen",
+              "curie": "krw:Panaschierstimmen"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://data.zh/krw/stimmen",
+              "curie": "krw:stimmen",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#int",
+                "columnName": "CVP_VERAENDERT"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/partei",
+              "curie": "krw:partei",
+              "target": {
+                "nodeType": "resource",
+                "value": "http://data.zh/krw/CVP",
+                "rdfTypes": [],
+                "links": []
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/kandidat",
+              "curie": "krw:kandidat",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "KAND_ID_UNIQUE",
+                "rdfTypes": [],
+                "links": []
+              }
+            }
+          ]
+        },
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value",
+          "isRowNumberCell": false,
+          "columnName": "EVP_VERAENDERT",
+          "rdfTypes": [
+            {
+              "uri": "http://data.zh/krw/Panaschierstimmen",
+              "curie": "krw:Panaschierstimmen"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://data.zh/krw/stimmen",
+              "curie": "krw:stimmen",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#int",
+                "columnName": "EVP_VERAENDERT"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/partei",
+              "curie": "krw:partei",
+              "target": {
+                "nodeType": "resource",
+                "value": "http://data.zh/krw/EVP",
+                "rdfTypes": [],
+                "links": []
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/kandidat",
+              "curie": "krw:kandidat",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "KAND_ID_UNIQUE",
+                "rdfTypes": [],
+                "links": []
+              }
+            }
+          ]
+        },
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value",
+          "isRowNumberCell": false,
+          "columnName": "BDP_VERAENDERT",
+          "rdfTypes": [
+            {
+              "uri": "http://data.zh/krw/Panaschierstimmen",
+              "curie": "krw:Panaschierstimmen"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://data.zh/krw/stimmen",
+              "curie": "krw:stimmen",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "BDP_VERAENDERT"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/partei",
+              "curie": "krw:partei",
+              "target": {
+                "nodeType": "resource",
+                "value": "http://data.zh/krw/BDP",
+                "rdfTypes": [],
+                "links": []
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/kandidat",
+              "curie": "krw:kandidat",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "KAND_ID_UNIQUE",
+                "rdfTypes": [],
+                "links": []
+              }
+            }
+          ]
+        },
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value",
+          "isRowNumberCell": false,
+          "columnName": "EDU_VERAENDERT",
+          "rdfTypes": [
+            {
+              "uri": "http://data.zh/krw/Panaschierstimmen",
+              "curie": "krw:Panaschierstimmen"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://data.zh/krw/stimmen",
+              "curie": "krw:stimmen",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "EDU_VERAENDERT"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/partei",
+              "curie": "krw:partei",
+              "target": {
+                "nodeType": "resource",
+                "value": "http://data.zh/krw/EDU",
+                "rdfTypes": [],
+                "links": []
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/kandidat",
+              "curie": "krw:kandidat",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "KAND_ID_UNIQUE",
+                "rdfTypes": [],
+                "links": []
+              }
+            }
+          ]
+        },
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value",
+          "isRowNumberCell": false,
+          "columnName": "AL_VERAENDERT",
+          "rdfTypes": [
+            {
+              "uri": "http://data.zh/krw/Panaschierstimmen",
+              "curie": "krw:Panaschierstimmen"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://data.zh/krw/stimmen",
+              "curie": "krw:stimmen",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "AL_VERAENDERT"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/partei",
+              "curie": "krw:partei",
+              "target": {
+                "nodeType": "resource",
+                "value": "http://data.zh/krw/AL",
+                "rdfTypes": [],
+                "links": []
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/kandidat",
+              "curie": "krw:kandidat",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "KAND_ID_UNIQUE",
+                "rdfTypes": [],
+                "links": []
+              }
+            }
+          ]
+        },
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value",
+          "isRowNumberCell": false,
+          "columnName": "IPZH_VERAENDERT",
+          "rdfTypes": [
+            {
+              "uri": "http://data.zh/krw/Panaschierstimmen",
+              "curie": "krw:Panaschierstimmen"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://data.zh/krw/stimmen",
+              "curie": "krw:stimmen",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#int",
+                "columnName": "IPZH_VERAENDERT"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/partei",
+              "curie": "krw:partei",
+              "target": {
+                "nodeType": "resource",
+                "value": "http://data.zh/krw/IP ZH",
+                "rdfTypes": [],
+                "links": []
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/kandidat",
+              "curie": "krw:kandidat",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "KAND_ID_UNIQUE",
+                "rdfTypes": [],
+                "links": []
+              }
+            }
+          ]
+        },
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value",
+          "isRowNumberCell": false,
+          "columnName": "JUSO_VERAENDERT",
+          "rdfTypes": [
+            {
+              "uri": "http://data.zh/krw/Panaschierstimmen",
+              "curie": "krw:Panaschierstimmen"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://data.zh/krw/stimmen",
+              "curie": "krw:stimmen",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#int",
+                "columnName": "JUSO_VERAENDERT"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/partei",
+              "curie": "krw:partei",
+              "target": {
+                "nodeType": "resource",
+                "value": "http://data.zh/krw/JUSO",
+                "rdfTypes": [],
+                "links": []
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/kandidat",
+              "curie": "krw:kandidat",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "KAND_ID_UNIQUE",
+                "rdfTypes": [],
+                "links": []
+              }
+            }
+          ]
+        },
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value",
+          "isRowNumberCell": false,
+          "columnName": "PIRATEN_VERAENDERT",
+          "rdfTypes": [
+            {
+              "uri": "http://data.zh/krw/Panaschierstimmen",
+              "curie": "krw:Panaschierstimmen"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://data.zh/krw/stimmen",
+              "curie": "krw:stimmen",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "valueType": "http://www.w3.org/2001/XMLSchema#int",
+                "columnName": "PIRATEN_VERAENDERT"
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/partei",
+              "curie": "krw:partei",
+              "target": {
+                "nodeType": "resource",
+                "value": "http://data.zh/krw/Piraten",
+                "rdfTypes": [],
+                "links": []
+              }
+            },
+            {
+              "uri": "http://data.zh/krw/kandidat",
+              "curie": "krw:kandidat",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "KAND_ID_UNIQUE",
+                "rdfTypes": [],
+                "links": []
+              }
+            }
+          ]
+        }
+      ]
+    }
+  }
+]
