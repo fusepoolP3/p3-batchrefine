@@ -1,6 +1,6 @@
 files:
-  - /home/user/log/openrefine.log
-  - /home/user/log/transformer.log
+  - /var/log/openrefine.log
+  - /var/log/transformer.log
 
 destination:
   host: logs2.papertrailapp.com

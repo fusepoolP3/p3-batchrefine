@@ -11,4 +11,4 @@ echo "transformer version is $VERSION"
 echo "transformer options are $@"
 
 # ... and the P3 transformer.
-java -jar ${BATCHREFINE_ROOT}/clients/clients-transformer/target/clients-transformer-${VERSION}-jar-with-dependencies.jar $@ 2>&1 | tee /home/user/log/transformer.log
+java -jar ${BATCHREFINE_ROOT}/clients/clients-transformer/target/clients-transformer-${VERSION}-jar-with-dependencies.jar $@ 2>&1 | tee /var/log/transformer.log
