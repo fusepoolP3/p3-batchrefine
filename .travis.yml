@@ -1,21 +1,18 @@
 language: java
 jdk:
 - oraclejdk7
-
 before_install:
-  - export WORKDIR=$(pwd)
-  - git clone --branch 2.6-beta.1 https://github.com/OpenRefine/OpenRefine.git OpenRefine
-  - git clone --branch v0.9.0 https://github.com/fadmaa/grefine-rdf-extension.git OpenRefine/extensions/rdf-extension
-  - cd OpenRefine; ant build jar_server jar_webapp
-  - cd extensions/rdf-extension; JAVA_TOOL_OPTIONS='-Dfile.encoding=UTF-8' ant build
-  - cd $WORKDIR; OPENREFINE_ROOT=$WORKDIR/OpenRefine ./bin/refine-import.sh
-
-install: $WORKDIR/OpenRefine/refine -x refine.headless=true &
-
+- export WORKDIR=$(pwd)
+- git clone --branch 2.6-beta.1 https://github.com/OpenRefine/OpenRefine.git OpenRefine
+- git clone --branch v0.9.0 https://github.com/fadmaa/grefine-rdf-extension.git OpenRefine/extensions/rdf-extension
+- cd OpenRefine; ant build jar_server jar_webapp
+- cd extensions/rdf-extension; JAVA_TOOL_OPTIONS='-Dfile.encoding=UTF-8' ant build
+- cd $WORKDIR; OPENREFINE_ROOT=$WORKDIR/OpenRefine ./bin/refine-import.sh
+install: "$WORKDIR/OpenRefine/refine -x refine.headless=true &"
 deploy:
   provider: releases
   api_key:
-    secure: pjfce7ykCtzSk1daZTdh8mqg3lBW5QdivTv4/PS6PP7kry+O0sXLBg+TgWBdZhAvGK33ZcaxU0SyOH2dIFZXPbFo6270JBWdHriRYcDW2OyyL/mN7TQUEhIiCQKFYxmm4Nj5OilkoX9oBQHt9L6nBQUz2KzSHvG5gOXztHib+z4=
+    secure: HZRdLBsL4jZBcnHSqP7uag/qWmXg8F696/BVP3t6ZnB68YRA7Ju919l5thqigts8DsxWUrI15QjZr/X+Tjk0d8FgR3lkbXsc1h69/jhicTvIz1F0iQJZbWBRRzSLoBYnia3JGZyewGzdFV+xqh363cdsL8o2hSwVL9q2TIlLpjU=
   skip_cleanup: true
   file:
   - clients/clients-cli/target/clients-cli-1.1.2-jar-with-dependencies.jar
