@@ -44,6 +44,9 @@ public class BatchRefineTransformerCLI {
     @Option(name = "-v", aliases = {"--verbose"}, usage = "Prints debug information", required = false)
     private boolean fVerbose;
 
+    @Option(name = "-C", aliases = {"--cors"},usage = "enable CORS",required=false)
+    private boolean fCORS = false;
+
 
     public void _main(String[] args) throws Exception {
         CmdLineParser parser = new CmdLineParser(this);
@@ -60,7 +63,8 @@ public class BatchRefineTransformerCLI {
     }
 
     private void start() throws Exception {
-        TransformerServer server = new TransformerServer(fPort, false);
+        TransformerServer server = new TransformerServer(fPort, fCORS);
+
         switch (fTransformer) {
 
             case sync:

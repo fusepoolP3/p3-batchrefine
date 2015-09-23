@@ -67,5 +67,5 @@ RUN cp /home/user/code/batchrefine/docker/internal/papertrail.yml \
 
 #ADD ./internal/supervisord.conf /home/user/supervisor/ # if you want to override it.
 
-CMD ["-v", "-t sync", "remote"]
+CMD ["-v", "-C", "-t sync", "remote"]
 ENTRYPOINT ["./p3-transformer-start.sh"]
