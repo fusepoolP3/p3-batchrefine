@@ -12,11 +12,8 @@ install: "$WORKDIR/OpenRefine/refine -x refine.headless=true &"
 deploy:
   provider: releases
   api_key:
-    secure: HZRdLBsL4jZBcnHSqP7uag/qWmXg8F696/BVP3t6ZnB68YRA7Ju919l5thqigts8DsxWUrI15QjZr/X+Tjk0d8FgR3lkbXsc1h69/jhicTvIz1F0iQJZbWBRRzSLoBYnia3JGZyewGzdFV+xqh363cdsL8o2hSwVL9q2TIlLpjU=
+    secure: "FlnsGoQxD3rQjSSULpgltIoM3mprCxZwPtBrpL9WmeqoCBQlr36VJI4lfVa9QO6wJDxBlxMqg09AU9D/edjrOI/AMvcQxQIQCaTUch8LwgP13c72Z3gxWnU3WfWYpgGjfN9XH0u2lbiUa9vn174deA+s8AlvorPLZTAb82zRKlg="
   skip_cleanup: true
   file:
-  - clients/clients-cli/target/clients-cli-1.1.2-jar-with-dependencies.jar
-  - clients/clients-transformer/target/clients-transformer-1.1.2-jar-with-dependencies.jar
-  on:
-    repo: fusepoolP3/p3-batchrefine
-    tags: true
+    -clients/clients-cli/target/clients-cli-1.1.2-jar-with-dependencies.jar
+    -clients/clients-transformer/target/clients-transformer-1.1.2-jar-with-dependencies.jar
