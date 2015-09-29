@@ -9,11 +9,3 @@ before_install:
 - cd extensions/rdf-extension; JAVA_TOOL_OPTIONS='-Dfile.encoding=UTF-8' ant build
 - cd $WORKDIR; OPENREFINE_ROOT=$WORKDIR/OpenRefine ./bin/refine-import.sh
 install: "$WORKDIR/OpenRefine/refine -x refine.headless=true &"
-deploy:
-  provider: releases
-  api_key:
-    secure: pjfce7ykCtzSk1daZTdh8mqg3lBW5QdivTv4/PS6PP7kry+O0sXLBg+TgWBdZhAvGK33ZcaxU0SyOH2dIFZXPbFo6270JBWdHriRYcDW2OyyL/mN7TQUEhIiCQKFYxmm4Nj5OilkoX9oBQHt9L6nBQUz2KzSHvG5gOXztHib+z4=
-  skip_cleanup: true
-  file:
-    - clients/clients-cli/target/clients-cli-1.1.2-jar-with-dependencies.jar
-    - clients/clients-transformer/target/clients-transformer-1.1.2-jar-with-dependencies.jar
