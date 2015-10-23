@@ -16,6 +16,7 @@ RUN apt-add-repository -y ppa:webupd8team/java
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get -y -qq update
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y -qq oracle-java7-installer
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y -qq httpry
 RUN DEBIAN_FRONTEND=noninteractive apt-get -y --force-yes -qq install ant maven3 && rm -Rf /var/cache/apt/*; \
     ln -s /usr/bin/mvn3 /bin/mvn
 
