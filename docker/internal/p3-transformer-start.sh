@@ -2,10 +2,6 @@
 set -eo pipefail
 BATCHREFINE_ROOT=/home/user/code/batchrefine
 
-# Start Httpry to log accesses
-httpry -f source-ip,request-uri -d -i eth0 'tcp port 8310' -o /var/log/httpry.log
-
-
 # Start OpenRefine using the supervisor daemon
 echo "starting supervisor"
 supervisord -c /home/user/supervisor/supervisord.conf
