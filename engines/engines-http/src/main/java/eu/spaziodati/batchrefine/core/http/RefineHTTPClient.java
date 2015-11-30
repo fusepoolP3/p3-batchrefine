@@ -28,6 +28,7 @@ import org.json.JSONObject;
 
 import java.io.*;
 import java.net.*;
+import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
@@ -41,10 +42,10 @@ public class RefineHTTPClient implements ITransformEngine {
 
     private static final Logger fLogger = Logger
             .getLogger(RefineHTTPClient.class);
-    
+
     /**
      * Filename is passed to OpenRefine inside {@link InputStreamBody}.
-     * In case OpenRefine is not able to guess the input format type, 
+     * In case OpenRefine is not able to guess the input format type,
      * extension is used to identify it.
      */
     private static final String BOGUS_FILENAME = "input.csv";
@@ -132,11 +133,11 @@ public class RefineHTTPClient implements ITransformEngine {
             return;
         }
 
-		try (OutputStream oStream = outputStream(output)) {
-			IOUtils.copy(entity.getContent(), oStream);
-		} finally {
-			Utils.safeClose(response);
-		}
+        try (OutputStream oStream = outputStream(output)) {
+            IOUtils.copy(entity.getContent(), oStream);
+        } finally {
+            Utils.safeClose(response);
+        }
     }
 
     private OutputStream outputStream(URL url) throws IOException {
@@ -195,7 +196,7 @@ public class RefineHTTPClient implements ITransformEngine {
             type = Files.probeContentType(new File(url.getFile()).toPath());
         }
 
-        return type != null ? ContentType.create(type) : ContentType.DEFAULT_TEXT;
+        return type != null ? ContentType.create(type) : ContentType.DEFAULT_TEXT.withCharset(Charset.forName("UTF-8"));
     }
 
     private boolean applyOperations(String handle, JSONArray transform)
