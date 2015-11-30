@@ -2,7 +2,7 @@ FROM ubuntu:trusty
 
 RUN groupadd user
 RUN useradd -ms /bin/bash -g user user
-
+ENV LC_ALL=C.UTF-8
 # Disable Oracle Java 7's prompts.
 RUN echo debconf shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections
 RUN echo debconf shared/accepted-oracle-license-v1-1 seen true | /usr/bin/debconf-set-selections
