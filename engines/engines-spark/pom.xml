@@ -6,12 +6,12 @@
 	<parent>
 		<groupId>eu.spaziodati.batchrefine</groupId>
 		<artifactId>batchrefine-parent</artifactId>
-		<version>1.1.4</version>
+		<version>1.1.5-SNAPSHOT</version>
 		<relativePath>../../</relativePath>
 	</parent>
 
 	<artifactId>engines-spark</artifactId>
-  <version>1.1.4</version>
+  <version>1.1.5-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>BatchRefine Engines: SparkRefine engine</name>
@@ -70,6 +70,6 @@
 
 
   <scm>
-    <tag>1.1.4</tag>
+    <tag>pre-release</tag>
   </scm>
 </project>
