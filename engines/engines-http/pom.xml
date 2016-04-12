@@ -7,7 +7,7 @@
     <groupId>eu.spaziodati.batchrefine</groupId>
     <artifactId>batchrefine-parent</artifactId>
     <version>1.1.2</version>
-    <relativePath>../../parent</relativePath>
+    <relativePath>../../</relativePath>
   </parent>
 
   <artifactId>engines-http</artifactId>
@@ -28,6 +28,12 @@
       <version>${project.version}</version>
       <type>test-jar</type>
       <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+      <version>3.3.2</version>
     </dependency>
 
     <dependency>
@@ -68,11 +74,6 @@
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <scope>test</scope>      
-    </dependency>
-
-    <dependency>
-      <groupId>commons-lang</groupId>
-      <artifactId>commons-lang</artifactId>
     </dependency>
 
     <dependency>

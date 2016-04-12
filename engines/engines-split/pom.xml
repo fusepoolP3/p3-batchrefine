@@ -6,7 +6,7 @@
 		<groupId>eu.spaziodati.batchrefine</groupId>
 		<artifactId>batchrefine-parent</artifactId>
 		<version>1.1.2</version>
-		<relativePath>../../parent</relativePath>
+		<relativePath>../../</relativePath>
 	</parent>
 
 	<artifactId>engines-split</artifactId>
@@ -54,11 +54,6 @@
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<scope>test</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>commons-lang</groupId>
-			<artifactId>commons-lang</artifactId>
 		</dependency>
 
 		<dependency>

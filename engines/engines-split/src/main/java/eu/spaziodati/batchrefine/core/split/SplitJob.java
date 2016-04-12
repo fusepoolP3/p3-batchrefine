@@ -7,7 +7,7 @@ import eu.spaziodati.batchrefine.core.split.SplitLogicFactory.ISplitLogic;
 import eu.spaziodati.batchrefine.core.split.SplitLogicFactory.ISplitLogic.TransformTask;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
-import org.apache.commons.lang.RandomStringUtils;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.json.JSONArray;
 
 import java.io.File;
