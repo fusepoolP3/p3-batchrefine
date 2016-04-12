@@ -5,12 +5,12 @@
 	<parent>
 		<groupId>eu.spaziodati.batchrefine</groupId>
 		<artifactId>batchrefine-parent</artifactId>
-		<version>1.1.4-SNAPSHOT</version>
+		<version>1.1.4</version>
 		<relativePath>../../</relativePath>
 	</parent>
 
 	<artifactId>engines-split</artifactId>
-  <version>1.1.4-SNAPSHOT</version>
+  <version>1.1.4</version>
 	<packaging>jar</packaging>
 
 	<name>BatchRefine Engines: Splitter</name>
@@ -72,6 +72,6 @@
 
 
 	<scm>
-		<tag>pre-release</tag>
+		<tag>1.1.4</tag>
 	</scm>
 </project>
