@@ -1,4 +1,5 @@
 language: java
+sudo: false
 jdk:
 - oraclejdk7
 before_install:
@@ -9,4 +10,14 @@ before_install:
 - cd extensions/rdf-extension; JAVA_TOOL_OPTIONS='-Dfile.encoding=UTF-8' ant build
 - cd $WORKDIR; OPENREFINE_ROOT=$WORKDIR/OpenRefine ./bin/refine-import.sh
 install: "$WORKDIR/OpenRefine/refine -x refine.headless=true &"
-sudo: false
+deploy:
+  provider: releases
+  api_key:
+    secure: fJY201NThX+mQ2cln67MoPD2hllO2J/xOskX5wGRFAc+unFPM7KGzIPeVdInpTySwjJiNd2MnKhgdLJPcHtfVvvP1RzfrpLX0MpOh/UGg2pWL+XwB6aRKk516pWSj691daZOrCaZc4oMvoptl8N+TaH9qsLb+kqmxetQT7hnfwQ=
+  skip_cleanup: true
+  file:
+    - clients/clients-transformer/target/clients-transformer-$TRAVIS_TAG-jar-with-dependencies.jar
+    - clients/clients-cli/target/clients-cli-$TRAVIS_TAG-jar-with-dependencies.jar
+  on:
+    repo: fusepoolP3/p3-batchrefine
+    tags: true

@@ -12,7 +12,7 @@ function import_jar {
     id=$3
     version=$4
 
-    mvn org.apache.maven.plugins:maven-install-plugin:2.3.1:install-file\
+    mvn org.apache.maven.plugins:maven-install-plugin:2.5.2:install-file\
  -Dfile=${OPENREFINE_ROOT}/${source}\
  -DgroupId=${group}\
  -DartifactId=${id}\
