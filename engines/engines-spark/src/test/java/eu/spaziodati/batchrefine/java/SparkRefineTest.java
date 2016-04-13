@@ -1,13 +1,18 @@
 package eu.spaziodati.batchrefine.java;
 
+import java.io.File;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Properties;
 
+import org.apache.commons.io.FileUtils;
+import org.json.JSONArray;
 import org.junit.runners.Parameterized;
 
 import eu.spaziodati.batchrefine.core.ITransformEngine;
 import eu.spaziodati.batchrefine.core.spark.SparkRefine;
+
+import static eu.spaziodati.batchrefine.java.EngineTestUtils.*;
 
 public class SparkRefineTest extends EngineTest {
 
@@ -18,7 +23,7 @@ public class SparkRefineTest extends EngineTest {
 
     @Override
     protected ITransformEngine engine() throws Exception {
-        return new SparkRefine(new Properties());
+        return new SparkRefine();
     }
 
     @Parameterized.Parameters(name = "{index}: {1}")
@@ -40,5 +45,28 @@ public class SparkRefineTest extends EngineTest {
                 {"high-earners", "save-rdf-schema", "rdf", CallType.sync},
                 {"high-earners", "save-rdf-schema", "turtle", CallType.sync}});
 
+    }
+
+    @Override
+    public void transformTest() throws Exception {
+        JSONArray transform = getTransform(fInput + "-" + fTransform + ".json");
+        File reference = findAndCopy("outputs/" + fInput + "_" + fTransform
+                + "." + fFormat);
+        File output = EngineTestUtils.outputDirectory();
+
+        try (ITransformEngine engine = engine()) {
+            engine.transform(findAndCopy("inputs/" + fInput + ".csv").toURI(),
+                    transform, output.toURI(), properties());
+        }
+        if (fFormat.equals("rdf"))
+            assertRDFEquals(FileUtils.readFileToString(FileUtils.getFile(output,"part-00000")),
+                    FileUtils.readFileToString(reference),
+                    "application/rdf+xml", "application/rdf+xml");
+        else if (fFormat.equals("turtle"))
+            assertRDFEquals(FileUtils.readFileToString(FileUtils.getFile(output,"part-00000")),
+                    FileUtils.readFileToString(reference), "text/turtle",
+                    "text/turtle");
+        else
+            assertContentEquals(reference, FileUtils.getFile(output,"part-00000"));
     }
 }

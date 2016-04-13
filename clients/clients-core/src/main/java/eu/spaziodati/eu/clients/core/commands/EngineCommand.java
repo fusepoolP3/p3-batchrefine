@@ -6,8 +6,7 @@ import eu.spaziodati.batchrefine.core.http.RefineHTTPClient;
 import org.kohsuke.args4j.CmdLineException;
 import org.kohsuke.args4j.Option;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -25,7 +24,7 @@ public abstract class EngineCommand {
     }
 
 
-    @Option(name = "-f", aliases = {("--format")}, usage = "The format in which to output the transformed data",hidden = true)
+    @Option(name = "-f", aliases = {("--format")}, usage = "The format in which to output the transformed data", hidden = true)
     protected Format fFormat = Format.csv;
     @Option(name = "-c", aliases = {("--config")}, metaVar = "config.properties", usage = "Load batchrefine config from properties file", handler = FileOptionHandler.class)
     protected File configFile;
@@ -42,7 +41,7 @@ public abstract class EngineCommand {
 
     public abstract ITransformEngine getEngine() throws URISyntaxException, IOException;
 
-    public abstract IAsyncTransformEngine getAsyncEngine() throws URISyntaxException;
+    public abstract IAsyncTransformEngine getAsyncEngine() throws URISyntaxException, IOException;
 
     public abstract Properties getExporterProperties();
 
@@ -55,5 +54,17 @@ public abstract class EngineCommand {
             clients[i] = new RefineHTTPClient(new URI("http://" + list[i]));
         }
         return clients;
+    }
+
+    protected Properties readPropertiesFromFile() throws IOException {
+        Properties properties = new Properties();
+
+        if (configFile != null) {
+            try (InputStream in = new FileInputStream(configFile)) {
+                properties.load(in);
+            }
+        }
+
+        return properties;
     }
 }

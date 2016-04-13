@@ -95,7 +95,6 @@ public class RefineHTTPClient implements ITransformEngine {
         String handle = null;
 
         URL input = asURL(original);
-        URL output = asURL(transformed);
 
         try {
             handle = createProjectAndUpload(input);
@@ -104,7 +103,7 @@ public class RefineHTTPClient implements ITransformEngine {
                 join(handle);
             }
 
-            write(results(handle, exporterOptions), output);
+            write(results(handle, exporterOptions), transformed);
 
         } catch (Exception ex) {
             throw launderedException(ex);
@@ -126,7 +125,7 @@ public class RefineHTTPClient implements ITransformEngine {
         return fRefineURI;
     }
 
-    private void write(CloseableHttpResponse response, URL output) throws IOException {
+    private void write(CloseableHttpResponse response, URI output) throws IOException {
         HttpEntity entity = response.getEntity();
         if (entity == null) {
             fLogger.warn("Response contained no entity. Nothing to write.");
@@ -140,14 +139,17 @@ public class RefineHTTPClient implements ITransformEngine {
         }
     }
 
-    private OutputStream outputStream(URL url) throws IOException {
+    private OutputStream outputStream(URI uri) throws IOException {
         // Need separate resolution due to
         // http://bugs.java.com/bugdatabase/view_bug.do?bug_id=4191800
-        if (url.getProtocol().equals("file")) {
-            return new BufferedOutputStream(new FileOutputStream(url.getFile()));
+        if (uri.getScheme().equals("file")) {
+            return new BufferedOutputStream(new FileOutputStream(asURL(uri).getFile()));
+        }
+        if (uri.getScheme().equals("stdout")) {
+            return System.out;
         }
 
-        return url.openConnection().getOutputStream();
+        return asURL(uri).openConnection().getOutputStream();
     }
 
     private String createProjectAndUpload(URL original) throws IOException {

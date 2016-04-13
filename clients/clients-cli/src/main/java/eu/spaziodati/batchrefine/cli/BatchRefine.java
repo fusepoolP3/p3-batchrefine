@@ -18,6 +18,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.net.ConnectException;
+import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 
@@ -80,11 +81,14 @@ public class BatchRefine {
                 return;
             }
 
-            File output = File.createTempFile("batchrefine", "tmp");
+            URI output;
+            if (fArguments.size() >= 3) {
+                output = new File(fArguments.get(3)).toURI();
+            } else {
+                output = new URI("stdout:/", null, null);
+            }
 
-            engine.transform(inputFile.toURI(), transform, output.toURI(), cmd.getExporterProperties());
-
-            output(output);
+            engine.transform(inputFile.toURI(), transform, output, cmd.getExporterProperties());
 
         } catch (ConnectException ex) {
             fLogger.error("Could not connect to host (is it running)? Error was:\n "
@@ -127,20 +131,6 @@ public class BatchRefine {
             return null;
         }
         return file;
-    }
-
-
-    private void output(File intermediate) throws IOException {
-        if (fArguments.size() >= 3) {
-            File output = new File(fArguments.get(2));
-            intermediate.renameTo(output);
-        } else {
-            try (FileInputStream iStream = new FileInputStream(intermediate)) {
-                IOUtils.copy(iStream, System.out);
-            } finally {
-                intermediate.delete();
-            }
-        }
     }
 
     private void printUsage(CmdLineException ex) {

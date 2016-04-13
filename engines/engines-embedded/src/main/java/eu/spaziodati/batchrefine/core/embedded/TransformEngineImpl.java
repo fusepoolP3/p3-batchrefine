@@ -101,6 +101,19 @@ public class TransformEngineImpl implements ITransformEngine {
         return new File(candidate);
     }
 
+    private OutputStream outputStream(URI uri) throws IOException {
+        // Need separate resolution due to
+        // http://bugs.java.com/bugdatabase/view_bug.do?bug_id=4191800
+        if (uri.getScheme().equals("file")) {
+            return new FileOutputStream(uri.toURL().getFile());
+        }
+        if (uri.getScheme().equals("stdout")) {
+            return System.out;
+        }
+
+        return uri.toURL().openConnection().getOutputStream();
+    }
+
     private Project loadData(File original) throws IOException {
 
         // Creates project. Project contain the RecordModel
