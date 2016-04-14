@@ -10,6 +10,7 @@ before_install:
 - cd extensions/rdf-extension; JAVA_TOOL_OPTIONS='-Dfile.encoding=UTF-8' ant build
 - cd $WORKDIR; OPENREFINE_ROOT=$WORKDIR/OpenRefine ./bin/refine-import.sh
 install: "$WORKDIR/OpenRefine/refine -x refine.headless=true &"
+script: mvn package
 deploy:
   provider: releases
   api_key:

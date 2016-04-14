@@ -21,7 +21,7 @@ import java.util.Properties;
  * Created by andrey on 22/02/15.
  */
 public class SparkCommand extends EngineCommand {
-    @Option(name = "-p", aliases = {"--partitions"}, usage = "How many partitions for the input")
+    @Option(name = "-p", aliases = {"--min-partitions"}, usage = "Minimum number partitions for the input")
     private Integer numberPartitions = null;
     @Argument
     private List<String> fArguments = new ArrayList<String>();
@@ -45,8 +45,8 @@ public class SparkCommand extends EngineCommand {
             throw new CmdLineException(parser, "");
         }
 
-        if (fArguments.size() < 2) {
-            throw new CmdLineException(parser, "Error: at least two arguments are required: INPUT TRANSFORM\n");
+        if (fArguments.size() < 3) {
+            throw new CmdLineException(parser, "Error: Three arguments are required: INPUT TRANSFORM OUTPUT\n");
         }
 
         return Collections.unmodifiableList(fArguments);
@@ -66,7 +66,7 @@ public class SparkCommand extends EngineCommand {
 
     @Override
     public IAsyncTransformEngine getAsyncEngine() throws IOException {
-        return null;
+        return new MultiInstanceEngine(new SparkRefine());
     }
 
     @Override

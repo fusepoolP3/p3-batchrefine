@@ -1,0 +1,15 @@
+[
+  {
+    "Classification": "spark",
+    "Properties": {
+      "maximizeResourceAllocation": "false"
+    }
+  },
+  {
+    "Classification": "spark-defaults",
+    "Properties": {
+      "spark.executor.instances": "1",
+      "spark.dynamicAllocation.enabled": "false"
+    }
+  }
+]
