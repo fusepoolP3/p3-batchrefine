@@ -21,6 +21,8 @@ import java.util.Properties;
  * Created by andrey on 22/02/15.
  */
 public class SparkCommand extends EngineCommand {
+    @Option(name = "-p", aliases = {"--partitions"}, usage = "How many partitions for the input")
+    private Integer numberPartitions = null;
     @Argument
     private List<String> fArguments = new ArrayList<String>();
 
@@ -32,13 +34,18 @@ public class SparkCommand extends EngineCommand {
         return ENGINE_TYPE;
     }
 
+    @Override
+    public String getEngineType() {
+        return ENGINE_TYPE;
+    }
+
 
     public List<String> getArguments() throws CmdLineException {
         if (help) {
             throw new CmdLineException(parser, "");
         }
 
-        if (fArguments.size() != 2) {
+        if (fArguments.size() < 2) {
             throw new CmdLineException(parser, "Error: at least two arguments are required: INPUT TRANSFORM\n");
         }
 
@@ -64,6 +71,9 @@ public class SparkCommand extends EngineCommand {
 
     @Override
     public Properties getExporterProperties() {
+        if (numberPartitions != null) {
+            exporterProperties.setProperty("input.partitions", numberPartitions.toString());
+        }
         exporterProperties.setProperty("format", fFormat.name());
         return exporterProperties;
     }

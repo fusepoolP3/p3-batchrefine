@@ -62,6 +62,11 @@ public class SplitCommand extends EngineCommand {
     }
 
     @Override
+    public String getEngineType() {
+        return ENGINE_TYPE;
+    }
+
+    @Override
     public void help() throws CmdLineException {
         if (help)
             throw new CmdLineException(parser, "");

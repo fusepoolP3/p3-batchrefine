@@ -44,7 +44,7 @@ public class BatchRefine {
 
     private Logger fLogger;
 
-    private void _main(String[] args) {
+    protected void _main(String[] args) {
 
         CmdLineParser parser = new CmdLineParser(this);
 
@@ -70,25 +70,41 @@ public class BatchRefine {
                 return;
             }
 
-            File inputFile = checkExists(fArguments.get(0));
-            File transformFile = checkExists(fArguments.get(1));
-            if (inputFile == null || transformFile == null) {
-                return;
-            }
+            URI inputFile = null;
+            URI output = null;
+            JSONArray transform = null;
 
-            JSONArray transform = deserialize(transformFile);
-            if (transform == null) {
-                return;
-            }
+            if (!cmd.getEngineType().equals("spark")) {
+                inputFile = checkExists(fArguments.get(0));
+                URI transformFile = checkExists(fArguments.get(1));
+                if (inputFile == null || transformFile == null) {
+                    return;
+                }
 
-            URI output;
-            if (fArguments.size() >= 3) {
-                output = new File(fArguments.get(3)).toURI();
+                transform = deserialize(transformFile);
+                if (transform == null) {
+                    return;
+                }
+
+                if (fArguments.size() >= 3) {
+                    output = new File(fArguments.get(2)).toURI();
+                } else {
+                    output = new URI("stdout:/", null, null);
+                }
+
             } else {
-                output = new URI("stdout:/", null, null);
+                inputFile = new URI(fArguments.get(0));
+                cmd.getExporterProperties().setProperty("refine.json", fArguments.get(1));
+
+                if (fArguments.size() >= 3) {
+                    output = new URI(fArguments.get(2));
+                } else {
+                    output = new URI("stdout:/", null, null);
+                }
             }
 
-            engine.transform(inputFile.toURI(), transform, output, cmd.getExporterProperties());
+
+            engine.transform(inputFile, transform, output, cmd.getExporterProperties());
 
         } catch (ConnectException ex) {
             fLogger.error("Could not connect to host (is it running)? Error was:\n "
@@ -113,10 +129,10 @@ public class BatchRefine {
         fLogger = Logger.getLogger(BatchRefine.class);
     }
 
-    private JSONArray deserialize(File transform) {
+    private JSONArray deserialize(URI transform) {
         String transformStr;
         try {
-            transformStr = FileUtils.readFileToString(transform);
+            transformStr = FileUtils.readFileToString(new File(transform));
             return ParsingUtilities.evaluateJsonStringToArray(transformStr);
         } catch (Exception ex) {
             fLogger.error("Error loading transform.", ex);
@@ -124,13 +140,13 @@ public class BatchRefine {
         }
     }
 
-    private File checkExists(String name) {
+    private URI checkExists(String name) {
         File file = new File(name);
         if (!file.exists()) {
             fLogger.error("File " + name + " could not be found.");
             return null;
         }
-        return file;
+        return file.toURI();
     }
 
     private void printUsage(CmdLineException ex) {

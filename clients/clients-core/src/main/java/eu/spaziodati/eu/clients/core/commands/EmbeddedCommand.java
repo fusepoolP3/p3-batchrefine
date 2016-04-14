@@ -26,6 +26,11 @@ public class EmbeddedCommand extends EngineCommand {
         return ENGINE_TYPE;
     }
 
+    @Override
+    public String getEngineType() {
+        return ENGINE_TYPE;
+    }
+
     CmdLineParser parser = new CmdLineParser(this);
 
     public List<String> getArguments() throws CmdLineException {
@@ -58,6 +63,6 @@ public class EmbeddedCommand extends EngineCommand {
     @Override
     public void help() throws CmdLineException {
         if (help)
-            throw new CmdLineException(parser,"");
+            throw new CmdLineException(parser, "");
     }
 }

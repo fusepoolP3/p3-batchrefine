@@ -23,7 +23,6 @@ public abstract class EngineCommand {
         csv, rdf, turtle
     }
 
-
     @Option(name = "-f", aliases = {("--format")}, usage = "The format in which to output the transformed data", hidden = true)
     protected Format fFormat = Format.csv;
     @Option(name = "-c", aliases = {("--config")}, metaVar = "config.properties", usage = "Load batchrefine config from properties file", handler = FileOptionHandler.class)
@@ -32,6 +31,8 @@ public abstract class EngineCommand {
     protected boolean help;
 
     public abstract String toString();
+
+    public abstract String getEngineType();
 
     public Format getFormat() {
         return fFormat;
