@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
         <groupId>eu.spaziodati.batchrefine</groupId>
         <artifactId>batchrefine-parent</artifactId>
-        <version>1.1.5-SNAPSHOT</version>
+        <version>1.1.5</version>
         <relativePath>../..</relativePath>
     </parent>
 
     <artifactId>clients-transformer</artifactId>
-    <version>1.1.5-SNAPSHOT</version>
+    <version>1.1.5</version>
     <packaging>jar</packaging>
 
     <name>BatchRefine Clients: Fusepool P3 Transformer</name>
@@ -42,12 +41,10 @@
                                 </includes>
                             </artifactSet>
                             <transformers>
-                                <transformer
-                                        implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
                                     <resource>reference.conf</resource>
                                 </transformer>
-                                <transformer
-                                        implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
                                     <mainClass>eu.spaziodati.batchrefine.transformer.BatchRefineTransformerCLI
                                     </mainClass>
                                 </transformer>
@@ -155,6 +152,6 @@
 
 
     <scm>
-        <tag>pre-release</tag>
+        <tag>1.1.5</tag>
     </scm>
 </project>
