@@ -6,12 +6,12 @@
   <parent>
     <groupId>eu.spaziodati.batchrefine</groupId>
     <artifactId>batchrefine-parent</artifactId>
-    <version>1.1.7-SNAPSHOT</version>
+    <version>1.1.7</version>
     <relativePath>../../</relativePath>
   </parent>
 
   <artifactId>engines-http</artifactId>
-  <version>1.1.7-SNAPSHOT</version>
+  <version>1.1.7</version>
   <packaging>jar</packaging>
 
   <name>BatchRefine Engines: HTTP wrapper</name>
@@ -92,6 +92,6 @@
 
 
   <scm>
-    <tag>pre-release</tag>
+    <tag>1.1.7</tag>
   </scm>
 </project>
