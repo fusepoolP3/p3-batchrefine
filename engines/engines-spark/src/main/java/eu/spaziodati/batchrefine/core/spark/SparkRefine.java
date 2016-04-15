@@ -40,8 +40,7 @@ public class SparkRefine implements ITransformEngine {
         SparkConf sparkConfiguration = new SparkConf(true);
         sparkConfiguration.setAppName(APP_NAME);
         sparkConfiguration.setMaster(sparkConfiguration.get("spark.master", "local"));
-        sparkConfiguration.set("spark.executor.cores", "1");
-        LogManager.getRootLogger().setLevel(Level.WARN);
+        sparkConfiguration.set("spark.task.cpus", sparkConfiguration.get("spark.executor.cores", "1"));
         sparkContext = new JavaSparkContext(sparkConfiguration);
         new ConsoleProgressBar(sparkContext.sc());
     }
@@ -60,6 +59,7 @@ public class SparkRefine implements ITransformEngine {
             try {
                 URI refineJson = new URI(exporterOptions.getProperty("refine.json"));
                 FileSystem fs = FileSystem.get(refineJson, sparkContext.hadoopConfiguration());
+                fLogger.info("Downloading transformation rules from: " + refineJson);
                 transform = new JSONArray(IOUtils.toString(fs.open(new Path(refineJson))));
             } catch (Exception e) {
                 throw new JSONException(e);

@@ -45,8 +45,8 @@ public class SparkCommand extends EngineCommand {
             throw new CmdLineException(parser, "");
         }
 
-        if (fArguments.size() < 3) {
-            throw new CmdLineException(parser, "Error: Three arguments are required: INPUT TRANSFORM OUTPUT\n");
+        if (fArguments.size() < 2) {
+            throw new CmdLineException(parser, "At least tow arguments are required: INPUT TRANSFORM [OUTPUT]\n");
         }
 
         return Collections.unmodifiableList(fArguments);

@@ -11,4 +11,9 @@ configurations:
 
 1. Download the latest BatchRefine jar version from [releases](https://github.com/fusepoolP3/p3-batchrefine/releases/latest) to
 the master instance of the cluster.
-2
+
+2. Run the command line client with `spark-submit`
+
+```
+spark-submit clients-cli-jar-with-dependencies.jar spark -p 4 s3://input.csv s3://transform.json s3://output
+```
