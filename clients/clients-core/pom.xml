@@ -6,12 +6,12 @@
     <parent>
         <groupId>eu.spaziodati.batchrefine</groupId>
         <artifactId>batchrefine-parent</artifactId>
-        <version>1.1.6-SNAPSHOT</version>
+        <version>1.1.6</version>
         <relativePath>../../</relativePath>
     </parent>
 
     <artifactId>clients-core</artifactId>
-  <version>1.1.6-SNAPSHOT</version>
+  <version>1.1.6</version>
     <packaging>jar</packaging>
 
     <name>BatchRefine Clients: Core Components</name>
@@ -78,6 +78,6 @@
 
 
   <scm>
-    <tag>pre-release</tag>
+    <tag>1.1.6</tag>
   </scm>
 </project>
