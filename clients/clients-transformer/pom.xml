@@ -6,12 +6,12 @@
     <parent>
         <groupId>eu.spaziodati.batchrefine</groupId>
         <artifactId>batchrefine-parent</artifactId>
-        <version>1.1.6</version>
+        <version>1.1.7-SNAPSHOT</version>
         <relativePath>../..</relativePath>
     </parent>
 
     <artifactId>clients-transformer</artifactId>
-    <version>1.1.6</version>
+    <version>1.1.7-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>BatchRefine Clients: Fusepool P3 Transformer</name>
@@ -152,6 +152,6 @@
 
 
     <scm>
-        <tag>1.1.6</tag>
+        <tag>pre-release</tag>
     </scm>
 </project>
