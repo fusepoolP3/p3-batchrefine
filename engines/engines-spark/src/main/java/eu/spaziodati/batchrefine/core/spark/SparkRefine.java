@@ -37,6 +37,8 @@ public class SparkRefine implements ITransformEngine {
     private final JavaSparkContext sparkContext;
 
     public SparkRefine() {
+        LogManager.getRootLogger().setLevel(Level.ERROR);
+        fLogger.setLevel(Level.INFO);
         SparkConf sparkConfiguration = new SparkConf(true);
         sparkConfiguration.setAppName(APP_NAME);
         sparkConfiguration.setMaster(sparkConfiguration.get("spark.master", "local"));
