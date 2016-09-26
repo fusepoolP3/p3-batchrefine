@@ -211,7 +211,7 @@ public class RefineHTTPClient implements ITransformEngine {
             pairs.add(new BasicNameValuePair("operations", transform.toString()));
 
             response = doPost("/command/core/apply-operations",
-                    new UrlEncodedFormEntity(pairs));
+                    new UrlEncodedFormEntity(pairs, "UTF-8"));
 
             JSONObject content = decode(response);
             if (content == null) {

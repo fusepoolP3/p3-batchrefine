@@ -1,0 +1,68 @@
+[
+  {
+    "op": "core/column-addition",
+    "description": "Create column col1_new at index 1 based on column col1 using expression grel:value",
+    "engineConfig": {
+      "mode": "row-based",
+      "facets": []
+    },
+    "newColumnName": "col1_new",
+    "columnInsertIndex": 1,
+    "baseColumnName": "col1",
+    "expression": "grel:value",
+    "onError": "set-to-blank"
+  },
+  {
+    "op": "core/column-addition",
+    "description": "Create column col2_new at index 3 based on column col2 using expression grel:value",
+    "engineConfig": {
+      "mode": "row-based",
+      "facets": []
+    },
+    "newColumnName": "col2_new",
+    "columnInsertIndex": 3,
+    "baseColumnName": "col2",
+    "expression": "grel:value",
+    "onError": "set-to-blank"
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column col1_new",
+    "engineConfig": {
+      "mode": "row-based",
+      "facets": []
+    },
+    "columnName": "col1_new",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Á"
+        ],
+        "to": "A"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column col2_new",
+    "engineConfig": {
+      "mode": "row-based",
+      "facets": []
+    },
+    "columnName": "col2_new",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Č"
+        ],
+        "to": "C"
+      }
+    ]
+  }
+]

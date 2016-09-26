@@ -29,6 +29,7 @@ public class BatchRefineBase {
     @Parameterized.Parameters(name = "{index}: {1}")
     public static Collection<?> parameters() {
         return Arrays.asList(new Object[][]{
+                {"smallab","simple-transform", "csv", CallType.sync},
                 {"osterie", "mass-edit", "csv", CallType.sync},
                 {"osterie", "column-addition", "csv", CallType.sync},
                 {"osterie", "column-removal", "csv", CallType.sync},
