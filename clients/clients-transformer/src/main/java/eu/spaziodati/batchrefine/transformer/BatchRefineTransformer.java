@@ -1,13 +1,10 @@
 package eu.spaziodati.batchrefine.transformer;
 
 import com.google.refine.util.ParsingUtilities;
-
-
 import eu.fusepool.p3.accept.util.AcceptPreference;
 import eu.fusepool.p3.transformer.HttpRequestEntity;
 import eu.fusepool.p3.transformer.Transformer;
 import eu.fusepool.p3.transformer.commons.Entity;
-
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.http.HttpEntity;
@@ -18,13 +15,13 @@ import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.log4j.Logger;
+import org.eclipse.jetty.http.MimeTypes;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import javax.activation.MimeType;
 import javax.activation.MimeTypeParseException;
 import javax.servlet.http.HttpServletRequest;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -115,7 +112,11 @@ public class BatchRefineTransformer implements Transformer {
                         + transformURI + ".");
             }
 
-            String encoding = request.getRequest().getCharacterEncoding();
+            String encoding = null;
+            if (responseEntity.getContentType() != null) {
+                encoding = MimeTypes.getCharsetFromContentType(responseEntity.getContentType().getValue());
+            }
+
             String transform = IOUtils.toString(responseEntity.getContent(),
                     encoding == null ? "UTF-8" : encoding);
 

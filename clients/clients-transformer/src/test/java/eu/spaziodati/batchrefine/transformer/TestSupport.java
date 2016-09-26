@@ -4,6 +4,7 @@ import com.jayway.restassured.RestAssured;
 import eu.fusepool.p3.transformer.Transformer;
 import eu.fusepool.p3.transformer.server.TransformerServer;
 import eu.spaziodati.batchrefine.java.EngineTest;
+import org.eclipse.jetty.http.MimeTypes;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.handler.DefaultHandler;
 import org.eclipse.jetty.server.handler.HandlerList;
@@ -52,6 +53,9 @@ public class TestSupport {
         Server fileServer = new Server(port);
 
         ResourceHandler handler = new ResourceHandler();
+        MimeTypes mimeTypes = handler.getMimeTypes();
+        mimeTypes.addMimeMapping("json", "application/json; charset=UTF-8");
+
         handler.setDirectoriesListed(true);
         handler.setBaseResource(JarResource.newResource(transforms));
 
