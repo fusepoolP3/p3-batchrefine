@@ -196,6 +196,8 @@ require customization to work (i.e. the RDF extension won't work out
 of the box). Further, it is likely that it has to be altered or
 rewritten  to work with newer versions of OpenRefine.
 
+If you get JSON exeptions like `org.json.JSONException` check the file size of your input JSON file. BatchRefine does not accept large input JSON files and you might have to shrink it to a few 100kB to get rid of it. This can be done by not selecting the whole history in OpenRefine, which can make the configuration really big (a few megabytes).
+
 #### Accessing a running OpenRefine instance
 
 The command line tool can also act as a direct client to a running
